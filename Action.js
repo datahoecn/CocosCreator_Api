@@ -34,6 +34,7 @@ properties: {
         default: null,
         type: cc.Animation//是一个node加sprite加animation的集合
     }
+    sheepAnim_2 = this.node.getComponent(cc.Animation);
 },
 
 // use this for initialization
@@ -44,3 +45,38 @@ onLoad: function () {
     };
     this.scheduleOnce(this._playAnimCallback, 2);//将在 2 秒后执行回调函数
 }
+
+
+//Spine
+    //component : Spine skeleton
+    Src Blend Factor：所用图片的颜色混合设置源项//1.10.2版本没有
+    Dst Blend Factor：所用图片的颜色混合设置目标项//1.10.2版本没有
+    Skeleton Data：骨骼动画文件。
+    Default Skin：默认的身体部件套装名称，这里形象地称为“皮肤”，
+    如果 Spine 中有多套皮肤信息，我们可以跟据需求为骨骼动画更换不同的皮肤套装，从而实现换装效果。
+    Animation：默认的动作名称，一般会有多个动作供切换
+    Loop：用来设置是否循环播放。
+    Premultiplied Alpha：在图片渲染时做半透明处理，
+    它的重要意义在于可使带透明度的图片纹理正常进行线性插值，
+    从而让旋转、缩放或者非整数的纹理坐标正常显示，否则就会像上面案例一样，在透明像素边缘产生奇怪的颜色
+    Time Scale：设置播放速度
+    Debug Slots：设置是否显示插槽
+    Debug Bones：设置是否显示骨骼。
+
+    //Spine 动作融合
+    动作融合的目的是保证多个动作之间更平滑、自然地切换。
+    要在两个动作之间使用动作融合，则需设置动作的切换时间
+
+//DragonBone
+    //component : DragonBones
+    Dragon Asset：骨骼动画文件。
+    Dragon Atlas Asset：骨骼动画对应的拼合纹理图。
+    Armature：骨架名称。
+    Animation：动画名称。
+
+    //动作混合
+    就是为人物的不同骨骼赋予不同的动作，
+    比如本例中，机器人一边走一边射击，下半身执行行走动作，而上半身同时进行着射击动作。
+    这种上、下半身分离，各自播放不同的动作，同时又混合在一个人物身上的效果
+
+
