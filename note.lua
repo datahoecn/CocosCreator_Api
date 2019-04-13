@@ -12,3 +12,7 @@
   --Depth：摄像机的深度缓冲值。
   --cullingMask：删除 Mask 值设置，如果您希望某些 Node 属性不显示，可以使用它。
   --clearFlags：是否清空颜色缓冲、深度缓冲、模版缓冲区
+
+  a < b && c
+  a -= b * c
+  a = b <= c

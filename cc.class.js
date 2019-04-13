@@ -2,7 +2,7 @@ const i18n = require('i18n');
 
 cc.Class({
     extends: cc.Component,
-
+    //参数
     properties: {
         btn_1: {
             default: null,
@@ -10,11 +10,10 @@ cc.Class({
         },
         btn_2: cc.Button,
 
-        lb_1: {
+        label: {
             default: null,
             type: cc.Label
         },
-        lb_2: cc.Label
 
         checkbox: {//Toggle
             default: null,
@@ -25,15 +24,31 @@ cc.Class({
             default: [],
             type: cc.Toggle
         }
+
+        progressBar: {
+            type: cc.ProgressBar,
+            default: null
+        },
+        scrollView: {
+            default: null,
+            type: cc.ScrollView
+        },
+    },
+
+    //加载时调用该函数完成初始化
+    onLoad: function () {
+        this._pingpong = true;
+    },
+
+    update: function (dt) {
     },
 
     onBtnLeftClicked: function() {
         console.log('Button clicked!');
-        this.lb_2.textKey = i18n.t("cases/02_ui/03_button/SimpleButton.js.1");
-    },
-    onBtnLeftClicked: function() {
-        console.log('Left button clicked!');
+        this.label.textKey = i18n.t("cases/02_ui/03_button/SimpleButton.js.1");
+
+        this.progressBar.progress = 0;
+
         this.btn_1.interactable = false;//Interactable：是否响应交互，不勾选相当于禁用。
     },
-
 });
