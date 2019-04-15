@@ -1,1 +1,1 @@
-alert(Date.now())
+console.log(Date.now())

@@ -1,6 +1,9 @@
---每一个场景都有一个默认顶层节点，命名为画布 Canvas
---assets目录，存放游戏所用的各类资源文件
---Cocos Creator会自动为每一个资源文件或目录生成 meta 文件，且放在同级目录下，
+
+Draw Call//表示引擎对当前画面的绘制次数
+
+this.schedule(callback, target, interval, repeat, delay, paused);//target可以省略
+this.unschedule(callback, target)//停止定时器
+
 --并以它们的名称来命名,该文件主要用来存放对应文件的版本及其它相关信息
 --cc.Class 是一个由 cc.Component 派生出来的组件类
 --onLoad()即组件挂接的对象在初始化完成后的回调函数
@@ -12,7 +15,3 @@
   --Depth：摄像机的深度缓冲值。
   --cullingMask：删除 Mask 值设置，如果您希望某些 Node 属性不显示，可以使用它。
   --clearFlags：是否清空颜色缓冲、深度缓冲、模版缓冲区
-
-  a < b && c
-  a -= b * c
-  a = b <= c

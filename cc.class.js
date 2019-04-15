@@ -4,6 +4,19 @@ cc.Class({
     extends: cc.Component,
     //参数
     properties: {
+        canvas: {
+            default: null,
+            type: cc.Canvas
+        },
+        root: {
+            default: null,
+            type: cc.Node
+        },
+        spriteList: {
+            default: [],
+            type: [cc.SpriteFrame]
+        }
+        
         btn_1: {
             default: null,
             type: cc.Button
@@ -50,5 +63,11 @@ cc.Class({
         this.progressBar.progress = 0;
 
         this.btn_1.interactable = false;//Interactable：是否响应交互，不勾选相当于禁用。
+    },
+
+    _onRegisteredEvent: function () {
+        for (var i = 0; i < this.loadList.length; ++i) {
+            this.loadList[i].on(cc.Node.EventType.TOUCH_END, this._onClick.bind(this));
+        }
     },
 });

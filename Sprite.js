@@ -1,6 +1,15 @@
 //精灵是游戏引擎中最常用的图像元件，它本质上是一张纹理图片
 //只是通过封装，具备了大量常用的图片操作属性，比如更换纹理、设置位置、旋转、缩放、颜色等等
 
+properties: {
+    spriteList: {
+        default: [],
+        type: [cc.SpriteFrame]
+    }
+},
+//设置当前精灵的贴图为数组中的随机元素
+sprite.spriteFrame = this.spriteList[randomIdx];
+
 Atlas：设置精灵的图集纹理（导入plist文件），
 表示精灵使用该图集中的某一张图片，作为自己的纹理，可以不设置
 
