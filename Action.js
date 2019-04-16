@@ -19,6 +19,15 @@ cc.easeCubicActionIn()
 
 cc.sequence(cc.moveBy(0.1, cc.p(0, -200)),cc.moveBy(0.1, cc.p(0, 200))).repeat(2)
 
+var callBack = function(node) {
+            node.removeFromParent();
+            node = null;
+        };
+        
+node.runAction(cc.sequence(
+            cc.spawn(cc.scaleTo(0.3, 0.8, 0.8), cc.fadeOut(0.3)),
+            cc.callFunc(callBack)));
+
 动画列表上方有一排小按钮，从左到右依次为：
 	打开/关闭编辑模式
 	跳转到第一帧
