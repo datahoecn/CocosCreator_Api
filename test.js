@@ -1,10 +1,12 @@
-var variables = "";
 
-for (var name in this) 
-{
-variables += name + "<br />";
-console.log(variables)
+var a = null
+
+if (a === null){
+    console.log("init manager1");
 
 }
-console.log(variables)
 
+if (a === undefined){
+    console.log("init manage2");
+
+}

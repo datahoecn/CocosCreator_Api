@@ -1,3 +1,31 @@
+
+var a //undefined
+//如果a是null，或者a未定义
+if (a === null || a === undefined){
+    a = {};
+}
+
+
+switch (this._curType) {
+    case 'SpriteFrame':
+        // specify the type to load sub asset from texture's url
+        cc.loader.loadRes(url, cc.SpriteFrame, loadCallBack);
+        break;
+    case 'Txt':
+    case 'Audio':
+        cc.loader.loadRes(url, loadCallBack);
+        break;
+    case 'CORS':
+        cc.loader.load(url, loadCallBack);
+        this.loadTips.textKey = "CORS image should report texImage2D error under WebGL and works ok under Canvas"
+        break;
+    default:
+        cc.loader.load(url, loadCallBack);
+        break;
+}
+
+专门设置一个变量来记录状态，然后根据状态来判断走那步
+
 this的四种用法
 	在一般函数方法中使用 this 指代全局对象
 
@@ -80,14 +108,14 @@ a = b <= c
 typeof(a)
 this._audioSource instanceof cc.AudioSource//检测某个对象是不是另一个对象的实例
 
-
+//return a array,
 stringObject.split(separator,howmany)//separator字符串或正则表达式，从该参数指定的地方分割 stringObject。
-	//howmany可选。该参数可指定返回的数组的最大长度。如果设置了该参数，返回的子串不会多于这个参数指定的数组
+	//howmany可选,限制返回的数组长度
 	
 arrayObject.length//获取数组长度
 arrayObject.splice(index,howmany,item1,.....,itemX)//index位置，howmany要删除的项目数量，如果设置为 0，则不会删除项目
 										//item1,.....,itemX可选。向数组添加的新项目。
-
+//如果不存在，返回-1
 stringObject.indexOf(searchvalue,fromindex)//返回某个指定的字符串值在字符串中首次出现的位置。
 	//searchvalue需检索的字符串值。
 	//fromindex可选，开始检索的位置。值0到stringObject.length - 1。如省略该参数，则将从字符串的首字符开始检索。

@@ -1,3 +1,6 @@
+cc.gl.audioMgr.playEffect("click.mp3");
+
+
 AudioSource 组件只能串行播放声音，相当于只有一个音轨。
 AudioEngine 是引擎内置的声音引擎库，可以同时并行播放多个音轨
 
@@ -21,6 +24,11 @@ this.audioSource.stop();
 this.audioSource.resume();
 this.audioSource.getCurrentTime();//获取当前播放时长
 this.audioSource.getDuration();//获取当前声音文件总时长
+
+//this.audioSource不是null并且this.audioSource是cc.AudioSource的实例
+if (this.audioSource && this.audioSource instanceof cc.AudioSource) {
+    this.audioSource.stop();
+}
 
 
 AudioEngine//AudioEngine 意为声音引擎，是 Cocos 引擎的一部分，在代码中直接调用即可。

@@ -30,6 +30,8 @@ this.node.on('mousedown', function ( event ) {
 }.bind(this));
 效果上是相同的
 
+var CallBack = this.CallBack.bind(this);
+
 关闭监听
 //off 方法的 参数必须和 on 方法的参数一一对应，才能完成关闭。
 this.node.off('foobar', this._sayHello, this)
@@ -55,6 +57,8 @@ this.node.on('foobar', function (event) {
 });
 
 //在事件监听回调中，开发者会接收到一个 cc.Event 类型的事件对象 event
+//this.callback.bind(this)
+//event.target.name
 type						String	事件的类型（事件名）
 target						cc.Node	接收到事件的原始对象
 currentTarget				cc.Node	接收到事件的当前对象，事件在冒泡阶段当前对象可能与原始对象不同

@@ -6,6 +6,8 @@ node.setPosition(cc.v2(0, 0));
 node.getLocation();
 node.setScale(0.7);
 node.addChild(node);
+node.getChildByName("Label");
+node.removeAllChildren(true);
 node.removeFromParent();
 node = null;
 
