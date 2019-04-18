@@ -11,7 +11,10 @@ Vertical Scroll Bar：纵向滚动条。
 Scroll Events：指定滚动视图内容时的回调函数。
 Cancel Inner Events：发生滚动行为时，是否取消子节点上注册的触屏事件。
 
-this.scrollView.scrollToOffset(cc.p(0, 500), 2);
+scrollView.scrollToOffset(cc.p(0, 500), 2);
+scrollView.stopAutoScroll();//停止滚动
+scrollView.content.removeAllChildren();
+scrollView.content.addChild(this.nothing_item);
 
 
 ListView

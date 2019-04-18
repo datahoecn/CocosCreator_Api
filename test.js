@@ -1,12 +1,9 @@
 
-var a = null
+var a = "11111\r\n2222"
+var b = "3333\r4444"
+var c = "5555\n66666"
+console.log(a);
+console.log(b);
+console.log(c);
 
-if (a === null){
-    console.log("init manager1");
 
-}
-
-if (a === undefined){
-    console.log("init manage2");
-
-}

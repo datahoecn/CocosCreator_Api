@@ -1,4 +1,21 @@
 
+parseInt(string, radix) 函数可解析一个字符串，并返回一个整数。
+string 要被解析的字符串
+radix  可选。表示要解析的数字的基数。如果省略该参数或其值为 0，则数字将以 10 为基础来解析。
+parseFloat(string)解析一个字符串，并返回一个浮点数。
+
+
+换行符‘\n’和回车符‘\r’
+换行符就是另起一行，回车符就是回到一行的开头
+键盘Enter键换行实则应该叫做叫做回车换行(\r\n)
+windows下可直接使用\n来匹配换行符，但仍然推荐使用标准的\r\n来匹配键盘Enter键的换行符;
+windows下enter是 \r\n; 
+linux/unix下是\n; 
+mac下是\r
+
+
+
+
 var a //undefined
 //如果a是null，或者a未定义
 if (a === null || a === undefined){
