@@ -1,3 +1,23 @@
+plist图集使用方法
+properties: {
+    //使用的图集
+    stars:{
+        default: null,
+        type: cc.SpriteAtlas
+    },
+},
+onLoad: function () {
+    var node = new cc.Node('Ten');
+    node.width = 240;
+    node.height = 240;
+    var sp = node.addComponent(cc.Sprite);
+    //this.stars._spriteFrames 为图集对象
+    //对象名称：xq009 即图片名称
+    sp.spriteFrame = this.stars._spriteFrames.xq009;
+}
+
+
+
 //精灵是游戏引擎中最常用的图像元件，它本质上是一张纹理图片
 //只是通过封装，具备了大量常用的图片操作属性，比如更换纹理、设置位置、旋转、缩放、颜色等等
 

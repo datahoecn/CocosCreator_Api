@@ -15,7 +15,7 @@ cc.loader.load(resources, progressCallback, completeCallback);
 var loadCallBack = this._loadCallBack.bind(this);
 cc.loader.loadRes(url, cc.SpriteFrame, loadCallBack);
 _loadCallBack: function (err, res) {
-    //err是 null 表示ok，res是一个表
+    //如果err是 null 表示没问题，res是一个表
     if (err) {
         cc.log('Error url [' + err + ']');
         return;
@@ -24,7 +24,16 @@ _loadCallBack: function (err, res) {
 
 加载整个目录
 //调用 loadResDir 加载 resources 下 test_assets 目录中的所有资源
-cc.loader.loadResDir("test_assets", (err, assets) => {
+//assets是一个表，里面是：图片是一个表，plist的cc_SpriteAtlas是一个表，cc_SpriteFrame是一个表
+//urls是与assets对应的string
+0: cc_Texture2D {_super: null, _name: "", _objFlags: 0
+1: cc_SpriteAtlas {_name: "bigProp_1.plist", _objFlags: 
+2: cc_SpriteFrame {_name: "17", _objFlags: 0, _native: ""
+
+0: "image/bigProps/bigProp_1"
+1: "image/bigProps/bigProp_1"
+2: "image/bigProps/bigProp_1/17"
+cc.loader.loadResDir("test_assets", (err, assets,urls) => {
     //加载完成或遇到错误进入以下代码
     //利用多线程加载目录，时间可能比较长，加载完成后，利用 isValid 判断当前节点是否已被销毁，如果销毁直接返回
     if (!this.isValid) {

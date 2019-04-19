@@ -1,4 +1,29 @@
 
+Cannot read property 'style' of null
+JS运行的时候你的页面还没有加载完成，所以你的JS代码找不到你的页面元素，就会抛出这个问题
+
+使用addChild方法就会处发onload等方法
+脚本里的onload与自定义方法谁先调用，根据addchild与调用自定义方法的先后决定
+注意先调用自定义方法，赋值，在调用addChild
+
+//按钮回调事件
+this.mainNode = cc.director.getScene().getChildByName("Canvas");
+btn_callback: function() {
+    var sellLayer = cc.instantiate(this.sellLayer);//新建节点，克隆预节点
+    this.mainNode.addChild(sellLayer);
+
+    var comSellLayer = sellLayer.getComponent("sellLayer");//获取sellLayer脚本组建
+    var data = {};
+    data.node = this.node;//脚本所挂的节点
+    data.index = this.tab_index;//用来判断是出售怪兽，还是怪兽碎片，0：怪兽 1：怪兽碎片
+    comSellLayer.set_data(data);//调用sellLayer脚本里的set_data方法
+
+    this.node.active = false;//本节点被禁用
+    
+},
+
+
+
 Draw Call//表示引擎对当前画面的绘制次数
 
 this.schedule(callback, target, interval, repeat, delay, paused);//target可以省略
