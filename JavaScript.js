@@ -1,4 +1,11 @@
 
+var actions = require("../UI/InActions.js");
+function actions(node) {
+    this.node = node;
+}
+var action = new actions(splashNode);
+
+
 parseInt(string, radix) 函数可解析一个字符串，并返回一个整数。
 string 要被解析的字符串
 radix  可选。表示要解析的数字的基数。如果省略该参数或其值为 0，则数字将以 10 为基础来解析。

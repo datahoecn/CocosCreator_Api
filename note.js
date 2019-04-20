@@ -1,3 +1,6 @@
+cc.find("Canvas/player1/playerName")//找当前场景中的节点
+
+：用cc.loader加载资源是不会重复加载的，loader中是缓存的，如果之前加载过了之后是不会再加载，而是直接从缓存中调用。可以用cc.loader.getRes(url)查看是否已经加载过了
 
 Cannot read property 'style' of null
 JS运行的时候你的页面还没有加载完成，所以你的JS代码找不到你的页面元素，就会抛出这个问题

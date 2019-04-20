@@ -1,3 +1,16 @@
+//动画
+var armatureDisplay = this.logo.getComponent(dragonBones.ArmatureDisplay);
+if(Config.language === "zh") {
+    armatureDisplay.playAnimation("Animation2", -1);
+}
+else if(Config.language === "en") {
+    armatureDisplay.playAnimation("Animation4", -1);
+}
+else {
+    armatureDisplay.playAnimation("Animation3", -1);
+}
+
+
 var moveTo = cc.moveTo(0.5, cc.p(0, 0));
 this.moveTo.runAction(moveTo);
 

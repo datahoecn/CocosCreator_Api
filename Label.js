@@ -1,4 +1,10 @@
 Label
+//设置字体
+window.localFont = undefined;
+cc.loader.loadRes("fonts/HYWenHei-85W.ttf", function(err, font) {
+    localFont = font;
+});
+
 Src Blend Factor 设置为 ONE
 Dst Blend Factor 设置为 ONE_MINUS_SRC_ALPHA
 这两个属性表示绘制文字时，文字区域的像素颜色为文字像素的颜色，而非文字区域为背景色
