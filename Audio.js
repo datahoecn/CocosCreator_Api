@@ -1,5 +1,11 @@
-cc.gl.audioMgr.playEffect("click.mp3");
-
+var audioUrl = "/music/click.mp3"
+cc.loader.loadRes(audioUrl, cc.AudioClip, (err, audioClip) => {
+    if(err){
+        console.log("playEffect error:" + err);
+    }else{
+        cc.audioEngine.play(audioClip, false, this.bgmVolume);
+    }               
+})
 
 AudioSource 组件只能串行播放声音，相当于只有一个音轨。
 AudioEngine 是引擎内置的声音引擎库，可以同时并行播放多个音轨

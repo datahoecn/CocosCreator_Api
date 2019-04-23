@@ -1,7 +1,8 @@
 //动画
 var armatureDisplay = this.logo.getComponent(dragonBones.ArmatureDisplay);
 if(Config.language === "zh") {
-    armatureDisplay.playAnimation("Animation2", -1);
+    //animName 指定播放动画的名称, -1 为使用配置文件中的次数。 0 为无限循环播放。
+    armatureDisplay.playAnimation("animName", -1);
 }
 else if(Config.language === "en") {
     armatureDisplay.playAnimation("Animation4", -1);
@@ -12,7 +13,7 @@ else {
 
 
 var moveTo = cc.moveTo(0.5, cc.p(0, 0));
-this.moveTo.runAction(moveTo);
+node.runAction(moveTo);
 
 cc.moveTo(0.5, cc.p(0, 0));
 cc.moveBy(0.5, cc.p(100, 100));
