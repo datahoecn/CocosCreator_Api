@@ -6,6 +6,12 @@ this.node.on("touchstart", (e) => {
         });
 
 //在节点上注册指定类型的回调函数，也可以设置 target 用于绑定响应函数的 this 对象。
+//loadlist是节点数组，_onClick是函数
+_onClick: function (event) {
+    this._curType = event.target.name.split('_')[1];
+    this._btnLabel = event.target.getChildByName("Label").getComponent("cc.Label");
+},
+this.loadList[i].on(cc.Node.EventType.TOUCH_END, this._onClick.bind(this));
 this.node.on(cc.Node.EventType.TOUCH_START, this.memberFunction, this); 
 node.on(cc.Node.EventType.TOUCH_START, callback, this);
 node.on(cc.Node.EventType.TOUCH_MOVE, callback, this);

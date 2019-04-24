@@ -1,3 +1,12 @@
+
+//为了防止联系点击
+  this._isLoading = false
+//添加到回调函数中
+  if (this._isLoading) {
+      return;
+  }
+  this._isLoading = true
+
 cc.find("Canvas/player1/playerName")//找当前场景中的节点
 
 ：用cc.loader加载资源是不会重复加载的，loader中是缓存的，如果之前加载过了之后是不会再加载，而是直接从缓存中调用。可以用cc.loader.getRes(url)查看是否已经加载过了

@@ -1,26 +1,61 @@
 在游戏运行过程中加载图片创建精灵，或加载 MP3 文件播放音乐，
 如果直接在主线程中进行，则会导致线程被 IO 操作、创建纹理等事情阻塞，从而造成卡顿。
-这时我们可以借助多线程动态异步加载。Cocos 提供了专门处理动态加载的类 cc.loader
+这时我们可以借助多线程动态异步加载。
+Cocos 提供了专门处理动态加载的类 cc.loader
 
 可以加载本地资源，也可以加载远程的网络资源
 
-有动态加载的资源都需放在项目的 resources 目录下。
+所有动态加载的资源都需放在项目的 resources 目录下
 如果不存在，可手动创建该目录，并将资源放在其中。
 
 加载单个文件
-在本地，使用 loadRes 方法处理，如果在远程，则使用 load 方法处理
-cc.loader.loadRes(url, type, progressCallback, completeCallback);
-cc.loader.load(resources, progressCallback, completeCallback);
-//example,第四个参数可以不写
-var loadCallBack = this._loadCallBack.bind(this);
-cc.loader.loadRes(url, cc.SpriteFrame, loadCallBack);
-_loadCallBack: function (err, res) {
-    //如果err是 null 表示没问题，res是一个表
-    if (err) {
-        cc.log('Error url [' + err + ']');
-        return;
+    //在本地，使用 loadRes 方法处理
+    progressCallback: function (err, res,) {
+        if (err) {
+            cc.log('Error url [' + err + ']');
+            return;
+        }
+        this._curRes = res;//后面可以用来释放资源
+    },
+    completeCallback: function (err, res,) {
+        console.log("======================")
+
+    },
+    var progressCallback = this.progressCallback.bind(this);
+    var url = "test_assets/audio"
+    Audio: "test_assets/audio",
+    Txt: "test_assets/text",
+    Texture: "test_assets/PurpleMonster",
+    Font: "test_assets/font",
+    Plist: "test_assets/atom.plist",
+    SpriteFrame: "test_assets/image",
+    Prefab: "test_assets/prefab",
+    Animation: "test_assets/sprite-anim",
+    Scene: "test_assets/scene",
+    Spine: "spineboy/spineboy",
+    CORS: "http://tools.itharbors.com/res/logo.png",
+    cc.loader.loadRes(url, cc.SpriteFrame, progressCallback, completeCallback);
+
+    //加载场景后，使用
+    this._curRes = res//加载的回调函数第二个参数
+    cc.director.runScene(this._curRes.scene);
+    cc.loader.releaseAsset(this._curRes);
+    this._curRes = null;
+
+
+
+    //如果在远程，则使用 load 方法处理
+    cc.loader.load(resources, progressCallback, completeCallback);
+    //example,第四个参数可以不写
+    var loadCallBack = this._loadCallBack.bind(this);
+    cc.loader.loadRes(url, cc.SpriteFrame, loadCallBack);
+    _loadCallBack: function (err, res) {
+        //如果err是 null 表示没问题，res是一个表
+        if (err) {
+            cc.log('Error url [' + err + ']');
+            return;
+        }
     }
-}
 
 加载整个目录
 //调用 loadResDir 加载 resources 下 test_assets 目录中的所有资源

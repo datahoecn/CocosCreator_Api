@@ -1,3 +1,12 @@
+component = node.addComponent(cc.AudioSource);
+component.clip = res;
+component.play();
+this._audioSource = component;
+if (this._audioSource && this._audioSource instanceof cc.AudioSource) {
+    this._audioSource.stop();
+}
+
+
 var audioUrl = "/music/click.mp3"
 cc.loader.loadRes(audioUrl, cc.AudioClip, (err, audioClip) => {
     if(err){

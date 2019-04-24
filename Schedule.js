@@ -1,5 +1,8 @@
 定时器
 
+可以利用 setInterval 和 schedule 两种方法实现定时逻辑
+setInterlval 比 schedule 的定时器精度更精确，但方法 schedule 更灵活。
+
 setInterval
 //第一个参数是定时器回调函数，第二个参数是定时器的时间间隔，单位为毫秒。
 
@@ -68,6 +71,22 @@ cc.Class({
     }
 });
 
+createEnemyPlane: function () {
+  //实例化预制体
+  var ePlane = cc.instantiate(this.EnemyPlanePrefab);
+  var EPlane = require("EnemyPlane");
+  //获取其挂载的脚本组件
+  var EPComp = ePlane.getComponent(EPlane);
+  //对实例化预制体进行设置
+  ePlane.parent = this.node;
+  ePlane.setPosition(cc.v2(x, y));
+  //进行初始化
+  EPComp.initInfo(x,y,....);
+}
+
+
+
 数据存储
 cc.sys.localStorage.getItem("BestScore");   
 cc.sys.localStorage.setItem("BestScore",this.totalscore);
+

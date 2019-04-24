@@ -1,4 +1,8 @@
 
+var a, i = 10;
+a = i ++; //这里i要先赋值，再自加。语句执行后a=10, i = 11;
+a = ++i; //这里i要先自加，再赋值。语句执行后a=11, i = 11;
+
 var actions = require("../UI/InActions.js");
 function actions(node) {
     this.node = node;
