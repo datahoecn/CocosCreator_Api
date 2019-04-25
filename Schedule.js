@@ -3,6 +3,14 @@
 可以利用 setInterval 和 schedule 两种方法实现定时逻辑
 setInterlval 比 schedule 的定时器精度更精确，但方法 schedule 更灵活。
 
+setTimeout()同理也是一种定时器，
+对应的结束定时的方法是clearTimeout()。
+与setInterval()不同的是，此定时器只执行一次
+
+var t = setTimeout(function(){
+    console.log("OK");
+},1000);//一秒后在控制台输出字符串"OK"
+
 setInterval
 //第一个参数是定时器回调函数，第二个参数是定时器的时间间隔，单位为毫秒。
 
@@ -24,6 +32,7 @@ cc.Class({
         }, 1000);
     },
     // 当脚本被销毁时，要记得释放定时器
+    //除非调用clearInterval()方法，否则无限循环执行回调函数
     onDestroy: function () {
         clearInterval(this.inervalId);
     },
@@ -60,7 +69,7 @@ cc.Class({
 
     //第一个回调函数
     task1: function () {
-        this.unschedule(this.task1);
+        this.unschedule(this.task1);//取消时参数是回调函数
         this.label.textKey = 'cases/05_scripting/04_scheduler/recursiveScheduler.fire.1';
         this.schedule(this.task2, 1, 0, 1);
     },

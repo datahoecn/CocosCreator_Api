@@ -1,3 +1,106 @@
+cc.Class 是一个很常用的 API，用于声明 Cocos Creator 中的类
+调用 cc.Class，传入一个原型对象，在原型对象中以键值对的形式设定所需的类型参数，就能创建出所需要的类。
+
+var Sprite = cc.Class({
+    name: "sprite"
+});
+
+//Sprite 变量保存的是一个 JavaScript 构造函数，可以直接 new 出一个对象：
+var obj = new Sprite();
+
+//需要做类型判断时，可以用 JavaScript 原生的 instanceof：
+cc.log(obj instanceof Sprite);
+
+//使用 ctor 声明构造函数：
+var Sprite = cc.Class({
+    ctor: function () {
+        cc.log(this instanceof Sprite);    // true
+    }
+});
+
+简单声明
+    当声明的属性为基本 JavaScript 类型时，可以直接赋予默认值：
+    properties: {
+      height: 20,       // number
+      type: "actor",    // string
+      loaded: false,    // boolean                
+      target: null,     // object
+    }
+
+    构造函数来完成声明
+        properties: {
+          target: cc.Node,
+          pos: cc.Vec2,
+        }
+
+    当声明属性的类型继承自 cc.ValueType 时（如：cc.Vec2，cc.Color 或 cc.Rect），
+    除了上面的构造函数，还可以直接使用实例作为默认值：
+        properties: {
+          pos: new cc.Vec2(10, 20),
+          color: new cc.Color(255, 255, 255, 128),
+        }
+
+    当声明属性是一个数组时，可以在声明处填写他们的类型或构造函数来完成声明
+        properties: {
+          any: [],      // 不定义具体类型的数组
+          bools: [cc.Boolean],
+          strings: [cc.String],
+          floats: [cc.Float],
+          ints: [cc.Integer],
+
+          values: [cc.Vec2],
+          nodes: [cc.Node],
+          frames: [cc.SpriteFrame],//图片
+        }
+
+完整声明
+    properties: {
+        score: {
+            default: 0,
+            displayName: "Score (player)",
+            tooltip: "The score of player",
+        }
+    }
+
+    default: 设置属性的默认值，这个默认值仅在组件第一次添加到节点上时才会用到
+    type: 限定属性的数据类型，详见 CCClass 进阶参考：type 参数
+    visible: 设为 false 则不在 属性检查器 面板中显示该属性
+    serializable: 设为 false 则不序列化（保存）该属性
+    displayName: 在 属性检查器 面板中显示成指定名字
+    tooltip: 在 属性检查器 面板中添加属性的 Tooltip//当鼠标移到参数上时，显示对应的 Tooltip。
+
+数组声明
+    数组的 default 必须设置为 []，如果要在 属性检查器 中编辑，
+    还需要设置 type 为构造函数，枚举，或者 cc.Integer，cc.Float，cc.Boolean 和 cc.String。
+    properties: {
+        names: {
+            default: [],
+            type: [cc.String]   // 用 type 指定数组的每个元素都是字符串类型
+        },
+
+        enemies: {
+            default: [],
+            type: [cc.Node]     // type 同样写成数组，提高代码可读性
+        },
+    }
+
+get/set 声明
+    在属性中设置了 get 或 set 以后，访问属性的时候，就能触发预定义的 get 或 set 方法。定义方法如下：
+    properties: {
+        width: {
+            get: function () {
+                return this._width;
+            },
+            set: function (value) {
+                this._width = value;
+            }
+        }
+    }
+
+
+
+
+
 cc.Component
 组件的基类，是用于控制整个组件运行的基类
 节点必须是激活、可见状态才会调用
@@ -72,15 +175,6 @@ properties属性列表基本类型
         default: null, // null /[]
     }
     
-    在属性中设置了 get 或 set 以后，访问属性的时候，就能触发预定义的 get 或 set 方法
-    width: {
-        get: function () {
-            return this._width;
-        },
-        set: function (value) {
-            this._width = value;
-        }
-
 组件操作//k可以不加组件类型进行搜索
 addComponent(组件类型): 向节点上添加一个组件实例, 返回挂上的组件实例;
 getComponent(组件类型): 查找一个为指定类型的组件实例(如果有多个，第一个匹配);
@@ -111,6 +205,7 @@ cc.log(obj instanceof Sprite);       // true
 
 const i18n = require('i18n');
 cc.Class({
+    name: "sprite"//类名设为 "sprite"，类名用于序列化，一般可以省略。
     extends: cc.Component,
     properties: {
         custom_comp: {
@@ -179,7 +274,11 @@ cc.Class({
             }.bind(this),5);
     },
     // 每次游戏刷新的时候调用, dt距离闪一次刷新的时间
+    //每0.5更新一次内容
     update: function (dt) {
+        this.updateTimer += dt;
+        if (this.updateTimer < 0.5) return;
+        this.updateTimer = 0;
     },
     // 不是特别常用
     lateUpdate: function(dt) {

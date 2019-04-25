@@ -16,10 +16,6 @@ node.removeFromParent();
 node = null;
 
 var pos = currentScene.convertToNodeSpaceAR(e.getLocation());
-var node = new cc.Node("NewNOde");
-component = node.addComponent(cc.Sprite);//添加组件
-component.spriteFrame = res;
-
 
 cc.instantiate(this.node);//克隆指定的任意类型的对象，或者从 Prefab 实例化出新节点。
 

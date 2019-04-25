@@ -1,5 +1,5 @@
-for (var i = 1; i <10; ++i) {
-	console.log(i)
+var a = 1
+if(a){
+	console.log("111111111111")
 }
-
 

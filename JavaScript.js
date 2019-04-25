@@ -1,13 +1,39 @@
 
+push() 方法可向数组的末尾添加一个或多个元素，并返回新的长度。
+
+for (let i = 0; i < this.spawnCount; ++i) { // spawn items, we only need to do this once
+	let item = cc.instantiate(this.itemTemplate);
+	this.content.addChild(item);
+	item.setPosition(0, -item.height * (0.5 + i) - this.spacing * (i + 1));
+	item.getComponent('Item').updateItem(i, i);
+    this.items.push(item);//items是数组
+}
+
+JavaScript 是属于网络的脚本语言
+
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
+}
+
 var a, i = 10;
 a = i ++; //这里i要先赋值，再自加。语句执行后a=10, i = 11;
 a = ++i; //这里i要先自加，再赋值。语句执行后a=11, i = 11;
+
+require 返回的就是被模块导出的对象，通常我们都会将结果立即存到一个变量（var Rotate）
+传入 require 的字符串就是模块的文件名，这个名字不包含路径也不包含后缀，而且大小写敏感。
+var Rotate = require("Rotate");
+
+require 可以在脚本的任何地方任意时刻进行调用。
+游戏开始时会自动 require 所有脚本，这时每个模块内部定义的代码就会被执行一次
+之后无论又被 require 几次，返回的始终是同一份实例。
+调试时，可以随时在 Developer Tools 的 Console 中 require 项目里的任意模块。
 
 var actions = require("../UI/InActions.js");
 function actions(node) {
     this.node = node;
 }
-var action = new actions(splashNode);
+
+var action = new actions(splashNode);//splashNode也是节点
 
 
 parseInt(string, radix) 函数可解析一个字符串，并返回一个整数。
@@ -24,7 +50,7 @@ windows下enter是 \r\n;
 linux/unix下是\n; 
 mac下是\r
 
-
+var rows = content.text.split("\r\n");
 
 
 var a //undefined
@@ -36,24 +62,17 @@ if (a === null || a === undefined){
 
 switch (this._curType) {
     case 'SpriteFrame':
-        // specify the type to load sub asset from texture's url
-        cc.loader.loadRes(url, cc.SpriteFrame, loadCallBack);
         break;
     case 'Txt':
     case 'Audio':
-        cc.loader.loadRes(url, loadCallBack);
-        break;
-    case 'CORS':
-        cc.loader.load(url, loadCallBack);
-        this.loadTips.textKey = "CORS image should report texImage2D error under WebGL and works ok under Canvas"
         break;
     default:
-        cc.loader.load(url, loadCallBack);
-        break;
+    	cc.loader.load(url, loadCallBack);
+    	break;
 }
 
-专门设置一个变量来记录状态，然后根据状态来判断走那步
 
+在全局对象中，this指向的是window对象；在自定义函数中，this对象指向的是调用这个函数的对象
 this的四种用法
 	在一般函数方法中使用 this 指代全局对象
 
@@ -118,21 +137,11 @@ this的四种用法
 	这个新对象会绑定到函数调用的this。
 	如果函数没有返回其他对象，那么new 表达式中的函数调用会自动返回这个新对象
 
-var self=this的用法
-	this对象是在运行时基于函数的执行环境绑定的，
-	即在全局对象中，this指向的是window对象；在自定义函数中，this对象指向的是调用这个函数的对象
-	this指向的是调用执行环境的那个对象。
-	如果是在函数嵌套环境中，this指代的是调用外部函数或者内部函数的执行环境的对象；
-	
 
 Date.now()
 Number.toFixed(num)//四舍五入,规定小数的位数，是 0 ~ 20 之间的值
-if (!a || b === c) return;//||且
 
-a < b && c
-a -= b * c
-a = b <= c
-
+if (!a || b === c) return;
 typeof(a)
 this._audioSource instanceof cc.AudioSource//检测某个对象是不是另一个对象的实例
 
