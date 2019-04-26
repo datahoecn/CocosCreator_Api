@@ -1,5 +1,4 @@
-var a = 1
-if(a){
-	console.log("111111111111")
-}
-
+var a = 601
+b = a%1000
+console.log(b)
+console.log(Math.floor(b / 100))

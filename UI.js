@@ -73,4 +73,31 @@ ScrollView//滚动视图
                break;
         }
     },
+
+    let items = this.items;
+    let buffer = this.bufferZone;
+    let isDown = this.scrollView.content.y < this.lastContentPosY; // scrolling direction
+    let offset = (this.itemTemplate.height + this.spacing) * items.length;
+    for (let i = 0; i < items.length; ++i) {
+        let viewPos = this.getPositionInView(items[i]);
+        if (isDown) {
+            // if away from buffer zone and not reaching top of content
+            if (viewPos.y < -buffer && items[i].y + offset < 0) {
+                items[i].y = items[i].y + offset;
+                let item = items[i].getComponent('Item');
+                let itemId = item.itemID - items.length; // update item id
+                item.updateItem(i, itemId);
+            }
+        } else {
+            // if away from buffer zone and not reaching bottom of content
+            if (viewPos.y > buffer && items[i].y - offset > -this.content.height) {
+                items[i].y = items[i].y - offset;
+                let item = items[i].getComponent('Item');
+                let itemId = item.itemID + items.length;
+                item.updateItem(i, itemId);
+            }
+        }
+    }
+    // update lastContentPosY
+    this.lastContentPosY = this.scrollView.content.y;
 	
