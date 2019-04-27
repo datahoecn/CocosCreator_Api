@@ -1,4 +1,11 @@
-var a = 601
-b = a%1000
+b = 2
+c = 1
+
+
+a = b<= 0 ? 0 : c;
+
+console.log(a)
+
+b -= c
+
 console.log(b)
-console.log(Math.floor(b / 100))
