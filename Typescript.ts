@@ -70,7 +70,7 @@
 	||	或
 	！	非
 
-	+=	a = b + a (c += b)
+	+=	a = b + a (a += b)
 
 	var a = b ? "b is true" : "b is false"
 
@@ -120,7 +120,6 @@
 	}
 
 	箭头函数
-	//var greet = (name?: string): string => {
 	var greet = (name?: string): string => {
 		if (name){
 			return "Hi! " + name;
@@ -191,7 +190,41 @@
 
 命名空间
 	使用 namespace 和 export 关键字
-	
+
+声明了一个变量之后，不能改变它的类型的语言，是静态语言；能够随时改变它的类型的语言，是动态语言
+
+
+装饰器使用 @ 字符开头作为标记，装饰器主要用于编辑器对组件和属性的识别
+const {ccclass, property} = cc._decorator; // 从 cc._decorator 命名空间中引入 ccclass 和 property 两个装饰器
+
+@ccclass // 使用装饰器声明 CCClass
+export default class NewClass extends cc.Component { // ES6 Class 声明语法，继承 cc.Component
+
+    @property(cc.Label)     // 使用 property 装饰器声明属性，括号里是属性类型，装饰器里的类型声明主要用于编辑器展示
+    label: cc.Label = null; // 这里是 TypeScript 用来声明变量类型的写法，冒号后面是属性类型，等号后面是默认值
+
+    // 也可以使用完整属性定义格式
+    @property({
+        visible: false
+    })
+    text: string = 'hello';
+
+    // 成员方法
+    onLoad() {
+        // init logic
+    }
+}
+
+TypeScript 的 public, private 修饰符不影响成员在 属性检查器 中的默认可见性，默认的可见性仍然取决于成员变量名是否以下划线开头
+
+function func1( ...args ) {//...操作符的作用是用来声明任意数量的方法参数
+
+函数重载
+	console.log(`${a} + 11111111`);//反引号 模板字符串中嵌入变量，需要将变量名写在${}之中
+
+	什么的签名？是Java语言中类的方法的签名吧。其实就是方法的声明
+
+	函数重载：使用相同名称，不同参数 数量 或 类型 创建多个方法。 返回值也要一样
 
 
 
