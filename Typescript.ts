@@ -41,7 +41,7 @@
 	path = "11111";
 	path = ["11111", "222222"];
 
-	typeof instanceof运算符对类型进行验证
+	typeof instanceof 运算符对类型进行验证
 	var x : any = {}
 	typeof x === "string"
 

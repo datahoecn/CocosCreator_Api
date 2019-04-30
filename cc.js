@@ -12,7 +12,7 @@ cc.sys.openURL('http://www.jianshu.com');
 cc.director.loadScene("login");
 
 是否本地平台
-cc.sys.isNative (Boolean)
+cc.sys.isNative//Boolean
 
 指示系统是否是网络浏览器
 cc.sys.isBrowser (Boolean)
@@ -33,7 +33,7 @@ cc.sys.os (String)
 cc.sys.browserType (String)
 
 指示正在运行的浏览器版本
-cc.sys.browserVersion (Number)
+cc.sys.browserVersion//Number
 
 指示整个游戏窗口的真实像素分辨率
 cc.sys.windowPixelResolution (Number)
@@ -46,7 +46,7 @@ var t = cc.sys.localStorage.getItem("bgmVolume");
 cc.sys.localStorage.removeItem("wx_account");
 
 当前平台的功能
-cc.sys.capabilities (Object)
+cc.sys.capabilities//Object
 
 if (cc.sys.isNative) {
     cc.log("本地平台");
