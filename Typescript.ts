@@ -28,7 +28,7 @@
 
 	var TestVar;			//变量声名但未初始化,undefined
 	var TestVar = null;		//变量被赋值null
-	不能把null或undefined当作类型使用
+	不能把 null 或 undefined 当作类型使用
 	var TestVar : null;		//错误，类型错误
 	var TestVar : undefined //错误，找不到undefined
 
@@ -70,7 +70,7 @@
 	||	或
 	！	非
 
-	+=	a = b + a (a += b)
+	a += b	a = b + a
 
 	var a = b ? "b is true" : "b is false"
 
@@ -96,8 +96,7 @@
 函数
 	具名函数
 	//参数name后面加了问号(?)，表示参数是可选的
-	//可选参数一定要放在必选参数的后面，可选参数放在必选参数前面 编译是不会通过的
-	//返回值不是必须的
+	//可选参数一定要放在必选参数的后
 	function greet(name?: string): string{
 		if (name){
 			return "Hi! " + name;
@@ -119,7 +118,7 @@
 		}
 	}
 
-	箭头函数
+	箭头函数 会绑定this操作符
 	var greet = (name?: string): string => {
 		if (name){
 			return "Hi! " + name;
@@ -130,10 +129,21 @@
 		}
 	}
 
-	//回掉函数，a和b类型是number,callback类型是函数
+	//回调函数，a和b类型是number,callback类型是函数
 	function sume(a: number, b: number, callback: (result: number) => void) {
 		callback(a + b);
 	}
+
+	var foo = function() {
+		console.log("foo")
+	}
+
+	function bar(cb : () => void){
+		console.log("(bar");
+		cb();
+	}
+
+	bar(foo)
 
 类
 	class Character {
@@ -225,6 +235,10 @@ function func1( ...args ) {//...操作符的作用是用来声明任意数量的
 	什么的签名？是Java语言中类的方法的签名吧。其实就是方法的声明
 
 	函数重载：使用相同名称，不同参数 数量 或 类型 创建多个方法。 返回值也要一样
+
+使用下划线(_)开始的变量名作为私有变量名
+
+闭包就是能够读取其他函数内部变量的函数。例如在javascript中，只有函数内部的子函数才能读取局部变量，所以闭包可以理解成“定义在一个函数内部的函数“。在本质上，闭包是将函数内部和函数外部连接起来的桥梁
 
 
 

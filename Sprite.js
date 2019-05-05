@@ -1,3 +1,12 @@
+
+var headSprite = item.getChildByName("mask").getChildByName("headSprite").getComponent(cc.Sprite);
+var address = "image/" + path;
+
+cc.loader.loadRes(address, cc.SpriteFrame, function(err, spriteFrame) {
+    headSprite.spriteFrame = spriteFrame;
+});
+
+
 plist图集使用方法
 properties: {
     //使用的图集

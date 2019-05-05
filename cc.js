@@ -1,3 +1,11 @@
+
+
+数据存储
+cc.sys.localStorage.getItem("BestScore");   
+cc.sys.localStorage.setItem("BestScore",this.totalscore);
+
+cc.find("Canvas/player1/playerName")//找当前场景中的节点
+
 //定义一个枚举类型。
 //用户可以把枚举值设为任意的整数，如果设为 -1，系统将会分配为上一个枚举值 + 1
 var LState = cc.Enum({

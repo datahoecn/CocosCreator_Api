@@ -210,6 +210,7 @@ cc.Class({
 
 
 
+用cc.loader 加载资源是不会重复加载的，loader中是缓存的，如果之前加载过了之后是不会再加载，而是直接从缓存中调用。可以用cc.loader.getRes(url)查看是否已经加载过了
 
 在游戏运行过程中加载图片创建精灵，或加载 MP3 文件播放音乐，
 如果直接在主线程中进行，则会导致线程被 IO 操作、创建纹理等事情阻塞，从而造成卡顿。
@@ -249,11 +250,9 @@ Cocos 提供了专门处理动态加载的类 cc.loader
     CORS: "http://tools.itharbors.com/res/logo.png",
     cc.loader.loadRes(url, cc.SpriteFrame, progressCallback, completeCallback);
 
-    //加载场景后，使用
     this._curRes = res//加载的回调函数第二个参数
     cc.director.runScene(this._curRes.scene);
-    cc.loader.releaseAsset(this._curRes);
-    this._curRes = null;
+    cc.loader.releaseAsset(this._curRes);//通过资源对象自身来释放资源
 
 
 
@@ -272,8 +271,8 @@ Cocos 提供了专门处理动态加载的类 cc.loader
 
 加载整个目录
 //调用 loadResDir 加载 resources 下 test_assets 目录中的所有资源
-//assets是一个表，里面是：图片是一个表，plist的cc_SpriteAtlas是一个表，cc_SpriteFrame是一个表
-//urls是与assets对应的string
+//assets 是一个表，里面是：图片是一个表，plist的cc_SpriteAtlas是一个表，cc_SpriteFrame是一个表
+//urls 是与 assets 对应的string
 0: cc_Texture2D {_super: null, _name: "", _objFlags: 0
 1: cc_SpriteAtlas {_name: "bigProp_1.plist", _objFlags: 
 2: cc_SpriteFrame {_name: "17", _objFlags: 0, _native: ""

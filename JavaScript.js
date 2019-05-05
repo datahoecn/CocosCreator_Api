@@ -11,9 +11,13 @@ for (let i = 0; i < this.spawnCount; ++i) { // spawn items, we only need to do t
 
 JavaScript 是属于网络的脚本语言
 
+//随机一个整数，min ~ max-1, 只用当 Math.random() = 1 时，值才会是max
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
 }
+
+Date.now()
+Number.toFixed(num)//四舍五入,规定小数的位数，是 0 ~ 20 之间的值
 
 var a, i = 10;
 a = i ++; //这里i要先赋值，再自加。语句执行后a=10, i = 11;
@@ -87,22 +91,6 @@ this的四种用法
 	它引用的是全局对象的 parseInt 属性。全局对象是作用域链的头，
 	还意味着在顶层 JavaScript 代码中声明的所有变量都将成为全局对象的属性。
 
-	在客户端 JavaScript 中，全局对象就是 Window 对象
-	function test(){
-　　　　this.x = 1;
-		console.log(this.x);
-　　}
-　　test(); // 1
-	
-	作为对象方法调用，this 指代上级对象
-	function test(){
-		console.log(this.x);
-	}
-	var o = {};
-	o.x = 1;
-	o.m = test;
-	o.m(); // 1
-
 	作为构造函数调用，this 指代new 出的对象
 	function test(){
 　　　　this.x = 1;
@@ -136,10 +124,6 @@ this的四种用法
 	这个新对象会被执行[[ 原型]] 连接。
 	这个新对象会绑定到函数调用的this。
 	如果函数没有返回其他对象，那么new 表达式中的函数调用会自动返回这个新对象
-
-
-Date.now()
-Number.toFixed(num)//四舍五入,规定小数的位数，是 0 ~ 20 之间的值
 
 if (!a || b === c) return;
 typeof(a)
