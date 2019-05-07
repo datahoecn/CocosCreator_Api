@@ -1,3 +1,17 @@
+
+CCAnimation的使用中，指定动画名称和动画时间，play(name,time),这样可以让动画在指定时间播放。
+
+让动画跳到某一帧但是不播放
+//获取当前或者指定的动画状态，如果未找到指定动画剪辑则返回 null。
+var state = this.anima.getAnimationState("test");
+var curves = state.curves;//Object[] 曲线列表
+var info = state.getWrappedInfo(0.01);
+for (var i = 0, len = curves.length; i < len; i++) {
+    var curve = curves[i];
+    curve.sample(info.time, info.ratio, this);//对指定或当前动画进行采样。你可以手动将动画设置到某一个状态，然后采样一次
+}
+
+
 //动画
 var armatureDisplay = this.logo.getComponent(dragonBones.ArmatureDisplay);
 if(Config.language === "zh") {

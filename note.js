@@ -18,6 +18,11 @@ project.json 文件和 assets 文件夹一起，作为验证 Cocos Creator 项�
 需要拖拽资源赋值的属性栏上会显示蓝色的标签
 
 刷新编辑器窗口（按 Ctrl / Cmd + R
+Ctrl+L 清空控制台
+程序运行到debugger就会自动停止运行	
+console.trace() 会输出函数调用堆栈
+console.table() 会把一个对象按表格形式输出
+console.time() 和 console.timeEnd()得到一段代码的执行时间
 
 Cannot read property 'style' of null
 JS运行的时候你的页面还没有加载完成，所以你的JS代码找不到你的页面元素，就会抛出这个问题

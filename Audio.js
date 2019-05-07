@@ -1,3 +1,17 @@
+//audioSource没有播放结束的回调，需要手动添加
+audioSource:{
+    default: null,
+    type: cc.AudioSource
+}
+var audio = this.audioSource.audio;
+audio.on("ended", () => {
+    console.log("播放结束");
+});
+this.audioSource.play();
+
+
+
+
 component = node.addComponent(cc.AudioSource);
 component.clip = res;
 component.play();
