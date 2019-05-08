@@ -22,6 +22,12 @@ cc.loader.loadRes("fonts/HYWenHei-85W.ttf", function(err, font) {
 
 加载位图： (orangeAtlas.labelatlas orange.png) 把orangeAtlas.labelatlas放入font
 
+scoreDisplay: {
+    default: null,
+    type: cc.Label
+},
+this.scoreDisplay.string = 'Score: ' + this.score;
+
 EditBox
   Background Image：设置 BACKGROUND_SPRITE 的纹理，即编辑器背景图。
   KeyboardReturnType：设置回车键类型。

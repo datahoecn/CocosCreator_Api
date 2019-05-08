@@ -1,4 +1,5 @@
-//cc.Class 是一个很常用的 API，用于声明 Cocos Creator 中的类
+//cc 是 Cocos 的简称，Cocos 引擎的主要命名空间，引擎代码中所有的类、函数、属性和常量都在这个命名空间中定义
+//Class() 就是 cc 模块下的一个方法，这个方法用于声明 Cocos Creator 中的类
 //调用 cc.Class，传入一个原型对象，在原型对象中以键值对的形式设定所需的类型参数，就能创建出所需要的类。
 require()
 const i18n = require('i18n');

@@ -1,3 +1,43 @@
+onKeyDown (event) {
+    switch(event.keyCode) {
+        case cc.macro.KEY.a:
+            this.accLeft = true;
+            break;
+        case cc.macro.KEY.d:
+            this.accRight = true;
+            break;
+    }
+},
+
+onKeyUp (event) {
+    switch(event.keyCode) {
+        case cc.macro.KEY.a:
+            this.accLeft = false;
+            break;
+        case cc.macro.KEY.d:
+            this.accRight = false;
+            break;
+    }
+},
+// 初始化键盘输入监听,通过 systemEvent 来监听系统 全局 事件
+cc.systemEvent.on(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
+cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);
+// 取消键盘输入监听
+cc.systemEvent.off(cc.SystemEvent.EventType.KEY_DOWN, this.onKeyDown, this);
+cc.systemEvent.off(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);
+
+update: function (dt) {
+// 根据当前加速度方向每帧更新速度
+    if (this.accLeft) {
+        this.xSpeed -= this.accel * dt;
+    } else if (this.accRight) {
+        this.xSpeed += this.accel * dt;
+    }
+    // 根据当前速度更新主角的位置
+    this.node.x += this.xSpeed * dt;
+},
+
+
 //audioSource没有播放结束的回调，需要手动添加
 audioSource:{
     default: null,
@@ -8,6 +48,13 @@ audio.on("ended", () => {
     console.log("播放结束");
 });
 this.audioSource.play();
+
+
+scoreAudio: {
+    default: null,
+    type: cc.AudioClip
+}
+cc.audioEngine.playEffect(this.scoreAudio, false);
 
 
 

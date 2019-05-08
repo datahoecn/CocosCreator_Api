@@ -1,3 +1,9 @@
+//新建一个精灵节点
+var role = new cc.Sprite('role.png');
+scene.addChild(role);
+role.setPosition(100, 100);
+var walk = cc.sequence(cc.moveBy(5, 100, 0), cc.moveBy(5, -100, 0)).repeatForever();
+role.runAction(walk);
 
 var headSprite = item.getChildByName("mask").getChildByName("headSprite").getComponent(cc.Sprite);
 var address = "image/" + path;

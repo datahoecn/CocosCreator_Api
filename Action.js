@@ -1,4 +1,6 @@
 
+this.player.stopAllActions(); //停止 player 节点的跳跃动作
+
 CCAnimation的使用中，指定动画名称和动画时间，play(name,time),这样可以让动画在指定时间播放。
 
 让动画跳到某一帧但是不播放
@@ -30,7 +32,7 @@ var moveTo = cc.moveTo(0.5, cc.p(0, 0));
 node.runAction(moveTo);
 
 cc.moveTo(0.5, cc.p(0, 0));
-cc.moveBy(0.5, cc.p(100, 100));
+cc.moveBy(0.5, 100, 100);//第二个参数如果是number，那么就需要传入第三个参数，坐标Y
 cc.rotateTo(1, 0, 100);//第一个参数是时间，第二个参数是沿X轴旋转，第三个参数是沿Y轴旋转
 cc.rotateBy(1, 100);//第二个参数是沿X与Y轴都旋转100度
 cc.scaleTo(0.2, 1, 0.6)
@@ -38,8 +40,16 @@ cc.tintTo(2, 255, 0, 0);//将精灵的颜色值改变为目标值
 cc.delayTime(0.5);
 cc.fadeOut(1);//用来设置在一段时间内淡出
 cc.fadeIn(1);//用来设置在一段时间内淡入
-cc.callFunc(() => {
-                });
+
+var finished = cc.callFunc(this.myMethod, this, opt);
+//匿名函数
+var finished = cc.callFunc(function () {
+    //doSomething
+}, this, opt);
+//箭头函数
+var finished = cc.callFunc(() => {
+
+}, this, opt);
 
 cc.moveTo(0.5, cc.p(0, 0)).easing(cc.easeCubicActionOut());
 cc.easeCubicActionOut()

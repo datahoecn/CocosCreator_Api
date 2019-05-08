@@ -11,6 +11,8 @@ for (let i = 0; i < this.spawnCount; ++i) { // spawn items, we only need to do t
 
 JavaScript 是属于网络的脚本语言
 
+Math.floor()//向下取整
+
 //随机一个整数，min ~ max-1, 只用当 Math.random() = 1 时，值才会是max
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
