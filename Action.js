@@ -28,10 +28,10 @@ else {
 }
 
 
-var moveTo = cc.moveTo(0.5, cc.p(0, 0));
+var moveTo = cc.moveTo(0.5, cc.v2(0, 0));
 node.runAction(moveTo);
 
-cc.moveTo(0.5, cc.p(0, 0));
+cc.moveTo(0.5, cc.v2(0, 0));
 cc.moveBy(0.5, 100, 100);//第二个参数如果是number，那么就需要传入第三个参数，坐标Y
 cc.rotateTo(1, 0, 100);//第一个参数是时间，第二个参数是沿X轴旋转，第三个参数是沿Y轴旋转
 cc.rotateBy(1, 100);//第二个参数是沿X与Y轴都旋转100度
@@ -51,11 +51,11 @@ var finished = cc.callFunc(() => {
 
 }, this, opt);
 
-cc.moveTo(0.5, cc.p(0, 0)).easing(cc.easeCubicActionOut());
+cc.moveTo(0.5, cc.v2(0, 0)).easing(cc.easeCubicActionOut());
 cc.easeCubicActionOut()
 cc.easeCubicActionIn()
 
-cc.sequence(cc.moveBy(0.1, cc.p(0, -200)),cc.moveBy(0.1, cc.p(0, 200))).repeat(2)
+cc.sequence(cc.moveBy(0.1, cc.v2(0, -200)),cc.moveBy(0.1, cc.v2(0, 200))).repeat(2)
 
 var callBack = function(node) {
             node.removeFromParent();

@@ -20,7 +20,7 @@ cc.Class({
         color: new cc.Color(255, 255, 255, 128),//当声明属性的类型继承自 cc.ValueType 时（如：cc.Vec2，cc.Color 或 cc.Rect），
         pos  : new cc.Vec2(10, 20),
         color: cc.color(0,0,0,255) 
-        pos  : cc.p(0,0)           
+        pos  : cc.v2(0,0)           
         size : cc.size(0,0)        
 
         //数组声明

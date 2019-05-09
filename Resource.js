@@ -1,0 +1,104 @@
+艺术数字资源 (LabelAtlas)
+	艺术数字资源 是一种用户自定义的资源，它可以用来配置艺术数字字体的属性
+	新建 -> 艺术数字配置
+	使用艺术数字资源
+		新建一个 Label 组件，然后将新建好的艺术数字资源拖拽到节点的 Label 组件的 Font 属性上即可
+
+资源导入导出(.fire 场景文件和 .prefab 预制文件)
+	在主菜单选择 文件 -> 资源导出
+
+图像资源的自动剪裁
+	导入图像资源后生成的 SpriteFrame 会进行自动剪裁，去除原始图片周围的透明像素区域
+
+	Trim 勾选后将在渲染 Sprite 图像时去除图像周围的透明像素
+	Size Mode 用来将节点的尺寸设置为原图或原图裁剪透明像素后的大小
+		TRIMMED 选择这个选项，会将节点的尺寸（size）设置为原始图片裁剪掉透明像素后的大小。
+		RAW 选择这个，会将节点尺寸设置为原始图片包括透明像素的大小。
+		CUSTOM 自定义尺寸
+
+	自带位置信息的序列帧动画
+	有很多动画师在绘制序列帧动画时，会使用一张较大的画布，
+	然后将角色在动画中的运动直接通过角色在画布上的位置变化表现出来。
+	在使用这种素材时，我们需要将 Sprite 组件 的 Trim 设为 false，
+	将 Size Mode 设为 RAW。这样动画在播放每个序列帧时，都将使用原始图片的尺寸，并保留图像周围透明像素的信息，
+	这样才能正确显示绘制在动画中的角色位移。
+
+	而 Trim 设为 true，则是在位移完全由角色位置属性控制的动画中，更推荐使用的方式。
+
+	在制作序列帧动画时，我们通常会使用TexturePacker这样的工具将序列帧打包成图集，
+	并在导入后通过图集资源下的 SpriteFrame 来使用。在 TexturePacker 中输出图集资源时，
+	Sprites 分类下的 Trim mode 请选择 Trim，一定不要选择 Crop, flush position，
+	否则透明像素剪裁信息会丢失，您在使用图集里的资源时也就无法获得原始图片未剪裁的尺寸和偏移信息了。
+
+为了提高资源管理效率，建议将导入的 plist 和 png （如果有使用贴图）文件存放在单独的目录下，不要和其他资源混在一起。
+
+	粒子资源（ParticleSystem）
+		粒子使用的 png 贴图文件或 base64 格式的内置图片文件可能会有不正确的预乘信息，
+		导致渲染出的粒子不能正确显示透明区域。如果出现这种情况，
+		请手动修改粒子 plist 文件中的 blendFuncSource 属性到下面的值：
+			<key>blendFuncSource</key>
+    		<integer>770</integer>
+
+    声音资源
+    	Web Audio
+    		通过 Web Audio 方式加载的声音资源，在引擎内是以一个 buffer 的形式缓存的。
+			这种方式的优点是兼容性好，问题比较少。缺点是占用的内存资源过多。
+		DOM Audio
+			通过生成一个标准的 audio 元素来播放声音资源，缓存的就是这个 audio 元素
+			使用标准的 audio 元素播放声音资源的时候，在某些浏览器上可能会遇到一些限制。比如：每次播放必须是用户操作事件内才允许播放（Web Audio 只要求第一次），且只允许播放一个声音资源等。
+			如果是比较大的音频如背景音乐，建议使用 DOM Audio
+		动态选择加载
+			音频默认是使用 Web Audio 的方式加载并播放的，只有在不支持的浏览器才会使用 DOM 模式
+			cc.loader.load(cc.url.raw('resources/background.mp3'), callback);
+
+	骨骼动画资源（Spine）
+		骨骼动画所需资源有：
+			.json 骨骼数据
+			.png 图集纹理
+			.txt/.atlas 图集数据
+
+	骨骼动画资源（DragonBones）
+		DragonBones 骨骼动画资源有：
+		.json 骨骼数据
+		.json 图集数据
+		.png 图集纹理
+
+	瓦片图资源（TiledMap）
+		地图所需资源有：
+		.tmx 地图数据
+		.png 图集纹理
+		.tsx tileset 数据配置文件（部分 tmx 文件需要）
+
+	JSON 资源
+		组件关联一个 JSON：
+		 // 声明
+	    npcList: {
+	        default: null,
+	        type: cc.JsonAsset,
+	    },
+
+	    // 读取
+	    var json = this.npcList.json;
+	    loadNpc(json);
+	    动态加载：
+	    cc.loader.loadRes('configs/npc', function (err, jsonAsset) {
+	        loadNpc(jsonAsset.json);
+	    });
+
+	文本资源
+		如 .txt, .plist, .xml, .json, .yaml, .ini, .csv, .md，都会导入为 cc.TextAsset。
+		组件关联一个 TextAsset：
+		// 声明
+	    file: {
+	        default: null,
+	        type: cc.TextAsset,
+	    },
+
+	    // 读取
+	    var text = this.file.text;
+	    动态加载：
+	    cc.loader.loadRes(url, function (err, file) {
+	        cc.log(file.text);
+	    });
+
+我们可以使用空的组件来对实体进行标记，从而能够在运行时动态的识别它。
