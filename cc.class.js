@@ -66,7 +66,9 @@ cc.Class({
         console.log("lateUpdate",dt);
     },
 
-    // 组件被激活的时候调用
+    //当组件的 enabled 属性从 false 变为 true 时，
+    //或者所在节点的 active 属性从 false 变为 true 时
+    //倘若节点第一次被创建且 enabled 为 true，则会在 onLoad 之后，start 之前被调用。
     onEnable: function() {
         console.log("onEnable");
     },
@@ -95,6 +97,7 @@ cc.Class({
     },
 
 });
+this.enabled = false//每帧不执行该组件的 update 方法，同时也用来控制渲染组件是否显示
 
 var Sprite = cc.Class({
     ctor: function () {
@@ -158,7 +161,12 @@ this.node.name 挂载了该组件的节点名称
 
 组件操作//可以不加组件类型getComponentInChildren()
 this.addComponent(组件类型): 向节点上添加一个组件实例, 返回挂上的组件实例;
+
 this.getComponent(组件类型): 查找一个为指定类型的组件实例(如果有多个，第一个匹配);
+var label = this.getComponent(cc.Label);
+var rotate = this.getComponent("SinRotate");//传入一个类名。对用户定义的组件而言，类名就是脚本的文件名
+
+
 this.getComponents(组件类型): 查找这个节点上所有这个类型的组件实例;[inst1, inst2, inst3, ...]
 this.getComponentInChildren(组件类型): 在自己与子节点里面查找;
 this.getComponentsInChildren (组件类型): 在自己与子节点里面查找;

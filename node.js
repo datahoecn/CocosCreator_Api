@@ -6,14 +6,25 @@ v.sub(cc.v2(5, 5));      // return Vec2 {x: 5, y: 5};
 var v = cc.v2(10, 10);//返回该向量的长度。
 v.mag(); // return 14.142135623730951;
 
+//更改节点尺寸
+this.node.width = 100;
+this.node.height = 100;
+
+//更改节点锚点位置
+this.node.anchorX = 1;
+this.node.anchorY = 0;
+
 this.node.destroy();
 node.rotationX = 0;
 node.rotationY = 0;
 node.opacity = 255;
 node.active = true
+//更改节点的父节点
 node.parent = this.root
 node.position = cc.p(100,100);//cc.v2(300, 200)
 node.position.x
+var cannons = this.node.children;//获得所有的子物体
+this.node.childrenCount 将返回节点的子节点数量。
 
 node.setPosition(cc.v2(0, 0));
 node.getLocation();//获取当前触点位置
@@ -23,6 +34,7 @@ node.setScale(0.7);
 node.addChild(node);
 node.getChildByName("Label");
 node.removeAllChildren(true);
+//removeFromParent 通常需要传入一个 false，否则默认会清空节点上绑定的事件和 action 等
 node.removeFromParent();
 node = null;
 
