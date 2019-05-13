@@ -4,65 +4,53 @@ const BlockEvents = ['touchstart', 'touchmove', 'touchend',
 this.node.on("touchstart", (e) => {
             var pos = currentScene.convertToNodeSpaceAR(e.getLocation());
         });
+触摸事件
+  touch cc.Touch  与当前事件关联的触点对象
+  getID Number  获取触点的 ID，用于多点触摸的逻辑判断
+  getLocation Object  获取触点位置对象，对象包含 x 和 y 属性
+  getLocationX  Number  获取触点的 X 轴位置
+  getLocationY  Number  获取触点的 Y 轴位置
+  getPreviousLocation Object  获取触点上一次触发事件时的位置对象，对象包含 x 和 y 属性
+  getStartLocation  Object  获取触点初始时的位置对象，对象包含 x 和 y 属性
+  getDelta  Object  获取触点距离上一次事件移动的距离对象，对象包含 x 和 y 属性
 
-//在节点上注册指定类型的回调函数，也可以设置 target 用于绑定响应函数的 this 对象。
-//loadlist是节点数组，_onClick是函数
-_onClick: function (event) {
-    this._curType = event.target.name.split('_')[1];
-    this._btnLabel = event.target.getChildByName("Label").getComponent("cc.Label");
+cc.Node 的其它事件
+position-changed  当位置属性修改时
+rotation-changed  当旋转属性修改时
+scale-changed 当缩放属性修改时
+size-changed  当宽高属性修改时
+anchor-changed  当锚点属性修改时
+
+
+
+_sayHello: function () {
+  console.log('Hello World');
 },
-this.loadList[i].on(cc.Node.EventType.TOUCH_END, this._onClick.bind(this));
-this.node.on(cc.Node.EventType.TOUCH_START, this.memberFunction, this); 
-node.on(cc.Node.EventType.TOUCH_START, callback, this);
-node.on(cc.Node.EventType.TOUCH_MOVE, callback, this);
-node.on(cc.Node.EventType.TOUCH_END, callback, this);
-node.on(cc.Node.EventType.TOUCH_CANCEL, callback, this);
-node.on(cc.Node.EventType.ANCHOR_CHANGED, callback);
-node.on(cc.Node.EventType.COLOR_CHANGED, callback);
-
 监听事件
-//事件处理是在节点（cc.Node）中完成的。对于组件，可以通过访问节点 this.node 来注册和监听事件
-//监听事件可以 通过this.node.on() 函数来注册
-this.node.on('mousedown', function ( event ) {
-      console.log('Hello!');
-    });
-//使用第三个参数
-this.node.on('mousedown', function (event) {
-  this.enabled = false;
-}, this);//传第三个参数 target
-//使用函数绑定
-this.node.on('mousedown', function ( event ) {
-  this.enabled = false;
-}.bind(this));
-效果上是相同的
-
-var CallBack = this.CallBack.bind(this);
-
+  this.node.on('foobar', this._sayHello, this);
 关闭监听
-//off 方法的 参数必须和 on 方法的参数一一对应，才能完成关闭。
-this.node.off('foobar', this._sayHello, this)
+  this.node.off('foobar', this._sayHello, this);
 
 发射事件
-//两种方式发射事件：emit 和 dispatchEvent。两者的区别在于，后者可以做事件传递
+//dispatchEvent可以做事件传递
 this.node.emit('say-hello', {
-      msg: 'Hello, this is Cocos Creator',
-    });
+  msg: 'Hello, this is Cocos Creator',
+});
 
-this.node.on('say-hello', function (event) {
-      console.log(event.detail.msg);
-    });
+this.node.on('say-hello', function (msg) {
+  console.log(msg);
+});
 
-
-//冒泡派送会将事件从事件发起节点，不断地向上传递给他的父级节点，
-//直到到达根节点或者在某个节点的响应函数中做了中断处理 event.stopPropagation()
+//在事件监听回调中，开发者会接收到一个 cc.Event 类型的事件对象 event
 // 节点 c 的组件脚本中
 this.node.dispatchEvent( new cc.Event.EventCustom('foobar', true) );
 // 节点 b 的组件脚本中
 this.node.on('foobar', function (event) {
-  event.stopPropagation();//截获事件后就不再将事件传递
+  //中断处理
+  event.stopPropagation();
 });
 
-//在事件监听回调中，开发者会接收到一个 cc.Event 类型的事件对象 event
+
 //this.callback.bind(this)
 //event.target.name
 type						String	事件的类型（事件名）
@@ -75,3 +63,4 @@ getCurrentTarget			Function	获取当前接收到事件的目标节点
 detail						Function	自定义事件的信息（属于 cc.Event.EventCustom）
 setUserData					Function	设置自定义事件的信息（属于 cc.Event.EventCustom）
 getUserData					Function	获取自定义事件的信息（属于 cc.Event.EventCustom）
+

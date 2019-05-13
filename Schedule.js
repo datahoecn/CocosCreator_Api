@@ -1,30 +1,39 @@
-定时器
+cc.Node 不包含计时器相关 API
+组件的计时器调用回调时，会将回调的 this 指定为组件本身，因此回调中可以直接使用 this
 
-可以利用 setInterval 和 schedule 两种方法实现定时逻辑
-setInterlval 比 schedule 的定时器精度更精确，但方法 schedule 更灵活。
+开始一个计时器
+    this.schedule(callback, target, interval, repeat, delay, paused);//target可以省略
+    component.schedule(function() {
+         // 这里的 this 指向 component
+         this.doSomething();
+     }, interval, repeat, delay);
 
-setTimeout()同理也是一种定时器，
-对应的结束定时的方法是clearTimeout()。
-与setInterval()不同的是，此定时器只执行一次
+开始一个只执行一次的计时器
+    component.scheduleOnce(function() {
+         this.doSomething();
+     }, 2);
 
-var t = setTimeout(function(){
-    console.log("OK");
-},1000);//一秒后在控制台输出字符串"OK"
+取消一个计时器
+    this.unschedule(callback, target)//停止定时器
+    this.callback = function () {
+        this.unschedule(this.callback);
+    }
+    component.schedule(this.callback, 1);
+
+取消这个组件的所有计时器
+    unscheduleAllCallbacks()
+
+setTimeout
+    start: function () {
+        // 5 秒后销毁目标节点
+        setTimeout(function () {
+          this.target.destroy();
+        }.bind(this), 5000);
+    },
+    结束定时clearTimeout()
 
 setInterval
-//第一个参数是定时器回调函数，第二个参数是定时器的时间间隔，单位为毫秒。
-
-cc.Class({
-    extends: cc.Component,
-
-    properties: {
-        nodeList: {
-            default: [],
-            type: [cc.Node]
-        }
-    },
-
-    // 脚本组件加载完成后，调用 setInterval 创建定时器，每秒调用一次 toggleNodesVisibility 来显示或隐藏数组中的所有节点
+    //第一个参数是定时器回调函数，第二个参数是定时器的时间间隔，单位为毫秒。
     onLoad: function () {
         var self = this;
         this.inervalId = setInterval(function () {
@@ -32,52 +41,6 @@ cc.Class({
         }, 1000);
     },
     // 当脚本被销毁时，要记得释放定时器
-    //除非调用clearInterval()方法，否则无限循环执行回调函数
     onDestroy: function () {
         clearInterval(this.inervalId);
     },
-
-    toggleNodesVisibility: function() {
-        console.log('toggle visibility');
-        for (var i = 0; i < this.nodeList.length; ++i) {
-            this.nodeList[i].active = !this.nodeList[i].active;
-        }
-    }
-});
-
-
-schedule 
-//schedule(callback, interval, repeat, delay)
-//第一个参数 callback 是定时器回调函数，
-//第二个参数 interval 是定时器的时间间隔，单位为秒，
-//第三个参数 repeat 是重复次数
-//最后一个参数 delay 为延时秒数
-
-//scheduleOnce(callback,delay)调用一次
-this.schedule(callback, target, interval, repeat, delay, paused);//target可以省略
-this.unschedule(callback, target)//停止定时器
-
-cc.Class({
-    extends: cc.Component,
-
-    properties: {
-        label: require('../../../i18n/LabelLocalized')
-    },
-
-    //点击按钮时调用定时器回调函数
-    run () {
-        this.schedule(this.task1, 1, 0, 1);
-    },
-
-    //第一个回调函数
-    task1: function () {
-        this.unschedule(this.task1);//取消时参数是回调函数
-        this.label.textKey = 'cases/05_scripting/04_scheduler/recursiveScheduler.fire.1';
-        this.schedule(this.task2, 1, 0, 1);
-    },
-
-    //第二个回调函数
-    task2: function () {
-        this.label.textKey = 'cases/05_scripting/04_scheduler/recursiveScheduler.fire.2';
-    }
-});

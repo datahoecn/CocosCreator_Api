@@ -1,9 +1,12 @@
+加载和切换场景
+	cc.director.loadScene("MyScene");
+预加载场景//就算预加载还没完成，也可以调用 cc.director.loadScene
+	cc.director.preloadScene("table", function () {
+	    cc.log("Next scene preloaded");
+	});
 // 获取逻辑树的场景节点
 var currentScene = cc.director.getScene();
 this.mainNode = cc.director.getScene().getChildByName("Canvas");
-
-cc.director.loadScene('game');//通过场景名称进行加载场景
-preloadScene//预加载场景，你可以在任何时候调用这个方法。
 
 var sceneName = 'scene-name';
 var onLaunched = function () {

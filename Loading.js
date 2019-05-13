@@ -1,3 +1,50 @@
+动态加载资源
+    加载 Prefab
+    cc.loader.loadRes("test assets/prefab", function (err, prefab) {
+        var newNode = cc.instantiate(prefab);
+        cc.director.getScene().addChild(newNode);
+    });
+    加载 AnimationClip
+    var self = this;
+    cc.loader.loadRes("test assets/anim", function (err, clip) {
+        self.node.getComponent(cc.Animation).addClip(clip, "anim");
+    });
+    加载 SpriteFrame
+    //如果指定了类型参数，就会在路径下查找指定类型的资源
+    //需要获取 “子资源”（例如获取 Texture2D 生成的 SpriteFrame），需要声明类型。
+    var self = this;
+    cc.loader.loadRes("test assets/image", cc.SpriteFrame, function (err, spriteFrame) {
+        self.node.getComponent(cc.Sprite).spriteFrame = spriteFrame;
+    });
+    加载图集中的 SpriteFrame
+    // 加载 SpriteAtlas（图集），并且获取其中的一个 SpriteFrame
+    // 注意 atlas 资源文件（plist）通常会和一个同名的图片文件（png）放在一个目录下, 所以需要在第二个参数指定资源类型
+    cc.loader.loadRes("test assets/sheep", cc.SpriteAtlas, function (err, atlas) {
+        var frame = atlas.getSpriteFrame('sheep_down_0');
+        sprite.spriteFrame = frame;
+    });
+
+    资源释放//releaseRes释放通过 loadRes 加载的资源
+    cc.loader.releaseRes("test assets/image", cc.SpriteFrame);
+    cc.loader.releaseRes("test assets/anim");
+    //释放特定的 Asset 实例,通过资源对象自身来释放资源
+    cc.loader.releaseAsset(spriteFrame);
+
+    资源批量加载
+    // 加载 test assets 目录下所有资源
+    cc.loader.loadResDir("test assets", function (err, assets) {
+    });
+    // 加载 test assets 目录下所有 SpriteFrame，并且获取它们的路径
+    cc.loader.loadResDir("test assets", cc.SpriteFrame, function (err, assets, urls) {
+    });
+    // 如果在这个 prefab 中有一些和场景其他部分共享的资源，你不希望它们被释放，可以将这个资源从依赖列表中删除
+    var deps = cc.loader.getDependsRecursively('prefabs/sample');
+    var index = deps.indexOf(texture2d._uuid);
+    if (index !== -1)
+        deps.splice(index, 1);
+    //通过 id（通常是资源 url）来释放一个资源或者一个资源数组
+    cc.loader.release(deps);
+
 const i18n = require('i18n');
 
 cc.Class({

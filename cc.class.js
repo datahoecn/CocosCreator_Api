@@ -1,3 +1,18 @@
+资源属性的声明
+    cc.Texture2D, cc.SpriteFrame, cc.AnimationClip, cc.Prefab
+    texture: {
+        default: null,
+        type: cc.Texture2D
+    },
+    spriteFrame: {
+        default: null,
+        type: cc.SpriteFrame
+    },
+    onLoad: function () {
+        var spriteFrame = this.spriteFrame;
+        var texture = this.texture;
+        spriteFrame.setTexture(texture);//通过 Texture，rect，rotated，offset 和 originalSize 设置 SpriteFrame
+    }
 //cc 是 Cocos 的简称，Cocos 引擎的主要命名空间，引擎代码中所有的类、函数、属性和常量都在这个命名空间中定义
 //Class() 就是 cc 模块下的一个方法，这个方法用于声明 Cocos Creator 中的类
 //调用 cc.Class，传入一个原型对象，在原型对象中以键值对的形式设定所需的类型参数，就能创建出所需要的类。
@@ -180,13 +195,6 @@ node.addComponent(dragonBones.ArmatureDisplay)
 import SpriteAnim from '../../../Engine/SpriteAnim';
 node.addComponent(SpriteAnim);
 
-Shedule定时器操作
-// 启动定时器, 节点或组件必须是激活状态,  例如被隐藏的节点，都是无法启动定时器的;
-this.scheduleOnce(callback,delay)在delay秒之后调用callback一次
-this.schedule(callback,interval,repeat ,delay); 在delay秒后调用callback重复repeat+1次，并且每隔interval秒调用一次。
-//如果repeat为cc.macro.REPEAT_FOREVER则无限调用callback函数
-this.unschedule(callback_fn); // 取消调度一个自定义的回调函数
-this.unscheduleAllCallbacks()取消所有的定时器操作;
 
 
 

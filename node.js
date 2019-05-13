@@ -1,3 +1,60 @@
+常驻节点
+	//在场景切换时不被自动销毁，常驻内存
+	//由于回调函数只能写在本脚本中，所以场景加载回调通常用来配合常驻节点，在常驻节点上挂载的脚本中使用
+	cc.game.addPersistRootNode(myNode);
+	//将节点还原为可在场景切换时销毁的节点
+	cc.game.removePersistRootNode(myNode);
+创建新节点
+	cc.Class({
+	  extends: cc.Component,
+	  properties: {
+	    sprite: {
+	      default: null,
+	      type: cc.SpriteFrame,
+	    },
+	  },
+	  start: function () {
+	    var node = new cc.Node('Sprite');
+	    var sp = node.addComponent(cc.Sprite);
+
+	    sp.spriteFrame = this.sprite;
+	    node.parent = this.node;
+	  },
+	});
+
+克隆已有节点 创建预制节点
+	cc.Class({
+	  extends: cc.Component,
+	  properties: {
+	    target: {
+	      default: null,
+	      type: cc.Node,
+	    },
+	    target: {
+	      default: null,
+	      type: cc.Prefab,
+	    },
+	  },
+	  start: function () {
+	    var scene = cc.director.getScene();
+	    var node = cc.instantiate(this.target);
+	    node.parent = scene;
+	    node.setPosition(0, 0);
+	  },
+	});
+销毁节点
+	//销毁节点并不会立刻被移除，而是在当前帧逻辑更新结束后，统一执行
+	start: function () {
+	    // 5 秒后销毁目标节点
+	    setTimeout(function () {
+	      this.target.destroy();
+	    }.bind(this), 5000);
+	},
+	//判断当前节点是否已经被销毁
+	cc.isValid(this.target)
+
+
+
 this.enabled = false;//不用时，禁用组件，防止再调用
 
 var v = cc.v2(10, 10);//向量减法，并返回新结果。
