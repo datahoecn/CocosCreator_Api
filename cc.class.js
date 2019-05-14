@@ -20,7 +20,23 @@ require()
 const i18n = require('i18n');
 cc.Class({
     name: "sprite"//设置类名为 "sprite"，类名用于序列化，一般可以省略。
-    extends: cc.Component,//组件的基类，是用于控制整个组件运行的基类
+    // 基类，可以是任意创建好的 cc.Class
+    // 值类型：Function
+    extends: cc.Component,
+    // 静态成员定义
+    // 值类型：Object
+    statics: {
+        _count: 0,
+        getCount: function () {}
+    },
+    // 构造函数
+    // 值类型：Function
+    ctor: function () {},
+    // 提供给 Component 的子类专用的参数字段
+    // 值类型：Object
+    editor: {
+        disallowMultiple: true
+    }
     properties: {
         trget: null,    //当声明的属性为基本 JavaScript 类型时，可以直接赋予默认值
         target: cc.Node,//构造函数来完成声明
@@ -125,6 +141,9 @@ var Sprite = cc.Class({
 var obj = new Sprite();
 //需要做类型判断时，可以用 JavaScript 原生的 instanceof：
 cc.log(obj instanceof Sprite);
+//使用 cc.isChildClassOf 来判断两个类的继承关系
+//两个传入参数都必须是类的构造函数，而不是类的对象实例。如果传入的两个类相等，isChildClassOf 同样会返回 true。
+cc.log(cc.isChildClassOf(Texture2D, Texture));   // true
 
 get/set 声明
     在属性中设置了 get 或 set 以后，访问属性的时候，就能触发预定义的 get 或 set 方法。定义方法如下：

@@ -29,14 +29,27 @@ var a, i = 10;
 a = i ++; //这里i要先赋值，再自加。语句执行后a=10, i = 11;
 a = ++i; //这里i要先自加，再赋值。语句执行后a=11, i = 11;
 
+require	可以导出组件
+		可以导出对象	module.exports = cfg;//cfg = {}
+	封装私有变量
+	var dirty = false;
+	module.exports = {
+	    setDirty: function () {
+	        dirty = true;
+	    },
+	    isDirty: function () {
+	        return dirty;
+	    },
+	};	
+
 require 返回的就是被模块导出的对象，通常我们都会将结果立即存到一个变量（var Rotate）
 传入 require 的字符串就是模块的文件名，这个名字不包含路径也不包含后缀，而且大小写敏感。
 var Rotate = require("Rotate");
 
+
 require 可以在脚本的任何地方任意时刻进行调用。
 游戏开始时会自动 require 所有脚本，这时每个模块内部定义的代码就会被执行一次
 之后无论又被 require 几次，返回的始终是同一份实例。
-调试时，可以随时在 Developer Tools 的 Console 中 require 项目里的任意模块。
 
 var actions = require("../UI/InActions.js");
 function actions(node) {
