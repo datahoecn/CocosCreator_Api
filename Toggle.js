@@ -9,6 +9,21 @@ Check Events：点击复选按钮时的响应函数数量。
 [0]：点击复选按钮时的第一个响应函数。
 CustomEventData：响应函数对应的参数
 
+var checkEventHandler = new cc.Component.EventHandler();
+checkEventHandler.target = this.node;
+checkEventHandler.component = "cc.MyComponent"
+checkEventHandler.handler = "callback";
+checkEventHandler.customEventData = "foobar";
+
+toggle.checkEvents.push(checkEventHandler);
+
+callback: function(toggle, customEventData) {
+    // 这里的 toggle 是事件发出的 Toggle 组件
+    // 这里的 customEventData 参数就等于之前设置的 "foobar"
+}
+
+
+
 RadioButton(单选按钮组)(ToggleContainer)
 Allow Switch Off : 允许其中的按钮相互切换
 ToggleContainer的child都是Toggle

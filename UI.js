@@ -8,9 +8,10 @@ Canvas(画布)
 
 Widget(对齐挂件)
 
-
-
-
+BlockInputEvents 组件
+  BlockInputEvents 组件将拦截所属节点 bounding box 内的所有输入事件（鼠标和触摸），
+  防止输入穿透到下层节点，一般用于上层 UI 的背景
+  
 Label
 设置string后，node的宽度未变更,下一帧才刷新大小
 在设置 label 所有属性后在执行一次 label._updateRenderData(true); 就能带当帧获取大小
@@ -75,7 +76,7 @@ Button
   CustomEventData：响应函数对应的参数。
 
   var eventHandler = new cc.Component.EventHandler();
-  eventHandler.target = newTarget;//Node 目标节点
+  eventHandler.target = this.node;//Node 目标节点
   eventHandler.component = "MainMenu";//String 目标组件名
   eventHandler.handler = "OnClick"//String 响应事件函数名
 
@@ -83,8 +84,9 @@ Button
       c: 1111, 
   };
   eventHandler.customEventData = data;
-
-  btn.clickEvents[0] = eventHandler;
+  
+  var button = node.getComponent(cc.Button);
+  button.clickEvents[0] = eventHandler;//button.clickEvents.push(eventHandler);
 
 Slide//滑动条
 	Handle：指定对应的滑块按钮。
@@ -125,6 +127,23 @@ ScrollView//滚动视图
 	scrollView.stopAutoScroll();//停止滚动
 	scrollView.content.removeAllChildren();
 	scrollView.content.addChild(this.nothing_item);
+
+  onLoad: function () {
+      var scrollViewEventHandler = new cc.Component.EventHandler();
+      scrollViewEventHandler.target = this.node; // 这个 node 节点是你的事件处理代码组件所属的节点
+      scrollViewEventHandler.component = "MyComponent";// 这个是代码文件名
+      scrollViewEventHandler.handler = "callback";
+      scrollViewEventHandler.customEventData = "foobar";
+
+      var scrollview = node.getComponent(cc.ScrollView);
+      scrollview.scrollEvents.push(scrollViewEventHandler);
+  },
+
+  callback: function (scrollview, eventType, customEventData) {
+      // 这里 scrollview 是一个 Scrollview 组件对象实例
+      // 这里的 eventType === cc.ScrollView.EventType enum 里面的值
+      // 这里的 customEventData 参数就等于你之前设置的 "foobar"
+  }
 
 	//滚动视图内容时的回调函数
 	scrollEvent: function(sender, event) {
