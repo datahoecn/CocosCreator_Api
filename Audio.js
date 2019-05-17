@@ -17,7 +17,7 @@ AudioSource 是组件，可以添加到场景中
     });
 
 AudioEngine 是引擎提供的纯 API，只能在脚本中进行调用，可以同时并行播放多个音轨
-    scoreAudio: {
+    clip: {
         default: null,
         type: cc.AudioClip
     }

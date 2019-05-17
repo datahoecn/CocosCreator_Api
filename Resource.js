@@ -1,3 +1,28 @@
+资源属性的声明
+	color: new cc.Color(255, 255, 255, 128)
+    pos  : new cc.Vec2(10, 20),
+    color: cc.color(0,0,0,255) 
+    pos  : cc.v2(0,0)           
+    size : cc.size(0,0)   
+	cc.Vec2 cc.Color cc.Rect
+	cc.Boolean cc.String cc.Float cc.Integer
+    cc.Texture2D, cc.SpriteFrame, cc.AnimationClip, cc.Prefab
+    cc.Sprite cc.Node cc.Label cc.Canvas cc.Toggle cc.ProgressBar cc.ScrollView 
+    texture: {
+        default: null,
+        type: cc.Texture2D
+    },
+    spriteFrame: {
+        default: null,
+        type: cc.SpriteFrame
+    },
+    onLoad: function () {
+        var spriteFrame = this.spriteFrame;
+        var texture = this.texture;
+        //通过 Texture，rect，rotated，offset 和 originalSize 设置 SpriteFrame
+        spriteFrame.setTexture(texture);
+    }
+
 艺术数字资源 (LabelAtlas)
 	艺术数字资源 是一种用户自定义的资源，它可以用来配置艺术数字字体的属性
 	新建 -> 艺术数字配置

@@ -71,6 +71,7 @@ this.node.height = 100;
 this.node.anchorX = 1;
 this.node.anchorY = 0;
 
+//销毁节点
 this.node.destroy();
 node.rotationX = 0;
 node.rotationY = 0;

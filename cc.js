@@ -16,7 +16,6 @@
         };
     //将对象序列化为 JSON 后保存
     cc.sys.localStorage.setItem('userData', JSON.stringify(userData));
-
 读取数据
     cc.sys.localStorage.getItem('gold')
     var userData = JSON.parse(cc.sys.localStorage.getItem('userData'));
@@ -48,8 +47,6 @@ var LState = cc.Enum({
 跳转页面：
 cc.sys.openURL('http://www.jianshu.com');
 
-cc.director.loadScene("login");
-
 是否本地平台
 cc.sys.isNative//Boolean
 
@@ -76,13 +73,6 @@ cc.sys.browserVersion//Number
 
 指示整个游戏窗口的真实像素分辨率
 cc.sys.windowPixelResolution (Number)
-
-本地存储组件，类似于安卓轻量级存储。存储、拿取、删除使用方式：
-cc.sys.localStorage (Object)
-
-cc.sys.localStorage.setItem("bgmVolume",v);
-var t = cc.sys.localStorage.getItem("bgmVolume");
-cc.sys.localStorage.removeItem("wx_account");
 
 当前平台的功能
 cc.sys.capabilities//Object

@@ -1,15 +1,11 @@
-// 停止一个动作
-node.stopAction(action);
-// 停止所有动作
-node.stopAllActions();
+停止动作
+    node.stopAction(action);
+    node.stopAllActions();
 
-// 给 action 设置 tag
-var ACTION_TAG = 1;
-action.setTag(ACTION_TAG);
-// 通过 tag 获取 action
-node.getActionByTag(ACTION_TAG);
-// 通过 tag 停止一个动作
-node.stopActionByTag(ACTION_TAG);
+标识
+    action.setTag(ACTION_TAG);
+    node.getActionByTag(ACTION_TAG);
+    node.stopActionByTag(ACTION_TAG);
 
 //repeat、repeatForever、speed
 this.jumpAction = cc.sequence(
@@ -35,8 +31,8 @@ this.jumpAction = cc.sequence(
     cc.flipY            Y轴翻转            var flipYAction = cc.flipY(true);
     cc.place            放置在目标位置      var placeAction = cc.place(cc.v2(200, 200));var placeAction = cc.place(200, 200);
     cc.callFunc         执行回调函数       var finish = cc.callFunc(this.myMethod, this, opt);
-                                          var finished = cc.callFunc(function () {}, this, opt);
-                                          var finished = cc.callFunc(() => {}, this, opt);
+                                          var finish = cc.callFunc(function () {}, this, opt);
+                                          var finish = cc.callFunc(() => {}, this, opt);
     cc.targetedAction   用已有动作和一个新的目标节点创建动作  
                                           var flipYAction = cc.targetedAction(target Node,action FiniteTimeAction);
 
@@ -105,7 +101,7 @@ this.jumpAction = cc.sequence(
     cc.easeQuinticActionOut     按五次函数缓动退出的动作
     cc.easeQuinticActionInOut   按五次函数缓动进入并退出的动作     action.easing(cc.easeQuinticActionInOut());
 
-缓动系统（cc.tween）
+缓动系统（cc.tween） 在 v2.0.9 提供了
     to：对属性进行绝对值计算，最终的运行结果即是设置的属性值
     by：对属性进行相对值计算，最终的运行结果是设置的属性值加上开始运行时节点的属性值
     cc.tween(this.node)
@@ -257,6 +253,7 @@ Animation组件
         // 对单个 cc.AnimationState 注册回调
         var anim1 = animation.getAnimationState('anim1');
         anim1.on('lastframe',    this.onLastFrame,      this);
+        
     动态创建 Animation Clip
         var animation = this.node.getComponent(cc.Animation);
         // frames 这是一个 SpriteFrame 的数组.
