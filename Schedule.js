@@ -1,8 +1,9 @@
-cc.Node 不包含计时器相关 API
+
 组件的计时器调用回调时，会将回调的 this 指定为组件本身，因此回调中可以直接使用 this
 
+组件的计时器封装了计时器
+
 开始一个计时器
-    this.schedule(callback, target, interval, repeat, delay, paused);//target可以省略
     component.schedule(function() {
          // 这里的 this 指向 component
          this.doSomething();
@@ -14,7 +15,6 @@ cc.Node 不包含计时器相关 API
      }, 2);
 
 取消一个计时器
-    this.unschedule(callback, target)//停止定时器
     this.callback = function () {
         this.unschedule(this.callback);
     }

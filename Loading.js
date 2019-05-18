@@ -13,7 +13,7 @@
     //如果指定了类型参数，就会在路径下查找指定类型的资源
     //需要获取 “子资源”（例如获取 Texture2D 生成的 SpriteFrame），需要声明类型。
     var self = this;
-    cc.loader.loadRes("test assets/image", cc.SpriteFrame, function (err, spriteFrame) {
+    cc.loader.loadRes("test  /image", cc.SpriteFrame, function (err, spriteFrame) {
         self.node.getComponent(cc.Sprite).spriteFrame = spriteFrame;
     });
     加载图集中的 SpriteFrame
@@ -257,7 +257,8 @@ cc.Class({
 
 
 
-用cc.loader 加载资源是不会重复加载的，loader中是缓存的，如果之前加载过了之后是不会再加载，而是直接从缓存中调用。可以用cc.loader.getRes(url)查看是否已经加载过了
+用cc.loader 加载资源是不会重复加载的，loader中是缓存的，如果之前加载过了之后是不会再加载，而是直接从缓存中调用。
+可以用cc.loader.getRes(url)查看是否已经加载过了
 
 在游戏运行过程中加载图片创建精灵，或加载 MP3 文件播放音乐，
 如果直接在主线程中进行，则会导致线程被 IO 操作、创建纹理等事情阻塞，从而造成卡顿。
@@ -350,7 +351,4 @@ cc.loader.loadResDir("test_assets", (err, assets,urls) => {
     }
 });
 
-loadResDir 方法有两种形态：
-	cc.loader.loadResDir("test_assets", (err, assets) => { ... });//加载指定目录下的所有资源
-	cc.loader.loadResDir("test_assets", cc.SpriteFrame, (err, assets) => { ... });
-		//加载指定目录下的图片文件，它的第二个参数为格式对象，用于指定要加载的对象类型
+

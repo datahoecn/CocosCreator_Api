@@ -1,5 +1,4 @@
 粒子特效
-
 properties: {
         particle: cc.Node,
     },

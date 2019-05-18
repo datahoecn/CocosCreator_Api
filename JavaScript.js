@@ -1,39 +1,69 @@
-break 语句用于跳出循环。
-continue 用于跳过循环中的一个迭代。
-
-__proto__属性的作用就是当访问一个对象的属性时，如果该对象内部不存在这个属性，那么就会去它的__proto__属性所指向的那个对象（父对象）里找，一直找，直到__proto__属性的终点null，然后返回undefined，通过__proto__属性将对象连接起来的这条链路即我们所谓的原型链。
-prototype属性的作用就是让该函数所实例化的对象们都可以找到公用的属性和方法，即f1.__proto__ === Foo.prototype。
-constructor属性的含义就是指向该对象的构造函数，所有函数（此时看成对象了）最终的构造函数都指向Function。
-
-
-push() 方法可向数组的末尾添加一个或多个元素，并返回新的长度。
-
-for (let i = 0; i < this.spawnCount; ++i) { // spawn items, we only need to do this once
-	let item = cc.instantiate(this.itemTemplate);
-	this.content.addChild(item);
-	item.setPosition(0, -item.height * (0.5 + i) - this.spacing * (i + 1));
-	item.getComponent('Item').updateItem(i, i);
-    this.items.push(item);//items是数组
-}
 
 JavaScript 是属于网络的脚本语言
 
-Math.floor()//向下取整
+Math
+	Math.floor()//向下取整
 
-//随机一个整数，min ~ max-1, 只用当 Math.random() = 1 时，值才会是max
-function getRandomInt(min, max) {
-    return Math.floor(Math.random() * (max - min)) + min;
-}
+Array
+	push() 方法可向数组的末尾添加一个或多个元素，并返回新的长度。
+	arrayObject.length//获取数组长度
 
-Date.now()
-Number.toFixed(num)//四舍五入,规定小数的位数，是 0 ~ 20 之间的值
+	//对数组的每个元素执行一次提供的函数
+	array.forEach(function(element) {
+	  console.log(element);
+	});
+
+Date
+	Date.now()
+
+Number
+	Number.toFixed(num)//四舍五入,规定小数的位数，是 0 ~ 20 之间的值
+	//string 要被解析的字符串
+	//radix  可选。表示要解析的数字的基数。如果省略该参数或其值为 0，则数字将以 10 为基础来解析。
+	parseInt(string, radix) 函数可解析一个字符串，并返回一个整数。
+	parseFloat(string)解析一个字符串，并返回一个浮点数。
+
+String
+	//return a array,
+	//howmany 可选,限制返回的数组长度
+	//separator 字符串或正则表达式，从该参数指定的地方分割
+	stringObject.split(separator,howmany)
+
+	//item1,.....,itemX可选。向数组添加的新项目。
+	//index位置，howmany要删除的项目数量，如果设置为 0，则不会删除项目
+	arrayObject.splice(index,howmany,item1,.....,itemX)
+											
+	//如果不存在，返回-1
+	//searchvalue需检索的字符串值。
+	//fromindex可选，开始检索的位置。值0到stringObject.length - 1。如省略该参数，则将从字符串的首字符开始检索。
+	//返回某个指定的字符串值在字符串中首次出现的位置。
+	stringObject.indexOf(searchvalue,fromindex)
+		
+function
+	随机一个整数//min ~ max-1, 只用当 Math.random() = 1 时，值才会是max
+	function getRandomInt(min, max) {
+	    return Math.floor(Math.random() * (max - min)) + min;
+	}
+
+
+
+break 语句用于跳出循环。
+continue 用于跳过循环中的一个迭代。
+
+__proto__ 属性的作用就是当访问一个对象的属性时，如果该对象内部不存在这个属性，
+			那么就会去它的__proto__属性所指向的那个对象（父对象）里找，一直找，直到__proto__属性的终点null，
+			然后返回undefined，通过__proto__属性将对象连接起来的这条链路即我们所谓的原型链。
+prototype 属性的作用就是让该函数所实例化的对象们都可以找到公用的属性和方法，即f1.__proto__ === Foo.prototype。
+constructor 属性的含义就是指向该对象的构造函数，所有函数（此时看成对象了）最终的构造函数都指向Function。
 
 var a, i = 10;
 a = i ++; //这里i要先赋值，再自加。语句执行后a=10, i = 11;
 a = ++i; //这里i要先自加，再赋值。语句执行后a=11, i = 11;
 
-require	可以导出组件
-		可以导出对象	module.exports = cfg;//cfg = {}
+require	
+	可以导出组件
+	可以导出对象	module.exports = cfg;//cfg = {}
+
 	封装私有变量
 	var dirty = false;
 	module.exports = {
@@ -45,27 +75,17 @@ require	可以导出组件
 	    },
 	};	
 
-require 返回的就是被模块导出的对象，通常我们都会将结果立即存到一个变量（var Rotate）
-传入 require 的字符串就是模块的文件名，这个名字不包含路径也不包含后缀，而且大小写敏感。
-var Rotate = require("Rotate");
-
-
 require 可以在脚本的任何地方任意时刻进行调用。
 游戏开始时会自动 require 所有脚本，这时每个模块内部定义的代码就会被执行一次
 之后无论又被 require 几次，返回的始终是同一份实例。
 
-var actions = require("../UI/InActions.js");
+
 function actions(node) {
     this.node = node;
 }
 
+var actions = require("../UI/InActions.js");
 var action = new actions(splashNode);//splashNode也是节点
-
-
-parseInt(string, radix) 函数可解析一个字符串，并返回一个整数。
-string 要被解析的字符串
-radix  可选。表示要解析的数字的基数。如果省略该参数或其值为 0，则数字将以 10 为基础来解析。
-parseFloat(string)解析一个字符串，并返回一个浮点数。
 
 
 换行符‘\n’和回车符‘\r’
@@ -93,7 +113,6 @@ switch (this._curType) {
     case 'Audio':
         break;
     default:
-    	cc.loader.load(url, loadCallBack);
     	break;
 }
 
@@ -120,17 +139,12 @@ this的四种用法
 　　var o = new test();
 	console.log(o.x); // 1
 
-	apply 调用 ，apply方法作用是改变函数的调用对象，此方法的第一个参数为改变后调用这个函数的对象，this指代第一个参数
-	var x = 0;
-　　function test(){
-		console.log(this.x);
-　　}
-　　var o={};
-　　o.x = 1;
-　　o.m = test;
-　　o.m.apply(); //0
-//apply()的参数为空时，默认调用全局对象。因此，这时的运行结果为0，证明this指的是全局对象。如果把最后一行代码修改为
-　　o.m.apply(o); //1
+call,apply和bind方法
+	js中的call(), apply()和bind()是Function.prototype下的方法
+	//注意如果call和apply的第一个参数写的是null，那么this指向的是window对象
+	call()、apply()和bind()都是用来改变函数执行时的上下文，可借助它们实现继承；
+	call()和apply()唯一区别是参数不一样，call()是apply()的语法糖；
+	bind()是返回一个新函数，供以后调用，而apply()和call()是立即调用。
 
 
 在JavaScript 中，构造函数只是一些使用new 操作符时被调用的函数。
@@ -149,21 +163,3 @@ this的四种用法
 
 if (!a || b === c) return;
 typeof(a)
-this._audioSource instanceof cc.AudioSource//检测某个对象是不是另一个对象的实例
-
-//return a array,
-stringObject.split(separator,howmany)//separator字符串或正则表达式，从该参数指定的地方分割 stringObject。
-	//howmany可选,限制返回的数组长度
-	
-arrayObject.length//获取数组长度
-arrayObject.splice(index,howmany,item1,.....,itemX)//index位置，howmany要删除的项目数量，如果设置为 0，则不会删除项目
-										//item1,.....,itemX可选。向数组添加的新项目。
-//如果不存在，返回-1
-stringObject.indexOf(searchvalue,fromindex)//返回某个指定的字符串值在字符串中首次出现的位置。
-	//searchvalue需检索的字符串值。
-	//fromindex可选，开始检索的位置。值0到stringObject.length - 1。如省略该参数，则将从字符串的首字符开始检索。
-
-//对数组的每个元素执行一次提供的函数
-array.forEach(function(element) {
-  console.log(element);
-});

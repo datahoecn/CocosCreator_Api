@@ -43,10 +43,7 @@ project.json 文件和 assets 文件夹一起，作为验证 Cocos Creator 项�
 
 当在搜索按钮中选择 组件 类型时，搜索栏中会出现 t: 的符号，在后面输入需要查找的组件名称即可（例如 t:cc.Camera）。
 
-需要拖拽资源赋值的属性栏上会显示蓝色的标签
 
-刷新编辑器窗口（按 Ctrl / Cmd + R
-Ctrl+L 清空控制台
 程序运行到debugger就会自动停止运行	
 console.trace() 会输出函数调用堆栈
 console.table() 会把一个对象按表格形式输出
@@ -55,17 +52,4 @@ console.time() 和 console.timeEnd()得到一段代码的执行时间
 Cannot read property 'style' of null
 JS运行的时候你的页面还没有加载完成，所以你的JS代码找不到你的页面元素，就会抛出这个问题
 
-使用addChild方法就会处发onload等方法
-脚本里的onload与自定义方法谁先调用，根据addchild与调用自定义方法的先后决定
-注意先调用自定义方法，赋值，在调用addChild
-
-
 Draw Call//表示引擎对当前画面的绘制次数
-
---cc.Class 是一个由 cc.Component 派生出来的组件类
---Camera属性
-  --ZoomRatio：视图缩放
-  --BackgroundColor：颜色缓冲区清空时显示的底色，将 background 删除后，将显示 BackgroundColor 所设置的颜色。
-  --Depth：摄像机的深度缓冲值。
-  --cullingMask：删除 Mask 值设置，如果您希望某些 Node 属性不显示，可以使用它。
-  --clearFlags：是否清空颜色缓冲、深度缓冲、模版缓冲区

@@ -74,13 +74,6 @@
 
 	var a = b ? "b is true" : "b is false"
 
-	switch(condition){
-		case condition1:
-		case condition2:
-			break;//如果没有break，会执行每个case
-		default:
-	}
-
 	迭代对象的属性
 		var obj : any = {a : 1, b: 2, c: 3};
 		for (var key in obj) {

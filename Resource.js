@@ -50,8 +50,7 @@
 
 	而 Trim 设为 true，则是在位移完全由角色位置属性控制的动画中，更推荐使用的方式。
 
-	在制作序列帧动画时，我们通常会使用TexturePacker这样的工具将序列帧打包成图集，
-	并在导入后通过图集资源下的 SpriteFrame 来使用。在 TexturePacker 中输出图集资源时，
+	在 TexturePacker 中输出图集资源时，
 	Sprites 分类下的 Trim mode 请选择 Trim，一定不要选择 Crop, flush position，
 	否则透明像素剪裁信息会丢失，您在使用图集里的资源时也就无法获得原始图片未剪裁的尺寸和偏移信息了。
 

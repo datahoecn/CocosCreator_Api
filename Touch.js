@@ -23,9 +23,7 @@ anchor-changed  当锚点属性修改时
 
 
 
-_sayHello: function () {
-  console.log('Hello World');
-},
+
 监听事件
   this.node.on('foobar', this._sayHello, this);
 关闭监听

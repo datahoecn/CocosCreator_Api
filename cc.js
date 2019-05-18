@@ -43,6 +43,7 @@ var LState = cc.Enum({
     CheckVersion:1,
 })
 
+cc.randomMinus1To1()//returns a random float between -1 and 1
 
 跳转页面：
 cc.sys.openURL('http://www.jianshu.com');

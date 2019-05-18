@@ -1,8 +1,25 @@
-//cc 是 Cocos 的简称，Cocos 引擎的主要命名空间，引擎代码中所有的类、函数、属性和常量都在这个命名空间中定义
+//cc.Class 是一个由 cc.Component 派生出来的组件类
 //Class() 就是 cc 模块下的一个方法，这个方法用于声明 Cocos Creator 中的类
 //调用 cc.Class，传入一个原型对象，在原型对象中以键值对的形式设定所需的类型参数，就能创建出所需要的类。
-const i18n = require('i18n');
-cc.Class({
+
+    const Node = require('../CCNode');
+
+    let _vec2_temp = cc.v2();
+
+    function _calculateCircle (center, radius, segements) {
+    }
+
+    let MaskType = cc.Enum({
+        RECT: 0,
+        ELLIPSE: 1,
+        IMAGE_STENCIL: 2,
+    });
+
+    const SEGEMENTS_MIN = 3;
+
+    cc.Mask = module.exports = Mask;
+
+let Mask = cc.Class({
     name: "sprite"//设置类名为 "sprite"，类名用于序列化，一般可以省略。
     // 基类，可以是任意创建好的 cc.Class
     // 值类型：Function
