@@ -1,3 +1,5 @@
+
+cc.visibleRect.width, cc.visibleRect.height
 术语
     CCClass：使用 cc.Class 声明的类。
     原型对象：调用 cc.Class 时传入的字面量参数。

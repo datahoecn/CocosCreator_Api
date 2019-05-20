@@ -8,28 +8,20 @@
 
     填充渲染（FILLED）--常用于各类进度条的绘制，使用该模式，可以按百分比显示精灵的部分图像
         Fill Type 用来调整填充方式，RADIAL（圆形的填充），VERTICAL，HORIZONTAL
-        Fill Start，表示图像横向或纵向起始填充区域，以百分比形式表示
-        Fill Range 表示图像最终填充区域，同样以百分比形式表示，不同的是 -1 代表全显示，0 代表不填充，即该图像不显示
+        Fill Start，表示 起始位置，以百分比形式表示(-1~1)
+        Fill Range 表示显示从 起始位置 到 Range
 
         Fill Center 定义了圆心的位置，一般设置 x 为 0.5，y 为 0.5
-        Fill Start 代表起始度数，以百分比形式表示。
-        Fill Range 代表最终填充总量，比如设置为 0.5，表示只绘制半圆。
 
     Size Mode：用来设置图片的显示方式（针对的是图片尺寸）
-    可以选择使用原图尺寸，还可以选择裁剪透明边缘后的图片大小。
+        Custom 表示会使用自定义尺寸。当用户手动修改过 Size 属性后，Size Mode 会被自动设置为 Custom，除非再次指定为前两种尺寸。
+        Trimmed 表示会使用原始图片资源裁剪透明像素后的尺寸
+        Raw 表示会使用原始图片未经裁剪的尺寸
 
-    TRIMMED，表示裁剪透明边缘。
-    Trim：为节点约束框，设置是否使用透明边缘裁剪后的图片大小。。
-    将精灵 Sprite 属性 Size Mode 设置为 TRIMMED，并勾选 Trim，即可自动裁剪精灵的透明边缘。
-
-    Blend：颜色混合方式
-    主要用于设置当前图像的像素点颜色值与背景像素点颜色值的混合运算方案（比如透明度混合，有加，乘，减等多种运算），
-    可产生多种效果。透明度混合方式最为常用，即 Src Blend Factor 设置为 SRC_ALPHA，表示使用源颜色的 ALPHA 值作为因子。
-    Dst Blend Factor 设置为 ONE_MINUS_SRC_ALPHA，表示使用 1.0 减去源颜色的 ALPHA 值作为因子。渲染时，
-    最终的像素 ALPHA 值 = 图形 ALPHA 值 * 图形 RGB 值 + （1 - 图形 ALPHA 值）* 背景色 RGB 值。
-    该设置可以实现多个带 ALPHA 渐变的图案叠加时产生正确的透明渐变效果。
-    此外，还有一些其它的设置因子，可以参看 OPENGL glBlendFunc() 设置说明。
+    Trim：为节点约束框，设置是否使用透明边缘裁剪后的图片大小
     
+    将精灵 Sprite 属性 Size Mode 设置为 Trimmed 并勾选 Trim，即可自动裁剪精灵的透明边缘。
+
     //新建一个精灵节点
         var role = new cc.Sprite('role.png');
         scene.addChild(role);
