@@ -1,3 +1,5 @@
+
+this.enabled = false;//不用时，禁用组件，防止再调用
 使用统一的控制脚本来初始化其他脚本
 	const Player = require('Player');
 	const Enemy = require('Enemy');

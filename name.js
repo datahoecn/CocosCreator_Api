@@ -1,0 +1,3 @@
+moveSpeed
+rotationSpeed
+touchingNumber

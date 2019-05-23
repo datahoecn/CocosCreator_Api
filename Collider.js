@@ -15,6 +15,9 @@
 
 		//当碰撞产生的时候调用
 		onCollisionEnter: function (other, self) {
+	        this.label.string = 'Collision on tag : ' + self.tag;
+	    }
+		onCollisionEnter: function (other, self) {
 		    console.log('on collision enter');
 		    // 碰撞系统会计算出碰撞组件在世界坐标系下的相关的值，并放到 world 这个属性里面
 		    var world = self.world;
@@ -43,6 +46,29 @@
 
 	tag	标签。当一个节点上有多个碰撞组件时，在发生碰撞后，可以使用此标签来判断是节点上的哪个碰撞组件被碰撞了
 
+点击测试
+	cc.PolygonCollider 组件(多边形对撞机)
+	this.node.on(cc.Node.EventType.TOUCH_START, function (touch, event) {
+	    var touchLoc = touch.getLocation();
+	    
+	    if (cc.Intersection.pointInPolygon(touchLoc, this.collider.world.points)) {
+	        this.title.string = 'Hit';
+	    }
+	    else {
+	        this.title.string = 'Not hit';
+	    }
+	}, this);
+	图形间的相交问题
+	lineLine(a1: Vec2, a2: Vec2, b1: Vec2, b2: Vec2): boolean;该函数用来测试线段与线段是否相交
+	lineRect(a1: Vec2, a2: Vec2, b: Rect): boolean; 该函数用来测试线段与矩形是否相交。
+	linePolygon(a1: Vec2, a2: Vec2, b: Vec2[]): boolean; 该函数用来测试线段与多边形是否相交。
+	rectRect(a: Rect, b: Rect): boolean; 该函数用来测试矩形与矩形是否相交。
+	rectPolygon(a: Rect, b: Vec2[]): boolean; 该函数用来测试矩形与多边形是否相交。
+	polygonPolygon(a: Vec2[], b: Vec2[]): boolean; 该函数用来测试多边形与多边形是否相交。
+	circleCircle(a: {position: Vec2, radius: number}, b: {position: Vec2, radius: number}): boolean;该函数用来测试圆形与圆形是否相交。
+	polygonCircle(polygon: Vec2[], circle: {position: Vec2, radius: number}): boolean;该函数用来测试矩形与圆形是否相交
+	pointLineDistance(point: Vec2, start: Vec2, end: Vec2, isSegment: boolean): boolean;
+	该函数用来计算点到直线的距离。如果这是一条线段并且垂足不在线段内，则会计算点到线段端点的距离。
 
 物理系统
 	//开启物理系统

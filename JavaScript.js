@@ -1,4 +1,6 @@
 
+return cc.game.groupList[this.groupIndex] || ''
+
 JavaScript 是属于网络的脚本语言
 
 Math
