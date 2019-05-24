@@ -82,7 +82,7 @@ method
 	removeChild 		node.removeChild(newNode, false); 移除节点中指定的子节点，是否需要清理所有正在运行的行为取决于 cleanup 参数。
 	removeAllChildren 	node.removeAllChildren(false); 移除节点所有的子节点，是否需要清理所有正在运行的行为取决于 cleanup 参数。
 	isChildOf 			node.isChildOf(newNode);参数: parent 是否是指定节点的子节点？
-	getComponent 		var sprites = node.getComponents(cc.Sprite); 获取节点上指定类型的组件，如果节点有附加指定类型的组件，则返回，如果没有则为空。
+	getComponent 		var sprite = node.getComponent(cc.Sprite); 获取节点上指定类型的组件，如果节点有附加指定类型的组件，则返回，如果没有则为空。
 	getComponents 		var sprites = node.getComponents(cc.Sprite); 返回节点上指定类型的所有组件。
 	getComponentInChildren var sprite = node.getComponentInChildren(cc.Sprite); 递归查找所有子节点中第一个匹配指定类型的组件。
 	getComponentsInChildren var sprites = node.getComponentsInChildren(cc.Sprite); 递归查找自身或所有子节点中指定类型的组件
@@ -121,7 +121,8 @@ method
 	v.sub(cc.v2(5, 5));      // return Vec2 {x: 5, y: 5};
 
 	var v = cc.v2(10, 10);//返回该向量的长度。
-	v.mag(); // return 14.142135623730951;
+根据两点位置计算两点之间距离
+    var dist = this.node.position.sub(playerPos).mag();
 
 
 node.emit(type, detail)：通知所有监听 type 事件的监听器，可以发送一个附加参数。
