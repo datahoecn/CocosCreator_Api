@@ -1,3 +1,8 @@
+函数自执行
+	(function () {
+		console.log("111111111111")
+	})();
+
 
 return cc.game.groupList[this.groupIndex] || ''
 
