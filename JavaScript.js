@@ -1,7 +1,74 @@
-函数自执行
-	(function () {
-		console.log("111111111111")
-	})();
+函数形式
+	函数声明//声明的函数比var声明的变量有更加优先的执行顺序
+		function fn() {
+			console.log("function");
+		}
+	函数表达式//将一个函数体赋值给一个变量的过程
+		其中，var fn = undefined会先执行，不能直接使用，需要提前声明
+			var fn = function() {}
+		对象中添加方法
+			var a = {
+				m: 20,
+				get: function() {
+					retrun this.m;
+				}
+			}
+	匿名函数//作为一个参数或返回值
+		setTimeout 中的参数
+			var timer = setTimeout(function(){},1000);
+		数组中的参数
+			var arr = [1, 2, 3];
+			arr.map(function(item) {
+				return item + 1;
+			})
+			arr.forEach(function(item) {
+				console.log(item);
+			})
+		作为返回值
+			function add() {
+				var a = 10;
+				return function() {
+					return a + 20
+				}
+			}
+			add()();
+	自执行函数
+		模拟块级作用域
+		(function () {
+			console.log("111111111111")
+		})();
+
+		for (var i = 1; i <= 5; i++) {
+			(function (i) {
+				setTimeout( function timer() {
+					console.log(i);
+				}, i*1000 );
+			})(i);
+		}
+
+new 会有如下实现
+	//将构造函数以参数形式传入
+	function New(func) {
+		// 声明一个中间对象，该对象为最终返回的实例
+		var res = {};
+		if(func.prototype !== null) {
+			// 将实例的原型指向构造函数的原型
+			res.__prote__ = func.prototype;
+		}
+
+		// ret 为构造函数执行的结果
+		// 通过apply，将构造函数内部的this指向修改为指向res，即为实例对象
+		var ret = func.apply(res, Array.prototype.slice.call(arguments, 1));
+
+		// 当在构造函数中明确之地了返回对象时，那么new的执行结果就是该返回对象
+		if ((typeof ret === "object" || typeof ret === "function") && ret !== null) {
+			return ret;
+		}
+
+		//如果没有明确指定返回对象，则默认返回res，这个res就是实例对象
+		return res;
+	}
+
 
 
 return cc.game.groupList[this.groupIndex] || ''
