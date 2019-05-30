@@ -83,7 +83,7 @@ method
 	removeAllChildren 	node.removeAllChildren(false); 移除节点所有的子节点，是否需要清理所有正在运行的行为取决于 cleanup 参数。
 	isChildOf 			node.isChildOf(newNode);参数: parent 是否是指定节点的子节点？
 	getComponent 		var sprite = node.getComponent(cc.Sprite); 获取节点上指定类型的组件，如果节点有附加指定类型的组件，则返回，如果没有则为空。
-	getComponents 		var sprites = node.getComponents(cc.Sprite); 返回节点上指定类型的所有组件。
+	getComponents 		var tests = node.getComponents("Test"); 返回节点上指定类型的所有组件。
 	getComponentInChildren var sprite = node.getComponentInChildren(cc.Sprite); 递归查找所有子节点中第一个匹配指定类型的组件。
 	getComponentsInChildren var sprites = node.getComponentsInChildren(cc.Sprite); 递归查找自身或所有子节点中指定类型的组件
 	addComponent 		var sprite = node.addComponent(cc.Sprite); 向节点添加一个指定类型的组件类，你还可以通过传入脚本的名称来添加组件。
@@ -104,7 +104,14 @@ method
 	var node = new cc.Node('Sprite');
 
 克隆已有节点 创建预制节点
-	var node = cc.instantiate(this.target);
+	createEnemyPlane: function () {
+	  var ePlane = cc.instantiate(this.EnemyPlanePrefab);
+	  var EPlane = require("EnemyPlane");
+	  var EPComp = ePlane.getComponent(EPlane);
+	  ePlane.parent = this.node;
+	  ePlane.setPosition(cc.v2(x, y));
+	  EPComp.initInfo(x,y,....);
+	}
 销毁节点
 	//销毁节点并不会立刻被移除，而是在当前帧逻辑更新结束后，统一执行
 	start: function () {

@@ -1,22 +1,26 @@
 动态加载资源
-    加载 Prefab
+    if (err) {
+        cc.log('Error url [' + err + ']');
+        return;
+    }
+加载 Prefab
     cc.loader.loadRes("test assets/prefab", function (err, prefab) {
         var newNode = cc.instantiate(prefab);
         cc.director.getScene().addChild(newNode);
     });
-    加载 AnimationClip
+加载 AnimationClip
     var self = this;
     cc.loader.loadRes("test assets/anim", function (err, clip) {
         self.node.getComponent(cc.Animation).addClip(clip, "anim");
     });
-    加载 SpriteFrame
+加载 SpriteFrame
     //如果指定了类型参数，就会在路径下查找指定类型的资源
     //需要获取 “子资源”（例如获取 Texture2D 生成的 SpriteFrame），需要声明类型。
     var self = this;
     cc.loader.loadRes("test  /image", cc.SpriteFrame, function (err, spriteFrame) {
         self.node.getComponent(cc.Sprite).spriteFrame = spriteFrame;
     });
-    加载图集中的 SpriteFrame
+加载图集中的 SpriteFrame
     // 加载 SpriteAtlas（图集），并且获取其中的一个 SpriteFrame
     // 注意 atlas 资源文件（plist）通常会和一个同名的图片文件（png）放在一个目录下, 所以需要在第二个参数指定资源类型
     cc.loader.loadRes("test assets/sheep", cc.SpriteAtlas, function (err, atlas) {
@@ -24,13 +28,13 @@
         sprite.spriteFrame = frame;
     });
 
-    资源释放//releaseRes释放通过 loadRes 加载的资源
+资源释放//releaseRes释放通过 loadRes 加载的资源
     cc.loader.releaseRes("test assets/image", cc.SpriteFrame);
     cc.loader.releaseRes("test assets/anim");
     //释放特定的 Asset 实例,通过资源对象自身来释放资源
     cc.loader.releaseAsset(spriteFrame);
 
-    资源批量加载
+资源批量加载
     // 加载 test assets 目录下所有资源
     cc.loader.loadResDir("test assets", function (err, assets) {
     });
@@ -303,8 +307,7 @@ Cocos 提供了专门处理动态加载的类 cc.loader
     cc.loader.releaseAsset(this._curRes);//通过资源对象自身来释放资源
 
 
-
-    //如果在远程，则使用 load 方法处理
+如果在远程，则使用 load 方法处理
     cc.loader.load(resources, progressCallback, completeCallback);
     //example,第四个参数可以不写
     var loadCallBack = this._loadCallBack.bind(this);

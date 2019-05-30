@@ -1,4 +1,9 @@
 
+cc.js.getClassName(obj); //param {Object|Function} return {String}
+cc.js.isNumber(obj);
+cc.js.isString(obj);
+
+
 cc.visibleRect.width, cc.visibleRect.height
 术语
     CCClass：使用 cc.Class 声明的类。

@@ -1,3 +1,43 @@
+0 是false
+
+class Person {
+	constructor(name, age) {
+		this.name = name;
+		this.age = age;
+	}
+	getName() { //原型方法
+		return this.name
+	}
+	static a = 20; // 等同于 Person.a= 20
+	c = 20; //表示在构造函数中添加属性，在构造函数中等同于this.c = 20
+
+	// 箭头函数的写法表示在构造函数中添加方法，在构造函数中等同于this.
+	getAge = function() {}
+	getAge = () => this.age
+}
+
+boolean && want();
+want && want(); // 先判断want存在，如果不存在就不会执行后面
+
+解析结构
+	var [a, b, c, d = 1] = array;
+	a === array[0]; // true
+
+	var obj = {
+		a: 1,
+		b: 2,
+		c: 3
+	}
+	var {a, b, c} = obj;
+
+展开运算符
+	//也可展开对象
+	var arr1 = [1, 2, 3];
+	var arr2 = [...arr1, 4, 5, 6];
+
+	var arr1 = [1, 2, 3];
+	var c = arr1.reduce((a, b) => a + b); // c 值是 6；
+
 函数形式
 	函数声明//声明的函数比var声明的变量有更加优先的执行顺序
 		function fn() {
@@ -45,6 +85,8 @@
 				}, i*1000 );
 			})(i);
 		}
+
+`${a} + 11111111`
 
 new 会有如下实现
 	//将构造函数以参数形式传入

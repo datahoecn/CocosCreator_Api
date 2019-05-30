@@ -1,107 +1,85 @@
-
-type: 'Integer'
-this.enabled = false;//不用时，禁用组件，防止再调用
-使用统一的控制脚本来初始化其他脚本
-	const Player = require('Player');
-	const Enemy = require('Enemy');
-	const Menu = require('Menu');
-
-	cc.Class({
-	    extends: cc.Component,
-	    properties: {
-	        player: Player,
-	        enemy: Enemy,
-	        menu: Menu
-	    },
-
-	    onLoad: function () {
-	        this.player.init();
-	        this.enemy.init();
-	        this.menu.init();
-	    }
-	});
-
-在 Update 中用自定义方法控制更新顺序
-	update: function (dt) {
-        this.player.updatePlayer(dt);
-        this.enemy.updateEnemy(dt);
-        this.menu.updateMenu(dt);
-    }
-
-控制同一个节点上的组件执行顺序
-	排列在上的组件会先于排列在下的组件执行
-
-	设置组件执行优先级
-	extends: cc.Component,
-    editor: {
-        executionOrder: -1
+const Player = require('Player');
+let Mask = cc.Class({
+    name: "sprite"//设置类名为 "sprite"，类名用于序列化，一般可以省略。
+	// 基类，可以是任意创建好的 cc.Class
+	// 值类型：Function
+    extends: cc.Component,
+    statics: {
+    	// 静态成员定义
+	// 值类型：Object
+        _count: 0,
+        getCount: function () {}
     },
-    executionOrder 越小，该组件相对其它组件就会越先执行。
-    executionOrder 默认为 0，因此设置为负数的话，就会在其它默认的组件之前执行。 
-    executionOrder 只对 onLoad, onEnable, start, update 和 lateUpdate 有效，对 onDisable 和 onDestroy 无效。
+    ctor: function () {
+    	// 构造函数
+		// 值类型：Function
+    },
 
+    editor: {
+    	// 提供给 Component 的子类专用的参数字段
+		// 值类型：Object
+        disallowMultiple: true
+        executionOrder: -1 //越小，该组件相对其它组件就会越先执行,默认为 0，
+    }
+    properties: {
+    	player: Player,
+    	type: 'Integer'
+    },
+    onLoad: function () {
+    	//你可以在onLoad里面访问场景的节点和数据，这个时候场景的节点和数据都已经准备好了
+    	//组件挂接的对象在初始化完成后的回调函数
+    },
+    start: function() {
+    	// 组件在第一次update调用之前调用
+    	comp.uuid		String 组件的 uuid，用于编辑器。
+		comp.enabled 	Boolean 表示该组件自身是否启用。
+		comp.enabledInHierarchy	Boolean 表示该组件是否被启用并且所在的节点也处于激活状态。
+		this.destroy(); 销毁该对象，并释放所有它对其它对象的引用。
+		this.name;
+		this.isValid;
 
+    	this.schedule(this.callback, interval, repeat, delay);
+    	this.scheduleOnce(function() {
+	        this.doSomething();
+	    }, 2);
+	    this.unschedule(this.callback);
+	    this.unscheduleAllCallbacks();
+    },
+    update: function (dt) {
+    },
+    lateUpdate: function(dt) {
+        //刷新完后调用(会在所有画面更新后执行);
+    },
+    onEnable: function() {
+	    //当该组件被启用，并且它的节点也激活时。
+	    //倘若节点第一次被创建且 enabled 为 true，则会在 onLoad 之后，start 之前被调用。
+    },
+    onDisable: function() {
+        // 当该组件被禁用或节点变为无效时调用
+    },
+    onDestroy: function() {
+        // 组件实例销毁的时候调用
+    },
+});
 
-对象池
-	在运行时进行节点的创建(cc.instantiate)和销毁(node.destroy)操作是非常耗费性能的
-	通过创建 cc.NodePool 的实例来初始化一种节点的对象池
+setTimeout
+    start: function () {
+        // 5 秒后销毁目标节点
+        setTimeout(function () {
+          this.target.destroy();
+        }.bind(this), 5000);
+    },
+    结束定时clearTimeout()
 
-	初始化对象池
-		properties: {
-		    enemyPrefab: cc.Prefab
-		},
-		onLoad: function () {
-		    this.enemyPool = new cc.NodePool();
-		    let initCount = 5;
-		    for (let i = 0; i < initCount; ++i) {
-		        let enemy = cc.instantiate(this.enemyPrefab); // 创建节点
-		        this.enemyPool.put(enemy); // 通过 put 接口放入对象池
-		    }
-		}
-
-	从对象池请求对象
-		createEnemy: function (parentNode) {
-		    let enemy = null;
-		    if (this.enemyPool.size() > 0) { // 通过 size 接口判断对象池中是否有空闲的对象
-		        enemy = this.enemyPool.get();
-		    } else { // 如果没有空闲对象，也就是对象池中备用对象不够时，我们就用 cc.instantiate 重新创建
-		        enemy = cc.instantiate(this.enemyPrefab);
-		    }
-		    enemy.parent = parentNode; // 将生成的敌人加入节点树
-		    enemy.getComponent('Enemy').init(); //接下来就可以调用 enemy 身上的脚本进行初始化
-		}
-
-	将对象返回对象池
-		onEnemyKilled: function (enemy) {
-		    // enemy 应该是一个 cc.Node
-		    this.enemyPool.put(enemy); // 和初始化时的方法一样，将节点放进对象池，这个方法会同时调用节点的 removeFromParent
-		}
-
-	使用构造函数创建对象池时，可以指定一个组件类型或名称
-	作为挂载在节点上用于处理节点回收和复用事件的组件。
-	每个菜单项上有一个 MenuItem.js 组件
-	// MenuItem.js
-	cc.Class({
-	    extends: cc.Component,
-
-	    onLoad: function () {
-	        this.node.selected = false;
-	        this.node.on(cc.Node.EventType.TOUCH_END, this.onSelect, this.node);
-	    },
-
-	    unuse: function () {
-	        this.node.off(cc.Node.EventType.TOUCH_END, this.onSelect, this.node);
-	    },
-
-	    reuse: function () {
-	        this.node.on(cc.Node.EventType.TOUCH_END, this.onSelect, this.node);
-	    }
-	});
-	let menuItemPool = new cc.NodePool('MenuItem');
-	当使用 menuItemPool.get() 获取节点后，就会调用 MenuItem 里的 reuse 方法,注册点击事件
-	当使用 menuItemPool.put(menuItemNode) 回收节点后，会调用 MenuItem 里的 unuse 方法,点击事件的反注册
-	cc.NodePool.get() 可以传入任意数量类型的参数，这些参数会被原样传递给 reuse 方法
-
-	清除对象池
-		myPool.clear(); // 调用这个方法就可以清空对象池
-
+setInterval
+    //第一个参数是定时器回调函数，第二个参数是定时器的时间间隔，单位为毫秒。
+    onLoad: function () {
+        var self = this;
+        this.inervalId = setInterval(function () {
+            self.toggleNodesVisibility();
+        }, 1000);
+    },
+    // 当脚本被销毁时，要记得释放定时器
+    onDestroy: function () {
+        clearInterval(this.inervalId);
+    },
