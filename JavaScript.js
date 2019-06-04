@@ -1,5 +1,20 @@
 0 是false
 
+function_1 (callback) {
+    if (this.curNum <= 0) {
+        return;
+    }
+    if (callback) {
+        callback();
+    }
+},
+
+function_2 () {
+    this.function_1(() => {
+        var pages = this.target.getPages();
+    });
+},
+
 class Person {
 	constructor(name, age) {
 		this.name = name;
@@ -155,11 +170,14 @@ String
 	//返回某个指定的字符串值在字符串中首次出现的位置。
 	stringObject.indexOf(searchvalue,fromindex)
 		
-function
-	随机一个整数//min ~ max-1, 只用当 Math.random() = 1 时，值才会是max
-	function getRandomInt(min, max) {
-	    return Math.floor(Math.random() * (max - min)) + min;
-	}
+随机一个整数//min ~ max-1, 只用当 Math.random() = 1 时，值才会是max
+function getRandomInt(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
+}
+
+getRandomPosition: function() {
+    return cc.v2((Math.random() - 0.5) * 2 * this.randomRange.x, (Math.random() - 0.5) * 2 * this.randomRange.y);
+},
 
 
 

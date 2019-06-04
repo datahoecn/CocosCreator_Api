@@ -11,30 +11,87 @@ ScrollView//滚动视图
 	Scroll Events：指定滚动视图内容时的回调函数。
 	Cancel Inner Events：发生滚动行为时，是否取消子节点上注册的触屏事件。
 
+  scrollView: cc.ScrollView,
+  this.content = this.scrollView.content;
+
+初始化容器
+	// totalCount 总数量
+	// spawnCount 实际显示数量
+	this.content.height = this.totalCount * (this.itemTemplate.height + this.spacing) + this.spacing; // get total content height
+	for (let i = 0; i < this.spawnCount; ++i) { // spawn items, we only need to do this once
+		let item = cc.instantiate(this.itemTemplate);
+		this.content.addChild(item);
+		item.setPosition(0, -item.height * (0.5 + i) - this.spacing * (i + 1));
+		item.getComponent('Item').initItem(i, i);
+        this.items.push(item);
+	}
+	//取得当前列表项在滚动视图中的纵向位置
+    getPositionInView: function (item) { 
+        //将相对 item.parent 的坐标，转换为世界坐标
+        let worldPos = item.parent.convertToWorldSpaceAR(item.position);
+        //将 worldPos 转换为相对 this.scrollView.node 的坐标
+        let viewPos = this.scrollView.node.convertToNodeSpaceAR(worldPos);
+        return viewPos;
+    },
+
+    update: function(dt) {
+        this.updateTimer += dt;
+        if (this.updateTimer < this.updateInterval) return; // 0.2, we don't need to do the math every frame
+        this.updateTimer = 0;
+        let items = this.items;
+        let buffer = this.bufferZone;// 值是 600, 根据 (this.itemTemplate.height + this.spacing) * items.length; 1460
+        let isDown = this.scrollView.content.y < this.lastContentPosY; // scrolling direction
+        let offset = (this.itemTemplate.height + this.spacing) * items.length;
+        for (let i = 0; i < items.length; ++i) {
+            let viewPos = this.getPositionInView(items[i]);
+            if (isDown) {
+                if (viewPos.y < -buffer && items[i].y + offset < 0) {
+                    items[i].y = items[i].y + offset;
+                    let item = items[i].getComponent('Item');
+                    let itemId = item.itemID - items.length; // update item id
+                    item.updateItem(itemId);
+                }
+            } else {// 超出缓冲区 this.scrollView.node 上下 600
+            		// item 的新坐标是否超过 content 范围
+                if (viewPos.y > buffer && items[i].y - offset > -this.content.height) {
+                    items[i].y = items[i].y - offset;
+                    let item = items[i].getComponent('Item');
+                    let itemId = item.itemID + items.length;
+                    item.updateItem(itemId);
+                }
+            }
+        }
+        this.lastContentPosY = this.scrollView.content.y;
+    },
+
+
 	scrollView.scrollToOffset(cc.p(0, 500), 2);
 	scrollView.stopAutoScroll();//停止滚动
 	scrollView.content.removeAllChildren();
 	scrollView.content.addChild(this.nothing_item);
 
-  onLoad: function () {
-      var scrollViewEventHandler = new cc.Component.EventHandler();
-      scrollViewEventHandler.target = this.node; // 这个 node 节点是你的事件处理代码组件所属的节点
-      scrollViewEventHandler.component = "MyComponent";// 这个是代码文件名
-      scrollViewEventHandler.handler = "callback";
-      scrollViewEventHandler.customEventData = "foobar";
 
-      var scrollview = node.getComponent(cc.ScrollView);
-      scrollview.scrollEvents.push(scrollViewEventHandler);
-  },
 
-  callback: function (scrollview, eventType, customEventData) {
-      // 这里 scrollview 是一个 Scrollview 组件对象实例
-      // 这里的 eventType === cc.ScrollView.EventType enum 里面的值
-      // 这里的 customEventData 参数就等于你之前设置的 "foobar"
-  }
+手动添加回调函数
+	onLoad: function () {
+	  var scrollViewEventHandler = new cc.Component.EventHandler();
+	  scrollViewEventHandler.target = this.node; // 这个 node 节点是你的事件处理代码组件所属的节点
+	  scrollViewEventHandler.component = "MyComponent";// 这个是代码文件名
+	  scrollViewEventHandler.handler = "callback";
+	  scrollViewEventHandler.customEventData = "foobar";
 
-	//滚动视图内容时的回调函数
-	scrollEvent: function(sender, event) {
+	  var scrollview = node.getComponent(cc.ScrollView);
+	  scrollview.scrollEvents.push(scrollViewEventHandler);
+	},
+	callback: function (scrollview, eventType, customEventData) {
+	  // 这里 scrollview 是一个 Scrollview 组件对象实例
+	  // 这里的 eventType === cc.ScrollView.EventType enum 里面的值
+	  // 这里的 customEventData 参数就等于你之前设置的 "foobar"
+	}
+
+//滚动视图事件的响应回调函数
+    scrollEvent: function(sender, event) {
+        //根据 event 值显示当前正在触发的事件
         switch(event) {
             case 0: 
                this.lblScrollEvent.string = "Scroll to Top"; 
@@ -69,29 +126,3 @@ ScrollView//滚动视图
         }
     },
 
-    let items = this.items;
-    let buffer = this.bufferZone;
-    let isDown = this.scrollView.content.y < this.lastContentPosY; // scrolling direction
-    let offset = (this.itemTemplate.height + this.spacing) * items.length;
-    for (let i = 0; i < items.length; ++i) {
-        let viewPos = this.getPositionInView(items[i]);
-        if (isDown) {
-            // if away from buffer zone and not reaching top of content
-            if (viewPos.y < -buffer && items[i].y + offset < 0) {
-                items[i].y = items[i].y + offset;
-                let item = items[i].getComponent('Item');
-                let itemId = item.itemID - items.length; // update item id
-                item.updateItem(i, itemId);
-            }
-        } else {
-            // if away from buffer zone and not reaching bottom of content
-            if (viewPos.y > buffer && items[i].y - offset > -this.content.height) {
-                items[i].y = items[i].y - offset;
-                let item = items[i].getComponent('Item');
-                let itemId = item.itemID + items.length;
-                item.updateItem(i, itemId);
-            }
-        }
-    }
-    // update lastContentPosY
-    this.lastContentPosY = this.scrollView.content.y;

@@ -19,3 +19,29 @@ PageView
   CustomEventData：将用户指定的任意字符串作为最后的参数传入事件回调函数中
     PageView 的事件回调有两个参数，第一个参数是 PageView 本身，第二个参数是 PageView 的事件类型。
   Cancel Inner Events：当产生滚动行为时，设置子节点上的注册事件是否取消。
+
+target: cc.PageView,
+// 设置的当前页面为 1
+this.target.setCurrentPageIndex(0);
+this.target.getCurrentPageIndex();
+// 第二个参数为滚动所需时间，默认值为 0.3 秒
+this.target.scrollToPage(0);
+// 添加页面
+this.target.addPage(this.newNode);
+// 插入当前页面
+this.target.insertPage(this.newNode(), this.target.getCurrentPageIndex());
+// 移除最后一个页面
+var pages = this.target.getPages();
+this.target.removePage(pages[pages.length - 1]);
+// 移除当前页面
+this.target.removePageAtIndex(this.target.getCurrentPageIndex());
+this.target.removeAllPages();
+
+// 监听事件
+onPageEvent (sender, eventType) {
+    // 翻页事件
+    if (eventType !== cc.PageView.EventType.PAGE_TURNING) {
+        return;
+    }
+    console.log("当前所在的页面索引:" + sender.getCurrentPageIndex());
+}
