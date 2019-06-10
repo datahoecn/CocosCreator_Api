@@ -1,32 +1,22 @@
 
-meta 文件
-	用于记录引擎使用该资源时所需的数据
-	uuid：该资源的唯一标识符，meta 文件创建时随机生成
-	ver：meta 文件的版本号，由资源对应的 meta 类定义。主要用于判断资源在不同版本的 Creator 编辑器中是否需要重新导入。
-	其他的属性都是由资源类型对应的 meta 类定义的
-	选择资源管理器面板中的任一资源。在属性检查器面板就可以编辑该资源的 meta 文件属性了
 资源属性的声明
 	color: new cc.Color(255, 255, 255, 128)
-    pos  : new cc.Vec2(10, 20),
-    color: cc.color(0,0,0,255) 
-    pos  : cc.v2(0,0)           
-    size : cc.size(0,0)   
+	//cc.Vec2是类型，cc.v2只是一个创建二维向量简便写法
+    pos  : cc.v2(10, 20),
+    pos: {
+        default: null,
+        type: cc.Vec2
+    }
+    color: cc.color(0,0,0,255)          
+    size : cc.size(0,0)  
+
 	cc.Vec2 cc.Color cc.Rect
 	cc.Boolean cc.String cc.Float cc.Integer
-    cc.Texture2D, cc.SpriteFrame, cc.AnimationClip, cc.Prefab
-    cc.Sprite cc.Node cc.Label cc.Canvas cc.Toggle cc.ProgressBar cc.ScrollView 
-    texture: {
-        default: null,
-        type: cc.Texture2D
-    },
-    spriteFrame: {
-        default: null,
-        type: cc.SpriteFrame
-    },
+
     onLoad: function () {
         var spriteFrame = this.spriteFrame;
         var texture = this.texture;
-        //通过 Texture，rect，rotated，offset 和 originalSize 设置 SpriteFrame
+        //通过 Texture rect rotated offset 和 originalSize 设置 SpriteFrame
         spriteFrame.setTexture(texture);
     }
 

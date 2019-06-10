@@ -1,3 +1,31 @@
+properties
+    node                Node 该组件被附加到的节点。
+    uuid                String 组件的 uuid，用于编辑器。
+    enabled             Boolean 表示该组件自身是否启用。
+    enabledInHierarchy  Boolean 表示该组件是否被启用并且所在的节点也处于激活状态。
+    _isOnLoadCalled     Number 返回一个值用来判断 onLoad 是否被调用过，不等于 0 时调用过，等于 0 时未调用。
+    name                String 该对象的名称。
+    isValid             Boolean 表示该对象是否可用（被 destroy 后将不可用）
+
+method
+    update 如果该组件启用，则每帧调用 update。
+    lateUpdate 如果该组件启用，则每帧调用 LateUpdate。
+    onLoad 当附加到一个激活的节点上或者其节点第一次激活时候调用。
+    start 如果该组件第一次启用，则在所有组件的 update 之前调用。
+    onEnable 当该组件被启用，并且它的节点也激活时。
+    onDisable 当该组件被禁用或节点变为无效时调用。
+    onDestroy 该方法为生命周期方法，父类未必会有实现。
+    addComponent 向节点添加一个组件类，你还可以通过传入脚本的名称来添加组件。
+    getComponent 获取节点上指定类型的组件，如果节点有附加指定类型的组件，则返回，如果没有则为空。
+    getComponents 返回节点上指定类型的所有组件。
+    getComponentInChildren 递归查找所有子节点中第一个匹配指定类型的组件。
+    getComponentsInChildren 递归查找自身或所有子节点中指定类型的组件
+    schedule 调度一个自定义的回调函数。
+    scheduleOnce 调度一个只运行一次的回调函数，可以指定 0 让回调函数在下一帧立即执行或者在一定的延时之后执行。
+    unschedule 取消调度一个自定义的回调函数。
+    unscheduleAllCallbacks 取消调度所有已调度的回调函数：定制的回调函数以及 'update' 回调函数。
+    destroy 销毁该对象，并释放所有它对其它对象的引用。
+
 const Player = require('Player');
 let Mask = cc.Class({
     name: "sprite"//设置类名为 "sprite"，类名用于序列化，一般可以省略。
