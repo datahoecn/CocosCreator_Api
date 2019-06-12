@@ -1,3 +1,6 @@
-i = 3;
-a = i * 19 + 1 * (i + 1)
-console.log(a)
+var a = new Boolean(0);
+a = true;
+a = false;
+a = "111";
+b = a.valueOf();
+console.log(typeof b)
