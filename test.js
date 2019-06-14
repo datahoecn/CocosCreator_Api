@@ -1,10 +1,14 @@
-function foo() {
-	var a = 20;
-	function bar() {
-		a = 30;
-		console.log(a);
-
+function f1() {
+	var n = 999;
+	nAdd = function() {
+		n += 1;
 	}
-	bar();
+
+	return function f2() {
+		console.log(n);
+	}
 }
-foo()
+
+var result = f1();
+result();
+nAdd();
