@@ -1,14 +1,12 @@
-function f1() {
-	var n = 999;
-	nAdd = function() {
-		n += 1;
+function foo() {
+	var a = 10;
+	function fn1() {
+		console.log(a);
 	}
-
-	return function f2() {
-		console.log(n);
+	function fn2() {
+		var b = 10;
+		console.log(b);
 	}
+	fn2();
 }
-
-var result = f1();
-result();
-nAdd();
+foo();
