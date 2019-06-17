@@ -1,3 +1,16 @@
+this.g = this.getComponent(cc.Graphics);
+this.node.on('touchstart',function (event) {
+    var pos = this.node.convertToNodeSpaceAR(event.getLocation());
+    this.g.moveTo(this.pos.x, this.pos.y);
+  }.bind(this));
+this.node.on('touchmove',function (event) {
+    var pos = this.node.convertToNodeSpaceAR(event.getLocation());
+    this.g.lineTo(pos.x, pos.y);
+    this.g.stroke();//绘出线条
+    this.g.moveTo(pos.x, pos.y);
+}.bind(this)); 
+
+
 画线(lineto)
 	var g = this.getComponent(cc.Graphics);
     g.lineWidth = 10;//绘制图形的线条宽度设置为 10

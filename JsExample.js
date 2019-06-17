@@ -1,3 +1,6 @@
+取值范围为 0 ~ 1 之间
+value < 0 ? 0 : value < 1 ? value : 1;
+
 随机一个整数//min ~ max-1, 只用当 Math.random() = 1 时，值才会是max
 function getRandomInt(min, max) {
     return Math.floor(Math.random() * (max - min)) + min;
