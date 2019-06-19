@@ -1,28 +1,18 @@
-(function() {
-    var states = {};
-    function type(elem) {
-        if(elem == null) {
-            return elem + "";
+function add() {
+    var _args = [].slice.call(arguments);
+    var adder = function() {
+        var _adder = function() {
+            _args.push(...arguments);
+            return _adder;
         }
-        return toString.call(elem).replace(/[\[\]]/g, "").split(" ")[1].toLowerCase();
+        _adder.valueOf = function() {
+            return _args.reduce(function(a,b) {
+                return a + b;
+            })
+        }
+        return _adder;
     }
-    function get(name) {
-        return states[name] ? states[name] : "";
-    }
-    function getStates() {
-        return states;
-    }
-    function set(options, target) {
-        var keys = Object.keys(options);
-        var o = target ? target : states;
-        keys.map(function(item) {
-            if(typeof o[item] == "undefined") {
-                o[item] = options[item];
-            }
-            else {
-                type(o[item]) == "object" ? set(options[item], 0[item]) : o[item] = options[item];
-            }
-            return item;
-        })
-    }
-})
+    return adder(..._args)
+}
+var a = add(1);
+console.log(a+1)
