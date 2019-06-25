@@ -142,5 +142,10 @@ cc.Node.EventType.TOUCH_MOVE		'touchmove'
 cc.Node.EventType.TOUCH_END			'touchend'
 cc.Node.EventType.TOUCH_CANCEL		'touchcancel'
 
+this.node.on(cc.Node.EventType.SIZE_CHANGED, this._updateRenderData, this);
+this.node.on(cc.Node.EventType.ANCHOR_CHANGED, this._updateRenderData, this);
+this.node.off(cc.Node.EventType.SIZE_CHANGED, this._updateRenderData, this);
+this.node.off(cc.Node.EventType.ANCHOR_CHANGED, this._updateRenderData, this);
+
 
 

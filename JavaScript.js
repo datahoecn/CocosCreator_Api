@@ -1,3 +1,26 @@
+当一个对象是原型时，A.constructor 指向构造函数
+当一个对象是构造函数时， B.prototype 指向原型
+当一个对象是实列时，C.__proto__ 指向它的原型
+
+var c = (a, b) => a + b
+等价
+var c = (a, b) => {
+    return a + b
+}
+
+实列方法:
+	function Foo() {
+		this.bar = function() {
+		}
+	}
+原型方法:
+	Foo.prototype.bar = function() {
+
+	}
+静态方法:
+	Foo.bar = function() {
+	}
+
 对象字面量并不会产生自己的作用域
 var obj = {
     a: 10,
