@@ -1,4 +1,3 @@
-var c = (a, b) => {
-    return a + b
-}
-console.log(c(1, 2))
+var a = new Date();
+a.getHours();
+console.log(a.getHours())

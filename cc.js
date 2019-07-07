@@ -1,4 +1,22 @@
 
+cc.game.on(cc.game.EVENT_HIDE, (event)=>{
+    cc.log("game onPause - StorageUtil");
+    if(this.intervalId) 
+    {
+        clearTimeout(this.intervalId);
+        this.intervalId = null;
+    }
+});
+cc.game.on(cc.game.EVENT_SHOW, (event)=>{
+    cc.log("game onResume - StorageUtil");
+});
+
+代码控制适配
+let frameSize = cc.view.getFrameSize();
+let bFitWidth = (frameSize.width / frameSize.height) < (750 / 1334)
+cc.Canvas.instance.fitWidth = bFitWidth;
+cc.Canvas.instance.fitHeight = !bFitWidth;
+
 cc.js.getClassName(obj); //param {Object|Function} return {String}
 cc.js.isNumber(obj);
 cc.js.isString(obj);

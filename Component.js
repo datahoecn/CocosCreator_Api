@@ -98,6 +98,20 @@ setTimeout
         }.bind(this), 5000);
     },
     结束定时clearTimeout()
+    this.intervalId = null;
+    if(!this.intervalId) 
+    {
+        this.intervalId = setTimeout(()=>{
+            this.intervalId = null;
+            this._syncLocalData();
+        },this.syncLocalDataInterval);
+    }
+
+    if(this.intervalId) 
+    {
+        clearTimeout(this.intervalId);
+        this.intervalId = null;
+    }
 
 setInterval
     //第一个参数是定时器回调函数，第二个参数是定时器的时间间隔，单位为毫秒。

@@ -78,7 +78,7 @@ cc.Class({
         _aimState : null,
         _walkState : null,
         _attackState : null,
-        _target : cc.p(0, 0),
+        _target : cc.v2(0, 0),
     },
 
     // use this for initialization
@@ -392,7 +392,7 @@ cc.Class({
         if (event.detail.name === "onFire") {
             //获取骨骼节点相对于根节点的位置偏移
             var firePointBone = event.detail.armature.getBone("firePoint");
-            var localPoint = cc.p(firePointBone.global.x, -firePointBone.global.y);
+            var localPoint = cc.v2(firePointBone.global.x, -firePointBone.global.y);
 
             var display = event.detail.armature.display;
             //通过相对位置点计算出世界坐标

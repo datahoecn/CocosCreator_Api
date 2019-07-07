@@ -65,7 +65,7 @@ ScrollView//滚动视图
     },
 
 
-	scrollView.scrollToOffset(cc.p(0, 500), 2);
+	scrollView.scrollToOffset(cc.v2(0, 500), 2);
 	scrollView.stopAutoScroll();//停止滚动
 	scrollView.content.removeAllChildren();
 	scrollView.content.addChild(this.nothing_item);
