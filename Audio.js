@@ -16,6 +16,7 @@ AudioSource 是组件，可以添加到场景中
         console.log("播放结束");
     });
 
+
 AudioEngine 是引擎提供的纯 API，只能在脚本中进行调用，可以同时并行播放多个音轨
     clip: {
         default: null,
@@ -38,6 +39,12 @@ AudioEngine 是引擎提供的纯 API，只能在脚本中进行调用，可以�
             cc.warn('.' + name + ' is not found!');
         }
     });
+
+// 使用 Web Audio 的方式加载
+cc.loader.load(cc.url.raw('resources/background.mp3'), callback);
+// 使用 DOM 模式加载
+//在 cc.loader 的 cache 中，缓存的 url 也会带有 ?useDom=1。建议不要直接填写资源的 url 尽量在脚本内定义一个 AudioClip
+cc.loader.load(cc.url.raw('resources/background.mp3?useDom=1'), callback);
 
 var audioUrl = "/music/click.mp3"
 cc.loader.loadRes(audioUrl, cc.AudioClip, (err, audioClip) => {

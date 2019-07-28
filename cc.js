@@ -1,4 +1,10 @@
 
+this.node.getBoundingBoxToWorld().contains(event.getLocation())
+
+cc.view.getVisibleSize();
+cc.winSize
+return value < min_inclusive ? min_inclusive : value < max_inclusive ? value : max_inclusive;
+
 cc.game.on(cc.game.EVENT_HIDE, (event)=>{
     cc.log("game onPause - StorageUtil");
     if(this.intervalId) 

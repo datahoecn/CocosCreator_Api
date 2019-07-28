@@ -1,3 +1,66 @@
+onEnable() {
+    this.node.on(cc.Node.EventType.TOUCH_START, this._onTouchStart, this);
+    this.node.on(cc.Node.EventType.TOUCH_END, this._onTouchEnd, this);
+    this.node.on(cc.Node.EventType.TOUCH_CANCEL, this._onTouchCancel, this);
+}
+
+onDisable() {
+    this.node.off(cc.Node.EventType.TOUCH_START, this._onTouchStart, this);
+    this.node.off(cc.Node.EventType.TOUCH_END, this._onTouchEnd, this);
+    this.node.off(cc.Node.EventType.TOUCH_CANCEL, this._onTouchCancel, this);
+}
+
+private _onTouchStart(event: cc.Event.EventTouch) {
+    if (this.node.getBoundingBoxToWorld().contains(event.getLocation())) {
+        this._isTouching = true;
+    } else {
+        this._isTouching = false;
+    }
+    if (this._isTouching) {
+        // 第一次触摸立即回调一次
+        this.publishOneTouch();
+
+        // 然后开启计时器，计算后续的长按相当于触摸了多少次
+        this.schedule(this._touchCounterCallback, this.touchInterval);
+    }
+    
+}
+
+private _onTouchEnd(event: cc.Event.EventTouch) {
+    this._isTouching = false;
+    this._touchCounter = 0;
+    this.unschedule(this._touchCounterCallback);
+}
+
+private _onTouchCancel(event: cc.Event.EventTouch) {
+    this._isTouching = false;
+    this._touchCounter = 0;
+    this.unschedule(this._touchCounterCallback);
+}
+
+
+private _touchCounterCallback() {
+    if (this._isTouching) {
+        this.publishOneTouch();
+    } else {
+        this.unschedule(this._touchCounterCallback);
+    }
+}
+
+ 
+//通知出去：被点击/触摸了一次，长按时，会连续多次回调这个方法
+  longTouchEvents: cc.Component.EventHandler[] = [];
+private publishOneTouch() {
+    if (!this._isTouching) {
+        return;
+    }
+    this._touchCounter++;
+    this.longTouchEvents.forEach((eventHandler: cc.Component.EventHandler) => {
+        eventHandler.emit([this._touchCounter]);
+    });
+}
+
+
 监听者通知分发者这里有代码对此事件感兴趣
 出事后由发射者通知分发者
 分发者根据当前的监听情况，把事件通知所有针对此事件的监听者

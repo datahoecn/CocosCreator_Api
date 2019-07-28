@@ -1,3 +1,5 @@
+
+
 properties
     node                Node 该组件被附加到的节点。
     uuid                String 组件的 uuid，用于编辑器。
@@ -65,8 +67,10 @@ let Mask = cc.Class({
 		this.destroy(); 销毁该对象，并释放所有它对其它对象的引用。
 		this.name;
 		this.isValid;
-
-    	this.schedule(this.callback, interval, repeat, delay);
+        // interval 等于 0 时，每帧都会调用，和update一样
+        // repeat 重复次数，回调repeat + 1 次，"kCCRepeatForever"代表永久
+        // delay 等于 0 会在下一帧调用
+    	component.schedule(this.callback, interval, repeat, delay);
     	this.scheduleOnce(function() {
 	        this.doSomething();
 	    }, 2);

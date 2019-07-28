@@ -1,3 +1,6 @@
+
+
+
 收集参数
 function createCurry(func, arity, args) {
     var arity = arity || func.length;

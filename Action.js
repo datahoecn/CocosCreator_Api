@@ -1,6 +1,9 @@
 停止动作
     node.stopAction(action);
     node.stopAllActions();
+    // 暂停 继续
+    node.pauseAllActions();
+    node.resumeAllActions();
 
 标识
     action.setTag(ACTION_TAG);
@@ -143,6 +146,8 @@ this.jumpAction = cc.sequence(
 
 
 Animation组件
+// 如果间隔超过1帧，那么需要建立N+1个关键帧，其中N为动画图片数量。
+// 最后两帧的内容保持一致，确保最后一张图也能持续指定的时间间隔后才重新开始播放第一帧
     播放
         var anim = this.getComponent(cc.Animation);
         // 如果没有指定播放哪个动画，并且有设置 defaultClip 的话，则会播放 defaultClip 动画
