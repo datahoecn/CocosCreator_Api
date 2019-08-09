@@ -1,6 +1,6 @@
 
 // 权重递增
-this.counter += Math.ceil((touchCounter - 3) * 1.003);
+this.counter +=  this.counter * 1.003;
 
 Anim			动画文件
 Audios			音效文件

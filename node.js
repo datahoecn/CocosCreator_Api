@@ -1,4 +1,5 @@
 properties
+	node.zIndex				Number 控制节点排列顺序
 	node.groupIndex 		Integer 节点的分组索引。
 	node.group 				String 节点的分组。
 	node.position 			cc.v2(300, 200)		Vec2 
@@ -9,6 +10,7 @@ properties
 	node.skewX 				Number 该节点 X 轴倾斜角度。
 	node.opacity 			Number 节点透明度，默认值为 255。
 	node.color 				new cc.Color(255, 255, 255);	Color 节点颜色。
+							cc.Color.RED WHITE BLACK TRANSPARENT(透明) GRAY(灰色) GREEN(绿色) BLUE(蓝色) YELLOW(黄色) ORANGE(橙色) CYAN(青色) MAGENTA(品红色)
 	node.anchorX 			Number 节点 X 轴锚点位置。
 	node.width 				Number 节点宽度。
 	node.height 			Number 节点高度。
