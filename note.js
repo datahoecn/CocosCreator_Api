@@ -1,4 +1,29 @@
+// cc.director.preloadScene("main", (completedCount, totalCount, item) => {            
+        //     let p = completedCount/totalCount;
+        //     this.progress_js.progress = p;
+        //     this.progress_lb.string = parseInt(p * 100) + '%';
+        // },() => {
+        //     cc.director.loadScene("main"); 
+        // });   
 
+
+var xmlhttp = cc.loader.getXMLHttpRequest();
+// xmlhttp.onreadystatechange=()=>{
+        //     if (xmlhttp.readyState==4 && xmlhttp.status==200){
+        //         var dateStr = xmlhttp.getResponseHeader("Date");
+        //         var date = new Date(dateStr);
+        //         var year = date.getFullYear();
+        //         var month = date.getMonth() + 1;
+        //         var date1 = date.getDate();
+        //         var hour = date.getHours();
+        //         var minutes = date.getMinutes();
+        //         var second = date.getSeconds();
+        //         cc.log(year + "年" + month + "月" + date1 + "日" + hour + "时" + minutes + "分" + second + "秒");
+        //     }
+        // }
+        // xmlhttp.open("GET", "https://www.baidu.com", true);
+        // xmlhttp.setRequestHeader("If-Modified-Since", "baidu");
+        // xmlhttp.send();
 // 权重递增
 this.counter +=  this.counter * 1.003;
 
