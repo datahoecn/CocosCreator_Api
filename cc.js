@@ -1,3 +1,17 @@
+//设计分辨率
+let designSize=cc.view.getDesignResolutionSize();
+//屏幕物理分辨率 也就是手机分辨率。
+let frameSize=cc.view.getFrameSize();
+ //获取视图的大小，以点为单位。 
+let winSize=cc.director.getWinSize();
+//获取运行场景的可见大小。
+let visiSize=cc.director.getVisibleSize();
+let winSizePixels=cc.director.getWinSizeInPixels();
+
+winSize = visiSize = winSizePixels。一般使用visiSize即可
+
+// 调试信息
+cc.debug.setDisplayStats(false);
 
 this.node.getBoundingBoxToWorld().contains(event.getLocation())
 

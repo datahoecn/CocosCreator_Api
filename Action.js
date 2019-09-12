@@ -16,7 +16,7 @@ this.jumpAction = cc.sequence(
 ).speed(2).repeat(5);//repeatForever
 
 在 cc.callFunc 中不应该停止自身动作，
-由于动作是不能被立即删除，如果在动作回调中暂停自身动作会引发一系列遍历问题
+由于动作是不能被立即删除，如果在动作回调中暂停自身动作会引发一系列历问题
  
 容器动作
     cc.sequence         顺序执行动作  var seq = cc.sequence(act1, act2);var seq = cc.sequence(actArray);

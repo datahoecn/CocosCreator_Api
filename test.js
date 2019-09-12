@@ -1,2 +1,2 @@
-let a = Date.now();
-console.log(a);		//1523619204809
+var a = 10
+console.log(Math.abs(0))

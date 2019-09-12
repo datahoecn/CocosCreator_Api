@@ -1,3 +1,7 @@
+svn checkout https://172.16.1.98/svn/math/design/Math/assets --username=lijie --password=123456 /Users/xhkj/Desktop/math/assets
+
+
+
 // cc.director.preloadScene("main", (completedCount, totalCount, item) => {            
         //     let p = completedCount/totalCount;
         //     this.progress_js.progress = p;
