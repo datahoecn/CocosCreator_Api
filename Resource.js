@@ -129,54 +129,6 @@
 层级管理器 里选中一个节点，然后按 Cmd/Ctrl + F 就可以在 场景编辑器 里聚焦这个节点
 选中一个节点后按 Cmd/Ctrl + D 会在该节点相同位置复制一个同样的节点
 
-全局变量访问
-	// Globals.js, this file can have any name
-	window.Global = {
-	    backNode: null,
-	    backLabel: null,
-	};
-	// Back.js
-	cc.Class({
-	    extends: cc.Component,
-	    onLoad: function () {
-	        Global.backNode = this.node;
-	        Global.backLabel = this.getComponent(cc.Label);
-	    }
-	});
-	// AnyScript.js
-	cc.Class({
-	    extends: cc.Component,
-	    // start 会在 onLoad 之后执行，所以这时 Global 已经初始化过了
-	    start: function () {
-	        var text = 'Back';
-	        Global.backLabel.string = text;
-	    }
-	});
-
-模块访问
-	// Global.js, now the filename matters
-	module.exports = {
-	    backNode: null,
-	    backLabel: null,
-	};
-	// Back.js
-	//每个脚本都能用 require + 文件名(不含路径) 来获取到对方 exports 的对象
-	var Global = require("Global");
-	cc.Class({
-	    extends: cc.Component,
-
-	    onLoad: function () {
-	        Global.backNode = this.node;
-	        Global.backLabel = this.getComponent(cc.Label);
-	    }
-	});
-
-获得其它组件
-	var label = this.getComponent(cc.Label);
-	var rotate = this.getComponent("SinRotate");//传入一个类名,类名就是脚本的文件名
-
-	//在节点上也有一个 getComponent 方法，它们的作用是一样的
-	this.node.getComponent(cc.Label) === this.getComponent(cc.Label)
 
 属性检查器设置组件
 	//拖动节点 "Player" 到 属性检查器,不用 getComponent

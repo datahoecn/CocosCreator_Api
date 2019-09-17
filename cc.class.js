@@ -1,51 +1,19 @@
-var Waves = {};
-Waves.sine = function(x) {
-  return Math.sin(x);
-};
-Waves.sign = function(x) {
-  x = +x; // convert to a number
-  if (x === 0 || isNaN(x)) {
-    return x;
-  }
-  return x > 0 ? 1 : -1;
-};
-let WavesEnumOptins = {};
-for (let k in Waves) {
-    WavesEnumOptins[k] = -1;
-}
-Waves.Enum = cc.Enum(WavesEnumOptins);
-
-let Wave = cc.Class({
-    name: 'Wave',
-    properties: {
-        timeModifier: 1,
-        waveType: {
-            default: Waves.Enum.sine,
-            type: Waves.Enum
-        },
-        strokeColor: cc.color(255, 255, 255, 100)
-    }
-});
 //cc.Class 是一个由 cc.Component 派生出来的组件类
 //Class() 就是 cc 模块下的一个方法，这个方法用于声明 Cocos Creator 中的类
 //调用 cc.Class，传入一个原型对象，在原型对象中以键值对的形式设定所需的类型参数，就能创建出所需要的类。
 
-    const Node = require('../CCNode');
+import SpriteAnim from '../../../Engine/SpriteAnim';
 
-    let _vec2_temp = cc.v2();
+const SEGEMENTS_MIN = 3;
 
-    function _calculateCircle (center, radius, segements) {
-    }
+cc.Mask = module.exports = Mask;
 
-    let MaskType = cc.Enum({
-        RECT: 0,
-        ELLIPSE: 1,
-        IMAGE_STENCIL: 2,
-    });
+this.node.getComponent(cc.Label) === this.getComponent(cc.Label)
 
-    const SEGEMENTS_MIN = 3;
-
-    cc.Mask = module.exports = Mask;
+//cc.Vec2是类型，cc.v2只是一个创建二维向量简便写法,用cc.v2就不用在前面加new
+f v2(x, y){
+    return new Vec2(x, y);
+}
 
 let Mask = cc.Class({
     name: "sprite"//设置类名为 "sprite"，类名用于序列化，一般可以省略。
@@ -186,13 +154,6 @@ cc.Component属性
     this.getComponentsInChildren (组件类型): 在自己与子节点里面查找;
     this.destroy(): 从节点中删除这个组件的实例;
 
-    var test = this.addComponent("test");//"test"是自定义cc.class
-    test = this.node.addComponent("test"); //两个代码实现相同的功能
-
-    node.addComponent(cc.Sprite)
-    node.addComponent(dragonBones.ArmatureDisplay)
-    import SpriteAnim from '../../../Engine/SpriteAnim';
-    node.addComponent(SpriteAnim);
 
 
 

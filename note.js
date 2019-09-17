@@ -1,45 +1,37 @@
+
 svn checkout https://172.16.1.98/svn/math/design/Math/assets --username=lijie --password=123456 /Users/xhkj/Desktop/math/assets
 
 
 
-// cc.director.preloadScene("main", (completedCount, totalCount, item) => {            
-        //     let p = completedCount/totalCount;
-        //     this.progress_js.progress = p;
-        //     this.progress_lb.string = parseInt(p * 100) + '%';
-        // },() => {
-        //     cc.director.loadScene("main"); 
-        // });   
+cc.director.preloadScene("main", (completedCount, totalCount, item) => {            
+    let p = completedCount/totalCount;
+    this.progress_js.progress = p;
+    this.progress_lb.string = parseInt(p * 100) + '%';
+},() => {
+    cc.director.loadScene("main"); 
+});   
 
 
 var xmlhttp = cc.loader.getXMLHttpRequest();
-// xmlhttp.onreadystatechange=()=>{
-        //     if (xmlhttp.readyState==4 && xmlhttp.status==200){
-        //         var dateStr = xmlhttp.getResponseHeader("Date");
-        //         var date = new Date(dateStr);
-        //         var year = date.getFullYear();
-        //         var month = date.getMonth() + 1;
-        //         var date1 = date.getDate();
-        //         var hour = date.getHours();
-        //         var minutes = date.getMinutes();
-        //         var second = date.getSeconds();
-        //         cc.log(year + "年" + month + "月" + date1 + "日" + hour + "时" + minutes + "分" + second + "秒");
-        //     }
-        // }
-        // xmlhttp.open("GET", "https://www.baidu.com", true);
-        // xmlhttp.setRequestHeader("If-Modified-Since", "baidu");
-        // xmlhttp.send();
+xmlhttp.onreadystatechange=()=>{
+    if (xmlhttp.readyState==4 && xmlhttp.status==200){
+        var dateStr = xmlhttp.getResponseHeader("Date");
+        var date = new Date(dateStr);
+        var year = date.getFullYear();
+        var month = date.getMonth() + 1;
+        var date1 = date.getDate();
+        var hour = date.getHours();
+        var minutes = date.getMinutes();
+        var second = date.getSeconds();
+        cc.log(year + "年" + month + "月" + date1 + "日" + hour + "时" + minutes + "分" + second + "秒");
+    }
+}
+xmlhttp.open("GET", "https://www.baidu.com", true);
+xmlhttp.setRequestHeader("If-Modified-Since", "baidu");
+xmlhttp.send();
 // 权重递增
 this.counter +=  this.counter * 1.003;
 
-Anim			动画文件
-Audios			音效文件
-Config			配置文件
-Loading			不用管这个， 这个是之前为了实现微信小游戏加载界面，把单独加载界面资源都放到里面。
-Prefab 			Prefab
-resources
-Scene 			场景
-Script 			代码
-Texture 		UI和游戏图片资源
 
 Global.js
 	var Global = {
@@ -47,8 +39,7 @@ Global.js
 	    //全局变量
 	    APPID: "123456",
 	}
-
-	module.exports = cc.Global = Global;
+module.exports = cc.Global = Global;
 
 
 
@@ -164,10 +155,6 @@ SpriteFrame 是核心渲染组件 Sprite 所使用的资源，设置或替换 Sp
 这样的设置是因为除了每个文件产生一个 SpriteFrame 的图像资源（Texture）之外
 我们还有包含多个 SpriteFrame 的图集资源（Atlas）类型
 
-var newStar = cc.instantiate(this.starPrefab);
-// 在星星组件上暂存 Game 对象的引用
-newStar.getComponent('Star').game = this;
-        
 settings 里保存项目相关的设置，如 构建发布 菜单里的包名、场景和平台选择等。这些设置需要和项目一起进行版本控制。
 
 local 文件夹中包含该项目的本地设置，包括编辑器面板布局，窗口大小，位置等信息。您不需要关心这里的内容，只要按照您的习惯设置编辑器布局，这些就会自动保存在这个文件夹。一般 local 也不需要进入版本控制。
@@ -175,15 +162,7 @@ local 文件夹中包含该项目的本地设置，包括编辑器面板布局�
 project.json 文件和 assets 文件夹一起，作为验证 Cocos Creator 项目合法性的标志
 只用来规定当前使用的引擎类型和插件存储位置，不需要用户关心其内容。这个文件也应该纳入版本控制。
 
-当用户按住 Alt/Option 的同时点击该按钮，除了执行这个文件夹自身的展开/折叠操作之外，还会同时展开/折叠该文件夹下的所有子节点。
-
-拷贝/粘贴：将节点复制到剪贴板上，然后可以粘贴到另外的位置，或打开另一个场景来粘贴刚才拷贝的节点。
-复制节点：生成和选中节点完全相同的节点副本，生成节点和选中节点在同一层级中。
-
-锁定节点：鼠标移到节点上，左侧会有一个锁定按钮，节点锁定后无法在 场景编辑器 内选中该节点。
-
 当在搜索按钮中选择 组件 类型时，搜索栏中会出现 t: 的符号，在后面输入需要查找的组件名称即可（例如 t:cc.Camera）。
-
 
 程序运行到debugger就会自动停止运行	
 console.trace() 会输出函数调用堆栈

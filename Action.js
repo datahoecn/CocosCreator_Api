@@ -11,7 +11,7 @@
     node.stopActionByTag(ACTION_TAG);
 
 //repeat、repeatForever、speed
-this.jumpAction = cc.sequence(
+cc.sequence(
 // 以1/2的速度慢放动画，并重复5次
 ).speed(2).repeat(5);//repeatForever
 

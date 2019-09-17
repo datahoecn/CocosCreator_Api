@@ -1,3 +1,8 @@
+取值范围为 0 ~ 1 之间
+value < 0 ? 0 : value < 1 ? value : 1;
+value < min_inclusive ? min_inclusive : value < max_inclusive ? value : max_inclusive;
+
+
 splice() 方法向/从数组中添加/删除项目，然后返回被删除的项目。
 
 当一个对象是原型时，A.constructor 指向构造函数
@@ -67,25 +72,14 @@ Boolean 对象
 	以上都为 false
 Math 对象
 	Math.PI 	返回圆周率（约等于3.14159）
-
 	abs(x)		返回 x 的绝对值。
-	acos(x)		返回 x 的反余弦值。
-	asin(x)		返回 x 的反正弦值。
-	atan(x)		以介于 -PI/2 与 PI/2 弧度之间的数值来返回 x 的反正切值。
-	atan2(y,x)	返回从 x 轴到点 (x,y) 的角度（介于 -PI/2 与 PI/2 弧度之间）。
 	ceil(x)		对数进行上舍入。
-	cos(x)		返回数的余弦。
-	exp(x)		返回 Ex 的指数。
 	floor(x)	对 x 进行下舍入。
-	log(x)		返回数的自然对数（底为e）。
 	max(x,y,z,...,n)	返回 x,y,z,...,n 中的最高值。
 	min(x,y,z,...,n)	返回 x,y,z,...,n中的最低值。
 	pow(x,y)	返回 x 的 y 次幂。
 	random()	返回 0 ~ 1 之间的随机数。
 	round(x)	四舍五入。
-	sin(x)		返回数的正弦。
-	sqrt(x)		返回数的平方根。
-	tan(x)		返回角的正切。
 Number 对象
 	var num = 5.56789;
 	var n = num.toFixed(2);
@@ -94,7 +88,6 @@ Number 对象
 	toString()			把数字转换为字符串，使用指定的基数。
 String 对象
 	string.length		返回字符串的长度
-
 	charAt()		返回在指定位置的字符。
 	charCodeAt()	返回在指定的位置的字符的 Unicode 编码。
 	concat()		连接两个或更多字符串，并返回新的字符串。

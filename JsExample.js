@@ -1,6 +1,4 @@
 
-
-
 收集参数
 function createCurry(func, arity, args) {
     var arity = arity || func.length;
@@ -29,17 +27,17 @@ var a = _add(1)(2, 3);
 var toArray = function(s){
     try{
         return Array.prototype.slice.call(s);
-    } catch(e){
+    }
+    catch(e){
         var arr = [];
         for(var i = 0,len = s.length; i < len; i++){
                arr[i] = s[i];
         }
-         return arr;
+        return arr;
     }
 }
 
-取值范围为 0 ~ 1 之间
-value < 0 ? 0 : value < 1 ? value : 1;
+
 
 随机一个整数//min ~ max-1, 只用当 Math.random() = 1 时，值才会是max
 function getRandomInt(min, max) {
@@ -60,6 +58,8 @@ getRandomPosition: function() {
 	        return dirty;
 	    },
 	};	
+
+    
 
 function actions(node) {
     this.node = node;

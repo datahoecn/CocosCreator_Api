@@ -10,14 +10,83 @@ let winSizePixels=cc.director.getWinSizeInPixels();
 
 winSize = visiSize = winSizePixels。一般使用visiSize即可
 
+cc.winSize  Size 为当前的游戏窗口的大小
+
 // 调试信息
 cc.debug.setDisplayStats(false);
 
+// instantiate node from prefab
+var scene = cc.director.getScene();
+var node = cc.instantiate(prefabAsset);
+node.parent = scene;
+
+var node = new cc.Node();
+cc.log(cc.isValid(node));    // true
+node.destroy();
+cc.log(cc.isValid(node));    // true, still valid in this frame
+// after a frame...
+cc.log(cc.isValid(node));    // false, destroyed in the end of last frame
+
+member: {
+    default: [],
+    type: cc.Integer// type: cc.Float  type: cc.Boolean  type: cc.String
+}
+
+Rect:
+    properties:
+        x       Number
+        y       Number
+        width   Number
+        height  Number
+        xMin    Number 矩形 x 轴上的最小值，等价于 rect.x。
+        yMin    Number 矩形 y 轴上的最小值。
+        xMax    Number 矩形 x 轴上的最大值。
+        yMax    Number 矩形 y 轴上的最大值。
+        center  Vec2 矩形的中心点。
+        origin  Vec2 矩形的 x 和 y 坐标。
+        size    Size 矩形的大小。
+    method
+        constructor     Rect类的构造函数。
+        fromMinMax      根据指定 2 个坐标创建出一个矩形区域。
+            cc.Rect.fromMinMax(cc.v2(10, 10), cc.v2(20, 20)); // Rect {x: 10, y: 10, width: 10, height: 10};
+        clone           克隆一个新的 Rect。
+            var a = new cc.Rect(0, 0, 10, 10);
+            a.clone();// Rect {x: 0, y: 0, width: 10, height: 10}
+        equals          是否等于指定的矩形。
+            var a = new cc.Rect(0, 0, 10, 10);
+            var b = new cc.Rect(0, 0, 10, 10);
+            a.equals(b);// true;
+        lerp            线性插值
+        intersects      当前矩形与指定矩形是否相交。
+            var a = new cc.Rect(0, 0, 10, 10);
+            var b = new cc.Rect(0, 0, 20, 20);
+            a.intersects(b);// true
+        intersection    返回 2 个矩形重叠的部分。
+            var a = new cc.Rect(0, 10, 20, 20);
+            var b = new cc.Rect(0, 10, 10, 10);
+            var intersection = new cc.Rect();
+            a.intersection(intersection, b); // intersection {x: 0, y: 10, width: 10, height: 10};
+        contains        当前矩形是否包含指定坐标点。
+            var a = new cc.Rect(0, 0, 10, 10);
+            var b = new cc.Vec2(0, 5);
+            a.contains(b);// true
+        containsRect    当前矩形是否包含指定矩形。
+            var a = new cc.Rect(0, 0, 20, 20);
+            var b = new cc.Rect(0, 0, 10, 10);
+            a.containsRect(b);// true
+        union           返回一个包含当前矩形和指定矩形的最小矩形。
+            var a = new cc.Rect(0, 10, 20, 20);
+            var b = new cc.Rect(0, 10, 10, 10);
+            var union = new cc.Rect();
+            a.union(union, b); // union {x: 0, y: 10, width: 20, height: 20};
+        transformMat4   使用 mat4 对矩形进行矩阵转换。
+        toString        转换为方便阅读的字符串
+            var a = new cc.Rect(0, 0, 10, 10);
+            a.toString();// "(0.00, 0.00, 10.00, 10.00)";
+        set             从其它对象把所有属性复制到当前对象
+
 this.node.getBoundingBoxToWorld().contains(event.getLocation())
 
-cc.view.getVisibleSize();
-cc.winSize
-return value < min_inclusive ? min_inclusive : value < max_inclusive ? value : max_inclusive;
 
 cc.game.on(cc.game.EVENT_HIDE, (event)=>{
     cc.log("game onPause - StorageUtil");
