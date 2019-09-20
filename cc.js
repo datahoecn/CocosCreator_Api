@@ -1,3 +1,10 @@
+CC_EDITOR   是否为编辑器环境
+CC_PREVIEW  是否为预览环境
+CC_JSB  是否为JSB环境
+CC_DEBUG    是否为调试环境
+CC_WECHATGAME   是否为微信小游戏环境
+CC_WECHATGAME_SUB   是否为微信小游戏子域环境
+
 //设计分辨率
 let designSize=cc.view.getDesignResolutionSize();
 //屏幕物理分辨率 也就是手机分辨率。

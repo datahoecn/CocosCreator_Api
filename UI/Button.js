@@ -11,7 +11,6 @@ Button
 
   Target：当前组件绑定的节点
   Interactable：是否响应交互，不勾选相当于禁用。
-  Click Events：点击按钮时响应的函数数量
 
   var eventHandler = new cc.Component.EventHandler();
   eventHandler.target = this.node;//Node 目标节点

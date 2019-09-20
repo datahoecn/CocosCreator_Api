@@ -43,7 +43,6 @@ PageView
   Size Mode：设置每个页面的大小类型，
     Free 自由类型，即每个页面大小可以不一样
     Unified 统一类型，即每个页面大小需一样。
-  PageView 的事件回调有两个参数，第一个参数是 PageView 本身，第二个参数是 PageView 的事件类型。
 
 content 中的每个子节点为一个单独页面，该每个页面的大小为 PageView 节点的大小
 

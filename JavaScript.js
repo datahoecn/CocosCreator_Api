@@ -199,6 +199,7 @@ class Person {
 				}
 			}
 	匿名函数//作为一个参数或返回值
+		// 为了方便调试，会为匿名函数添加一个名字
 		setTimeout 中的参数
 			var timer = setTimeout(function(){},1000);
 		数组中的参数
@@ -212,7 +213,7 @@ class Person {
 		作为返回值
 			function add() {
 				var a = 10;
-				return function() {
+				return function() {// return function bar() {
 					return a + 20
 				}
 			}
