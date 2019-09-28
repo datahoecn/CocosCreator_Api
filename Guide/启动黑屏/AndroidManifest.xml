@@ -1,63 +1,28 @@
-hideNativeSplash() {
-	if (CC_JSB) {
-		if (cc.sys.os == cc.sys.OS_ANDROID) {
-			jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity", "hideSplash", "()V");
+initGame.js
+	hideNativeSplash() {
+		if (CC_JSB) {
+			if (cc.sys.os == cc.sys.OS_ANDROID) {
+				jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity", "hideSplash", "()V");
+			}
 		}
 	}
-}
 
-start() {
-	this.scheduleOnce(() => {
-			this.hideNativeSplash();
-	}, 1);
-}
+	start() {
+		this.scheduleOnce(() => {
+				this.hideNativeSplash();
+		}, 1);
+	}
 
 
 网站
-https://forum.cocos.com/t/cocos-creator-android-2/83154
+	https://forum.cocos.com/t/cocos-creator-android-2/83154
 
-		
-		<!-- 纯色背景主题的 Activity -->
-		
-		<!--<activity-->
-		<!--android:name="org.cocos2dx.javascript.BgSplashActivity"-->
-		<!--android:configChanges="orientation|keyboardHidden|screenSize"-->
-		<!--android:label="@string/app_name"-->
-		<!--android:launchMode="singleTask"-->
-		<!--android:screenOrientation="portrait"-->
-		<!--android:taskAffinity=""-->
-		<!--android:theme="@style/BgSplashStyle"-->
-		<!--android:usesCleartextTraffic="true"-->
-		<!--tools:targetApi="m" >-->
-		<!--<intent-filter >-->
-		<!--<action android:name="android.intent.action.MAIN" />-->
-		<!--<action android:name="android.intent.action.VIEW" />-->
-		<!---->
-		<!--<category android:name="android.intent.category.LAUNCHER" />-->
-		<!--</intent-filter >-->
-		<!--</activity >-->
-		
-		<!-- 图片背景主题的 Activity -->
-		
-		<!--<activity-->
-		<!--android:name="org.cocos2dx.javascript.ImageSplashActivity"-->
-		<!--android:configChanges="orientation|keyboardHidden|screenSize"-->
-		<!--android:label="@string/app_name"-->
-		<!--android:launchMode="singleTask"-->
-		<!--android:screenOrientation="portrait"-->
-		<!--android:taskAffinity=""-->
-		<!--android:theme="@style/ImageSplashStyle"-->
-		<!--android:usesCleartextTraffic="true"-->
-		<!--tools:targetApi="m" >-->
-		<!--<intent-filter >-->
-		<!--<action android:name="android.intent.action.MAIN" />-->
-		<!--<action android:name="android.intent.action.VIEW" />-->
-		<!---->
-		<!--<category android:name="android.intent.category.LAUNCHER" />-->
-		<!--</intent-filter >-->
-		<!--</activity >-->
-		
-		<!-- Slogan + 背景主题的 Activity -->
-		android:name="org.cocos2dx.javascript.SloganSplashActivity"
-		android:theme="@style/SloganSplashStyle"
-			
+纯色背景
+    android:theme="@style/BgSplashStyle"
+    参考 BgSplashActivity.java
+图片背景
+	android:theme="@style/ImageSplashStyle"
+	参考 ImageSplashActivity.java
+纯色 + 图片
+	android:theme="@style/SloganSplashStyle"
+	参考 SloganSplashActivity.java

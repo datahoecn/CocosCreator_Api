@@ -1,3 +1,23 @@
+CommonJS模块规范
+	每个文件是一个模块, module 变量代表当前模块, 它的exports属性（即module.exports）是对外的接口
+	require方法用于加载模块
+	module.exports = {};//example.js
+	var example = require('example.js');
+
+ES6模块规范
+	export function sum(x, y, z) {
+	    return x+y+z;
+	}
+	export function multiply(x, y) {
+	    return x*y;
+	}
+	export default function () {
+	    alert("default module called!");
+	};
+	import {ModuleA, ModuleB} from "modules"; 
+	import Default from 'modules2';
+
+
 取值范围为 0 ~ 1 之间
 value < 0 ? 0 : value < 1 ? value : 1;
 value < min_inclusive ? min_inclusive : value < max_inclusive ? value : max_inclusive;

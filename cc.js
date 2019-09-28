@@ -1,3 +1,6 @@
+
+cc.assert(locator, 'locator string is null');
+
 CC_EDITOR   是否为编辑器环境
 CC_PREVIEW  是否为预览环境
 CC_JSB  是否为JSB环境
