@@ -1,3 +1,11 @@
+
+粒子资源（ParticleSystem）
+		粒子使用的 png 贴图文件或 base64 格式的内置图片文件可能会有不正确的预乘信息，
+		导致渲染出的粒子不能正确显示透明区域。如果出现这种情况，
+		请手动修改粒子 plist 文件中的 blendFuncSource 属性到下面的值：
+			<key>blendFuncSource</key>
+    		<integer>770</integer>
+    		
 粒子特效
 properties: {
         particle: cc.Node,

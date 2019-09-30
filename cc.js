@@ -1,6 +1,31 @@
 
-cc.assert(locator, 'locator string is null');
 
+资源属性的声明
+    //cc.Vec2是类型，cc.v2只是一个创建二维向量简便写法
+    pos  : cc.v2(10, 20),
+    pos: {
+        default: null,
+        type: cc.Vec2
+    }
+    color: new cc.Color(255, 255, 255, 128)
+    color: cc.color(0,0,0,255)          
+    size : cc.size(0,0)  
+
+    cc.Vec2
+    cc.Color
+    cc.Rect
+    cc.Boolean
+    cc.String
+    cc.Float
+    cc.Integer
+
+    onLoad: function () {
+        var spriteFrame = this.spriteFrame;
+        var texture = this.texture;
+        //通过 Texture rect rotated offset 和 originalSize 设置 SpriteFrame
+        spriteFrame.setTexture(texture);
+    }
+    
 CC_EDITOR   是否为编辑器环境
 CC_PREVIEW  是否为预览环境
 CC_JSB  是否为JSB环境

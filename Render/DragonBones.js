@@ -1,4 +1,12 @@
 
+
+骨骼动画资源（DragonBones）
+        DragonBones 骨骼动画资源有：
+        .json 骨骼数据
+        .json 图集数据
+        .png 图集纹理
+
+        
 Dragon Asset    骨骼信息数据，包含了骨骼信息（绑定骨骼动作，slots，渲染顺序，attachments，皮肤等等）和动画，但不持有任何状态。
                 多个 ArmatureDisplay 可以共用相同的骨骼数据。
                 可拖拽 DragonBones 导出的骨骼资源到这里

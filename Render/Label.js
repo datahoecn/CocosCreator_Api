@@ -1,4 +1,10 @@
 
+艺术数字资源 (LabelAtlas)
+	艺术数字资源 是一种用户自定义的资源，它可以用来配置艺术数字字体的属性
+	新建 -> 艺术数字配置
+	使用艺术数字资源
+	新建一个 Label 组件，然后将新建好的艺术数字资源拖拽到节点的 Label 组件的 Font 属性上即可
+
 string 			String 标签显示的文本内容。
 horizontalAlign Label.HorizontalAlign.LEFT CENTER RIGHT 文本内容的水平对齐方式。
 verticalAlign 	Label.VerticalAlign.TOP CENTER BOTTOM 文本内容的垂直对齐方式。

@@ -1,3 +1,10 @@
+
+骨骼动画资源（Spine）
+		骨骼动画所需资源有：
+			.json 骨骼数据
+			.png 图集纹理
+			.txt/.atlas 图集数据
+			
 sp.Skeleton 组件
 	Skeleton Data：骨骼动画文件。
 	Default Skin：默认的身体部件套装名称，这里形象地称为“皮肤”，如果 Spine 中有多套皮肤信息，我们可以跟据需求为骨骼动画更换不同的皮肤套装，从而实现换装效果。

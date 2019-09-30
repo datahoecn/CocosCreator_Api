@@ -1,3 +1,35 @@
+JSON 资源
+        组件关联一个 JSON：
+         // 声明
+        npcList: {
+            default: null,
+            type: cc.JsonAsset,
+        },
+
+        // 读取
+        var json = this.npcList.json;
+        loadNpc(json);
+        动态加载：
+        cc.loader.loadRes('configs/npc', function (err, jsonAsset) {
+            loadNpc(jsonAsset.json);
+        });
+
+文本资源
+        如 .txt, .plist, .xml, .json, .yaml, .ini, .csv, .md，都会导入为 cc.TextAsset。
+        组件关联一个 TextAsset：
+        // 声明
+        file: {
+            default: null,
+            type: cc.TextAsset,
+        },
+
+        // 读取
+        var text = this.file.text;
+        动态加载：
+        cc.loader.loadRes(url, function (err, file) {
+            cc.log(file.text);
+        });
+
 动态加载资源
     if (err) {
         cc.log('Error url [' + err + ']');
@@ -49,215 +81,13 @@
     //通过 id（通常是资源 url）来释放一个资源或者一个资源数组
     cc.loader.release(deps);
 
-const i18n = require('i18n');
-
-cc.Class({
-    extends: cc.Component,
-
-    properties: {
-        showWindow: cc.Node,
-        loadAnimTestPrefab: cc.Prefab,
-        loadTips: cc.Label,
-        loadList: {
-            default: [],
-            type: cc.Node
-        }
-    },
-
-    // use this for initialization
-    onLoad: function () {
-        // cur load Target
-        this._curType = "";
-        this._lastType = "";
-        this._curRes = null;
-        this._btnLabel = null;
-        this._audioSource = null;
-        this._isLoading = false;
-        //D:\Documents\NewProject_1\assets\resources\test_assets
-        this._urls = {
-            Audio: "test_assets/audio",//audio.mp3
-            Txt: "test_assets/text",//text.txt
-            Texture: "test_assets/PurpleMonster",//PurpleMonster.png
-            Font: "test_assets/font",//font.fnt
-            Plist: "test_assets/atom.plist",//atom.plist 有无后缀都可
-            SpriteFrame: "test_assets/image",//image.png
-            Prefab: "test_assets/prefab",//prefab.prefab
-            Animation: "test_assets/sprite-anim",//sprite-anim.anim
-            Scene: "test_assets/scene",//scene.fire
-            Spine: "spineboy/spineboy",//spineboy.json
-            CORS: "http://tools.itharbors.com/res/logo.png",//必须有后缀
-        };
-        // registered event
-        this._onRegisteredEvent();
-    },
-
-    _onRegisteredEvent: function () {
-        for (var i = 0; i < this.loadList.length; ++i) {
-            this.loadList[i].on(cc.Node.EventType.TOUCH_END, this._onClick.bind(this));
-        }
-    },
-
-    _onClick: function (event) {
-        if (this._isLoading) {
-            return;
-        }
-
-        this._onClear();
-
-        this._curType = event.target.name.split('_')[1];
-        if (this._lastType !== "" && this._curType === this._lastType) {
-            this._onShowResClick(event);
-            return;
-        }
-
-        if (this._btnLabel) {
-            this._btnLabel.textKey = i18n.t("cases/05_scripting/07_asset_loading/AssetLoading.js.1") + this._lastType;
-        }
-
-        this._lastType = this._curType;
-
-        this._btnLabel = event.target.getChildByName("Label").getComponent("cc.Label");
-
-        this.loadTips.textKey = this._curType + " Loading....";
-        this._isLoading = true;
-
-        this._load();
-    },
-
-    _load: function () {
-        var url = this._urls[this._curType];
-        var loadCallBack = this._loadCallBack.bind(this);
-        switch (this._curType) {
-            case 'SpriteFrame':
-                // specify the type to load sub asset from texture's url
-                cc.loader.loadRes(url, cc.SpriteFrame, loadCallBack);
-                break;
-            case 'Spine':
-                // specify the type to avoid the duplicated name from spine atlas
-                cc.loader.loadRes(url, sp.SkeletonData, loadCallBack);
-                break;
-            case 'Font':
-                cc.loader.loadRes(url, cc.Font, loadCallBack);
-                break;
-            case 'Plist':
-                cc.loader.loadRes(url, cc.ParticleAsset, loadCallBack);
-                break;
-            case 'Animation':
-            case 'Prefab':
-            case 'Scene':
-            case 'Texture':
-            case 'Txt':
-            case 'Audio':
-                cc.loader.loadRes(url, loadCallBack);
-                break;
-            case 'CORS':
-                cc.loader.load(url, loadCallBack);
-                this.loadTips.textKey = "CORS image should report texImage2D error under WebGL and works ok under Canvas"
-                break;
-            default:
-                cc.loader.load(url, loadCallBack);
-                break;
-        }
-    },
-
-    _loadCallBack: function (err, res) {
-        this._isLoading = false;
-        if (err) {
-            cc.log('Error url [' + err + ']');
-            return;
-        }
-        this._curRes = res;
-        if (this._curType === "Audio") {
-            this._btnLabel.textKey = i18n.t("cases/05_scripting/07_asset_loading/AssetLoading.js.2");
-        }
-        else {
-            this._btnLabel.textKey = i18n.t("cases/05_scripting/07_asset_loading/AssetLoading.js.3");
-        }
-        this._btnLabel.textKey += this._curType;
-        this.loadTips.textKey = this._curType + " Loaded Successfully!";
-    },
-
-    _onClear: function () {
-        this.showWindow.removeAllChildren(true);
-        if (this._audioSource && this._audioSource instanceof cc.AudioSource) {
-            this._audioSource.stop();
-        }
-    },
-
-    _onShowResClick: function (event) {
-        if (this._curType === "Scene") {
-            cc.director.runScene(this._curRes.scene);
-            cc.loader.releaseAsset(this._curRes);
-            this._curRes = null;
-
-            return;
-        }
-        this._createNode(this._curType, this._curRes);
-    },
-
-    _createNode: function (type, res) {
-        this.loadTips.textKey = "";
-        var node = new cc.Node("New " + type);
-        node.setPosition(0, 0);
-        var component = null;
-        switch (this._curType) {
-            case "SpriteFrame":
-                component = node.addComponent(cc.Sprite);
-                component.spriteFrame = res;
-                break;
-            case "Texture":
-            case "CORS":
-                component = node.addComponent(cc.Sprite);
-                component.spriteFrame = new cc.SpriteFrame(res);
-                break;
-            case "Audio":
-                component = node.addComponent(cc.AudioSource);
-                component.clip = res;
-                component.play();
-                this._audioSource = component;
-                this.loadTips.textKey = i18n.t("cases/05_scripting/07_asset_loading/AssetLoading.js.4");
-                break;
-            case "Txt":
-                component = node.addComponent(cc.Label);
-                component.lineHeight = 40;
-                component.string = res;
-                break;
-            case "Font":
-                component = node.addComponent(cc.Label);
-                component.font = res;
-                component.lineHeight = 40;
-                component.string = "This is BitmapFont!";
-                break;
-            case "Plist":
-                component = node.addComponent(cc.ParticleSystem);
-                component.file = res;
-                component.resetSystem();
-                break;
-            case "Prefab":
-                var prefab = cc.instantiate(res);
-                prefab.parent = node;
-                prefab.setPosition(0, 0);
-                break;
-            case "Animation":
-                var loadAnim = cc.instantiate(this.loadAnimTestPrefab);
-                loadAnim.parent = node;
-                loadAnim.setPosition(0, 0);
-                var AanimCtrl = loadAnim.getComponent(cc.Animation);
-                AanimCtrl.addClip(res);
-                AanimCtrl.play(res.name);
-                break;
-            case "Spine":
-                component = node.addComponent(sp.Skeleton);
-                component.skeletonData = res;
-                component.animation = "walk";
-                node.y = -248;
-                break;
-        }
-        this.showWindow.addChild(node);
-    }
-});
-
-
+cc.director.preloadScene("main", (completedCount, totalCount, item) => {            
+    let p = completedCount/totalCount;
+    this.progress_js.progress = p;
+    this.progress_lb.string = parseInt(p * 100) + '%';
+},() => {
+    cc.director.loadScene("main"); 
+});  
 
 
 

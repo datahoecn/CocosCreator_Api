@@ -9,12 +9,11 @@ properties
 	node.scaleX 			Number 节点 X 轴缩放。
 	node.skewX 				Number 该节点 X 轴倾斜角度。
 	node.opacity 			Number 节点透明度，默认值为 255。
-	node.color 				new cc.Color(255, 255, 255);	Color 节点颜色。
+	node.color 				new cc.Color(255, 255, 255, 255);	Color 节点颜色。
 							cc.Color.RED WHITE BLACK TRANSPARENT(透明) GRAY(灰色) GREEN(绿色) BLUE(蓝色) YELLOW(黄色) ORANGE(橙色) CYAN(青色) MAGENTA(品红色)
 	node.anchorX 			Number 节点 X 轴锚点位置。
 	node.width 				Number 节点宽度。
 	node.height 			Number 节点高度。
-	node.zIndex 			Number zIndex 是用来对节点进行排序的关键属性，它决定一个节点在兄弟节点之间的位置。
 	node.cascadeOpacity 	Boolean 节点的不透明度值是否影响其子节点，默认值为 true。
 	node.isValid 			Boolean 表示该对象是否可用（被 destroy 后将不可用）。
 	node.name 				String 该节点名称。
@@ -47,16 +46,8 @@ method
 	stopAction 			var action = cc.scaleTo(0.2, 1, 0.6); node.stopAction(action);停止并移除指定的动作。
 	stopActionByTag 	node.stopAction(1); 停止并且移除指定标签的动作。
 	getActionByTag 		var action = node.getActionByTag(1); 通过标签获取指定动作。
-	getPosition 		node.getPosition() 获取节点在父节点坐标系中的位置（x, y）。
-	setPosition 		node.setPosition(cc.v2(0, 0)); 设置节点在父节点坐标系中的位置。
-	getScale 			node.getScale() 获取节点的缩放。
-	setScale 			node.setScale(cc.v2(1, 1)) 设置节点的缩放比例，默认值为 1.0。
-	setRotation 		参数:Number 设置该节点以局部坐标系 Z 轴为轴进行旋转的角度。
-	getRotation 		获取该节点以局部坐标系 Z 轴为轴进行旋转的角度。
 	getContentSize 		node.getContentSize() 获取节点自身大小，不受该节点是否被缩放或者旋转的影响。
 	setContentSize 		node.setContentSize(cc.size(100, 100)); 设置节点原始大小，不受该节点是否被缩放或者旋转的影响。
-	getAnchorPoint 		node.getAnchorPoint() 获取节点锚点，用百分比表示。
-	setAnchorPoint 		node.setAnchorPoint(cc.v2(1, 1)); 设置锚点的百分比。
 	convertToNodeSpace 	var newVec2 = node.convertToNodeSpace(cc.v2(100, 100)); 将一个点转换到节点 (局部) 坐标系，并加上锚点的坐标。
 	convertToWorldSpace var newVec2 = node.convertToWorldSpace(cc.v2(100, 100)); 将一个相对于节点左下角的坐标位置转换到世界空间坐标系。
 	convertToNodeSpaceAR var newVec2 = node.convertToNodeSpaceAR(cc.v2(100, 100)); 将一个点转换到节点 (局部) 空间坐标系，这个坐标系以锚点为原点。
@@ -67,8 +58,6 @@ method
 	getBoundingBoxToWorld var newRect = node.getBoundingBoxToWorld(); 返回节点在世界坐标系下的对齐轴向的包围盒（AABB）。
 	addChild 			node.addChild(newNode, 1, "node"); 添加子节点，并且可以修改该节点的 局部 Z 顺序和名字。
 	cleanup 			node.cleanup(); 停止所有正在播放的动作和计时器。
-	getParent 			var parent = this.node.getParent(); 获取该节点的父节点。
-	setParent 			node.setParent(newNode); 设置该节点的父节点。
 	attr 				var attrs = { key: 0, num: 100 }; node.attr(attrs);属性配置函数。在 attrs 的所有属性将被设置为节点属性
 	getChildByUuid 		var child = node.getChildByUuid(uuid); 通过 uuid 获取节点的子节点。
 	getChildByName 		var child = node.getChildByName("Test Node"); 通过名称获取节点的子节点。
@@ -106,22 +95,11 @@ method
 	var node = new cc.Node('Sprite');
 
 克隆已有节点 创建预制节点
-	createEnemyPlane: function () {
-	  var ePlane = cc.instantiate(this.EnemyPlanePrefab);
-	  var EPlane = require("EnemyPlane");
-	  var EPComp = ePlane.getComponent(EPlane);
-	  ePlane.parent = this.node;
-	  ePlane.setPosition(cc.v2(x, y));
-	  EPComp.initInfo(x,y,....);
-	}
+	var ePlane = cc.instantiate(this.EnemyPlanePrefab);
+	
 销毁节点
 	//销毁节点并不会立刻被移除，而是在当前帧逻辑更新结束后，统一执行
-	start: function () {
-	    // 5 秒后销毁目标节点
-	    setTimeout(function () {
-	      this.target.destroy();
-	    }.bind(this), 5000);
-	},
+	this.target.destroy();
 	//判断当前节点是否已经被销毁
 	cc.isValid(this.target)
 
@@ -129,7 +107,6 @@ method
 	var v = cc.v2(10, 10);//向量减法，并返回新结果。
 	v.sub(cc.v2(5, 5));      // return Vec2 {x: 5, y: 5};
 
-	var v = cc.v2(10, 10);//返回该向量的长度。
 根据两点位置计算两点之间距离
     var dist = this.node.position.sub(playerPos).mag();
 
@@ -144,10 +121,8 @@ cc.Node.EventType.TOUCH_MOVE		'touchmove'
 cc.Node.EventType.TOUCH_END			'touchend'
 cc.Node.EventType.TOUCH_CANCEL		'touchcancel'
 
-this.node.on(cc.Node.EventType.SIZE_CHANGED, this._updateRenderData, this);
-this.node.on(cc.Node.EventType.ANCHOR_CHANGED, this._updateRenderData, this);
-this.node.off(cc.Node.EventType.SIZE_CHANGED, this._updateRenderData, this);
-this.node.off(cc.Node.EventType.ANCHOR_CHANGED, this._updateRenderData, this);
+cc.Node.EventType.SIZE_CHANGED
+cc.Node.EventType.ANCHOR_CHANGED
 
 
 

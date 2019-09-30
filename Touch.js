@@ -1,4 +1,28 @@
 
+
+this.node.on(cc.Node.EventType.TOUCH_START, (event) => {
+    // this._targetNode接受点击的节点
+    //目标节点不存在，拦截
+    if (!this._targetNode) {
+        this.node._touchListener.setSwallowTouches(true);
+        return;
+    }
+
+    //目标区域存在，击中放行
+    let rect = this._targetNode.getBoundingBoxToWorld();
+    if (rect.contains(event.getLocation())) {
+        this.node._touchListener.setSwallowTouches(false);
+        cc.log('未命中目标节点，放行')
+    } else {
+        this.node._touchListener.setSwallowTouches(true);
+        cc.log('未命中目标节点，拦截');
+    }
+}, this);
+// 仅接收一次点击事件
+this.node.once(cc.Node.EventType.TOUCH_END, () => {
+
+});
+
 监听者通知分发者这里有代码对此事件感兴趣
 出事后由发射者通知分发者
 分发者根据当前的监听情况，把事件通知所有针对此事件的监听者
