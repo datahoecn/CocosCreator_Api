@@ -1,4 +1,10 @@
 
+onLoad () {
+    cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, this._onKeyPressed, this);
+},
+onDestroy () {
+    cc.systemEvent.off(cc.SystemEvent.EventType.KEY_UP, this._onKeyPressed, this);
+},
 
 this.node.on(cc.Node.EventType.TOUCH_START, (event) => {
     // this._targetNode接受点击的节点
