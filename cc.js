@@ -1,4 +1,6 @@
 
+// this 是 object
+this[name + "_prefab"];
 
 资源属性的声明
     //cc.Vec2是类型，cc.v2只是一个创建二维向量简便写法

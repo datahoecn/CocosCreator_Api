@@ -1,3 +1,8 @@
+
+object
+	var a = {"aaa": []};
+	a.hasOwnProperty("aaa");
+
 CommonJS模块规范
 	每个文件是一个模块, module 变量代表当前模块, 它的exports属性（即module.exports）是对外的接口
 	require方法用于加载模块
