@@ -15,6 +15,16 @@ find(value, cb) {
         }
     });
 },
+_focusToNode(node) {
+        this._mask._graphics.clear();
+        let rect = node.getBoundingBoxToWorld();
+        let p = this.node.convertToNodeSpaceAR(rect.origin);   
+        rect.x = p.x;
+        rect.y = p.y;
+
+        this._mask._graphics.fillRect(rect.x, rect.y, rect.width, rect.height);
+        return rect;
+    },
 */
 
 /**
