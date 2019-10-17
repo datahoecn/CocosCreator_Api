@@ -1,9 +1,3 @@
-var a = []
-for (var i = 0; i < 100; i++) {
-    var index = Math.floor(Math.random() * 4);
-    console.log(index)
-}
-
-
-
-   
+var a =[1,2,3]
+var b = a.lastIndexOf(1);
+console.log(b)
