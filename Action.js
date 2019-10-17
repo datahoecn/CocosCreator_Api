@@ -1,3 +1,14 @@
+
+// 范例使用节点上组件 this 可以暂停，文档说使用 node
+cc.director.getActionManager().resumeTarget(this);
+cc.director.getActionManager().pauseTarget(this);
+
+resumeTarget:function (target) {
+        var element = this._hashTargets[target._id];
+        if (element)
+            element.paused = false;
+    },
+
 停止动作
     node.stopAction(action);
     node.stopAllActions();

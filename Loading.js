@@ -1,3 +1,24 @@
+当加载新场景时，旧场景的资源根据旧场景是否勾选“Auto Release Assets”，
+将会被释放或者保留。 而使用 cc.loader.loadRes 或 cc.loader.loadResDir 动态加载的资源，
+则不受场景设置的影响，默认不自动释放。
+loader
+    method
+        getXMLHttpRequest   Gets a new XMLHttpRequest instance.
+        load                Load resources with a progression callback and a complete callback....
+        loadRes             Load resources from the "resources" folder inside the "assets" folder of your project.
+        loadResArray        This method is like loadRes except that it accepts array of url.
+        loadResDir          Load all assets in a folder inside the "assets/resources" folder of your project.
+        getRes              Get resource data by id. 
+        getDependsRecursively   获取某个已经加载好的资源的所有依赖资源，包含它自身，并保存在数组中返回。
+        release                 通过 id（通常是资源 url）来释放一个资源或者一个资源数组。
+        releaseAsset            通过资源对象自身来释放资源。
+        releaseRes              释放通过 loadRes 加载的资源。
+        releaseResDir           释放通过 loadResDir 加载的资源。
+        releaseAll              释放所有资源。
+        setAutoRelease          设置当场景切换时是否自动释放资源。
+        setAutoReleaseRecursively 设置当场景切换时是否自动释放资源及资源引用的其它资源。
+        isAutoRelease           返回指定的资源是否有被设置为自动释放，不论场景的“Auto Release Assets”如何设置。
+
 JSON 资源
         组件关联一个 JSON：
          // 声明
@@ -101,8 +122,6 @@ Cocos 提供了专门处理动态加载的类 cc.loader
 
 可以加载本地资源，也可以加载远程的网络资源
 
-所有动态加载的资源都需放在项目的 resources 目录下
-如果不存在，可手动创建该目录，并将资源放在其中。
 
 加载单个文件
     //在本地，使用 loadRes 方法处理

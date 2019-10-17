@@ -26,3 +26,27 @@ export default class NodeMgr {
         }
     }
 }
+
+js
+var nodeMgr = {
+    _pool: new cc.NodePool('boxs'),
+    prefab: null,
+    putNode: function(node) {
+        cc.log(this._pool.size());
+        if(node){
+            this._pool.put(node);
+        } 
+    },
+    getNode: function () {
+        let node = null;
+        if (this._pool.size() > 0) {
+            node = this._pool.get();
+            node.stopAllActions();
+        } else {
+            node = cc.instantiate(this.prefab);
+        }
+        return node;
+    },
+}
+
+module.exports = nodeMgr;

@@ -172,53 +172,14 @@ TiledMap
 	propertie:
 		只有 Tmx Asset 编辑框，用来选择 Tiled Map 编辑器制作的地图文件，后缀名为 tmx
 
-properties
-	tmxAsset TiledMapAsset TiledMap 资源。
-	__eventTargets Array Register all related EventTargets,...
-
-method
-	getMapSize 获取地图大小。							Size 			let mapSize = tiledMap.getMapSize();
-	getTileSize 获取地图背景中 tile 元素的大小。		Size 			let tileSize = tiledMap.getTileSize();
-	getMapOrientation 获取地图方向。					Number			let mapOrientation = tiledMap.getMapOrientation();
-	getObjectGroups 获取所有的对象层。					TiledObjectGroup[]		let objGroups = titledMap.getObjectGroups();
-	getObjectGroup 获取指定的 TMXObjectGroup。		TiledObjectGroup	let group = titledMap.getObjectGroup("Players");
-	getProperties 获取地图的属性。						Object[]		let properties = titledMap.getProperties();
-	getLayers 返回包含所有 layer 的数组。				TiledLayer[]	let layers = titledMap.getLayers();
-	getLayer 获取指定名称的 layer。					TiledLayer		let layer = titledMap.getLayer("Player");
-	getProperty 通过属性名称，获取指定的属性。			String			let property = titledMap.getProperty("info");
-	getPropertiesForGID 通过 GID ，获取指定的属性。	Object 			let properties = titledMap.getPropertiesForGID(GID);
-
-
-TiledLayer
-
-properties
-	__eventTargets Array Register all related EventTargets 注册所有相关的事件目标
-
-method
-	getLayerName 	String	let layerName = tiledLayer.getLayerName(); 获取层的名称。
-	SetLayerName 	tiledLayer.setLayerName("New Layer"); 设置层的名称
-	getProperty 	Any		let property = tiledLayer.getProperty("info"); 获取指定属性名的值。
-	getPositionAt 	Vec2	let pos = tiledLayer.getPositionAt(cc.v2(0, 0)); 获取指定 tile 的像素坐标。
-							let pos = tiledLayer.getPositionAt(0, 0);
-	setTileGIDAt 	tiledLayer.setTileGIDAt(tileGid, 10, 10, flag) // tileGid 需要加一
-																	// flag 最好不填
-													
-	getTileGIDAt 	Number	let tileGid = tiledLayer.getTileGIDAt(0, 0);// tileGid 需要减一
-						通过给定的 tile 坐标、flags（可选）返回 tile 的 GID. 
-				 		如果它返回 0，则表示该 tile 为空。
-				 							
-	getTiledTileAt 	cc.TiledTile	let tile = tiledLayer.getTiledTileAt(100, 100, true);
-					通过指定的 tile 坐标获取对应的 TiledTile。
-					如果指定的坐标没有 tile，第三个参数为true 那么将会在指定的坐标创建一个新的 TiledTile 。
-					在渲染这个 tile 的时候，将会使用 TiledTile 的节点的旋转、缩放、位移、颜色属性。
-											
-	setTiledTileAt 将指定的 tile 坐标替换为指定的 TiledTile。	
-					参数列表 x Integer y Integer tiledTile cc.TiledTile
-	getTexture 获取纹理。						Texture2D	let texture = tiledLayer.getTexture();
-	setTexture 设置纹理。						tiledLayer.setTexture(texture);
-	getLayerSize 获得层大小。					Size 	let size = tiledLayer.getLayerSize();
-	getMapTileSize 获取 tile 的大小( tile 的大小可能会有所不同)。		Size  let mapTileSize = tiledLayer.getMapTileSize();
-	getTileSet 获取 layer 的 info。									TMXTilesetInfo	let tileset = tiledLayer.getTileSet();
-	setTileSet 设置 layer 的 info。									tiledLayer.setTileSet(tileset);
-	getLayerOrientation 获取 Layer 方向(同地图方向)。					Number	let orientation = tiledLayer.getLayerOrientation();
-	getProperties 获取 layer 的属性   	   							Array	let properties = tiledLayer.getProperties();
+    method
+    	getMapSize 获取地图大小。							Size 			let mapSize = tiledMap.getMapSize();
+    	getTileSize 获取地图背景中 tile 元素的大小。		Size 			let tileSize = tiledMap.getTileSize();
+    	getMapOrientation 获取地图方向。					Number			let mapOrientation = tiledMap.getMapOrientation();
+    	getObjectGroups 获取所有的对象层。					TiledObjectGroup[]		let objGroups = titledMap.getObjectGroups();
+    	getObjectGroup 获取指定的 TMXObjectGroup。		TiledObjectGroup	let group = titledMap.getObjectGroup("Players");
+    	getProperties 获取地图的属性。						Object[]		let properties = titledMap.getProperties();
+    	getLayers 返回包含所有 layer 的数组。				TiledLayer[]	let layers = titledMap.getLayers();
+    	getLayer 获取指定名称的 layer。					TiledLayer		let layer = titledMap.getLayer("Player");
+    	getProperty 通过属性名称，获取指定的属性。			String			let property = titledMap.getProperty("info");
+    	getPropertiesForGID 通过 GID ，获取指定的属性。	Object 			let properties = titledMap.getPropertiesForGID(GID);
