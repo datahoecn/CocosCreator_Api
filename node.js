@@ -111,18 +111,7 @@ method
     var dist = this.node.position.sub(playerPos).mag();
 
 
-node.emit(type, detail)：通知所有监听 type 事件的监听器，可以发送一个附加参数。
-node.dispatchEvent(event)：发送一个事件给它的监听器，支持冒泡。
-node.on(type, callback, target)：持续监听 node 的 type 事件。
-node.once(type, callback, target)：监听一次 node 的 type 事件。
-node.off(type, callback, target)：取消监听所有 type 事件或取消 type 的某个监听器（用 callback 和 target 指定）。
-cc.Node.EventType.TOUCH_START		'touchstart'
-cc.Node.EventType.TOUCH_MOVE		'touchmove'
-cc.Node.EventType.TOUCH_END			'touchend'
-cc.Node.EventType.TOUCH_CANCEL		'touchcancel'
 
-cc.Node.EventType.SIZE_CHANGED
-cc.Node.EventType.ANCHOR_CHANGED
 
 
 

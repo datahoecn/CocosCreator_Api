@@ -10,11 +10,8 @@
 	number  	var height : number = 6;
 	string		var name : string = "bob";
 	array		var list : number[] = [1,2,3]; 
-				var list : Array<number> = [1, 2, 3];
-
 	enum		enum Color {Red, Green, Blue};//enum类型是为了给一个数字集合更友好的命名
 				var c : Color = Color.Green;
-
 	any 		var notSure : any = 4;//any类型可以表示任意JavaScript值，只进行最小化静态检查
 				notSure = "maybe string instead";
 				notSure = false;//合法行为定义一个布尔类型
@@ -32,8 +29,6 @@
 	var TestVar : null;		//错误，类型错误
 	var TestVar : undefined //错误，找不到undefined
 
-	var:使用var声明的变量保存在最近的函数作用域中或全局作用域中
-	let:使用let声明的变量保存在最近的比函数作用域小的块作用域中或全局作用域中
 	const:会创建一个保存在创建位置作用域中的常量
 
 联合类型
@@ -48,10 +43,12 @@
 类型别名
 	类型别名常用于联合类型
 	使用type关键字声明类型别名
-	type PrimitiveArray = Array<string|number|boolean>;
-	type MyNumber = number;
-	type NgScope = ng.IScope;
-	type Callback = () => void;
+	type aa=number
+	type name=string|number
+	let a:name=123
+	let b:aa=456
+	console.log(a)   //123
+	console.log(b)   //456
 
 环境声明
 	declare var jQuery: (selector: string) => any;
