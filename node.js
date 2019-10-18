@@ -81,7 +81,7 @@ method
 	removeComponent 	node.removeComponent(cc.Sprite); 删除节点上的指定组件，传入参数可以是一个组件构造函数或组件名，也可以是已经获得的组件引用。
 						component.destroy()	如果你已经获得组件引用
 	destroyAllChildren 	node.destroyAllChildren(); 销毁所有子节点，并释放所有它们对其它对象的引用。
-	destroy 			obj.destroy(); 销毁该对象，并释放所有它对其它对象的引用。
+	destroy 			obj.destroy(); 销毁该对象，并释放所有它对其它对象的引用。销毁节点并不会立刻被移除，而是在当前帧逻辑更新结束后，统一执行
 						cc.isValid(obj) 来检查对象是否已被销毁。
 
 
@@ -97,18 +97,7 @@ method
 克隆已有节点 创建预制节点
 	var ePlane = cc.instantiate(this.EnemyPlanePrefab);
 	
-销毁节点
-	//销毁节点并不会立刻被移除，而是在当前帧逻辑更新结束后，统一执行
-	this.target.destroy();
-	//判断当前节点是否已经被销毁
-	cc.isValid(this.target)
 
-向量计算
-	var v = cc.v2(10, 10);//向量减法，并返回新结果。
-	v.sub(cc.v2(5, 5));      // return Vec2 {x: 5, y: 5};
-
-根据两点位置计算两点之间距离
-    var dist = this.node.position.sub(playerPos).mag();
 
 
 

@@ -1,4 +1,6 @@
 
+var size = cc.view.getDesignResolutionSize();
+
 // this 是 object
 this[name + "_prefab"];
 

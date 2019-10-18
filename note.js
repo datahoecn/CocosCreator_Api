@@ -32,24 +32,12 @@ xmlhttp.send();
 // 权重递增
 this.counter +=  this.counter * 1.003;
 
-
 // 获取逻辑树的场景节点
 var currentScene = cc.director.getScene();
 this.mainNode = cc.director.getScene().getChildByName("Canvas");
 
 
-如果项目中的场景很多，随着新场景的切换，内存占用就会不断上升
-除了使用 cc.loader.release 等 API 来精确释放不使用的资源
-我们还可以使用场景的自动释放功能。要配置自动释放
-可以在 资源管理器 中选中所需场景，然后在 属性检查器 中设置“自动释放资源”选项，该项默认关闭。
-
-启用了某个场景的资源自动释放后，如果在脚本中保存了对该场景的资源的“特殊引用”
-当场景切换后，由于资源已经被释放，这些引用可能会变成非法的，有可能引起渲染异常等问题
-为了让这部分资源在场景切换时不被释放，我们可以使用 cc.loader.setAutoRelease 或者 cc.loader.setAutoReleaseRecursively 来保留这些资源。
-
-
 图像资源（Texture）又经常被称作贴图、图片
-
 
 console.trace() 会输出函数调用堆栈
 console.table() 会把一个对象按表格形式输出
