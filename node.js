@@ -69,7 +69,7 @@ method
 						    console.log('Walked through node ' + target.name + ' after walked all children in its sub tree');
 						});
 						默认为 true 表示清理
-	removeFromParent 	node.removeFromParent(false);调用这个 API 时总是传入 false 参数,
+	removeFromParent 	node.removeFromParent(false);通常需要传入一个 false，否则默认会清空节点上绑定的事件和 action 等。
 	removeChild 		node.removeChild(newNode, false); 移除节点中指定的子节点，是否需要清理所有正在运行的行为取决于 cleanup 参数。
 	removeAllChildren 	node.removeAllChildren(false); 移除节点所有的子节点，是否需要清理所有正在运行的行为取决于 cleanup 参数。
 	isChildOf 			node.isChildOf(newNode);参数: parent 是否是指定节点的子节点？
