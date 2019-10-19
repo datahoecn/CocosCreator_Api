@@ -67,7 +67,7 @@ JSON 资源
         return;
     }
 加载 Prefab
-    cc.loader.loadRes("test assets/prefab", function (err, prefab) {
+    cc.loader.loadRes("prefabs/popUp", function (err, prefab) {
         var newNode = cc.instantiate(prefab);
         cc.director.getScene().addChild(newNode);
     });

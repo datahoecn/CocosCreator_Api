@@ -172,16 +172,17 @@ cc.visibleRect.width, cc.visibleRect.height
 读取数据
     cc.sys.localStorage.getItem('gold')
     var userData = JSON.parse(cc.sys.localStorage.getItem('userData'));
-移除键值对
+当我们不再需要一个存储条目时，可以通过下面的接口将其移除
     cc.sys.localStorage.removeItem(key)
 对玩家存档进行加密
-    //选择一个适用的加密算法和第三方库，比如 encryptjs， 将下载好的库文件放入你的项目
+    // 选择一个适用的加密算法和第三方库，比如 encryptjs， 将下载好的库文件放入你的项目
+    // https://www.npmjs.com/package/encryptjs
     var encrypt=require('encryptjs');
     var secretkey= 'open_sesame'; // 加密密钥
     var dataString = JSON.stringify(userData);
     var encrypted = encrypt.encrypt(dataString,secretkey,256);
     cc.sys.localStorage.setItem('userData', encrypted);
-
+    读取
     var cipherText = cc.sys.localStorage.getItem('userData');
     var userData=JSON.parse(encrypt.decrypt(cipherText,secretkey,256));
 
