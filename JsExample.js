@@ -1,5 +1,6 @@
 
 收集参数
+// length 是js函数对象的一个属性值，该值是指 “该函数有多少个必须要传入的参数”，即形参的个数
 function createCurry(func, arity, args) {
     var arity = arity || func.length;
     var args = args || [];

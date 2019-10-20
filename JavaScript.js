@@ -1,4 +1,5 @@
 switch 用来判断的表达式可以是任意类型，而不仅限于整型（C++ 和 Java 要求该表达式必须为整型）
+
 object
 	var a = {"aaa": []};
 	a.hasOwnProperty("aaa");
