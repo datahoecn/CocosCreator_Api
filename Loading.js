@@ -129,6 +129,12 @@ cc.director.preloadScene("main", (completedCount, totalCount, item) => {
     cc.director.loadScene("main"); 
 });  
 
+refreshCallBack : function(event, customEventData){
+    this.playSound("sound/click", false);
+    cc.director.preloadScene('playScene', function () {
+        cc.director.loadScene('playScene');
+    });
+},
 
 
 用cc.loader 加载资源是不会重复加载的，loader中是缓存的，如果之前加载过了之后是不会再加载，而是直接从缓存中调用。

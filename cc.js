@@ -170,7 +170,8 @@ cc.visibleRect.width, cc.visibleRect.height
     //将对象序列化为 JSON 后保存
     cc.sys.localStorage.setItem('userData', JSON.stringify(userData));
 读取数据
-    cc.sys.localStorage.getItem('gold')
+    cc.sys.localStorage.getItem('gold');
+    let tag = parseInt(cc.sys.localStorage.getItem("gunHeroType") || 0);
     var userData = JSON.parse(cc.sys.localStorage.getItem('userData'));
 当我们不再需要一个存储条目时，可以通过下面的接口将其移除
     cc.sys.localStorage.removeItem(key)

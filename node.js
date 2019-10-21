@@ -50,7 +50,7 @@ method
 	setContentSize 		node.setContentSize(cc.size(100, 100)); 设置节点原始大小，不受该节点是否被缩放或者旋转的影响。
 	convertToNodeSpace 	var newVec2 = node.convertToNodeSpace(cc.v2(100, 100)); 将一个点转换到节点 (局部) 坐标系，并加上锚点的坐标。
 	convertToWorldSpace var newVec2 = node.convertToWorldSpace(cc.v2(100, 100)); 将一个相对于节点左下角的坐标位置转换到世界空间坐标系。
-	convertToNodeSpaceAR var newVec2 = node.convertToNodeSpaceAR(cc.v2(100, 100)); 将一个点转换到节点 (局部) 空间坐标系，这个坐标系以锚点为原点。
+		convertToNodeSpaceAR var newVec2 = node.convertToNodeSpaceAR(cc.v2(100, 100)); 将一个点转换到节点 (局部) 空间坐标系，这个坐标系以锚点为原点。
 	convertToWorldSpaceAR var newVec2 = node.convertToWorldSpaceAR(cc.v2(100, 100)); 将节点坐标系下的一个点转换到世界空间坐标系。
 	convertTouchToNodeSpace var newVec2 = node.convertTouchToNodeSpace(touch); 将触摸点转换成本地坐标系中位置。
 	convertTouchToNodeSpaceAR var newVec2 = node.convertTouchToNodeSpaceAR(touch); 转换一个 cc.Touch（世界坐标）到一个局部坐标，该方法基于节点坐标。

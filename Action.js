@@ -157,6 +157,27 @@ cc.sequence(
 
 
 Animation组件
+
+playAni(nameStr, count, dt, isLoop){
+    this.node.stopAllActions();
+    this.node.getComponent(cc.Sprite).spriteFrame = this.bigImg.getSpriteFrame(nameStr + 0);
+    let array = [];
+    for(let i = 0; i < count; i++){
+        array.push(cc.delayTime(dt));
+        array.push(cc.callFunc(() =>{
+            this.node.getComponent(cc.Sprite).spriteFrame = this.bigImg.getSpriteFrame(nameStr + i);
+        }));
+    }
+    
+    if(isLoop){
+        this.node.runAction(cc.repeatForever(cc.sequence(array)));
+    }
+    else{
+        this.node.runAction(cc.sequence(array));
+    }
+},
+this.playAni("heroRun" + this.heroType + "_", 5, 0.06, true);
+
 // 如果间隔超过1帧，那么需要建立N+1个关键帧，其中N为动画图片数量。
 // 最后两帧的内容保持一致，确保最后一张图也能持续指定的时间间隔后才重新开始播放第一帧
     播放

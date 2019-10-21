@@ -1,3 +1,13 @@
+setImgTexture : function(str, node){
+    cc.loader.loadRes(str, cc.SpriteFrame, function (err, spriteFrame) {
+        if (err) {
+            cc.error(err.message || err);
+            return;
+        }
+        node.getComponent(cc.Sprite).spriteFrame = spriteFrame;
+    }.bind(this));
+},
+
     Atlas：设置精灵的图集纹理（导入plist文件），
     表示精灵使用该图集中的某一张图片，作为自己的纹理，可以不设置
 

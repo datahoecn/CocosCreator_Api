@@ -1,4 +1,8 @@
 
+
+this.enemyDieParticle.stopSystem();
+this.enemyDieParticle.resetSystem();
+
 粒子资源（ParticleSystem）
 		粒子使用的 png 贴图文件或 base64 格式的内置图片文件可能会有不正确的预乘信息，
 		导致渲染出的粒子不能正确显示透明区域。如果出现这种情况，

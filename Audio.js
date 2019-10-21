@@ -1,4 +1,15 @@
 
+
+this.playSound("sound/select", false);
+playSound : function(name, isLoop){
+    cc.loader.loadRes(name, cc.AudioClip, function (err, clip) {
+        if(err){
+            return;
+        }
+        let audioID = cc.audioEngine.playEffect(clip, isLoop);
+    });
+},
+
 Web Audio
     通过 Web Audio 方式加载的声音资源，在引擎内是以一个 buffer 的形式缓存的。
     这种方式的优点是兼容性好，问题比较少。缺点是占用的内存资源过多。
