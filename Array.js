@@ -1,3 +1,15 @@
+function New(func) {
+	var res = {};
+	if(func.prototype !== null) {
+		res.__proto__ = func.prototype;
+	}
+	var ret = func.apply(res, Array.prototype.slice.call(arguments, 1));
+	if((typeof ret === "object" || typeof ret === "function") && ret !== null) {
+		return ret;
+	}
+	return res;
+}
+
 javaScript 中数组也是对象
 var objects = [1, "joe", true, null];
 
@@ -43,10 +55,19 @@ reduce		arr.reduce(add);				接受一个函数参数，最后返回一个叠加�
 				return runningTotal + currentValue;
 			}
 reduceRight	与 reduce 顺序相反
-map  		arr.map(curve); 				返回一个新数组，新数组元素是原数组元素使用函数后得到的
-			function curve(grade) {
-				return grade + 5;
-			}
+ 			// map方法第一个参数 回调函数
+ 			// map方法第二个参数是回调函数的this
+ 			// 回调函数第一个参数 表示数组每一项
+ 			// 回调函数第二个参数 表示当前索引值
+ 			// 回调函数第三个参数 表示数组本身
+ 			var array = [1, 2, 3, 4];
+map 		var newArray = array.map(function(item, i, array){
+				// 1 0 [ 1, 2, 3, 4 ] { a: 1 }
+				console.log(item, i ,array, this);
+				return item + 1;
+			}, {a: 1})
+			// newArray [ 2, 3, 4, 5 ]
+
 filter		arr.filter(isEven);				参数是一个返回值为布尔类型的函数，对数组中的每个元素使用该函数，
 											如果元素使用该函数，返回值是true，那么元素成为新数组的元素，
 	

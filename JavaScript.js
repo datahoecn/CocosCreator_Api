@@ -1,3 +1,59 @@
+柯里化
+function createCurry(func, arity, args) {
+	var arity = arity || func.length;
+	var args = args || [];
+	var wrapper = function() {
+		var _args = [].slice.call(arguments);
+		[].push.apply(args, _args);
+		if(_args.length < arity) {
+			arity -= _args.length;
+			return createCurry(func, arity, args);
+		}
+		return func.apply(func, args);
+	}
+	return wrapper;
+}
+
+
+
+function add() {
+	var _args = [].slice.call(arguments);
+	var adder = function() {
+		var _adder = function() {
+			_args.push(...arguments);
+			return _adder;
+		}
+		_adder.toString = function() {
+			return _args.reduce(function(a,b) {
+				return a + b;
+			}) 
+		}
+		return _adder;
+	}
+	return adder(..._args);
+}
+var a = add(1)(2)(3)(4);
+console.log(a + 10)
+
+
+arguments对象是所有（非箭头）函数中都可用的局部变量
+你可以使用arguments对象在函数中引用函数的参数
+第一个参数在索引0处
+arguments[0]
+arguments对象不是一个 Array 。它类似于Array,但除了length属性和索引元素之外没有任何Array属性。
+var args = Array.prototype.slice.call(arguments);
+var args = [].slice.call(arguments);
+var args = (arguments.length === 1 ? [arguments[0]] : Array.apply(null, arguments));
+要确定函数签名中（输入）参数的数量，请使用Function.length属性
+
+function myConcat(separator) {
+  var args = Array.prototype.slice.call(arguments, 1);
+  return args.join(separator);
+}
+// returns "red, orange, blue"
+myConcat(", ", "red", "orange", "blue");
+
+
 switch 用来判断的表达式可以是任意类型，而不仅限于整型（C++ 和 Java 要求该表达式必须为整型）
 
 object
@@ -319,4 +375,6 @@ call,apply和bind方法
 	call()、apply()和bind()都是用来改变函数执行时的上下文，可借助它们实现继承；
 	call()和apply()唯一区别是参数不一样，call()是apply()的语法糖；
 	bind()是返回一个新函数，供以后调用，而apply()和call()是立即调用。
+
+
 	
