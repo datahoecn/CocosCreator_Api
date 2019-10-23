@@ -1,3 +1,60 @@
+
+实例方法
+	构造函数中的方法
+	function Foo() {
+		this.bar = function() {
+		}
+	}
+原型方法
+	通过 prototype 挂载到原型对象上的方法
+	Foo.prototype.bar = function() {
+
+	}
+静态方法
+	挂载在构造函数上的方法
+	静态方法不能通过实例访问，只能通过构造函数来访问
+	常用来实现一些常用的，与具体实例无关的功能
+	Foo.each = function() {
+	}
+
+继承
+	function Student(name, age, grade) {
+		Person.call(this, name, age);
+		this.grade = grade;
+	}
+
+	Student.prototype = Object.create(Person.prototype, {
+		constructor: {
+			value: Student
+		},
+		getGrade: {
+			value: function() {
+				return this.grade;
+			}
+		}
+	})
+
+
+基本类型可以认为是传值赋值
+var a = [1,2,3];
+var b = a;
+b = [4,5,6];
+console.log(a);//[1,2,3];
+console.log(b);//[4,5,6];
+对象类型则是引用赋值，会携带内存地址，相当于指针
+var a = {aa: 1};
+var b = a;
+b.aa = 2;
+console.log(a);//{aa: 2};
+console.log(b);//{aa: 2};
+
+
+所有函数与对象都有一个toSring和valuOf方法
+来自Object.prototype
+
+
+
+
 柯里化
 function createCurry(func, arity, args) {
 	var arity = arity || func.length;
@@ -35,6 +92,10 @@ function add() {
 var a = add(1)(2)(3)(4);
 console.log(a + 10)
 
+var a = [b: 0];
+var c = "b";
+// 当属性名是一个变量时，用中括号
+a[c];
 
 arguments对象是所有（非箭头）函数中都可用的局部变量
 你可以使用arguments对象在函数中引用函数的参数
@@ -87,28 +148,18 @@ value < min_inclusive ? min_inclusive : value < max_inclusive ? value : max_incl
 
 splice() 方法向/从数组中添加/删除项目，然后返回被删除的项目。
 
-当一个对象是原型时，A.constructor 指向构造函数
-当一个对象是构造函数时， B.prototype 指向原型
-当一个对象是实列时，C.__proto__ 指向它的原型
 
-var c = (a, b) => a + b
-等价
-var c = (a, b) => {
-    return a + b
-}
+箭头函数
+	当函数直接被return时，可以省略函数体的括号
+	var c = (a, b) => a + b
 
-实列方法:
-	function Foo() {
-		this.bar = function() {
-		}
+	var c = (a, b) => {
+	    return a + b
 	}
-原型方法:
-	Foo.prototype.bar = function() {
+	箭头函数中的this,就是 声明函数时 所处上下文中的this,它不会被其他方式所改变
+	在箭头函数中，没有arguments对象
 
-	}
-静态方法:
-	Foo.bar = function() {
-	}
+
 
 对象字面量并不会产生自己的作用域
 var obj = {
@@ -227,6 +278,15 @@ Array 对象
 		array.lastIndexOf(item,start)		返回它最后出现的位置
 		array.push(item1, item2, ..., itemX)添加一个或多个元素，并返回新的长度
 		array.reduce(function(total, curValue))将数组元素计算为一个值（从左到右）
+		// 第一次计算，如果initialValue赋值了，prev = initialValue，cur是第一个元素
+					//否则 prev 是第一个元素，cur是第二个元素
+		// 后面计算，prev 是 return 值
+		// index 是索引值，arr 是计算的数组
+		// sum 是最后计算的 return 值
+		var sum = arr.reduce(function(prev, cur, index, arr) {
+		    console.log(prev, cur, index);
+		    return prev + cur;
+		}, initialValue)
 		array.reduceRight(function(total, curValue))将数组元素计算为一个值（从右到左）
 		array.slice(start, end)				选取数组的的一部分，并返回一个新数组。
 		array.sort(sortfunction)			对数组的元素进行排序。
@@ -250,22 +310,30 @@ class Person {
 
 
 解析结构
+	从对象或数组中取值
 	var array = [1,2,3,4];
 	var [c, d] = array;
-	console.log(c) // 3
+	console.log(c) // 1
 
 	var obj = {
 		a: 1,
 		b: 2,
 		c: 3
 	}
-	var {c} = obj;
+	// 如果找不到d，则使用默认值 4
+	var {c,d = 4} = obj;
 	console.log(c) // 3
+
+	// 如果没输入参数，使用默认值
+	var a = function(x = 2, y = 3){
+		console.log(x + y)
+	}
 
 展开运算符
 	//也可展开对象
 	var arr1 = [1, 2, 3];
 	var arr2 = [...arr1, 4, 5, 6];
+
 函数形式
 	函数声明//声明的函数比var声明的变量有更加优先的执行顺序
 		function fn() {
@@ -314,13 +382,28 @@ class Person {
 			})(i);
 		}
 
-`${a} + 11111111`
+${}中可以是变量，也可以是表达式，还可以是一个函数
+// 表达式
+	var a = 1;
+	var b = 2;
+	`add: ${a + b}`
+// 函数
+	var foo = () => {
+		return 1;
+	}
+	`foo: ${foo()}`
+
 
 new 会有如下实现
 	创建（或者说构造）一个全新的对象。
 	这个新对象会被执行[[ 原型]] 连接。
 	这个新对象会绑定到函数调用的this。
 	如果函数没有返回其他对象，那么new 表达式中的函数调用会自动返回这个新对象
+	// PPrototype是原型
+	Person.prototype = {
+		constructor: Person,
+		getName: function() {}
+	}
 	
 	//将构造函数以参数形式传入
 	function New(func) {
@@ -342,8 +425,6 @@ new 会有如下实现
 		return res;
 	}
 		
-break 语句用于跳出循环。
-continue 用于跳过循环中的一个迭代。
 
 __proto__ 属性的作用就是当访问一个对象的属性时，如果该对象内部不存在这个属性，
 			那么就会去它的__proto__属性所指向的那个对象（父对象）里找，一直找，直到__proto__属性的终点null，
@@ -351,29 +432,19 @@ __proto__ 属性的作用就是当访问一个对象的属性时，如果该对�
 prototype 属性的作用就是让该函数所实例化的对象们都可以找到公用的属性和方法，即f1.__proto__ === Foo.prototype。
 constructor 属性的含义就是指向该对象的构造函数，所有函数（此时看成对象了）最终的构造函数都指向Function。
 
+当一个对象是原型时，A.constructor 指向构造函数
+当一个对象是构造函数时， B.prototype 指向原型
+当一个对象是实列时，C.__proto__ 指向它的原型
 
 
-换行符‘\n’和回车符‘\r’
-换行符就是另起一行，回车符就是回到一行的开头
-键盘Enter键换行实则应该叫做叫做回车换行(\r\n)
-windows下可直接使用\n来匹配换行符，但仍然推荐使用标准的\r\n来匹配键盘Enter键的换行符;
-windows下enter是 \r\n; 
-linux/unix下是\n; 
-mac下是\r
-
-
-var a //undefined
-//如果a是null，或者a未定义
-if (a === null || a === undefined){
-    a = {};
-}
+'\r' 回车，回到当前行的行首，而不会换到下一行，如果接着输出的话，本行以前的内容会被逐一覆盖；
+'\n' 换行，换到当前位置的下一行，而不会回到行首
 
 
 call,apply和bind方法
 	js中的call(), apply()和bind()是Function.prototype下的方法
-	//注意如果call和apply的第一个参数写的是null，那么this指向的是window对象
-	call()、apply()和bind()都是用来改变函数执行时的上下文，可借助它们实现继承；
-	call()和apply()唯一区别是参数不一样，call()是apply()的语法糖；
+	如果call和apply的第一个参数写的是null，那么this指向的是window对象
+	call()和apply()唯一区别是参数不一样
 	bind()是返回一个新函数，供以后调用，而apply()和call()是立即调用。
 
 
