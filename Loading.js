@@ -129,13 +129,9 @@ cc.director.preloadScene("main", (completedCount, totalCount, item) => {
     cc.director.loadScene("main"); 
 });  
 
-refreshCallBack : function(event, customEventData){
-    this.playSound("sound/click", false);
-    cc.director.preloadScene('playScene', function () {
-        cc.director.loadScene('playScene');
-    });
-},
-
+cc.director.preloadScene('playScene', function () {
+    cc.director.loadScene('playScene');
+});
 
 用cc.loader 加载资源是不会重复加载的，loader中是缓存的，如果之前加载过了之后是不会再加载，而是直接从缓存中调用。
 可以用cc.loader.getRes(url)查看是否已经加载过了
@@ -146,42 +142,5 @@ refreshCallBack : function(event, customEventData){
 Cocos 提供了专门处理动态加载的类 cc.loader
 
 可以加载本地资源，也可以加载远程的网络资源
-
-
-加载单个文件
-    //在本地，使用 loadRes 方法处理
-    progressCallback: function (err, res,) {
-        if (err) {
-            cc.log('Error url [' + err + ']');
-            return;
-        }
-        this._curRes = res;//后面可以用来释放资源
-    },
-    completeCallback: function (err, res,) {
-        console.log("======================")
-
-    },
-    var progressCallback = this.progressCallback.bind(this);
-    var url = "test_assets/audio"
-    cc.loader.loadRes(url, cc.SpriteFrame, progressCallback, completeCallback);
-
-    this._curRes = res//加载的回调函数第二个参数
-    cc.director.runScene(this._curRes.scene);
-    cc.loader.releaseAsset(this._curRes);//通过资源对象自身来释放资源
-
-
-如果在远程，则使用 load 方法处理
-    cc.loader.load(resources, progressCallback, completeCallback);
-    //example,第四个参数可以不写
-    var loadCallBack = this._loadCallBack.bind(this);
-    cc.loader.loadRes(url, cc.SpriteFrame, loadCallBack);
-    _loadCallBack: function (err, res) {
-        //如果err是 null 表示没问题，res是一个表
-        if (err) {
-            cc.log('Error url [' + err + ']');
-            return;
-        }
-    }
-
 
 

@@ -1,4 +1,12 @@
 
+progressCallback: function (err, res,) {
+}
+var progressCallback = this.progressCallback.bind(this);
+
+function fn(want) {
+	setTimeout(want, 0);// 后执行
+	console.log("先执行")
+}
 实例方法
 	构造函数中的方法
 	function Foo() {
