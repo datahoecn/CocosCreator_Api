@@ -1,57 +1,6 @@
-var tag = false;
-var p = new Promise(function(resolve, reject) {
-	if(tag){
-		resolve("tag is true");
-	} else {
-		reject("tag is false");
-	}
-})
-
-p.then(function(result) {
-	console.log(result);
-	console.log("=========================");
-})
-.catch(function(err) {
-	console.log(err);
-	console.log("=========================");
-})
-
-function fn_1(num) {
-	return new Promise(function(resolve, reject) {
-		if(typeof num == "number") {
-			resolve();
-		} else {
-			reject();
-		}
-	}).then(function() {
-		console.log("参数是一个number值");
-		console.log("=========================");
-	}).catch(function() {
-		console.log("参数不是一个number值");
-		console.log("=========================");
-	})
-}
-
-fn_1("12");
-console.log("next code");
-
-function fn_2(num) {
-	return new Promise(function(resolve, reject) {
-		setTimeout(function() {
-			if(typeof num == "number") {
-				resolve(num);
-			} else {
-				var err = num + " is not a number.";
-				reject(err);
-			}
-		}, 2000);
-	})
-	.then(function(resp) {
-		console.log(resp);
-	})
-	.catch(function(err) {
-		console.log(err);
-	})
-}
-fn_2("abc");
-console.log("next code");
+var x = 7;
+var y = 3;
+var arr_x = [x-2, x-2, x-1, x-1, x-1, x-1, x,   x,   x,   x,   x,   x+1, x+1, x+1, x+1, x+2, x+2];
+                var arr_y = [y,   y-1, y+1, y,   y-1, y-2, y+2, y+1, y-1, y-2, y-3, y+1, y,   y-1, y-2, y,   y-1];
+console.log(arr_x);
+console.log(arr_y);
