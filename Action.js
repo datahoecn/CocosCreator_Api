@@ -181,6 +181,7 @@ this.playAni("heroRun" + this.heroType + "_", 5, 0.06, true);
 // 如果间隔超过1帧，那么需要建立N+1个关键帧，其中N为动画图片数量。
 // 最后两帧的内容保持一致，确保最后一张图也能持续指定的时间间隔后才重新开始播放第一帧
     播放
+        // 使用 play 接口播放一个动画时，如果还有其他的动画正在播放，则会先停止其他动画
         var anim = this.getComponent(cc.Animation);
         // 如果没有指定播放哪个动画，并且有设置 defaultClip 的话，则会播放 defaultClip 动画
         anim.play();
@@ -188,8 +189,6 @@ this.playAni("heroRun" + this.heroType + "_", 5, 0.06, true);
         anim.play('test');
         // 指定从 1s 开始播放 test 动画
         anim.play('test', 1);
-        // 使用 play 接口播放一个动画时，如果还有其他的动画正在播放，则会先停止其他动画
-        anim.play('test2');
     同时播放多个
         // 播放第一个动画
         anim.playAdditive('position-anim');
@@ -266,12 +265,6 @@ this.playAni("heroRun" + this.heroType + "_", 5, 0.06, true);
         //动画系统会搜索动画根节点中的所有组件，
         //如果组件中有实现动画事件中指定的函数的话，就会对它进行调用，并传入事件中填的参数
     注册动画回调
-        //当在 cc.Animation 注册了一个回调函数后，它会在播放一个动画时，
-        //对相应的 cc.AnimationState 注册这个回调，
-        //在 cc.AnimationState 停止播放时，对 cc.AnimationState 取消注册这个回调。
-
-        //cc.AnimationState 其实才是动画回调的发送方，如果希望对单个 cc.AnimationState 注册回调的话，
-        //那么可以获取到这个 cc.AnimationState 再单独对它进行注册。
         var animation = this.node.getComponent(cc.Animation);
         // 注册
         animation.on('play',      this.onPlay,        this);

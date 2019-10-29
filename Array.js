@@ -1,3 +1,6 @@
+判断二个数组是否相等
+使用toString
+
 function New(func) {
 	var res = {};
 	if(func.prototype !== null) {
@@ -15,10 +18,10 @@ var objects = [1, "joe", true, null];
 
 
 浅复制: 当把一个数组赋给另外一个数组时，只是为被赋值的数组增加了一个新的应用
-	var a = 2;
-	var b = a;
-	b = 10;
-	console.log(a);// [10, 2, 3]
+var a = [1,2,3,4];
+var b= a;
+b[0] = 4;//a 与 b 相互影响
+b = [4,2,3,4];// a 与 b 相互不影响
 
 push		arr.push(1);
 unshift		arr.unshift(1，2);				在数组的开头添加元素
@@ -28,12 +31,11 @@ length		arr[arr.length] = 1;			增加元素
 isArray		Array.isArray(objects)			判断是否是数组
 indexof		array.indexOf("name");			查找元素，查到返回索引值，否则返回 -1
 lastIndexOf()	array.lastIndexOf("name"); 	逆方向查找元素，查不到返回 -1
-join		var str = array.join("");			数组转化为字符串
+join		var str = array.join("");		连接数组元素为一个字符串，可以指定连接字符
 toString	var str = array.toString();		数组转化为字符串
 concat		var array3 = array1.concat(array2);	连接二个数组，返回一个新数组；
-splice		var arr2 = arr1.splice(3, 4); 	起始索引是3，截取长度是4，
-			arr.splice(2,0,"William")
-			arr.splice(2,1,"William")
+splice		var arr2 = arr1.splice(3, 4); 	起始索引是3，截取长度是4，使用负数可从数组结尾处规定位置
+			arr.splice(2,0,"William")		向数组添加的新项目"William"
 reverse		arr.reverse();					元素顺序进行翻转
 sort		arr.sort();						按字符串类型，进行排序
 			arr.sort(compare);				使用函数进行排序
@@ -55,6 +57,7 @@ reduce		arr.reduce(add);				接受一个函数参数，最后返回一个叠加�
 				return runningTotal + currentValue;
 			}
 reduceRight	与 reduce 顺序相反
+
  			// map方法第一个参数 回调函数
  			// map方法第二个参数是回调函数的this
  			// 回调函数第一个参数 表示数组每一项
