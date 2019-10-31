@@ -51,7 +51,7 @@ winSize = visiSize = winSizePixels。一般使用visiSize即可
 
 cc.winSize  Size 为当前的游戏窗口的大小
 
-// 调试信息
+// 关闭调试信息
 cc.debug.setDisplayStats(false);
 
 // instantiate node from prefab

@@ -1,10 +1,6 @@
-//
-//  RechargeVC.m
-//  StoreKit
-//
-//  Created by 夏远全 on 2017/2/21.
-//  Copyright © 2017年 夏远全. All rights reserved.
-//
+
+// NSString *password = @"17bd70aea8c4435c94184115871bdc86";
+// App Store Connect 我的App 点击app 功能 App内购买项目 App专用共享密钥
 
 #import "RechargeVC.h"
 
