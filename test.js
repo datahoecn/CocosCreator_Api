@@ -1,3 +1,2 @@
-var myDate = new Date();
-var a = myDate.getTime();
-console.log(a)
+var a = [1,2]
+console.log(a[-1]);

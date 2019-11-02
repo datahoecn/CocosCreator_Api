@@ -1,41 +1,6 @@
 
-var size = cc.view.getDesignResolutionSize();
-
 // this 是 object
 this[name + "_prefab"];
-
-资源属性的声明
-    //cc.Vec2是类型，cc.v2只是一个创建二维向量简便写法
-    pos  : cc.v2(10, 20),
-    pos: {
-        default: null,
-        type: cc.Vec2
-    }
-    color: new cc.Color(255, 255, 255, 128)
-    color: cc.color(0,0,0,255)          
-    size : cc.size(0,0)  
-
-    cc.Vec2
-    cc.Color
-    cc.Rect
-    cc.Boolean
-    cc.String
-    cc.Float
-    cc.Integer
-
-    onLoad: function () {
-        var spriteFrame = this.spriteFrame;
-        var texture = this.texture;
-        //通过 Texture rect rotated offset 和 originalSize 设置 SpriteFrame
-        spriteFrame.setTexture(texture);
-    }
-    
-CC_EDITOR   是否为编辑器环境
-CC_PREVIEW  是否为预览环境
-CC_JSB  是否为JSB环境
-CC_DEBUG    是否为调试环境
-CC_WECHATGAME   是否为微信小游戏环境
-CC_WECHATGAME_SUB   是否为微信小游戏子域环境
 
 //设计分辨率
 let designSize=cc.view.getDesignResolutionSize();
@@ -50,6 +15,13 @@ let winSizePixels=cc.director.getWinSizeInPixels();
 winSize = visiSize = winSizePixels。一般使用visiSize即可
 
 cc.winSize  Size 为当前的游戏窗口的大小
+cc.visibleRect.width, cc.visibleRect.height
+
+代码控制适配
+let frameSize = cc.view.getFrameSize();
+let bFitWidth = (frameSize.width / frameSize.height) < (750 / 1334)
+cc.Canvas.instance.fitWidth = bFitWidth;
+cc.Canvas.instance.fitHeight = !bFitWidth;
 
 // 关闭调试信息
 cc.debug.setDisplayStats(false);
@@ -66,10 +38,6 @@ cc.log(cc.isValid(node));    // true, still valid in this frame
 // after a frame...
 cc.log(cc.isValid(node));    // false, destroyed in the end of last frame
 
-member: {
-    default: [],
-    type: cc.Integer// type: cc.Float  type: cc.Boolean  type: cc.String
-}
 
 Rect:
     properties:
@@ -129,28 +97,16 @@ this.node.getBoundingBoxToWorld().contains(event.getLocation())
 
 cc.game.on(cc.game.EVENT_HIDE, (event)=>{
     cc.log("game onPause - StorageUtil");
-    if(this.intervalId) 
-    {
-        clearTimeout(this.intervalId);
-        this.intervalId = null;
-    }
 });
 cc.game.on(cc.game.EVENT_SHOW, (event)=>{
     cc.log("game onResume - StorageUtil");
 });
-
-代码控制适配
-let frameSize = cc.view.getFrameSize();
-let bFitWidth = (frameSize.width / frameSize.height) < (750 / 1334)
-cc.Canvas.instance.fitWidth = bFitWidth;
-cc.Canvas.instance.fitHeight = !bFitWidth;
 
 cc.js.getClassName(obj); //param {Object|Function} return {String}
 cc.js.isNumber(obj);
 cc.js.isString(obj);
 
 
-cc.visibleRect.width, cc.visibleRect.height
 术语
     CCClass：使用 cc.Class 声明的类。
     原型对象：调用 cc.Class 时传入的字面量参数。

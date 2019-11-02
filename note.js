@@ -1,4 +1,7 @@
-
+destroy 后，节点不可用。
+removeFromParent 后，节点可重新 add 回场景中。
+当节点要销毁时，请 destroy。
+当节点要**暂时**从场景中移除，请 removeFromParent。
 
 动态合图
   在项目运行时动态的将贴图合并到一张大贴图中。当渲染一张贴图的时候，

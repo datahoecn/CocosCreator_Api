@@ -1,5 +1,5 @@
 
-
+// 封装播放音乐函数
 this.playSound("sound/select", false);
 playSound : function(name, isLoop){
     cc.loader.loadRes(name, cc.AudioClip, function (err, clip) {
@@ -52,8 +52,7 @@ AudioEngine 是引擎提供的纯 API，只能在脚本中进行调用，可以�
     //通过 cc.audioEngine 获取声音引擎
     cc.audioEngine.getMaxAudioInstance();//可同时存在多少个声音效果并行播放
     //return {Number} audioId, clip can be array
-    var id = cc.audioEngine.play(clip, loop, volume);//The audio clip to play.Whether the music loop or not.Volume size
-    cc.audioEngine.stop(id);
+    var id = cc.audioEngine.play(clip, loop, volume);//The audio clip to play
     cc.audioEngine.stopAll();
     cc.audioEngine.pauseAll();
     cc.audioEngine.resumeAll();
