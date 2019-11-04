@@ -1,12 +1,9 @@
 
-progressCallback: function (err, res,) {
-}
-var progressCallback = this.progressCallback.bind(this);
-
 function fn(want) {
 	setTimeout(want, 0);// 后执行
 	console.log("先执行")
 }
+
 实例方法
 	构造函数中的方法
 	function Foo() {
@@ -61,12 +58,11 @@ console.log(b);//{aa: 2};
 来自Object.prototype
 
 
-
-
 柯里化
 function createCurry(func, arity, args) {
 	var arity = arity || func.length;
 	var args = args || [];
+
 	var wrapper = function() {
 		var _args = [].slice.call(arguments);
 		[].push.apply(args, _args);
@@ -76,9 +72,9 @@ function createCurry(func, arity, args) {
 		}
 		return func.apply(func, args);
 	}
+
 	return wrapper;
 }
-
 
 
 function add() {
@@ -100,16 +96,19 @@ function add() {
 var a = add(1)(2)(3)(4);
 console.log(a + 10)
 
+
 var a = [b: 0];
 var c = "b";
 // 当属性名是一个变量时，用中括号
 a[c];
 
-arguments对象是所有（非箭头）函数中都可用的局部变量
-你可以使用arguments对象在函数中引用函数的参数
+arguments是对象{"0": "参数1", "1": "参数2"}
+arguments对象不是一个 Array 。它类似于Array,但除了length属性和索引元素之外没有任何Array属性。
 第一个参数在索引0处
 arguments[0]
-arguments对象不是一个 Array 。它类似于Array,但除了length属性和索引元素之外没有任何Array属性。
+arguments是所有（非箭头）函数中都可用的局部变量
+
+// 收集参数
 var args = Array.prototype.slice.call(arguments);
 var args = [].slice.call(arguments);
 var args = (arguments.length === 1 ? [arguments[0]] : Array.apply(null, arguments));
@@ -126,8 +125,24 @@ myConcat(", ", "red", "orange", "blue");
 switch 用来判断的表达式可以是任意类型，而不仅限于整型（C++ 和 Java 要求该表达式必须为整型）
 
 object
-	var a = {"aaa": []};
+	var a = {"aaa": [], "bbb": null};
+	// 判断对象是否包含特定的自身(非继承)属性
+	// 继承属性
+	a.hasOwnProperty('toString');         // 返回 false
+	// 非继承属性
 	a.hasOwnProperty("aaa");
+	// 即使属性的值是 null 或 undefined，只要属性存在，hasOwnProperty 依旧会返回 true。
+	a.hasOwnProperty("bbb");// true
+	// 遍历一个对象的所有自身属性
+	var buz = {fog: 'stack'};
+	for (var name in buz) {
+		if (buz.hasOwnProperty(name)) {
+		    console.log('this is fog (' + name + ') for sure. Value: ' + buz[name]);
+		}else {
+		    console.log(name); // toString or something else
+		}
+	}
+	JavaScript 并没有保护 hasOwnProperty 这个属性名，千万别定义
 
 CommonJS模块规范
 	每个文件是一个模块, module 变量代表当前模块, 它的exports属性（即module.exports）是对外的接口
@@ -154,9 +169,6 @@ value < 0 ? 0 : value < 1 ? value : 1;
 value < min_inclusive ? min_inclusive : value < max_inclusive ? value : max_inclusive;
 
 
-splice() 方法向/从数组中添加/删除项目，然后返回被删除的项目。
-
-
 箭头函数
 	当函数直接被return时，可以省略函数体的括号
 	var c = (a, b) => a + b
@@ -167,13 +179,6 @@ splice() 方法向/从数组中添加/删除项目，然后返回被删除的项
 	箭头函数中的this,就是 声明函数时 所处上下文中的this,它不会被其他方式所改变
 	在箭头函数中，没有arguments对象
 
-
-
-对象字面量并不会产生自己的作用域
-var obj = {
-    a: 10,
-    c: this.a + 10,// 正确应该是 a + 10
-}
 
 一个函数调用时
 	创建阶段
@@ -186,17 +191,16 @@ var obj = {
 	执行阶段
 		变量赋值，函数引用，执行其他可执行代码
 		
-for(let i = 0) 因为没有生成新的作用域，如果用 var 在 {} 外还可以访问到 i
+for(let i = 0) 没有生成新的作用域
+如果用 var 在 {} 外还可以访问到 i
+如果用 let 在 {} 外不能可以访问到 i
 
-逻辑运算符
-	&&
-	||
-	!
 条件（三元）运算符
 	?
 	(condition) ? value1:value2
+
 JavaScript 全局属性
-	isNaN()	检查某个值是否是数字。
+	isNaN()	检查某个值是否是数字。  isNaN(123) // false  如果参数值为 NaN 或字符串、对象、undefined等非数字值则返回 true
 	Number()	把对象的值转换为数字。
 	parseFloat()	解析一个字符串并返回一个浮点数。
 	parseInt()	解析一个字符串并返回一个整数。
@@ -252,53 +256,6 @@ String 对象
 	toLocaleUpperCase()	根据本地主机的语言环境把字符串转换为大写。
 	valueOf()		返回某个字符串对象的原始值。
 	toString()		返回一个字符串。
-
-Array 对象
-	properties
-		constructor 返回创建数组对象的原型函数
-		length 		设置或返回数组元素的个数
-		prototype 	允许你向数组对象添加属性或方法
-	method
-		Array.from([1, 2, 3], x => x * 10)  通过给定的对象中创建一个数组
-		Array.isArray(obj)					判断对象是否为数组
-
-		array.valueOf()						返回数组对象的原始值。
-		array.toString()					把数组转换为字符串，并返回结果。
-		array.reverse()						反转数组的元素顺序
-		array.shift()						删除并返回数组的第一个元素
-		array.pop()							删除数组的最后一个元素,返回删除的元素
-
-		array.every(function(curValue){})	是否符合指定条件,有一个元素不满足,剩余的元素不会再进行检测
-		array.filter(function(curValue))	返回符合条件的新数组
-		array.some(function(curValue))		检测数组元素中是否有元素符合指定条件。
-		array.forEach(function(curValue))	数组每个元素都执行一次回调函数
-		array.map(function(curValue))		通过指定函数处理数组的每个元素，并返回处理后的数组
-		array.find(function(curValue))		返回第一个符合条件的元素
-		array.findIndex(function(curValue))	返回第一个符合条件的元素索引
-		
-		array1.concat(array2,array3,...,arrayX)		返回一个新数组，连接两个或多个数组
-		array.unshift(item1,item2, ..., itemX)		向数组的开头添加一个或更多元素，并返回新的长度
-		array.copyWithin(target, start, end)		复制到指定目标索引位置, 元素复制的起始位置, 停止复制的索引位置 (默认为 array.length)。如果为负值，表示倒数
-		array.includes(searchElement)		判断一个数组是否包含一个指定的值
-		array.fill(value, start, end)		将一个固定值替换数组的元素。
-		array.join(separator)				把数组的所有元素合并成一个字符串, separator分隔符进行分隔的
-		array.indexOf(item,start)			返回它所在的位置
-		array.lastIndexOf(item,start)		返回它最后出现的位置
-		array.push(item1, item2, ..., itemX)添加一个或多个元素，并返回新的长度
-		array.reduce(function(total, curValue))将数组元素计算为一个值（从左到右）
-		// 第一次计算，如果initialValue赋值了，prev = initialValue，cur是第一个元素
-					//否则 prev 是第一个元素，cur是第二个元素
-		// 后面计算，prev 是 return 值
-		// index 是索引值，arr 是计算的数组
-		// sum 是最后计算的 return 值
-		var sum = arr.reduce(function(prev, cur, index, arr) {
-		    console.log(prev, cur, index);
-		    return prev + cur;
-		}, initialValue)
-		array.reduceRight(function(total, curValue))将数组元素计算为一个值（从右到左）
-		array.slice(start, end)				选取数组的的一部分，并返回一个新数组。
-		array.sort(sortfunction)			对数组的元素进行排序。
-		array.splice(index,howmany,item1,.....,itemX)()	从数组中添加或删除元素。
 
 class Person {
 	constructor(name, age) {
