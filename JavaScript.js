@@ -58,25 +58,6 @@ console.log(b);//{aa: 2};
 来自Object.prototype
 
 
-柯里化
-function createCurry(func, arity, args) {
-	var arity = arity || func.length;
-	var args = args || [];
-
-	var wrapper = function() {
-		var _args = [].slice.call(arguments);
-		[].push.apply(args, _args);
-		if(_args.length < arity) {
-			arity -= _args.length;
-			return createCurry(func, arity, args);
-		}
-		return func.apply(func, args);
-	}
-
-	return wrapper;
-}
-
-
 function add() {
 	var _args = [].slice.call(arguments);
 	var adder = function() {
@@ -358,7 +339,8 @@ ${}中可以是变量，也可以是表达式，还可以是一个函数
 	}
 	`foo: ${foo()}`
 
-
+构造函数的函数名首字母必须大写
+内部使用this对象，来指向将要生成的对象实例
 new 会有如下实现
 	创建（或者说构造）一个全新的对象。
 	这个新对象会被执行[[ 原型]] 连接。
@@ -389,17 +371,15 @@ new 会有如下实现
 		//如果没有明确指定返回对象，则默认返回res，这个res就是实例对象
 		return res;
 	}
-		
-
-__proto__ 属性的作用就是当访问一个对象的属性时，如果该对象内部不存在这个属性，
-			那么就会去它的__proto__属性所指向的那个对象（父对象）里找，一直找，直到__proto__属性的终点null，
-			然后返回undefined，通过__proto__属性将对象连接起来的这条链路即我们所谓的原型链。
-prototype 属性的作用就是让该函数所实例化的对象们都可以找到公用的属性和方法，即f1.__proto__ === Foo.prototype。
-constructor 属性的含义就是指向该对象的构造函数，所有函数（此时看成对象了）最终的构造函数都指向Function。
 
 当一个对象是原型时，A.constructor 指向构造函数
 当一个对象是构造函数时， B.prototype 指向原型
 当一个对象是实列时，C.__proto__ 指向它的原型
+
+__proto__和constructor属性是对象所独有的；② prototype属性是函数所独有的，因为函数也是一种对象，所以函数也拥有__proto__和constructor属性。
+__proto__属性的作用就是当访问一个对象的属性时，如果该对象内部不存在这个属性，那么就会去它的__proto__属性所指向的那个对象（父对象）里找，一直找，直到__proto__属性的终点null，再往上找就相当于在null上取值，会报错。通过__proto__属性将对象连接起来的这条链路即我们所谓的原型链。
+prototype属性的作用就是让该函数所实例化的对象们都可以找到公用的属性和方法，即f1.__proto__ === Foo.prototype。
+constructor属性的含义就是指向该对象的构造函数，所有函数（此时看成对象了）最终的构造函数都指向Function。
 
 
 '\r' 回车，回到当前行的行首，而不会换到下一行，如果接着输出的话，本行以前的内容会被逐一覆盖；

@@ -12,12 +12,12 @@
 
 loader
     method
-        getXMLHttpRequest   Gets a new XMLHttpRequest instance.
-        load                Load resources with a progression callback and a complete callback....
-        loadRes             Load resources from the "resources" folder inside the "assets" folder of your project.
-        loadResArray        This method is like loadRes except that it accepts array of url.
-        loadResDir          Load all assets in a folder inside the "assets/resources" folder of your project.
-        getRes              Get resource data by id. 
+        getXMLHttpRequest       Gets a new XMLHttpRequest instance.     var xhr = cc.loader.getXMLHttpRequest();
+        load                    Load resources with a progression callback and a complete callback....
+        loadRes                 Load resources from the "resources" folder inside the "assets" folder of your project.
+        loadResArray            This method is like loadRes except that it accepts array of url.
+        loadResDir              Load all assets in a folder inside the "assets/resources" folder of your project.
+        getRes                  Get resource data by id. 
         getDependsRecursively   获取某个已经加载好的资源的所有依赖资源，包含它自身，并保存在数组中返回。
         release                 通过 id（通常是资源 url）来释放一个资源或者一个资源数组。
         releaseAsset            通过资源对象自身来释放资源。
@@ -28,8 +28,15 @@ loader
         setAutoReleaseRecursively 设置当场景切换时是否自动释放资源及资源引用的其它资源。
         isAutoRelease           返回指定的资源是否有被设置为自动释放，不论场景的“Auto Release Assets”如何设置。
 
+    // 如果在这个 prefab 中有一些和场景其他部分共享的资源，你不希望它们被释放，可以将这个资源从依赖列表中删除
+    var deps = cc.loader.getDependsRecursively('prefabs/sample');
+    var index = deps.indexOf(texture2d._uuid);
+    if (index !== -1)
+        deps.splice(index, 1);
+    //通过 id（通常是资源 url）来释放一个资源或者一个资源数组
+    cc.loader.release(deps);
+
 JSON 资源
-        组件关联一个 JSON：
          // 声明
         npcList: {
             default: null,
@@ -37,6 +44,7 @@ JSON 资源
         },
         // 读取
         var json = this.npcList.json;
+
         动态加载：
         cc.loader.loadRes('configs/npc', function (err, jsonAsset) {
         });
@@ -49,9 +57,9 @@ JSON 资源
             default: null,
             type: cc.TextAsset,
         },
-
         // 读取
         var text = this.file.text;
+
         动态加载：
         cc.loader.loadRes(url, function (err, file) {
             cc.log(file.text);
@@ -64,12 +72,11 @@ JSON 资源
     });
 加载 AnimationClip
     var self = this;
-    cc.loader.loadRes("test assets/anim", function (err, clip) {
+    cc.loader.loadRes("testassets/anim", function (err, clip) {
         self.node.getComponent(cc.Animation).addClip(clip, "anim");
     });
 加载 SpriteFrame
     //如果指定了类型参数，就会在路径下查找指定类型的资源
-    //需要获取 “子资源”（例如获取 Texture2D 生成的 SpriteFrame），需要声明类型。
     var self = this;
     cc.loader.loadRes("test/image", cc.SpriteFrame, function (err, spriteFrame) {
         self.node.getComponent(cc.Sprite).spriteFrame = spriteFrame;
@@ -113,13 +120,6 @@ JSON 资源
             }
         }
     });
-    // 如果在这个 prefab 中有一些和场景其他部分共享的资源，你不希望它们被释放，可以将这个资源从依赖列表中删除
-    var deps = cc.loader.getDependsRecursively('prefabs/sample');
-    var index = deps.indexOf(texture2d._uuid);
-    if (index !== -1)
-        deps.splice(index, 1);
-    //通过 id（通常是资源 url）来释放一个资源或者一个资源数组
-    cc.loader.release(deps);
 
 cc.director.preloadScene("main", (completedCount, totalCount, item) => {            
     let p = completedCount/totalCount;
@@ -133,14 +133,7 @@ cc.director.preloadScene('playScene', function () {
     cc.director.loadScene('playScene');
 });
 
-用cc.loader 加载资源是不会重复加载的，loader中是缓存的，如果之前加载过了之后是不会再加载，而是直接从缓存中调用。
-可以用cc.loader.getRes(url)查看是否已经加载过了
-
-在游戏运行过程中加载图片创建精灵，或加载 MP3 文件播放音乐，
-如果直接在中进主线程行，则会导致线程被 IO 操作、创建纹理等事情阻塞，从而造成卡顿。
-这时我们可以借助多线程动态异步加载。
-Cocos 提供了专门处理动态加载的类 cc.loader
-
-可以加载本地资源，也可以加载远程的网络资源
+用 cc.loader 加载资源是不会重复加载的，loader中是缓存的，如果之前加载过了之后是不会再加载，而是直接从缓存中调用。
+可以用 cc.loader.getRes(url)查看是否已经加载过了
 
 
