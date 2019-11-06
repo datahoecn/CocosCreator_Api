@@ -1,4 +1,5 @@
 properties
+	node.z
 	node.zIndex				Number 控制节点排列顺序
 	node.groupIndex 		Integer 节点的分组索引。
 	node.group 				String 节点的分组。
@@ -54,14 +55,14 @@ method
 	convertToWorldSpaceAR var newVec2 = node.convertToWorldSpaceAR(cc.v2(100, 100)); 将节点坐标系下的一个点转换到世界空间坐标系。
 	convertTouchToNodeSpace var newVec2 = node.convertTouchToNodeSpace(touch); 将触摸点转换成本地坐标系中位置。
 	convertTouchToNodeSpaceAR var newVec2 = node.convertTouchToNodeSpaceAR(touch); 转换一个 cc.Touch（世界坐标）到一个局部坐标，该方法基于节点坐标。
-	getBoundingBox 		var boundingBox = node.getBoundingBox(); 返回父节坐标系下的轴向对齐的包围盒。
-	getBoundingBoxToWorld var newRect = node.getBoundingBoxToWorld(); 返回节点在世界坐标系下的对齐轴向的包围盒（AABB）。
+	getBoundingBox 		return Rect {x: -40, y: 480, width: 80, height: 80} 返回父节坐标系下的轴向对齐的包围盒。
+	getBoundingBoxToWorld Rect {x: 320, y: 1119, width: 80, height: 80} 返回节点在世界坐标系下的对齐轴向的包围盒（AABB）。
 	addChild 			node.addChild(newNode, 1, "node"); 添加子节点，并且可以修改该节点的 局部 Z 顺序和名字。
 	cleanup 			node.cleanup(); 停止所有正在播放的动作和计时器。
 	attr 				var attrs = { key: 0, num: 100 }; node.attr(attrs);属性配置函数。在 attrs 的所有属性将被设置为节点属性
 	getChildByUuid 		var child = node.getChildByUuid(uuid); 通过 uuid 获取节点的子节点。
 	getChildByName 		var child = node.getChildByName("Test Node"); 通过名称获取节点的子节点。
-	insertChild 		node.insertChild(child, 2); 插入子节点到指定位置
+	insertChild 		node.insertChild(child, 2); 插入子节点到指定位置(执行了 child.parent = this);
 	walk 				遍历该节点的子树里的所有节点并按规则执行回调函数。
 						node.walk(function (target) {//在访问它的子节点之前调用 target当前访问节点
 						    console.log('Walked through node ' + target.name + ' for the first time');
@@ -84,6 +85,11 @@ method
 	destroy 			obj.destroy(); 销毁该对象，并释放所有它对其它对象的引用。销毁节点并不会立刻被移除，而是在当前帧逻辑更新结束后，统一执行
 						cc.isValid(obj) 来检查对象是否已被销毁。
 
+destroy	与 removeFromParent 区别		
+destroy 后，节点不可用。
+removeFromParent 后，节点可重新 add 回场景中。
+当节点要销毁时，请 destroy。
+当节点要**暂时**从场景中移除，请 removeFromParent。
 
 常驻节点
 	//在场景切换时不被自动销毁，常驻内存
@@ -96,6 +102,10 @@ method
 
 克隆已有节点 创建预制节点
 	var ePlane = cc.instantiate(this.EnemyPlanePrefab);
+
+// 获取逻辑树的场景节点
+var currentScene = cc.director.getScene();
+this.mainNode = cc.director.getScene().getChildByName("Canvas");
 	
 
 

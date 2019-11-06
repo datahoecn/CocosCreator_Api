@@ -4,7 +4,7 @@
     var v = cc.v2(10, 10);//向量减法，并返回新结果。
     v.sub(cc.v2(5, 5));      // return Vec2 {x: 5, y: 5};
 
-根据两点位置计算两点之间距离
+计算两点之间距离
     var dist = this.node.position.sub(playerPos).mag();
 
 // 判断是否在目标位置，周围50
@@ -46,63 +46,6 @@ export default class Role extends cc.Component {
 }
 
 
-Item.ts
-// 挂在追踪节点上
-import Role from "./Role";
-
-const {ccclass, property} = cc._decorator;
-
-@ccclass
-export default class Item extends cc.Component {
-
-    @property(Role)
-    role: Role = null;
-
-    @property
-    speed: number = 10;
-
-    update (dt) {
-        // 判断是否追上目标，50范围算追上
-        if (this.node.position.fuzzyEquals(this.role.node.position, 50)) {
-            this.node.removeFromParent(true);
-        }
-        // 获取目标与本节点位置差
-        var direction = this.role.node.position.sub(this.node.position);
-        // 更新本节点位置，normalize 归一化，mul缩放向量
-        this.node.position = this.node.position.add(direction.normalize().mul(this.speed * dt));
-    }
-}
-
-
-CreateItem.ts
-// 创建追踪节点
-import Role from "./Role";
-
-const {ccclass, property} = cc._decorator;
-
-@ccclass
-export default class CreateItem extends cc.Component {
-    // 追踪预制节点
-    @property(cc.Prefab)
-    prefab: cc.Prefab = null;
-
-    @property(Role)
-    role: Role = null;
-
-    // 按钮响应函数
-    // 创建追踪节点
-    create () {
-        var size = cc.view.getDesignResolutionSize();
-        var node = cc.instantiate(this.prefab);
-        var item = node.getComponent("Item");
-        item.role = this.role;
-        node.x = Math.random() * size.width - size.width / 2;
-        node.y = Math.random() * size.height - size.height / 2;
-        this.node.addChild(node);
-    }
-
-}
-
 // 节点移动
 cc.Class({
     extends: cc.Component,
@@ -129,15 +72,6 @@ cc.Class({
     },
 
     walk_to_next() {
-        // 无限循环
-        if(this.next_step >= this.road_data.length) {
-            this.next_step = 1;
-            this.speed = this.speed + 100;
-            if(this.speed >= 500) {
-                this.speed = 500;
-            }
-        }
-
         var src = this.node.getPosition();
         // 获取下个位置坐标
         var dst = this.road_data[this.next_step];

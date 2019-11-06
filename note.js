@@ -1,7 +1,5 @@
-destroy 后，节点不可用。
-removeFromParent 后，节点可重新 add 回场景中。
-当节点要销毁时，请 destroy。
-当节点要**暂时**从场景中移除，请 removeFromParent。
+svn checkout https://172.16.1.98/svn/math/design/Math/assets --username=lijie --password=123456 /Users/xhkj/Desktop/math/assets
+
 
 动态合图
   在项目运行时动态的将贴图合并到一张大贴图中。当渲染一张贴图的时候，
@@ -59,7 +57,6 @@ meta
 
 只负责挂载脚本，执行逻辑，不包含任何渲染相关内容。通常我们将这些节点放置在场景根层级，和 Canvas 节点并列
      
-svn checkout https://172.16.1.98/svn/math/design/Math/assets --username=lijie --password=123456 /Users/xhkj/Desktop/math/assets
 
 资源导入导出(.fire 场景文件和 .prefab 预制文件)
 在主菜单选择 文件 -> 资源导出
@@ -84,10 +81,6 @@ xmlhttp.send();
 
 // 权重递增
 this.counter +=  this.counter * 1.003;
-
-// 获取逻辑树的场景节点
-var currentScene = cc.director.getScene();
-this.mainNode = cc.director.getScene().getChildByName("Canvas");
 
 
 图像资源（Texture）又经常被称作贴图、图片
