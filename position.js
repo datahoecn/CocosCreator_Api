@@ -1,3 +1,44 @@
+Vec2
+    cc.v2(0, 0);
+    properties
+        x Number
+        y Number
+    method
+        constructor 构造函数，可查看 Cc/vec2:method 或者 cc.p
+        clone 克隆一个 Vec2 对象
+        set 设置向量值。
+        equals 当前的向量是否与指定的向量相等。
+        fuzzyEquals 近似判断两个点是否相等。
+        toString 转换为方便阅读的字符串。
+        lerp 线性插值。
+        clampf 返回指定限制区域后的向量。
+        // 返回 self(加之后)
+        addSelf 向量加法。
+        // 返回一个新 vec2
+        add 向量加法，并返回新结果。
+        subSelf 向量减法。
+        sub 向量减法，并返回新结果。
+        mulSelf 缩放当前向量。 var v = cc.v2(10, 10);  v.mulSelf(5);// return Vec2 {x: 50, y: 50};
+        mul 缩放向量，并返回新结果。
+        scaleSelf 分量相乘。
+        scale 分量相乘，并返回新的结果。
+        divSelf 向量除法。
+        div 向量除法，并返回新的结果。
+        negSelf 向量取反。
+        neg 返回取反后的新向量。
+        dot 当前向量与指定向量进行点乘。
+        cross 当前向量与指定向量进行叉乘。
+        mag 返回该向量的长度。
+        magSqr 返回该向量的长度平方。
+        normalizeSelf 向量归一化，让这个向量的长度为 1。
+        normalize 返回归一化后的向量。
+        angle 夹角的弧度。
+        signAngle 带方向的夹角的弧度。
+        rotate 返回旋转给定弧度后的新向量。
+        rotateSelf 按指定弧度旋转向量。
+        project 返回当前向量在指定 vector 向量上的投影向量。
+        transformMat4 Transforms the vec2 with a mat4. 3rd vector component is implicitly '0', 4th vector component is implicitly '1'
+
 
 
 向量计算

@@ -43,10 +43,10 @@
 类型别名
 	类型别名常用于联合类型
 	使用type关键字声明类型别名
-	type aa=number
-	type name=string|number
-	let a:name=123
-	let b:aa=456
+	type aa = number
+	type name = string|number
+	let a:name = 123
+	let b:aa = 456
 	console.log(a)   //123
 	console.log(b)   //456
 

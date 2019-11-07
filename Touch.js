@@ -1,53 +1,4 @@
 
-//判断触屏偏移的绝对值最小阙值
-var minMoveValue = 50;
-//设置触屏点击时的响应函数，记录是否触屏，以及触屏位置点
-this.node.on(cc.Node.EventType.TOUCH_START, (event) => {
-    this._touching = true;
-    this._touchStartPos = event.touch.getLocation();
-});
-//设置触屏离开时的响应函数，记录是否触屏，以及触屏位置点
-this.node.on(cc.Node.EventType.TOUCH_END, (event) => {
-    if (!this._touching) return;
-    //重置触屏标记
-    this._touching = false;
-    //取得当前触屏松开时位置点，然后与触屏点击时的位置点相减，计算偏移的横向和纵向移动距离
-    var touchPos = event.touch.getLocation();
-    var movedX = touchPos.x - this._touchStartPos.x;
-    var movedY = touchPos.y - this._touchStartPos.y;
-    var movedXValue = Math.abs(movedX);
-    var movedYValue = Math.abs(movedY);
-    if (movedXValue < minMoveValue && movedYValue < minMoveValue) {
-        return;
-    }
-    //计算当前主角所在格子位置
-    var newTile = cc.v2(this._curTile.x, this._curTile.y);
-    var mapMoveDir = MoveDirection.NONE;
-    //如果横向移动距离大于纵向移动距离，根据上面相减结果的正负值判断移动方向
-    if (movedXValue >= movedYValue) {
-        // move to right or left
-        if (movedX > 0) {
-            newTile.x += 1;
-            mapMoveDir = MoveDirection.LEFT;
-        } else {
-            newTile.x -= 1;
-            mapMoveDir = MoveDirection.RIGHT;
-        }
-    } else {
-        // move to up or down
-        if (movedY > 0) {
-            newTile.y -= 1;
-            mapMoveDir = MoveDirection.DOWN;
-        } else {
-            newTile.y += 1;
-            mapMoveDir = MoveDirection.UP;
-        }
-    }
-    this._tryMoveToNewTile(newTile, mapMoveDir);
-});
-
-
-
 // 按键监听
 onLoad () {
     cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, this._onKeyPressed, this);
@@ -87,10 +38,8 @@ this.node.on(cc.Node.EventType.TOUCH_START, (event) => {
     let rect = this._targetNode.getBoundingBoxToWorld();
     if (rect.contains(event.getLocation())) {
         this.node._touchListener.setSwallowTouches(false);
-        cc.log('未命中目标节点，放行')
     } else {
         this.node._touchListener.setSwallowTouches(true);
-        cc.log('未命中目标节点，拦截');
     }
 }, this);
 

@@ -1,3 +1,9 @@
+properties
+	type Mask.Type 遮罩类型
+	spriteFrame SpriteFrame 遮罩所需要的贴图
+	alphaThreshold Number 只有当模板的像素的 alpha 大于 alphaThreshold 时，才会绘制内容。
+	inverted Boolean 反向遮罩（不支持 Canvas 模式）
+	segements Number TODO: remove segments, not supported by graphics
 
 this._mask = this.node.getComponent(cc.Mask);
 this._mask. ！inverted = true;

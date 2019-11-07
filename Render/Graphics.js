@@ -1,3 +1,28 @@
+properties
+    lineWidth Number 当前线条宽度
+    lineJoin Graphics.LineJoin lineJoin 用来设置2个长度不为0的相连部分（线段，圆弧，曲线）如何连接在一起的属性。
+    lineCap Graphics.LineCap lineCap 指定如何绘制每一条线段末端。
+    strokeColor Color 线段颜色
+    fillColor Color 填充颜色
+    miterLimit Number 设置斜接面限制比例
+method
+    moveTo 移动路径起点到坐标(x, y)
+    lineTo 绘制直线路径
+    bezierCurveTo 绘制三次贝赛尔曲线路径
+    quadraticCurveTo 绘制二次贝赛尔曲线路径
+    arc 绘制圆弧路径。
+    ellipse 绘制椭圆路径。
+    circle 绘制圆形路径。
+    rect 绘制矩形路径。
+    roundRect 绘制圆角矩形路径。
+    fillRect 绘制填充矩形。
+    clear 擦除之前绘制的所有内容的方法。
+    close 将笔点返回到当前路径起始点的。
+    stroke 根据当前的画线样式，绘制当前或已经存在的路径。
+    fill 根据当前的画线样式，填充当前或已经存在的路径。
+
+
+
 this.g = this.getComponent(cc.Graphics);
 this.node.on('touchstart',function (event) {
     var pos = this.node.convertToNodeSpaceAR(event.getLocation());
