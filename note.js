@@ -1,6 +1,7 @@
 svn checkout https://172.16.1.98/svn/math/design/Math/assets --username=lijie --password=123456 /Users/xhkj/Desktop/math/assets
 
-
+模块设置是针对发布 Web 版游戏时引擎中使用的模块进行裁剪，
+  达到减小发布版引擎包体的效果。在列表中选中的模块在打包时将被引擎包括，未选中的模块会被裁剪掉。
 动态合图
   在项目运行时动态的将贴图合并到一张大贴图中。当渲染一张贴图的时候，
   动态合图系统会自动检测这张贴图是否已经被加入到了动态合图系统，
@@ -88,5 +89,13 @@ this.counter +=  this.counter * 1.003;
 console.trace() 会输出函数调用堆栈
 console.table() 会把一个对象按表格形式输出
 console.time() 和 console.timeEnd()得到一段代码的执行时间
+// 一组信息
+console.group("====第" + (this.wave_index + 1) + "波小怪====");
+console.groupEnd();
+
+console.assert(isDebug,'为false时输出的信息');// isDebug为false，打印'为false时输出的信息'
+console.count('myFunction被执行的次数'); // myFunction被执行的次数: 1
+console.dir(obj)// 输出obj详细
+https://developer.chrome.com/devtools/docs/console-api
 
 Draw Call//表示引擎对当前画面的绘制次数

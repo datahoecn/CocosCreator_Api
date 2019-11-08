@@ -6,6 +6,76 @@
         .json 图集数据
         .png 图集纹理
 
+properties: {
+    zhuanchang_zb: dragonBones.ArmatureDisplay,
+    zhuanchang_db: dragonBones.ArmatureDisplay
+}
+playAni(name) {
+    switch (name) {
+        case "name_1":
+            this.zhuanchang_zb.node.active = true;
+            this.zhuanchang_zb.playAnimation("newAnimation", 1);
+            break;
+        case "name_2":
+            this.zhuanchang_db.node.active = true;
+            if(global.language === "zh"){
+                this.zhuanchang_db.playAnimation("gxjs-jianti", 1);
+            }else if(global.language === "en"){
+                this.zhuanchang_db.playAnimation("gxjs-yingwen", 1);      
+            }else{
+                this.zhuanchang_db.playAnimation("gxjs-fanti", 1);
+            }
+            break;
+        default:
+            break;
+    }
+},
+
+hideAni(name) {
+    switch (name) {
+        case "name_1":
+            this.zhuanchang_zb.node.active = false;
+            break;
+        case "name_2":
+            this.zhuanchang_db.node.active = false;
+            break;
+        default:
+            break;
+    }
+}
+
+// 手动创建
+var self = this;
+cc.loader.loadResDir('pet/dragon', function(err, assets){
+    if(err){
+        return;
+    }
+    if(assets.length <= 0){  
+        return;  
+    }  
+
+    var newHero = new cc.Node();  
+    self.node.addChild(newHero);  
+    var dragonDisplay = newHero.addComponent(dragonBones.ArmatureDisplay);  
+    for(var i in assets){  
+        if(assets[i] instanceof dragonBones.DragonBonesAsset){  
+            //attachments，皮肤等等）和动画但不持有任何状态
+            dragonDisplay.dragonAsset = assets[i];  
+        }  
+        if(assets[i] instanceof dragonBones.DragonBonesAtlasAsset){  
+            // 骨骼数据所需的 Atlas Texture 数据
+            dragonDisplay.dragonAtlasAsset  = assets[i];  
+        }  
+    }  
+    // 当前的 Armature 名称
+    dragonDisplay.armatureName = 'boos1tree';  
+    // animName 指定播放动画的名称
+    dragonDisplay.playAnimation('idle');  
+})
+
+当使用 DragonBones 组件时，属性检查器 中 Node 组件上的 Anchor 与 Size 属性是无效的
+
+
         
 Dragon Asset    骨骼信息数据，包含了骨骼信息（绑定骨骼动作，slots，渲染顺序，attachments，皮肤等等）和动画，但不持有任何状态。
                 多个 ArmatureDisplay 可以共用相同的骨骼数据。
@@ -29,37 +99,3 @@ Debug Bones     是否显示 bone 的 debug 信息
 Enable Batch    是否开启动画合批，默认关闭。（v2.0.9 中新增）
                 开启时，能减少 drawcall，适用于大量且简单动画同时播放的情况。
                 关闭时，drawcall 会上升，但能减少 cpu 的运算负担，适用于复杂的动画。
-
-robot: {
-    type: dragonBones.ArmatureDisplay,
-    default: null,
-},
-
-
-
-var self = this;
-cc.loader.loadResDir('pet/dragon', function(err, assets){
-	if(err){
-		return;
-	}
-	if(assets.length <= 0){  
-        return;  
-    }  
-
-    var newHero = new cc.Node();  
-    self.node.addChild(newHero);  
-    var dragonDisplay = newHero.addComponent(dragonBones.ArmatureDisplay);  
-    for(var i in assets){  
-        if(assets[i] instanceof dragonBones.DragonBonesAsset){  
-            dragonDisplay.dragonAsset = assets[i];  
-        }  
-        if(assets[i] instanceof dragonBones.DragonBonesAtlasAsset){  
-            dragonDisplay.dragonAtlasAsset  = assets[i];  
-        }  
-    }  
-
-    dragonDisplay.armatureName = 'boos1tree';  
-    dragonDisplay.playAnimation('idle');  
-})
-
-当使用 DragonBones 组件时，属性检查器 中 Node 组件上的 Anchor 与 Size 属性是无效的

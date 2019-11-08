@@ -25,6 +25,9 @@ module.exports = nodeMgr;
 最好在切换场景或其他不再需要对象池的时候手动调用 clear 方法来清空缓存节点。
 myPool.clear();
 
+get 会触发 onEnable
+put 会触发 onDisable
+
 // 可以传入任意数量类型的参数，这些参数会被原样传递给 reuse 方法
 this._pool.get(this);
 
