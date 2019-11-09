@@ -1,2 +1,3 @@
-var a = 50 * 1.05 ** 2
-console.log(a)
+for (var i = 0; i < 10; i++) {
+	console.log(Math.random())
+}

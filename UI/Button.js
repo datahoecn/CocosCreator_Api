@@ -12,18 +12,18 @@ Button
   Target：当前组件绑定的节点
   Interactable：是否响应交互，不勾选相当于禁用。
 
-  var eventHandler = new cc.Component.EventHandler();
-  eventHandler.target = this.node;//Node 目标节点
-  eventHandler.component = "MainMenu";//String 目标组件名
-  eventHandler.handler = "OnClick"//String 响应事件函数名
+var event = new cc.Component.EventHandler();
+event.target = this.node;
+event.component = "MainMenu";
+event.handler = "OnClick";
 
   var data = {
       c: 1111, 
   };
-  eventHandler.customEventData = data;
+  event.customEventData = data;
   
   var button = node.getComponent(cc.Button);
-  button.clickEvents[0] = eventHandler;//button.clickEvents.push(eventHandler);
+  button.clickEvents[0] = event;//button.clickEvents.push(event);
 
 
 
