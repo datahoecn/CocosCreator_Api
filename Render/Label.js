@@ -24,20 +24,17 @@ font 			Font 文本字体。
 useSystemFont 	Boolean 是否使用系统字体。
 spacingX 		Number 文字之间 x 轴的间距（使用 BMFont 位图字体时生效）
 cacheMode 		Label.CacheMode 文本缓存模式, 仅对 系统字体 或 ttf 字体有效
-node 			Node 该组件被附加到的节点。
-enabled 		Boolean 表示该组件自身是否启用。
-enabledInHierarchy Boolean 表示该组件是否被启用并且所在的节点也处于激活状态。
-_isOnLoadCalled Number 返回一个值用来判断 onLoad 是否被调用过，不等于 0 时调用过，等于 0 时未调用。
-_name 			String
-_objFlags 		Number
-name 			String 该对象的名称。
-isValid 		Boolean 表示该对象是否可用（被 destroy 后将不可用）。
+
 
 
 设置string后，node的宽度未变更,下一帧才刷新大小
-在设置 label 所有属性后在执行一次 label._updateRenderData(true); 就能带当帧获取大小
-//设置字体
-window.localFont = undefined;
-cc.loader.loadRes("fonts/HYWenHei-85W.ttf", function(err, font) {
-    localFont = font;
-});
+在设置 label 所有属性后,执行一次 label._updateRenderData(true); 就能带当帧获取大小
+
+
+LabelOutlineb
+
+	properties
+	 	color 				Color 改变描边的颜色   new cc.Color(0.5, 0.3, 0.7, 1.0);
+		width 				Number 改变描边的宽度
+
+

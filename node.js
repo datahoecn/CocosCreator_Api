@@ -99,6 +99,7 @@ removeFromParent 后，节点可重新 add 回场景中。
 	cc.game.removePersistRootNode(myNode);
 创建新节点
 	var node = new cc.Node('Sprite');
+	var role = new cc.Sprite('role.png');
 
 克隆已有节点 创建预制节点
 	var ePlane = cc.instantiate(this.EnemyPlanePrefab);
