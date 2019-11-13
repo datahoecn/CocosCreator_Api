@@ -76,7 +76,7 @@ export default class Role extends cc.Component {
         // 获取目标位置与本节点位置差
         var direction = this._targetPos.sub(this.node.position);
         // 更新本节点位置，normalize 归一化，mul缩放向量
-        this.node.position = this.node.position.add(direction.normalize().mul(this.speed));
+        this.node.position = this.node.position.add(direction.normalize().mul(this.speed * dt));
     }
     // 重置目标位置
     _refreshTargetPos ()  {
