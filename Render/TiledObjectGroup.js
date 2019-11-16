@@ -1,6 +1,5 @@
 properties
-	__eventTargets Array Register all related EventTargets,...
-	node Node 该组件被附加到的节点。
+
 
 method
 	getPositionOffset 获取子对象的偏移位置。	Vec2 	let offset = tMXObjectGroup.getPositionOffset();

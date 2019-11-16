@@ -6,7 +6,7 @@ method
 	getLayerName 	String	let layerName = tiledLayer.getLayerName(); 获取层的名称。
 	SetLayerName 	tiledLayer.setLayerName("New Layer"); 设置层的名称
 	getProperty 	Any		let property = tiledLayer.getProperty("info"); 获取指定属性名的值。
-	getPositionAt 	获取以左下角为原点的像素坐标 	Vec2	let pos = tiledLayer.getPositionAt(cc.v2(0, 0)); 
+	getPositionAt 	通过Map坐标获取以左下角为原点的像素坐标 	Vec2	let pos = tiledLayer.getPositionAt(cc.v2(0, 0)); 
 														let pos = tiledLayer.getPositionAt(0, 0);
 	setTileGIDAt 	重新设置纹理，根据gid		tiledLayer.setTileGIDAt(tileGid, 10, 10) // tileGid 需要加一
 													
