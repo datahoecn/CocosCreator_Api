@@ -40,6 +40,15 @@ Vec2
         transformMat4 Transforms the vec2 with a mat4. 3rd vector component is implicitly '0', 4th vector component is implicitly '1'
 
 
+//取得当前列表项在滚动视图中的纵向位置
+    getPositionInView: function (item) { 
+        //将相对 item.parent 的坐标，转换为世界坐标
+        let worldPos = item.parent.convertToWorldSpaceAR(item.position);
+        //将 worldPos 转换为相对 this.scrollView.node 的坐标
+        let viewPos = this.scrollView.node.convertToNodeSpaceAR(worldPos);
+        return viewPos;
+    },
+
 
 向量计算
     var v = cc.v2(10, 10);//向量减法，并返回新结果。
