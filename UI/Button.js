@@ -14,7 +14,8 @@ Button
     var button = node.getComponent(cc.Button);
     button.clickEvents[0] = event;//button.clickEvents.push(event);
 
-
+    this.node.on('click', this.callback, this);
+    this.node.off('click', this.callback, this);
 
     监听者通知分发者这里有代码对此事件感兴趣
     出事后由发射者通知分发者
@@ -127,7 +128,7 @@ Button
     });
 
     this.node.on('say-hello', function (msg) {
-    console.log(msg);
+        console.log(msg);
     });
 
     //在事件监听回调中，开发者会接收到一个 cc.Event 类型的事件对象 event

@@ -8,6 +8,7 @@ properties
 
 
 method
+    setState        0 是正常，1 是灰色
     textureLoaded   返回是否已加载纹理 return this._texture && this._texture.loaded;
     isRotated       获取 SpriteFrame 是否旋转
     getRect         Rect    获取 SpriteFrame 的纹理矩形区域
