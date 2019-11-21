@@ -158,6 +158,9 @@ cc.sequence(
 
 Animation组件
 
+当在 cc.Animation 注册了一个回调函数后，它会在播放一个动画时，对相应的 cc.AnimationState 注册这个回调，
+在 cc.AnimationState 停止播放时，对 cc.AnimationState 取消注册这个回调。
+
 playAni(nameStr, count, dt, isLoop){
     this.node.stopAllActions();
     this.node.getComponent(cc.Sprite).spriteFrame = this.bigImg.getSpriteFrame(nameStr + 0);
@@ -300,26 +303,18 @@ this.playAni("heroRun" + this.heroType + "_", 5, 0.06, true);
         animation.play('anim_run');
 
 
-Spine
-    //component : Spine skeleton
-    Src Blend Factor：所用图片的颜色混合设置源项//1.10.2版本没有
-    Dst Blend Factor：所用图片的颜色混合设置目标项//1.10.2版本没有
-    Skeleton Data：骨骼动画文件。
-    Default Skin：默认的身体部件套装名称，这里形象地称为“皮肤”，
-    如果 Spine 中有多套皮肤信息，我们可以跟据需求为骨骼动画更换不同的皮肤套装，从而实现换装效果。
-    Animation：默认的动作名称，一般会有多个动作供切换
-    Loop：用来设置是否循环播放。
-    Premultiplied Alpha：在图片渲染时做半透明处理，
-    它的重要意义在于可使带透明度的图片纹理正常进行线性插值，
-    从而让旋转、缩放或者非整数的纹理坐标正常显示，否则就会像上面案例一样，在透明像素边缘产生奇怪的颜色
-    Time Scale：设置播放速度
-    Debug Slots：设置是否显示插槽
-    Debug Bones：设置是否显示骨骼。
-
-    //Spine 动作融合
-    动作融合的目的是保证多个动作之间更平滑、自然地切换。
-    要在两个动作之间使用动作融合，则需设置动作的切换时间
-
+AnimationClip 
+    properties
+        duration Number 动画的持续时间。
+        sample Number 动画的帧速率。
+        speed Number 动画的播放速度。
+        wrapMode WrapMode 动画的循环模式。
+        curveData Object 曲线数据。
+        events Object[] 事件数据。
+        loaded Boolean 该资源是否已经成功加载
+        name String 该对象的名称。
+    method
+        createWithSpriteFrames 使用一组序列帧图片来创建动画剪辑
 DragonBone
     var armatureDisplay = this.node.getComponent(dragonBones.ArmatureDisplay);
     if(Config.language === "zh") {
