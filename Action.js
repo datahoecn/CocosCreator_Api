@@ -1,4 +1,5 @@
 // PZE9653cPtkc
+
 // 范例使用节点上组件 this 可以暂停，文档说使用 node
 cc.director.getActionManager().resumeTarget(this);
 cc.director.getActionManager().pauseTarget(this);
