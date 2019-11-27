@@ -1,3 +1,7 @@
 
-var a = 1 ? 1 : 2;
-console.log(a)
+function A() {
+	console.log("A")
+}
+
+console.log(A.prototype);
+console.log(A._proto_)
