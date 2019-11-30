@@ -1,16 +1,6 @@
 svn checkout https://172.16.1.98/svn/math/design/Math/assets --username=lijie --password=123456 /Users/xhkj/Desktop/math/assets
 
 
-if (CC_EDITOR) {
-    Editor.Profile.load('profile://project/i18n.json', (err, profile) => {
-        window.i18n.curLang = profile.data['default_language'];
-        if (polyInst) {
-            let data = loadLanguageData(window.i18n.curLang) || {};
-            initPolyglot(data);
-        }
-    });
-}
-
 模块设置是针对发布 Web 版游戏时引擎中使用的模块进行裁剪，
   达到减小发布版引擎包体的效果。在列表中选中的模块在打包时将被引擎包括，未选中的模块会被裁剪掉。
 动态合图
