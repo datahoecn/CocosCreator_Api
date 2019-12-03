@@ -64,9 +64,19 @@ Button
     返回值是注册成功的回调函数，利用此返回值关闭事件监听
 
     onEnable() {
-        this.node.on(cc.Node.EventType.TOUCH_START, this._onTouchStart, this);
-        this.node.on(cc.Node.EventType.TOUCH_END, this._onTouchEnd, this);
-        this.node.on(cc.Node.EventType.TOUCH_CANCEL, this._onTouchCancel, this);
+        this.control_bg.on(cc.Node.EventType.TOUCH_START, this.start_click, this);
+        this.control_bg.on(cc.Node.EventType.TOUCH_MOVE, this.move_click, this);
+        this.control_bg.on(cc.Node.EventType.TOUCH_END, this.end_click, this);
+        this.control_bg.on(cc.Node.EventType.TOUCH_CANCEL, this.cancel_click, this);
+
+        start_click(e) {
+        },
+        move_click(e) {
+        },
+        end_click(e) {
+        },
+        cancel_click(e) {
+        },
     },
 
     onDisable() {
