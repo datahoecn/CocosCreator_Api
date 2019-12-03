@@ -55,7 +55,7 @@ console.log(a);//{aa: 2};
 console.log(b);//{aa: 2};
 
 
-所有函数与对象都有一个toSring和valuOf方法
+所有函数与对象都有一个 toSring 和 valueOf 方法
 来自Object.prototype
 
 
@@ -79,11 +79,6 @@ var a = add(1)(2)(3)(4);
 console.log(a + 10)
 
 
-var a = [b: 0];
-var c = "b";
-// 当属性名是一个变量时，用中括号
-a[c];
-
 arguments是对象{"0": "参数1", "1": "参数2"}
 arguments对象不是一个 Array 。它类似于Array,但除了length属性和索引元素之外没有任何Array属性。
 第一个参数在索引0处
@@ -94,7 +89,7 @@ arguments是所有（非箭头）函数中都可用的局部变量
 var args = Array.prototype.slice.call(arguments);
 var args = [].slice.call(arguments);
 var args = (arguments.length === 1 ? [arguments[0]] : Array.apply(null, arguments));
-要确定函数签名中（输入）参数的数量，请使用Function.length属性
+要确定函数签名中（输入）参数的数量，请使用Function.length 属性
 
 function myConcat(separator) {
   var args = Array.prototype.slice.call(arguments, 1);
@@ -173,13 +168,6 @@ value < min_inclusive ? min_inclusive : value < max_inclusive ? value : max_incl
 	执行阶段
 		变量赋值，函数引用，执行其他可执行代码
 		
-for(let i = 0) 没有生成新的作用域
-如果用 var 在 {} 外还可以访问到 i
-如果用 let 在 {} 外不能可以访问到 i
-
-条件（三元）运算符
-	?
-	(condition) ? value1:value2
 
 JavaScript 全局属性
 	isNaN()	检查某个值是否是数字。  isNaN(123) // false  如果参数值为 NaN 或字符串、对象、undefined等非数字值则返回 true
@@ -210,8 +198,8 @@ Math 对象
 Number 对象
 	var num = 5.56789;
 	var n = num.toFixed(2);
-	toFixed(x)			把数字转换为字符串，结果的小数点后有指定位数的数字。
-	toPrecision(x)		把数字格式化为指定的长度。
+	toFixed(x)			四舍五入为指定小数位数的数字
+	toPrecision(x)		四舍五入把数字格式化为指定的长度。
 	toString()			把数字转换为字符串，使用指定的基数。
 String 对象
 	string.length		返回字符串的长度
@@ -340,6 +328,7 @@ ${}中可以是变量，也可以是表达式，还可以是一个函数
 	}
 	`foo: ${foo()}`
 
+
 构造函数的函数名首字母必须大写
 内部使用this对象，来指向将要生成的对象实例
 new 会有如下实现
@@ -347,12 +336,7 @@ new 会有如下实现
 	这个新对象会被执行[[ 原型]] 连接。
 	这个新对象会绑定到函数调用的this。
 	如果函数没有返回其他对象，那么new 表达式中的函数调用会自动返回这个新对象
-	// PPrototype是原型
-	Person.prototype = {
-		constructor: Person,
-		getName: function() {}
-	}
-	
+
 	//将构造函数以参数形式传入
 	function New(func) {
 		// 声明一个中间对象，该对象为最终返回的实例
