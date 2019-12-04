@@ -189,6 +189,11 @@ cc.sys.windowPixelResolution (Number)
 当前平台的功能
 cc.sys.capabilities//Object
 
+// 比如你用模拟器运行是原生版本，手机APP是原生版本。
+// 对应的在浏览器里运行的是H5版本
+// cc.sys.isNative 这个变量等同于 CC_JSB，通常情况下建议使用 CC_JSB
+// 通过 CC_JSB 来判断是否为 native 环境（模拟器）
+// 通过 cc.sys.isMobile 来判断是否为手机环境
 if (cc.sys.isNative) {
     cc.log("本地平台");
     if (cc.sys.isMobile) {

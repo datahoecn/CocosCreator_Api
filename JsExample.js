@@ -42,19 +42,6 @@ function add(a,b,c) {
 var _add = createCurry(add);
 var a = _add(1)(2, 3);
 
-函数参数转为数组
-var toArray = function(s){
-    try{
-        return Array.prototype.slice.call(s);
-    }
-    catch(e){
-        var arr = [];
-        for(var i = 0,len = s.length; i < len; i++){
-               arr[i] = s[i];//据说这样比push快
-        }
-        return arr;
-    }
-}
 
 // 可以获取 -0.5 ~ 0.5
 Math.random() - 0.5
@@ -72,9 +59,6 @@ Math.random() - 0.5
 	};	
 
     
-// 数组求和
-var sum = arr.reduce((x,y)=>x+y);
-
 // 计算数组中每个元素出现的次数
 let nameNum = names.reduce((pre,cur)=>{
   if(cur in pre){

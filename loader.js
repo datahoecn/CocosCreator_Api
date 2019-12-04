@@ -9,13 +9,11 @@ if (CC_EDITOR) {
     });
 }
 
-
-粒子使用的 png 贴图文件或 base64 格式的内置图片文件可能会有不正确的预乘信息，导致渲染出的粒子不能正确显示透明区域。
-如果出现这种情况，请手动修改粒子 plist 文件中的 blendFuncSource 属性到下面的值：
+导致渲染出的粒子不能正确显示透明区域。请手动修改粒子 plist 文件中的 blendFuncSource 属性到下面的值：
     <key>blendFuncSource</key>
     <integer>770</integer>
 
-Trim mode 请选择 Trim，一定不要选择 Crop, flush position，否则透明像素剪裁信息会丢失，
+制作序列帧动画时，Trim mode 请选择 Trim，一定不要选择 Crop, flush position，否则透明像素剪裁信息会丢失，
 您在使用图集里的资源时也就无法获得原始图片未剪裁的尺寸和偏移信息了
 
 将 Sprite 组件 的 Trim 设为 false，将 Size Mode 设为 RAW。这样动画在播放每个序列帧时，
@@ -79,10 +77,8 @@ loader
 
 JSON 资源
          // 声明
-        npcList: {
-            default: null,
-            type: cc.JsonAsset,
-        },
+        npcList: cc.JsonAsset,
+        
         // 读取
         var json = this.npcList.json;
 
@@ -94,10 +90,7 @@ JSON 资源
         如 .txt, .plist, .xml, .json, .yaml, .ini, .csv, .md，都会导入为 cc.TextAsset。
         组件关联一个 TextAsset：
         // 声明
-        file: {
-            default: null,
-            type: cc.TextAsset,
-        },
+        file: cc.TextAsset
         // 读取
         var text = this.file.text;
 
@@ -162,17 +155,18 @@ JSON 资源
         }
     });
 
-cc.director.preloadScene("main", (completedCount, totalCount, item) => {            
-    let p = completedCount/totalCount;
-    this.progress_js.progress = p;
-    this.progress_lb.string = parseInt(p * 100) + '%';
-},() => {
-    cc.director.loadScene("main"); 
-});  
+加载场景
+    cc.director.preloadScene("main", (completedCount, totalCount, item) => {            
+        let p = completedCount/totalCount;
+        this.progress_js.progress = p;
+        this.progress_lb.string = parseInt(p * 100) + '%';
+    },() => {
+        cc.director.loadScene("main"); 
+    });  
 
-cc.director.preloadScene('playScene', function () {
-    cc.director.loadScene('playScene');
-});
+    cc.director.preloadScene('playScene', function () {
+        cc.director.loadScene('playScene');
+    });
 
 用 cc.loader 加载资源是不会重复加载的，loader中是缓存的，如果之前加载过了之后是不会再加载，而是直接从缓存中调用。
 可以用 cc.loader.getRes(url)查看是否已经加载过了

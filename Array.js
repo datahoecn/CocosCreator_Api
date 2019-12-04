@@ -44,7 +44,7 @@ Array 对象
 		array.sort();						按字符串类型，进行排序
 
 		array.slice(start, end)				选取数组的的一部分，并返回一个新数组。
-		array1.concat(array2,array3,...,arrayX)		返回一个新数组，连接两个或多个数组
+		array1.concat(array2,array3,...,arrayX)		返回一个新数组，可以连接单个值，也可以连接数组
 		array.copyWithin(target, start, end)		复制到指定目标索引位置, 元素复制的起始位置, 停止复制的索引位置 (默认为 array.length)。如果为负值，表示倒数
 
 		array.every(function(curValue){})	是否符合指定条件,有一个元素不满足,剩余的元素不会再进行检测
