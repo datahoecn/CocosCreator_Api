@@ -1,10 +1,4 @@
 类型
-	//类型声明是可选的
-	var counter; 				//未知（any）类型
-	var counter = 0; 			//number类型（TypeScript推断出的）
-	var counter : number; 		//number类型
-	var counter : number = 0; 	//number类型
-
 	//基本类型
 	boolean		var isDone : boolean = false;
 	number  	var height : number = 6;

@@ -27,18 +27,9 @@ _focusToNode(node) {
     },
 */
 
-/**
- * @object
- * Location主要用从场景树中检索UI节点
- */
 let Locator = {
 
     timeout: 5000, //超时
-    /**
-     * 定位解析
-     * @param locator
-     * @returns {Array}
-     */
     parse: function (locator) {
         cc.assert(locator, 'locator string is null');
 
@@ -51,13 +42,6 @@ let Locator = {
         });
         return segments;
     },
-
-    /**
-     * 通过节点名搜索节点对象
-     * @param root
-     * @param name
-     * @returns {*}
-     */
     seekNodeByName: function (root, name) {
         if (!root)
             return null;
@@ -74,13 +58,6 @@ let Locator = {
         }
         return null;
     },
-
-    /**
-     * 在root节点中，定位locator
-     * @param root
-     * @param locator
-     * @param cb
-     */
     locateNode: function (root, locator, cb) {
         if (!this.locating) {
             this.startTime = Date.now();    

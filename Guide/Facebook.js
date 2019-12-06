@@ -83,7 +83,7 @@ happymath.ios.com
                                                       annotation:annotation];
 }
 
-sdkbox
+使用现成的sdkbox
   // connect 失败
   sdkbox.PluginFacebook.init();
   //打开/关闭Facebook的调试模式 sdkbox_config.json

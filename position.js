@@ -39,27 +39,6 @@ Vec2
         project 返回当前向量在指定 vector 向量上的投影向量。
         transformMat4 Transforms the vec2 with a mat4. 3rd vector component is implicitly '0', 4th vector component is implicitly '1'
 
-
-//取得当前列表项在滚动视图中的纵向位置
-    getPositionInView: function (item) { 
-        //将相对 item.parent 的坐标，转换为世界坐标
-        let worldPos = item.parent.convertToWorldSpaceAR(item.position);
-        //将 worldPos 转换为相对 this.scrollView.node 的坐标
-        let viewPos = this.scrollView.node.convertToNodeSpaceAR(worldPos);
-        return viewPos;
-    },
-
-
-向量计算
-    var v = cc.v2(10, 10);//向量减法，并返回新结果。
-    v.sub(cc.v2(5, 5));      // return Vec2 {x: 5, y: 5};
-
-计算两点之间距离
-    var dist = this.node.position.sub(playerPos).mag();
-
-// 判断是否在目标位置，周围50
-pos_1.fuzzyEquals(pos_2, 50);
-
 Role.ts
 // 挂在目标节点上
 const {ccclass, property} = cc._decorator;
