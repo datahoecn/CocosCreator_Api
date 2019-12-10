@@ -1,5 +1,10 @@
 Button
 
+    监听者通知分发者这里有代码对此事件感兴趣
+    出事后由发射者通知分发者
+    分发者根据当前的监听情况，把事件通知所有针对此事件的监听者
+    通知分发者这段代码对此事件不再感兴趣了
+
     Interactable 是否响应交互，不勾选相当于禁用。
 
     var event = new cc.Component.EventHandler();
@@ -14,47 +19,6 @@ Button
     var button = node.getComponent(cc.Button);
     button.clickEvents[0] = event;//button.clickEvents.push(event);
 
-    this.node.on('click', this.callback, this);
-    this.node.off('click', this.callback, this);
-
-    监听者通知分发者这里有代码对此事件感兴趣
-    出事后由发射者通知分发者
-    分发者根据当前的监听情况，把事件通知所有针对此事件的监听者
-    通知分发者这段代码对此事件不再感兴趣了
-
-    // 按键监听
-    onLoad () {
-        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, this._onKeyPressed, this);
-    },
-    onDestroy () {
-        cc.systemEvent.off(cc.SystemEvent.EventType.KEY_UP, this._onKeyPressed, this);
-    },
-    //按键监听函数
-    _onKeyPressed: function(event) {
-        switch(event.keyCode) {
-            case cc.macro.KEY.up:
-                //上键，
-                break;
-            case cc.macro.KEY.down:
-                //下键
-                break;
-            case cc.macro.KEY.left:
-                break;
-            case cc.macro.KEY.right:
-                break;
-            default:
-                return;
-        }
-    },
-
-
-
-    longTouchEvents: [cc.Component.EventHandler],
-    this.longTouchEvents.forEach((eventHandler) => {
-        eventHandler.emit([this._touchCounter]);
-    });
-
-
 
     this.node.on(type, callback, [target], [useCapture  = false]);
     type        string    监听事件类型
@@ -63,27 +27,45 @@ Button
     useCapture  boolean   捕获模式开关
     返回值是注册成功的回调函数，利用此返回值关闭事件监听
 
-    onEnable() {
-        this.control_bg.on(cc.Node.EventType.TOUCH_START, this.start_click, this);
-        this.control_bg.on(cc.Node.EventType.TOUCH_MOVE, this.move_click, this);
-        this.control_bg.on(cc.Node.EventType.TOUCH_END, this.end_click, this);
-        this.control_bg.on(cc.Node.EventType.TOUCH_CANCEL, this.cancel_click, this);
+    this.node.on(cc.Node.EventType.TOUCH_START, this.start_click, this);
+    this.node.on(cc.Node.EventType.TOUCH_MOVE, this.move_click, this);
+    this.node.on(cc.Node.EventType.TOUCH_END, this.end_click, this);
+    this.node.on(cc.Node.EventType.TOUCH_CANCEL, this.cancel_click, this);
 
-        start_click(e) {
-        },
-        move_click(e) {
-        },
-        end_click(e) {
-        },
-        cancel_click(e) {
-        },
-    },
+    this.node.off(cc.Node.EventType.TOUCH_START, this.start_click, this);
+    this.node.off(cc.Node.EventType.TOUCH_MOVE, this.move_click, this);
+    this.node.off(cc.Node.EventType.TOUCH_END, this.end_click, this);
+    this.node.off(cc.Node.EventType.TOUCH_CANCEL, this.cancel_click, this);
 
-    onDisable() {
-        this.node.off(cc.Node.EventType.TOUCH_START, this._onTouchStart, this);
-        this.node.off(cc.Node.EventType.TOUCH_END, this._onTouchEnd, this);
-        this.node.off(cc.Node.EventType.TOUCH_CANCEL, this._onTouchCancel, this);
-    },
+
+    this.node.on('click', this.callback, this);
+    this.node.off('click', this.callback, this);
+
+    cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, this.keyBoard, this);
+    cc.systemEvent.off(cc.SystemEvent.EventType.KEY_UP, this.keyBoard, this);
+
+    Global.isAgain = false;
+    keyBoard: function(event) {
+      cc.log(event.keyCode);
+      if(event.keyCode === 6) {
+         if(Global.isAgain){
+            cc.game.end();
+         }else{
+            Global.isAgain = true;
+            setTimeout(() => {
+               Global.isAgain = false;
+            }, 1000);
+         }
+      }
+    }
+
+
+    longTouchEvents: [cc.Component.EventHandler],
+    this.longTouchEvents.forEach((eventHandler) => {
+        eventHandler.emit("需要传递的值");
+    });
+
+   
 
     this.node.on(cc.Node.EventType.TOUCH_START, (event) => {
         // this._targetNode接受点击的节点
@@ -103,9 +85,7 @@ Button
     }, this);
 
 
-    
-
-    callback有一个传入参数，cc.Event 类型的事件对象 event
+cc.Event 类型的事件对象 event
         type                      String    事件的类型（事件名）
         bubbles                   boolean   表示该事件是否进行冒泡
         target                    cc.Node   接收到事件的原始对象
@@ -119,22 +99,22 @@ Button
         getUserData               Function  获取自定义事件的信息（属于 cc.Event.EventCustom）
 
 
-    触摸事件
-        touch cc.Touch  与当前事件关联的触点对象
-        getID Number  获取触点的 ID，用于多点触摸的逻辑判断
-        getLocation Object  获取触点位置对象，对象包含 x 和 y 属性
-        getLocationX  Number  获取触点的 X 轴位置
-        getLocationY  Number  获取触点的 Y 轴位置
-        getPreviousLocation Object  获取触点上一次触发事件时的位置对象，对象包含 x 和 y 属性
-        getStartLocation  Object  获取触点初始时的位置对象，对象包含 x 和 y 属性
-        getDelta  Object  获取触点距离上一次事件移动的距离对象，对象包含 x 和 y 属性
+触摸事件
+    touch cc.Touch  与当前事件关联的触点对象
+    getID Number  获取触点的 ID，用于多点触摸的逻辑判断
+    getLocation Object  获取触点位置对象，对象包含 x 和 y 属性
+    getLocationX  Number  获取触点的 X 轴位置
+    getLocationY  Number  获取触点的 Y 轴位置
+    getPreviousLocation Object  获取触点上一次触发事件时的位置对象，对象包含 x 和 y 属性
+    getStartLocation  Object  获取触点初始时的位置对象，对象包含 x 和 y 属性
+    getDelta  Object  获取触点距离上一次事件移动的距离对象，对象包含 x 和 y 属性
 
 
 
-    发射事件
+发射事件
     //dispatchEvent可以做事件传递
     this.node.emit('say-hello', {
-    msg: 'Hello, this is Cocos Creator',
+        msg: 'Hello, this is Cocos Creator',
     });
 
     this.node.on('say-hello', function (msg) {

@@ -89,6 +89,12 @@ this.node.rotation = -Math.atan2(sub_y, sub_x) * 180 / Math.PI;
 
 this.node.setPosition(cc.visibleRect.bottomLeft);
 
+let rot_1 = Math.atan2(y_1,x_1);
+let rot_2 = Math.atan2(y_2,x_2);
+let sub_1 = Math.abs(rot_1 - rot_2);
+let sub_2 = Math.abs(2 * Math.PI - Math.abs(rot_1) - Math.abs(rot_2));
+let sub_3 = sub_1 > sub_2 ? sub_2 : sub_1; // 夹角
+
 destroy	与 removeFromParent 区别		
 destroy 后，节点不可用。
 removeFromParent 后，节点可重新 add 回场景中。
