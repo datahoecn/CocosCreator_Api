@@ -12,7 +12,7 @@ let winSize=cc.director.getWinSize();
 let visiSize=cc.director.getVisibleSize();
 let winSizePixels=cc.director.getWinSizeInPixels();
 
-winSize = visiSize = winSizePixels。一般使用visiSize即可
+winSize = visiSize = winSizePixels。一般使用 visiSize 即可
 
 cc.winSize  Size 为当前的游戏窗口的大小
 cc.visibleRect.width, cc.visibleRect.height
