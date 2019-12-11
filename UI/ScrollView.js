@@ -23,7 +23,7 @@ ScrollView//滚动视图
 		this.content.addChild(item);
 		item.setPosition(0, -item.height * (0.5 + i) - this.spacing * (i + 1));
 		item.getComponent('Item').initItem(i, i);
-        this.items.push(item);
+    this.items.push(item);
 	}
 	//取得当前列表项在滚动视图中的纵向位置
     getPositionInView: function (item) { 
