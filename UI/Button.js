@@ -19,6 +19,13 @@ Button
     var button = node.getComponent(cc.Button);
     button.clickEvents[0] = event;//button.clickEvents.push(event);
 
+    cc.game.on(cc.game.EVENT_HIDE, (event)=>{
+        cc.log("game onPause - StorageUtil");
+    });
+    cc.game.on(cc.game.EVENT_SHOW, (event)=>{
+        cc.log("game onResume - StorageUtil");
+    });
+
 
     this.node.on(type, callback, [target], [useCapture  = false]);
     type        string    监听事件类型

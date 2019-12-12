@@ -1,14 +1,9 @@
 // PZE9653cPtkc
 
 // 范例使用节点上组件 this 可以暂停，文档说使用 node
-cc.director.getActionManager().resumeTarget(this);
-cc.director.getActionManager().pauseTarget(this);
-// 源码
-resumeTarget:function (target) {
-    var element = this._hashTargets[target._id];
-    if (element)
-        element.paused = false;
-},
+cc.director.getActionManager().resumeTarget(this.node);
+cc.director.getActionManager().pauseTarget(this.node);
+
 
 停止动作
     node.stopAction(action);
@@ -48,6 +43,8 @@ cc.sequence(
     cc.callFunc         执行回调函数       var finish = cc.callFunc(this.myMethod, this, opt);
                                           var finish = cc.callFunc(function () {}, this, opt);
                                           var finish = cc.callFunc(() => {}, this, opt);
+                                            myMethod: function (sender, opt) { // sender == this
+                                            }
     cc.targetedAction   用已有动作和一个新的目标节点创建动作  
                                           var flipYAction = cc.targetedAction(target Node,action FiniteTimeAction);
 

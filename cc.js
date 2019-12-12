@@ -1,3 +1,10 @@
+//定义一个枚举类型。
+//用户可以把枚举值设为任意的整数，如果设为 -1，系统将会分配为上一个枚举值 + 1
+var LState = cc.Enum({
+    Init:0,
+    CheckVersion:1,
+})
+
 
 // this 是 object
 this[name + "_prefab"];
@@ -25,18 +32,6 @@ cc.Canvas.instance.fitHeight = !bFitWidth;
 
 // 关闭调试信息
 cc.debug.setDisplayStats(false);
-
-// instantiate node from prefab
-var scene = cc.director.getScene();
-var node = cc.instantiate(prefabAsset);
-node.parent = scene;
-
-var node = new cc.Node();
-cc.log(cc.isValid(node));    // true
-node.destroy();
-cc.log(cc.isValid(node));    // true, still valid in this frame
-// after a frame...
-cc.log(cc.isValid(node));    // false, destroyed in the end of last frame
 
 
 Rect:
@@ -95,13 +90,6 @@ Rect:
 this.node.getBoundingBoxToWorld().contains(event.getLocation())
 
 
-cc.game.on(cc.game.EVENT_HIDE, (event)=>{
-    cc.log("game onPause - StorageUtil");
-});
-cc.game.on(cc.game.EVENT_SHOW, (event)=>{
-    cc.log("game onResume - StorageUtil");
-});
-
 cc.js.getClassName(obj); //param {Object|Function} return {String}
 cc.js.isNumber(obj);
 cc.js.isString(obj);
@@ -146,13 +134,6 @@ cc.js.isString(obj);
 
 
 cc.find("Canvas/player1/playerName")//找当前场景中的节点
-
-//定义一个枚举类型。
-//用户可以把枚举值设为任意的整数，如果设为 -1，系统将会分配为上一个枚举值 + 1
-var LState = cc.Enum({
-    Init:0,
-    CheckVersion:1,
-})
 
 cc.randomMinus1To1()//returns a random float between -1 and 1
 

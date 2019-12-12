@@ -1,3 +1,8 @@
+
+var angle = Math.random() * Math.PI * 2;
+var dx = 500 * Math.cos(angle);
+var dy = 500 * Math.sin(angle);
+
 Vec2
     cc.v2(0, 0);
     properties

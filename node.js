@@ -85,6 +85,15 @@ method
 	destroy 			obj.destroy(); 销毁该对象，并释放所有它对其它对象的引用。销毁节点并不会立刻被移除，而是在当前帧逻辑更新结束后，统一执行
 						cc.isValid(obj) 来检查对象是否已被销毁。
 
+
+var node = new cc.Node();
+cc.log(cc.isValid(node));    // true
+node.destroy();
+cc.log(cc.isValid(node));    // true, still valid in this frame
+// after a frame...
+cc.log(cc.isValid(node));    // false, destroyed in the end of last frame
+
+
 this.node.rotation = -Math.atan2(sub_y, sub_x) * 180 / Math.PI;
 
 this.node.setPosition(cc.visibleRect.bottomLeft);
