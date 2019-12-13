@@ -1,4 +1,16 @@
 
+Object.values()方法返回一个给定对象自身的所有可枚举属性值的数组，
+值的顺序与使用for...in循环的顺序相同 ( 区别在于 for-in 循环枚举原型链中的属性 )。
+var obj = { foo: 'bar', baz: 42 };
+console.log(Object.values(obj)); // ['bar', 42]
+console.log(Object.values('foo')); // ['f', 'o', 'o'].
+
+for (var prop in obj) {
+  if (obj.hasOwnProperty(prop)) {
+    console.log(`obj.${prop} = ${obj[prop]}`);
+  } 
+}
+
 
 function fn(want) {
 	setTimeout(want, 0);// 后执行
@@ -39,20 +51,6 @@ function fn(want) {
 			}
 		}
 	})
-
-
-基本类型可以认为是传值赋值
-var a = [1,2,3];
-var b = a;
-b = [4,5,6];
-console.log(a);//[1,2,3];
-console.log(b);//[4,5,6];
-对象类型则是引用赋值，会携带内存地址，相当于指针
-var a = {aa: 1};
-var b = a;
-b.aa = 2;
-console.log(a);//{aa: 2};
-console.log(b);//{aa: 2};
 
 
 所有函数与对象都有一个 toSring 和 valueOf 方法
@@ -185,6 +183,7 @@ Boolean 对象
 	undefined
 	NaN
 	以上都为 false
+
 Math 对象
 	Math.PI 	返回圆周率（约等于3.14159）
 	abs(x)		返回 x 的绝对值。
@@ -195,37 +194,39 @@ Math 对象
 	pow(x,y)	返回 x 的 y 次幂。
 	random()	返回 0 ~ 1 之间的随机数。
 	round(x)	四舍五入。
+
 Number 对象
 	var num = 5.56789;
 	var n = num.toFixed(2);
 	toFixed(x)			四舍五入为指定小数位数的数字
 	toPrecision(x)		四舍五入把数字格式化为指定的长度。
 	toString()			把数字转换为字符串，使用指定的基数。
+
 String 对象
 	string.length		返回字符串的长度
-	charAt()		返回在指定位置的字符。
-	charCodeAt()	返回在指定的位置的字符的 Unicode 编码。
-	concat()		连接两个或更多字符串，并返回新的字符串。
-	fromCharCode()	将 Unicode 编码转为字符。
-	indexOf()		返回某个指定的字符串值在字符串中首次出现的位置。
-	includes()		查找字符串中是否包含指定的子字符串。
-	lastIndexOf()	从后向前搜索字符串，并从起始位置（0）开始计算返回字符串最后出现的位置。
-	match()			查找找到一个或多个正则表达式的匹配。
-	repeat()		复制字符串指定次数，并将它们连接在一起返回。
-	replace()		在字符串中查找匹配的子串， 并替换与正则表达式匹配的子串。
-	search()		查找与正则表达式相匹配的值。
-	slice()			提取字符串的片断，并在新的字符串中返回被提取的部分。
-	split()			把字符串分割为字符串数组。
-	startsWith()	查看字符串是否以指定的子字符串开头。
-	substr()		从起始索引号提取字符串中指定数目的字符。
-	substring()		提取字符串中两个指定的索引号之间的字符。
-	toLowerCase()	把字符串转换为小写。
-	toUpperCase()	把字符串转换为大写。
-	trim()			去除字符串两边的空白
+	charAt()			返回在指定位置的字符。
+	charCodeAt()		返回在指定的位置的字符的 Unicode 编码。
+	concat()			连接两个或更多字符串，并返回新的字符串。
+	fromCharCode()		将 Unicode 编码转为字符。
+	indexOf()			返回某个指定的字符串值在字符串中首次出现的位置。
+	includes()			查找字符串中是否包含指定的子字符串。
+	lastIndexOf()		从后向前搜索字符串，并从起始位置（0）开始计算返回字符串最后出现的位置。
+	match()				查找找到一个或多个正则表达式的匹配。
+	repeat()			复制字符串指定次数，并将它们连接在一起返回。
+	replace()			在字符串中查找匹配的子串， 并替换与正则表达式匹配的子串。
+	search()			查找与正则表达式相匹配的值。
+	slice()				提取字符串的片断，并在新的字符串中返回被提取的部分。
+	split()				把字符串分割为字符串数组。
+	startsWith()		查看字符串是否以指定的子字符串开头。
+	substr()			从起始索引号提取字符串中指定数目的字符。
+	substring()			提取字符串中两个指定的索引号之间的字符。
+	toLowerCase()		把字符串转换为小写。
+	toUpperCase()		把字符串转换为大写。
+	trim()				去除字符串两边的空白
 	toLocaleLowerCase()	根据本地主机的语言环境把字符串转换为小写。
 	toLocaleUpperCase()	根据本地主机的语言环境把字符串转换为大写。
-	valueOf()		返回某个字符串对象的原始值。
-	toString()		返回一个字符串。
+	valueOf()			返回某个字符串对象的原始值。
+	toString()			返回一个字符串。
 
 class Person {
 	constructor(name, age) {
@@ -343,7 +344,7 @@ new 会有如下实现
 		var res = {};
 		if(func.prototype !== null) {
 			// 将实例的原型指向构造函数的原型
-			res.__prote__ = func.prototype;
+			res.__proto__ = func.prototype;
 		}
 		// ret 为构造函数执行的结果
 		// 通过apply，将构造函数内部的this指向修改为指向res，即为实例对象

@@ -1,3 +1,34 @@
+
+chrome://about/  查看Chrome的所有指令列表
+
+
+双引号 完全匹配搜索 "seo方法图片"
+减号 搜索不包含减号后面的词的页面 搜索 -引擎  返回的则是包含“搜索”这个词，却不包含“引擎”这个词的结果
+星号 常用的通配符 搜索*擎 百度不支持*号搜索指令 其中的*号代表任何文字
+inurl 用于搜索查询词出现在url 中的页面 inurl:搜索引擎优化
+	提供书籍下载的，url一般包括book、ebook、shu、shuji、
+	论坛的url中常含有bbs、forum
+	音乐方面 music、yinyue、mp3、midi
+	提供软件用 soft、software、ruanjian
+	新闻的用news、xinwen 体育的是sports、tiyu
+	inurl:20050407 zm zm是周末（ZhouMo）的缩写，20050407 是日期
+	inurl:shendiaoxialv book 
+	inurl:yijianmei music 一剪梅
+inanchor 
+		inanchor:点击这里  页面链接文字中包含搜索词"点击这里"
+intitle
+	“intitle:同喜”  显示在网页标题中包含“同喜”这个词的网页
+allintitle
+	allintitle:SEO 搜索引擎优化 当于：intitle:SEO intitle:搜索引擎优化
+allinurl
+	allinurl:SEO 搜索引擎优化 相当于 ：inurl:SEO inurl:搜索引擎优化
+filetype
+	filetype:pdf SEO  返回包含 SEO 这个关键词的所有 pdf 文件
+site
+	李子柒 site:weibo.com 搜索范围限定在这个站点中
+
+
+
 仓库
 	// 在当前目录，新建一个Git代码库
 	git init

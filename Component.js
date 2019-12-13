@@ -1,6 +1,6 @@
-//cc.Class 是一个由 cc.Component 派生出来的组件类
-//Class() 就是 cc 模块下的一个方法，这个方法用于声明 Cocos Creator 中的类
-//调用 cc.Class，传入一个原型对象，在原型对象中以键值对的形式设定所需的类型参数，就能创建出所需要的类。
+cc.Class 是一个由 cc.Component 派生出来的组件类
+Class() 就是 cc 模块下的一个方法，这个方法用于声明 Cocos Creator 中的类
+调用 cc.Class，传入一个原型对象，在原型对象中以键值对的形式设定所需的类型参数，就能创建出所需要的类。
 
 const SEGEMENTS_MIN = 3;
 cc.Mask = module.exports = Mask;
@@ -40,31 +40,33 @@ method
 
 const Player = require('Player');
 let Mask = cc.Class({
-    name: "sprite"//设置类名为 "sprite"，类名用于序列化，一般可以省略。
-	// 基类，可以是任意创建好的 cc.Class
-	// 值类型：Function
-    extends: cc.Component,
+    name: "sprite"//设置类名，类名用于序列化，一般可以省略。
+    extends: cc.Component, // 值类型：Function
     statics: {
-    	// 静态成员定义
-	   // 值类型：Object
         _count: 0,
-        getCount: function () {}
+        getCount: function () {} //// 静态成员定义
     },
     ctor: function () {
     	// 构造函数
-		// 值类型：Function
     },
     editor: {
-    	// 提供给 Component 的子类专用的参数字段
-		// 值类型：Object
-        disallowMultiple: true
-        executionOrder: -1 //越小，该组件相对其它组件就会越先执行,默认为 0，
+    	executeInEditMode: false,// 允许当前组件在编辑器模式下运行。默认只会在运行时执行
+        requireComponent: null,// 指定当前组件的依赖组件.
+                                // 该选项在运行时同样有效。
+                                // 当组件添加到节点上时，如果依赖的组件不存在，引擎将会自动将依赖组件添加到同一个节点，防止脚本出错
+        executionOrder: 0,// 脚本生命周期回调的执行优先级。小于 0 的脚本将优先执行，大于 0 的脚本将最后执行。
+                        // 该优先级只对 onLoad, onEnable, start, update 和 lateUpdate 有效，对 onDisable 和 onDestroy 无效。
+        disallowMultiple: false,// 当本组件添加到节点上后，禁止同类型（含子类）的组件再添加到同一个节点，
+        menu: "", // 用来将当前组件添加到组件菜单中，方便用户查找（如 "Rendering/Camera"）
+        playOnFocus: false, // 当设置了 "executeInEditMode" 以后，playOnFocus 可以用来设定选中当前组件所在的节点时，编辑器的场景刷新频率,
+                            // 设置为 true，场景渲染将保持 60 FPS，如果为 false，场景就只会在必要的时候进行重绘。
+        inspector: "", // 自定义当前组件在 **属性检查器** 中渲染时所用的网页 url。
+        icon: "", // 自定义当前组件在编辑器中显示的图标 url。
+        help: "", // 指定当前组件的帮助文档的 url，设置过后，在 **属性检查器** 中就会出现一个帮助图标，
     }
     properties: {
-        pos  : [cc.Vec2]
-        pos  : cc.v2(10, 20),
-        color: new cc.Color(255, 255, 255, 128)
-        color: cc.color(0,0,0,255)          
+        pos  : [cc.Vec2] // cc.v2(10, 20),
+        color: new cc.Color(255, 255, 255, 128) // cc.color(0,0,0,255)        
         size : cc.size(0,0)  
 
         cc.Vec2
@@ -95,7 +97,7 @@ get/set 声明
 完整声明
     score: {
         default: 设置属性的默认值，这个默认值仅在组件第一次添加到节点上时才会用到
-        type: 限定属性的数据类型，详见 CCClass 进阶参考：type 参数
+        type: 限定属性的数据类型
         visible: 设为 false 则不在 属性检查器 面板中显示该属性
         serializable: 设为 false 则不序列化（保存）该属性
         displayName: 在 属性检查器 面板中显示成指定名字
