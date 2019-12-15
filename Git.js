@@ -1,3 +1,38 @@
+码	50.7.12.147	8097	eIW0Dnk69454e6nSwuspv9DmS201tQ0D	aes-256-cfb
+码	46.29.166.112	55	lncn.org ddf	rc4-md5
+码	162.220.51.58	8097	eIW0Dnk69454e6nSwuspv9DmS201tQ0D	aes-256-cfb
+码	nat1.hk.pn	10301	nat1hkpn	chacha20-ietf-poly1305
+码	50.7.12.147	8099	eIW0Dnk69454e6nSwuspv9DmS201tQ0D	aes-256-cfb
+码	199.223.119.92	8099	eIW0Dnk69454e6nSwuspv9DmS201tQ0D	aes-256-cfb
+码	209.58.188.157	8099	eIW0Dnk69454e6nSwuspv9DmS201tQ0D	aes-256-cfb
+码	69.36.182.52	8097	eIW0Dnk69454e6nSwuspv9DmS201tQ0D	aes-256-cfb
+码	139.162.15.45	8099	eIW0Dnk69454e6nSwuspv9DmS201tQ0D	aes-256-cfb
+码	45.77.134.121	882	lncn.org 55j	rc4-md5
+码	45.144.242.108	55	lncn.org eek	rc4-md5
+码	212.84.169.72	8099	eIW0Dnk69454e6nSwuspv9DmS201tQ0D	aes-256-cfb
+码	192.240.99.182	8097	eIW0Dnk69454e6nSwuspv9DmS201tQ0D	aes-256-cfb
+码	167.179.89.246	882	lncn.org 55j	rc4-md5
+码	167.179.89.246	55	lncn.org yjf	rc4-md5
+码	185.186.245.44	8097	eIW0Dnk69454e6nSwuspv9DmS201tQ0D	aes-256-cfb
+码	45.77.134.121	55	lncn.org yjf	rc4-md5
+码	23.254.204.203	8099	eIW0Dnk69454e6nSwuspv9DmS201tQ0D	aes-256-cfb
+码	204.45.182.34	8097	eIW0Dnk69454e6nSwuspv9DmS201tQ0D	aes-256-cfb
+码	45.90.142.13	55	lncn.org gge	rc4-md5
+码	85.117.234.223	55	lncn.org eek	rc4-md5
+码	198.255.103.62	8097	eIW0Dnk69454e6nSwuspv9DmS201tQ0D	aes-256-cfb
+码	172.105.192.135	8097	eIW0Dnk69454e6nSwuspv9DmS201tQ0D	aes-256-cfb
+码	199.223.119.83	8097	eIW0Dnk69454e6nSwuspv9DmS201tQ0D	aes-256-cfb
+码	45.144.242.112	55	lncn.org eek	rc4-md5
+码	209.58.188.12	8097	eIW0Dnk69454e6nSwuspv9DmS201tQ0D	aes-256-cfb
+码	45.144.243.158	882	lncn.org k3f	rc4-md5
+码	45.144.2.235	55	lncn.org eek	rc4-md5
+码	139.162.67.40	8097	eIW0Dnk69454e6nSwuspv9DmS201tQ0D	aes-256-cfb
+码	185.22.152.211	55	lncn.org ddf	rc4-md5
+码	172.104.131.24	8099	eIW0Dnk69454e6nSwuspv9DmS201tQ0D	aes-256-cfb
+码	198.255.103.62	8099	eIW0Dnk69454e6nSwuspv9DmS201tQ0D	aes-256-cfb
+码	89.31.125.236	55	lncn.org gge	rc4-md5
+码	45.146.122.119	882	lncn.org 6te	rc4-md5
+码	85.117.235.82	55	lncn.org ddf	rc4-md5
 
 chrome://about/  查看Chrome的所有指令列表
 
