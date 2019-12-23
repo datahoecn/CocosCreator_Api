@@ -1,4 +1,4 @@
-var audioMgr = require("audioMgr");
+// var audioMgr = require("audioMgr");
 const max_width = 720;
 
 cc.Class({

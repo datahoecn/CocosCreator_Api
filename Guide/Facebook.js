@@ -19,7 +19,6 @@ dependencies {
 // 3. AndroidManifest.xml 添加元素
 <meta-data android:name="com.facebook.sdk.ApplicationId"
                 android:value="@string/facebook_app_id"/>
-<uses-permission android:name="android.permission.INTERNET"/>
 
 // 4. strings.xml 加入
 <string name="facebook_app_id">674285536409021</string>
