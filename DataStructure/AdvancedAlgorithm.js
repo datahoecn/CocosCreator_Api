@@ -85,18 +85,53 @@ function lcs(word1, word2) {
 }
 console.log(lcs("dddddddddddddddddsqqqqqqqqqqqqq", "ddsqq"));
 
-// 背包问题
 
+
+// 背包问题
+function max(a, b) {
+	return (a > b) ? a : b;
+}
+
+function knapsack(capacity, size, value, n) {
+	if (n == 0 || capacity == 0) {
+		return 0;
+	}
+	if (size[n - 1] > capacity) {
+		return knapsack(capacity, size, value, n - 1);
+	} else {
+		return max(value[n - 1] + knapsack(capacity - size[n - 1], size, value, n - 1), knapsack(capacity, size, value, n - 1));
+	}
+}
 var value = [4, 5, 10, 11, 13];
 var size = [3, 4, 7, 8, 9];
 var capacity = 16;
+var n = 5;
+console.log(knapsack(capacity, size, value, n));
 
-function dKnapscak(capacity, value, size) {
-	var max = 0;
-	for (var i = 0; i < size.length; i++) {
-		let cur_size = size[i];
 
+function dKnapsack(capacity, size, value, n) {
+	var k = [];
+	// for (var i = 0; i <= n; i++) {
+	// 	k[i] = [];
+	// }
+	for (var i = 0; i <= n; i++) {
+		k[i] = [];
+		for (var w = 0; w <= capacity; w++) {
+			if (i == 0 || w == 0) {
+				k[i][w] = 0;
+			} else if (size[i - 1] <= w) {
+				k[i][w] = max(value[i - 1] + k[i - 1][w - size[i - 1]], k[i - 1][w]);
+			} else {
+				k[i][w] = k[i - 1][w];
+			}
+
+		}
+		console.log(k[i]);
 	}
+	console.log(k[n][capacity]);
 }
+
+dKnapsack(capacity, size, value, n);
+
 
 
