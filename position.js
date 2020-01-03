@@ -1,7 +1,26 @@
 
+AB+BC=AC
+AB-AC=CB. 即“共同起点，指向被减”
+
+a⊥b的充要条件是 a•b=0。
+a⊥b的充要条件是 xx'+yy'=0。
+
+已知两个非零向量a、b，那么a·b=|a||b|cosθ（θ是a与b的夹角
+数量积a·b的几何意义是：a的长度|a|与b在a的方向上的投影|b|cos θ的乘积。
+
 var angle = Math.random() * Math.PI * 2;
 var dx = 500 * Math.cos(angle);
 var dy = 500 * Math.sin(angle);
+
+// 旋转指定角度
+var pos_x = 3;
+var pos_y = 1;
+var angle = 90 / 180 * Math.PI;
+var cosVal = Math.cos(angle);
+var sinVal = Math.sin(angle);
+var new_x = pos_x * cosVal - pos_y * sinVal;
+var new_y = pos_x * sinVal + pos_y * cosVal;
+console.log(new_x,new_y);
 
 Vec2
     cc.v2(0, 0);
