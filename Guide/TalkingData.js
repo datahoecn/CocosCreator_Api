@@ -7,14 +7,17 @@ Android
         <uses-permission android:name="android.permission.INTERNET"/>
         <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
         <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-        <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE">
-        <uses-permission android:name="android.permission.READ_PHONE_STATE">
+        <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+        <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 
     4.在 AppActivity.java 文件里增加如下：
     	import com.tendcloud.tenddata.TalkingDataGA;
-    	import com.tendcloud.tenddata.TDGAAccount;
-    	import android.content.SharedPreferences;
-    	import android.util.Log;
+        import com.tendcloud.tenddata.TDGAAccount;
+        import com.tendcloud.tenddata.TDGAMission;
+        import android.content.SharedPreferences;
+        import android.util.Log;
+
+        static TDGAAccount account;
 
     	protected void onCreate(Bundle savedInstanceState) {
     	    super.onCreate(savedInstanceState);
@@ -29,6 +32,20 @@ Android
 
         public static void TalkingEvnet(String str) {
             TalkingDataGA.onEvent(str);
+        }
+
+        public static void TalkingBegin(String str) {
+            TDGAMission.onBegin(str); 
+        }
+        public static void TalkingCompleted(String str) {
+            TDGAMission.onCompleted(str);
+        }
+        public static void TalkingFailed(String str) {
+            TDGAMission.onFailed(str, "gameOver");
+        }
+
+        public static void TalkingLevel(int level) {
+            account.setLevel(level);
         }
 
         void loadData() {
@@ -50,3 +67,45 @@ Android
 
     5.如果混淆报错：
         app/build.gradle 修改 minifyEnabled 和 shrinkResources 为 false
+
+
+
+
+        setLevelTalking: function(num) {
+            if(typeof(jsb)!="undefined"){
+                jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity", "TalkingLevel", "(I)V",num);
+            }else{
+                cc.log("玩家等级:",num);
+            }
+        },
+
+        TalkingBegin: function(str) {
+            if(typeof(jsb)!="undefined"){
+               jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity", "TalkingBegin", "(Ljava/lang/String;)V",str);
+            }else{
+               cc.log(str,"开始闯关");
+            }
+         },
+
+         TalkingCompleted: function(str) {
+            if(typeof(jsb)!="undefined"){
+               jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity", "TalkingCompleted", "(Ljava/lang/String;)V",str);
+            }else{
+               cc.log(str,"闯关成功");
+            }
+         },
+
+         TalkingFailed: function(str) {
+            if(typeof(jsb)!="undefined"){
+               jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity", "TalkingFailed", "(Ljava/lang/String;)V",str);
+            }else{
+               cc.log(str,"闯关失败");
+            }
+         },
+
+         var str = num;
+          if(num < 10){
+             str = "00" + num;
+          }else if(num < 100) {
+             str = "0" + num;
+          }

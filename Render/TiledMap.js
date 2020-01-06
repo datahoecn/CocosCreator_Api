@@ -1,3 +1,71 @@
+CocosCreator中可视区域外的节点依然会被渲染，所以屏幕外和mask外的节点需要自己手动active=false，对于TileMap，需要添加：
+cc.macro.ENABLE_TILEDMAP_CULLING = true;
+
+TileMap坐标转换
+
+    TileMap坐标：以地图左上角为原点(0,0)，X轴向右增加，Y轴向下增加
+    OpenGL坐标：以地图左下角为原点(0,0)，X轴向右增加，Y轴向上增加
+    Creator坐标：以节点中心点为原点(0,0)，X轴向右增加，向左减少，Y轴向上增加，向下减少
+
+正常地图
+    public tileToOpengl(point: cc.Vec2) {
+      let mapSize = this._tileMap.getMapSize();
+      let tileSize = this._tileMap.getTileSize();
+      let x = point.x * tileSize.width + tileSize.width / 2;
+      let y = (mapSize.height - point.y) * tileSize.height - tileSize.height / 2;
+
+      return cc.v2(x, y);
+    }
+
+    public openglToTile(point: cc.Vec2) {
+      let mapSize = this._tileMap.getMapSize();
+      let tileSize = this._tileMap.getTileSize();
+      let x = Math.floor(point.x / tileSize.width);
+      let y = Math.floor((mapSize.height * tileSize.height - point.y) / tileSize.height);
+
+      return cc.v2(x, y);
+    }
+
+45 度交错
+    public tileToOpengl(point: cc.Vec2) {
+      let mapSize = this._tileMap.getMapSize();
+      let tileSize = this._tileMap.getTileSize();
+      let x = point.x * tileSize.width + Math.floor(point.y % 2) * tileSize.width / 2;
+      let y = (mapSize.height - (point.y + 1)) * tileSize.height / 2 - tileSize.height / 2;
+
+      return cc.v2(x, y);
+    }
+
+    public openglToTile(point: cc.Vec2) {
+      let mapSize = this._tileMap.getMapSize();
+      let tileSize = this._tileMap.getTileSize();
+      let y = Math.floor((mapSize.height - 2 - ((2 * Math.floor(point.y) / Math.floor(tileSize.height)))));
+      let x = Math.floor(point.x / tileSize.width - (y % 2) / 2);
+
+      return cc.v2(x, y);
+    }
+
+
+public openglToScreen(point: cc.Vec2) {
+  let mapSize = this._tileMap.getMapSize();
+  let tileSize = this._tileMap.getTileSize();
+  let x = point.x - mapSize.width * tileSize.width / 2;
+  let y = point.y - mapSize.height * tileSize.height / 2;
+
+  return cc.v2(x, y);
+}
+
+public screenToOpengl(point: cc.Vec2) {
+  let mapSize = this._tileMap.getMapSize();
+  let tileSize = this._tileMap.getTileSize();
+  let x = point.x + mapSize.width * tileSize.width / 2;
+  let y = point.y + mapSize.height * tileSize.height / 2;
+
+  return cc.v2(x, y);
+}
+
+
+
 瓦块地图
 	// 代码创建
 	CreateTileMap () {
