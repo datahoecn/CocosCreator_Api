@@ -1,4 +1,8 @@
 
+Date.now() // 返回自1970年1月1日 00:00:00 UTC到当前时间的毫秒数，类型为Number。
+Date.UTC(year,month[,date[,hrs[,min[,sec[,ms]]]]]) // 返回1970-1-1 00:00:00 UTC到指定的日期之间的毫秒数
+var utcDate = Date.parse("Jul 8, 2005")
+
 Object.values()方法返回一个给定对象自身的所有可枚举属性值的数组，
 值的顺序与使用for...in循环的顺序相同 ( 区别在于 for-in 循环枚举原型链中的属性 )。
 var obj = { foo: 'bar', baz: 42 };
@@ -203,6 +207,8 @@ Number 对象
 	toString()			把数字转换为字符串，使用指定的基数。
 
 String 对象
+	padStart			补全长度
+	padEnd				'x'.padStart(5, 'ab')
 	string.length		返回字符串的长度
 	charAt()			返回在指定位置的字符。
 	charCodeAt()		返回在指定的位置的字符的 Unicode 编码。

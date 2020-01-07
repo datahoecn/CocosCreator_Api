@@ -1,4 +1,19 @@
 
+_loadRes: function(url, type, cb) {
+    cc.loader.loadRes(url, type, function(err, prefab) {
+        if(!err) {
+            cb(prefab);
+        }
+    })
+}
+_createPrefab(url) {
+    var prefab = cc.loader.getRes(url, cc.Prefab);
+    if (prefab !== null && typeof(prefab) !== "undefined") {
+        return cc.instantiate(prefab);
+    }
+    return null;
+}
+
 if (CC_EDITOR) {
     Editor.Profile.load('profile://project/i18n.json', (err, profile) => {
         window.i18n.curLang = profile.data['default_language'];
@@ -63,7 +78,7 @@ loader
         releaseRes              释放通过 loadRes 加载的资源。
         releaseResDir           释放通过 loadResDir 加载的资源。
         releaseAll              释放所有资源。
-        setAutoRelease          设置当场景切换时是否自动释放资源。
+        setAutoRelease          设置当场景切换时是否自动释放资源。// (this.prefab, true) true是释放，false是不释放
         setAutoReleaseRecursively 设置当场景切换时是否自动释放资源及资源引用的其它资源。
         isAutoRelease           返回指定的资源是否有被设置为自动释放，不论场景的“Auto Release Assets”如何设置。
 
@@ -75,6 +90,12 @@ loader
     //通过 id（通常是资源 url）来释放一个资源或者一个资源数组
     cc.loader.release(deps);
 
+
+    // getDependsRecursively一起使用
+    cc.loader.release(prefab) // 只会release掉这个prefab所使用的json文件，而prefab所引用的spriteFrame以及其他的一些资源并不会释放掉
+    var deps = cc.loader.getDependsRecursively(prefab);
+    cc.loader.release(deps);
+    
 JSON 资源
          // 声明
         npcList: cc.JsonAsset,

@@ -1,5 +1,26 @@
 svn checkout https://172.16.1.98/svn/math/design/Math/assets --username=lijie --password=123456 /Users/xhkj/Desktop/math/assets
 
+图片优化方法
+避免大尺寸的图片
+cocos creator所支持的最大图片尺寸为2048*2048
+
+勾选 prefab 延迟加载资源 可以减少加载耗时，但所引用的资源，像图片、音效会在prefab第一次显示的时候再进行资源的加载
+优化多次创建性能：Prefab加载后会进行一个预处理的操作，预处理就是动态生成一些prefab的实例化代码，并把这些代码交给jit去进行优化。
+              这样在实例化时的耗时将会大大减少，相应的，在load时的耗时会有所增加。
+优化单词创建性能：加载后会跳过预处理的步骤，这样在加载时的耗时会减少很多
+
+由于微信小游戏平台禁用了动态加载代码，类似eval这些不能使用，因此优化策略这个选项在微信小游戏平台是无效的。
+
+安装 async
+1.进入项目文件夹(NewProject);
+2.npm init
+3.填信息
+4.npm install async --save
+5.var async = require("async");
+
+
+
+
 
 模块设置是针对发布 Web 版游戏时引擎中使用的模块进行裁剪，
   达到减小发布版引擎包体的效果。在列表中选中的模块在打包时将被引擎包括，未选中的模块会被裁剪掉。

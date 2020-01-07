@@ -1,4 +1,6 @@
 properties
+	node.eulerAngles 		cc.v3(0, Date.now() / 10, 0); 欧拉角度
+	node.is3DNode 			Boolean 开启 3 D 节点
 	node.z
 	node.zIndex				Number 控制节点排列顺序
 	node.groupIndex 		Integer 节点的分组索引。
