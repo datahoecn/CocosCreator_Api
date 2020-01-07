@@ -51,20 +51,7 @@ Button
     cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, this.keyBoard, this);
     cc.systemEvent.off(cc.SystemEvent.EventType.KEY_UP, this.keyBoard, this);
 
-    Global.isAgain = false;
-    keyBoard: function(event) {
-      cc.log(event.keyCode);
-      if(event.keyCode === 6) {
-         if(Global.isAgain){
-            cc.game.end();
-         }else{
-            Global.isAgain = true;
-            setTimeout(() => {
-               Global.isAgain = false;
-            }, 1000);
-         }
-      }
-    }
+    
 
 
     longTouchEvents: [cc.Component.EventHandler],
@@ -154,25 +141,3 @@ cc.Event 类型的事件对象 event
     position-changed  当位置属性修改时
     rotation-changed  当旋转属性修改时
     scale-changed 当缩放属性修改时
-
-
-    cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, Global.keyBoard);
-     keyBoard: function(event) {
-      cc.log(event.keyCode);
-      if(event.keyCode === 6) {
-         if(Global.isAgain){
-            cc.game.end();
-         }else{
-            Global.isAgain = true;
-            Global.main.tip_lab.node.active = true;
-            if(Global.main.language == "zh") {
-               Global.main.tip_lab.string = "再次点击退出游戏";
-            }else {
-               Global.main.tip_lab.string = "Click again to exit the game";
-            }
-            setTimeout(() => {
-               Global.isAgain = false;
-               Global.main.tip_lab.node.active = false;
-            }, 1000);
-         }
-      }
