@@ -52,18 +52,14 @@ function lcs(word1, word2) {
 	for (var i = 0; i < word1.length; i++) {
 		lcsarr[i] = new Array(word2.length);
 		for (var j = 0; j < word2.length; j++) {
-			lcsarr[i][j] = 0;
-		}
-	}
-
-	for (var i = 0; i < word1.length; i++) {
-		for (var j = 0; j < word2.length; j++) {
 			if(word1[i] == word2[j]) {
 				if(i > 0 && j > 0) {
 					lcsarr[i][j] = lcsarr[i-1][j-1] + 1;
 				} else {
 					lcsarr[i][j] = 1;
 				}
+			} else {
+				lcsarr[i][j] = 0;
 			}
 			if(max < lcsarr[i][j]) {
 				max = lcsarr[i][j];
@@ -71,20 +67,17 @@ function lcs(word1, word2) {
 			}
 		}
 	}
-
 	var str = "";
 	if(max == 0) {
 		return "";
 	} else {
 		for (var i = index - max + 1; i <= index; i++) {
-			console.log(i)
 			str += word1[i];
 		}
 		return str;
 	}
 }
 console.log(lcs("dddddddddddddddddsqqqqqqqqqqqqq", "ddsqq"));
-
 
 
 // 背包问题
@@ -111,9 +104,6 @@ console.log(knapsack(capacity, size, value, n));
 
 function dKnapsack(capacity, size, value, n) {
 	var k = [];
-	// for (var i = 0; i <= n; i++) {
-	// 	k[i] = [];
-	// }
 	for (var i = 0; i <= n; i++) {
 		k[i] = [];
 		for (var w = 0; w <= capacity; w++) {
