@@ -6,11 +6,14 @@ Ctrl + K Ctrl + X	Trim trailing whitespace
 Ctrl + \ 			Split editor
 Ctrl + Shift + S 	Save As... // 另存为
 Ctrl + Tab			Open next
+
 Ctrl + K P 			Copy path of active file
 Ctrl + K R 			Reveal active file in Explorer
+
 Ctrl + Shift + E    Show Explorer / Toggle focus
 Ctrl + Shift + F    Show Search
 Ctrl + Shift + H    Replace in files
+
 Ctrl + Shift + K	delete line
 Ctrl + Enter		Insert line below
 Ctrl + T 			Show all Symbols
@@ -22,3 +25,7 @@ Ctrl + U			Undo last cursor operation
 Shift + Alt + I 	Insert cursor at end of each line selected
 Ctrl + L 			Select current line
 Ctrl + F2 			Select all occurences of current word
+
+Alt + 箭头			Move line up/down
+Ctrl + Shift + \ 	Jump to matching braket
+

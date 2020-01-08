@@ -1,16 +1,11 @@
-var a = [0, 1, 2, 3, 4, 5];
-var b = [0, 1];
-for (var i = 2; i < 10 + 1; i++) {
-	b[i] = b[i - 1] + b[i - 2];
-}
-console.log(b)
-
-function recurFib(n) {
-	if(n < 2) {
-		return n;
-	} else {
-		return recurFib(n - 1) + recurFib(n - 2);
-	}
+function makeAdder(x) {
+  return function(y) {
+    return x + y;
+  };
 }
 
-console.log(recurFib(10))
+var add5 = makeAdder(5);
+var add10 = makeAdder(10);
+
+console.log(add5(2));  // 7
+console.log(add10(2)); // 12

@@ -1,4 +1,7 @@
 
+闭包是由函数以及创建该函数的词法环境组合而成。
+这个环境包含了这个闭包创建时所能访问的所有局部变量。
+
 Date.now() // 返回自1970年1月1日 00:00:00 UTC到当前时间的毫秒数，类型为Number。
 Date.UTC(year,month[,date[,hrs[,min[,sec[,ms]]]]]) // 返回1970-1-1 00:00:00 UTC到指定的日期之间的毫秒数
 var utcDate = Date.parse("Jul 8, 2005")
