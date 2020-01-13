@@ -1,6 +1,7 @@
 // PZE9653cPtkc
-
+// lsSlctVDVMRFk4M0hONjRaZXBvZnN1ZGdwR0FkeElYTi16WUN3bWgzamVzRUplRVFBQUFBJCQAAAAAAAAAAAEAAACYjamlzPjQrM7aueoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAN4jG17eIxteU3
 // 范例使用节点上组件 this 可以暂停，文档说使用 node
+// 17C15C4C-7843-FD55-68B5-2EE4FD9A3305
 cc.director.getActionManager().resumeTarget(this.node);
 cc.director.getActionManager().pauseTarget(this.node);
 

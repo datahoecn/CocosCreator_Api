@@ -1,29 +1,39 @@
-function dKnapsack(capacity, size, value, n) {
-	var k = [];
-	for (var i = 0; i <= n; i++) {
-		k[i] = [];
-		for (var w = 0; w <= capacity; w++) {
-			if (i == 0 || w == 0) {
-				k[i][w] = 0;
-			} else if (size[i - 1] <= w) {
-				k[i][w] = max(value[i - 1] + k[i - 1][w - size[i - 1]], k[i - 1][w]);
-			} else {
-				k[i][w] = k[i - 1][w];
-			}
+var arr = [];
+for (let i = 0; i < 100; i++) {
+	arr.push(Math.floor(Math.random() * 100));
+}
 
+function show(arr) {
+	var str = "";
+	for (let i = 0; i < 10; i++) {
+		for (let j = 0; j < 10; j++) {
+			str += arr[i * 10 + j] + " ";
 		}
-		console.log(k[i]);
+		str += "\n"
 	}
-	console.log(k[n][capacity]);
+	console.log(str);
 }
 
-// 背包问题
-function max(a, b) {
-	return (a > b) ? a : b;
+show(arr);
+
+function insertionSort(arr) {
+	var inner, temp;
+	for (var outer = 1; outer < arr.length; outer++) {
+		temp = arr[outer];
+		inner = outer;
+		while (inner > 0 && arr[inner - 1] >= temp) {
+			arr[inner] = arr[inner - 1];
+			inner--;
+		}
+		arr[inner] = temp;
+	}
 }
 
-var value = [4, 5, 10, 11, 13];
-var size = [3, 4, 7, 8, 9];
-var capacity = 16;
-var n = 5;
-dKnapsack(capacity, size, value, n);
+function swap(arr, index1, index2) {
+	var temp = arr[index1];
+	arr[index1] = arr[index2];
+	arr[index2] = temp;
+}
+
+insertionSort(arr);
+show(arr);
