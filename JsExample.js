@@ -1,4 +1,12 @@
 
+// 访问属性、调用方法运算符"."的优先级高于赋值运算符。
+var a = {n: 1}
+var b = a;
+a.x = a = {n: 2};
+console.log(a.x);
+console.log(b.x)
+
+
 // 状态
 transition: function(evnet) {
     switch(this.currentState) {

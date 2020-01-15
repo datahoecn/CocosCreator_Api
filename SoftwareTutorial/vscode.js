@@ -2,7 +2,6 @@
 Shift + Alt + F		Format document
 F12					Go Definition
 F2					Rename Symbol
-Ctrl + K Ctrl + X	Trim trailing whitespace
 Ctrl + \ 			Split editor
 Ctrl + Shift + S 	Save As... // 另存为
 Ctrl + Tab			Open next
