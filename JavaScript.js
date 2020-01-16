@@ -1,4 +1,16 @@
 
+
+var x1 = 1;
+var y1 = 0;
+var x2 = 1;
+var y2 = 2;
+// 夹角
+var anl = 180 / Math.PI * Math.acos((x1 * x2 + y1 * y2) / Math.sqrt(x1 * x1 + y1 * y1) / Math.sqrt(x2 * x2 + y2 * y2));
+// 顺时针 还是 逆时针
+anl = 180 / Math.PI * Math.asin((x1 * y2 - y1 * x2) / Math.sqrt(x1 * x1 + y1 * y1) / Math.sqrt(x2 * x2 + y2 * y2));
+
+
+
 闭包是由函数以及创建该函数的词法环境组合而成。
 这个环境包含了这个闭包创建时所能访问的所有局部变量。
 
