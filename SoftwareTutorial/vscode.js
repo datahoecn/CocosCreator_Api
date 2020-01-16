@@ -24,7 +24,7 @@ Ctrl + U			Undo last cursor operation
 Shift + Alt + I 	Insert cursor at end of each line selected
 Ctrl + L 			Select current line
 Ctrl + F2 			Select all occurences of current word
+Shift+PgUp / PgDn  Scroll page up/down
 
 Alt + 箭头			Move line up/down
 Ctrl + Shift + \ 	Jump to matching braket
-
