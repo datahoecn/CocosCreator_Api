@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name" translatable="false">Crazy Hammer</string>
+    <string name="facebook_app_id">160450937861304</string>
+	<string name="fb_login_protocol_scheme">fb160450937861304</string>
+</resources>

@@ -1,4 +1,4 @@
-
+ 
 Android 版应用事件入门指南
 https://developers.facebook.com/docs/app-events/getting-started-app-events-android/?translation
 应用面板
@@ -27,7 +27,8 @@ dependencies {
 // 5. 生成开发密钥散列
 // 下载 openssl
 // 在C:\Program Files\Java\jdk1.8.0_211\bin cmd 运行下面代码
-keytool -exportcert -alias yaowei -keystore "D:\Projects\key\yaowei.keystore" | "D:\Downloads\chrome\bin\openssl" sha1 -binary | "D:\Downloads\chrome\bin\openssl" base64
+keytool -exportcert -alias yaowei -keystore "D:\CocosCreator\resources\static\build-templates\native\debug.keystore" | "D:\Downloads\chrome\bin\openssl" sha1 -binary | "D:\Downloads\chrome\bin\openssl" base64
+gEVqMOra91JCtnJx8zEFMJRkLck=
 
 // 6. 提供您的 Android 项目信息
 com.happymath.gp

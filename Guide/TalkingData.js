@@ -17,36 +17,11 @@ Android
         import android.content.SharedPreferences;
         import android.util.Log;
 
-        static TDGAAccount account;
-
     	protected void onCreate(Bundle savedInstanceState) {
     	    super.onCreate(savedInstanceState);
     	    TalkingDataGA.init(this, "F69AD027C4004BCFA2E35E0B01C57791", "play.Android.com");
     	    loadData();
     	}
-
-    	static String mDebugTag = "================AppActivity: ";
-        static void logError(String msg) {
-            Log.e(mDebugTag, msg);
-        }
-
-        public static void TalkingEvnet(String str) {
-            TalkingDataGA.onEvent(str);
-        }
-
-        public static void TalkingBegin(String str) {
-            TDGAMission.onBegin(str); 
-        }
-        public static void TalkingCompleted(String str) {
-            TDGAMission.onCompleted(str);
-        }
-        public static void TalkingFailed(String str) {
-            TDGAMission.onFailed(str, "gameOver");
-        }
-
-        public static void TalkingLevel(int level) {
-            account.setLevel(level);
-        }
 
         void loadData() {
             SharedPreferences sp = getPreferences(MODE_PRIVATE);
@@ -70,42 +45,91 @@ Android
 
 
 
+日志
+    static String mDebugTag = "================AppActivity: ";
+    static void logError(String msg) {
+        Log.e(mDebugTag, msg);
+    }
+        
+初始化
+    // static TDGAAccount account;
+    public static void TalkingLevel(int level) {
+        account.setLevel(level);
+    }
 
-        setLevelTalking: function(num) {
-            if(typeof(jsb)!="undefined"){
-                jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity", "TalkingLevel", "(I)V",num);
-            }else{
-                cc.log("玩家等级:",num);
-            }
-        },
+    setLevelTalking: function(num) {
+        if(typeof(jsb)!="undefined"){
+            jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity", "TalkingLevel", "(I)V",num);
+        }else{
+            cc.log("玩家等级:",num);
+        }
+    },
 
-        TalkingBegin: function(str) {
-            if(typeof(jsb)!="undefined"){
-               jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity", "TalkingBegin", "(Ljava/lang/String;)V",str);
-            }else{
-               cc.log(str,"开始闯关");
-            }
-         },
+自定义事件
+    import java.util.Map;
+    import java.util.TreeMap;
 
-         TalkingCompleted: function(str) {
-            if(typeof(jsb)!="undefined"){
-               jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity", "TalkingCompleted", "(Ljava/lang/String;)V",str);
-            }else{
-               cc.log(str,"闯关成功");
-            }
-         },
+    static Map<String,Object> map;
+    public static void TalkingEvnet(int rankNum, int timeNum,int defeatNum) {
+        map = new TreeMap<>();
+        map.put("rank",String.valueOf(rankNum));
+        map.put("defeat",String.valueOf(defeatNum));
+        map.put("curTime",String.valueOf(timeNum));
+        TalkingDataGA.onEvent("gameOver", map);
+    }
 
-         TalkingFailed: function(str) {
-            if(typeof(jsb)!="undefined"){
-               jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity", "TalkingFailed", "(Ljava/lang/String;)V",str);
-            }else{
-               cc.log(str,"闯关失败");
-            }
-         },
+    public static void TalkingEvnet(String str) {
+        TalkingDataGA.onEvent(str);
+    }
 
-         var str = num;
-          if(num < 10){
-             str = "00" + num;
-          }else if(num < 100) {
-             str = "0" + num;
+    TalkingOnEvent: function(rankNum, timeNum, defeatNum) {
+          if(typeof(jsb)!="undefined"){
+             jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity", "TalkingEvnet", "(III)V",rankNum, timeNum, defeatNum);
+          }else{
+             cc.log("排名：" + rankNum);
+             cc.log("剩余时间：" + timeNum);
+             cc.log("击败数：" + defeatNum);
           }
+    },
+
+定义闯关
+    public static void TalkingBegin(String str) {
+        TDGAMission.onBegin(str); 
+    }
+    public static void TalkingCompleted(String str) {
+        TDGAMission.onCompleted(str);
+    }
+    public static void TalkingFailed(String str) {
+        TDGAMission.onFailed(str, "gameOver");
+    }
+
+    TalkingBegin: function(str) {
+        if(typeof(jsb)!="undefined"){
+           jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity", "TalkingBegin", "(Ljava/lang/String;)V",str);
+        }else{
+           cc.log(str,"开始闯关");
+        }
+     },
+
+     TalkingCompleted: function(str) {
+        if(typeof(jsb)!="undefined"){
+           jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity", "TalkingCompleted", "(Ljava/lang/String;)V",str);
+        }else{
+           cc.log(str,"闯关成功");
+        }
+     },
+
+     TalkingFailed: function(str) {
+        if(typeof(jsb)!="undefined"){
+           jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity", "TalkingFailed", "(Ljava/lang/String;)V",str);
+        }else{
+           cc.log(str,"闯关失败");
+        }
+     },
+
+    var str = num;
+    if(num < 10){
+         str = "00" + num;
+    }else if(num < 100) {
+         str = "0" + num;
+    }
