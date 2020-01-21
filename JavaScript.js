@@ -1,4 +1,7 @@
-
+var randomNumber = function(){
+    return 0.5 - Math.random()
+}
+skinIndexs.sort(randomNumber);
 
 var x1 = 1;
 var y1 = 0;
