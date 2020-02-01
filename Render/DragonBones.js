@@ -1,4 +1,20 @@
-
+DragonBone
+    var armatureDisplay = this.node.getComponent(dragonBones.ArmatureDisplay);
+    if(Config.language === "zh") {
+        //animName 指定播放动画的名称, -1 为使用配置文件中的次数。 0 为无限循环播放。
+        armatureDisplay.playAnimation("animName", -1);
+    }
+    else if(Config.language === "en") {
+        armatureDisplay.playAnimation("Animation4", -1);
+    }
+    else {
+        armatureDisplay.playAnimation("Animation3", -1);
+    }
+    //component : DragonBones
+    Dragon Asset：骨骼动画文件。
+    Dragon Atlas Asset：骨骼动画对应的拼合纹理图。
+    Armature：骨架名称。
+    Animation：动画名称。
 
 骨骼动画资源（DragonBones）
         DragonBones 骨骼动画资源有：

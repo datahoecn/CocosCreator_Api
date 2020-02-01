@@ -1,10 +1,7 @@
 // PZE9653cPtkc
+// 好像是用在Facebook上
 // lsSlctVDVMRFk4M0hONjRaZXBvZnN1ZGdwR0FkeElYTi16WUN3bWgzamVzRUplRVFBQUFBJCQAAAAAAAAAAAEAAACYjamlzPjQrM7aueoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAN4jG17eIxteU3
-// 范例使用节点上组件 this 可以暂停，文档说使用 node
-// 17C15C4C-7843-FD55-68B5-2EE4FD9A3305
-cc.director.getActionManager().resumeTarget(this.node);
-cc.director.getActionManager().pauseTarget(this.node);
-
+// 速盘极速版激活码 17C15C4C-7843-FD55-68B5-2EE4FD9A3305
 
 停止动作
     node.stopAction(action);
@@ -77,6 +74,17 @@ cc.sequence(
     cc.cardinalSplineBy 按基数样条曲线轨迹移动指定的距离
     cc.catmullRomTo     按 Catmull Rom 样条曲线轨迹移动到目标位置     var action1 = cc.catmullRomTo(3, array);points Array
     cc.catmullRomBy     按 Catmull Rom 样条曲线轨迹移动指定的距离     var action1 = cc.catmullRomBy(3, array);
+
+    getDuration     获取动作以秒为单位的持续时间。
+    setDuration     设置动作以秒为单位的持续时间。
+    reverse         返回一个新的动作，执行与原动作完全相反的动作。
+    clone           返回一个克隆的动作。
+    isDone          如果动作已完成就返回 true。
+    getTarget       获取当前目标节点。
+    setTarget       设置目标节点。
+    getOriginalTarget 获取原始目标节点。
+    getTag          获取用于识别动作的标签。
+    setTag          设置标签，用于识别动作。
 
 缓动动作
     cc.easeIn                   由慢到快                        action.easing(cc.easeIn(3.0));
@@ -155,8 +163,35 @@ cc.sequence(
     .start()
 
 
-Animation组件
+ActionManager
+    cc.ActionManager 是可以管理动作的单例类
+    99%的情况您将使用 CCNode 的接口,以下情况用到：
+        当你想要运行一个动作，但目标不是 CCNode 类型时。
+        当你想要暂停/恢复动作时
+    var mng = new cc.ActionManager();
+        or
+    cc.director.getActionManager().resumeTarget(this.node);
+    cc.director.getActionManager().pauseTarget(this.node);
+    addAction(Action, Node, Boolean)    增加一个动作，同时还需要提供动作的目标对象，目标对象是否暂停作为参数。
+    removeAllActions()                  移除所有对象的所有动作。
+    removeAllActionsFromTarget(Node, Boolean(forceDelete))  移除指定对象上的所有动作。
+    removeAction(Action)                移除指定的动作。
+    removeActionByTag(tag, Node)        删除指定对象下特定标签的一个动作，将删除首个匹配到的动作。
+    getActionByTag(tag, Node)           通过目标对象和标签获取一个动作。
+    getNumberOfRunningActionsInTarget(Node) 返回指定对象下所有正在运行的动作数量。组合动作被算作一个动作。
+        如果您正在运行 7 个动作组成的序列动作（Sequence），这个函数将返回 1。
+        如果你正在运行 2 个序列动作（Sequence）和 5 个普通动作，这个函数将返回 7。
+    pauseTarget(Node)                   暂停指定对象：所有正在运行的动作和新添加的动作都将会暂停。
+    resumeTarget(Node)                  让指定目标恢复运行。
+    pauseAllRunningActions()            暂停所有正在运行的动作，返回一个包含了那些动作被暂停了的目标对象的列表。
+    resumeTargets(Array)                让一组指定对象恢复运行（用来逆转 pauseAllRunningActions 效果的便捷函数）。
+    pauseTargets(Array)                 暂停一组指定对象。
+    purgeSharedManager()                清除共用的动作管理器。它释放了持有的实例.因为它使用 this，因此它不能是静态的。
+    update(dt)                          ActionManager主循环。
 
+
+
+Animation组件
 当在 cc.Animation 注册了一个回调函数后，它会在播放一个动画时，对相应的 cc.AnimationState 注册这个回调，
 在 cc.AnimationState 停止播放时，对 cc.AnimationState 取消注册这个回调。
 
@@ -314,27 +349,6 @@ AnimationClip
         name String 该对象的名称。
     method
         createWithSpriteFrames 使用一组序列帧图片来创建动画剪辑
-DragonBone
-    var armatureDisplay = this.node.getComponent(dragonBones.ArmatureDisplay);
-    if(Config.language === "zh") {
-        //animName 指定播放动画的名称, -1 为使用配置文件中的次数。 0 为无限循环播放。
-        armatureDisplay.playAnimation("animName", -1);
-    }
-    else if(Config.language === "en") {
-        armatureDisplay.playAnimation("Animation4", -1);
-    }
-    else {
-        armatureDisplay.playAnimation("Animation3", -1);
-    }
-    //component : DragonBones
-    Dragon Asset：骨骼动画文件。
-    Dragon Atlas Asset：骨骼动画对应的拼合纹理图。
-    Armature：骨架名称。
-    Animation：动画名称。
 
-    //动作混合
-    就是为人物的不同骨骼赋予不同的动作，
-    比如本例中，机器人一边走一边射击，下半身执行行走动作，而上半身同时进行着射击动作。
-    这种上、下半身分离，各自播放不同的动作，同时又混合在一个人物身上的效果
 
 
