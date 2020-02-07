@@ -5,12 +5,6 @@ javaScript 中数组也是对象
 var objects = [1, "joe", true, null];
 
 
-浅复制: 当把一个数组赋给另外一个数组时，只是为被赋值的数组增加了一个新的应用
-var a = [1,2,3,4];
-var b= a;
-b[0] = 4;//a 与 b 相互影响
-b = [4,2,3,4];// a 与 b 相互不影响
-
 Array 对象
 	properties
 		constructor 返回创建数组对象的原型函数

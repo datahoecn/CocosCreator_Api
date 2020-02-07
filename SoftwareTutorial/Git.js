@@ -1,3 +1,6 @@
+
+
+
 码	50.7.12.147	8097	eIW0Dnk69454e6nSwuspv9DmS201tQ0D	aes-256-cfb
 码	46.29.166.112	55	lncn.org ddf	rc4-md5
 码	162.220.51.58	8097	eIW0Dnk69454e6nSwuspv9DmS201tQ0D	aes-256-cfb
@@ -64,7 +67,9 @@ site
 	李子柒 site:weibo.com 搜索范围限定在这个站点中
 
 
-
+git中出现>这个符号怎么退出(git commit -m "在这按了换行，所以出现了 > ")
+解决办法： ctrl + d
+原因：这个表示你没有输入完成, 跟git无关, 是命令行的问题
 仓库
 	// 在当前目录，新建一个Git代码库
 	git init
