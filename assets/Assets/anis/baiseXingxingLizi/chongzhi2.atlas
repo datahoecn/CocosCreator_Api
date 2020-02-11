@@ -1,0 +1,13 @@
+
+chongzhi2.png
+size: 18,18
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+stars_01
+  rotate: false
+  xy: 2, 2
+  size: 14, 14
+  orig: 14, 14
+  offset: 0, 0
+  index: -1

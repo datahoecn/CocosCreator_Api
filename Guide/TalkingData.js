@@ -82,7 +82,7 @@ Android
         TalkingDataGA.onEvent(str);
     }
 
-    TalkingOnEvent: function(rankNum, timeNum, defeatNum) {
+    talkingOnEvent: function(rankNum, timeNum, defeatNum) {
           if(typeof(jsb)!="undefined"){
              jsb.reflection.callStaticMethod("org/cocos2dx/javascript/AppActivity", "TalkingEvnet", "(III)V",rankNum, timeNum, defeatNum);
           }else{
