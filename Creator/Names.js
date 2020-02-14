@@ -135,3 +135,14 @@ Controller     //控制器
 类的数据成员加前缀m_（表示member），这样可以避免数据成员与成员函数的参数同名 m_width 
 常量全用大写的字母，用下划线分割单词。 MAX_LENGTH 
 类名和函数名用大写字母开头的单词组合而成
+
+
+onTouchCallback
+setRemoveCallback
+setAddCallback
+getRandomNum
+setRatio
+reloadUI
+addRedPacket
+onPointChanged
+onClick

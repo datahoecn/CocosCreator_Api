@@ -1,3 +1,29 @@
+ @property([cc.SpriteFrame])
+ spf:cc.SpriteFrame[] = [];
+
+ @property(cc.Sprite)
+ sp:cc.Sprite = null;
+
+ @property(cc.Node)
+ nodeParent:cc.Node = null;
+
+ @property(cc.Label)
+ txtPoint:cc.Label = null;
+
+ @property(cc.Prefab)
+ prefab:cc.Prefab = null;
+
+ private index:number = 0;
+ private addCallback:any = null;
+ private isOver:boolean = false;
+
+setAddCallback(callback:any):void{
+    this.addCallback = callback;
+}
+
+btn(event:cc.Event, data:string):void{
+}
+
 类型
 	//基本类型
 	boolean		var isDone : boolean = false;
