@@ -18,6 +18,7 @@ Button
       
     var button = node.getComponent(cc.Button);
     button.clickEvents[0] = event;//button.clickEvents.push(event);
+    
 
     cc.game.on(cc.game.EVENT_HIDE, (event)=>{
         cc.log("game onPause - StorageUtil");
@@ -141,3 +142,49 @@ cc.Event 类型的事件对象 event
     position-changed  当位置属性修改时
     rotation-changed  当旋转属性修改时
     scale-changed 当缩放属性修改时
+
+
+
+// Button 源码
+    this.node.on(cc.Node.EventType.TOUCH_START, this._onTouchBegan, this);
+    this.node.on(cc.Node.EventType.TOUCH_MOVE, this._onTouchMove, this);
+    this.node.on(cc.Node.EventType.TOUCH_END, this._onTouchEnded, this);
+    this.node.on(cc.Node.EventType.TOUCH_CANCEL, this._onTouchCancel, this);
+
+    this.node.off(cc.Node.EventType.TOUCH_START, this._onTouchBegan, this);
+    this.node.off(cc.Node.EventType.TOUCH_MOVE, this._onTouchMove, this);
+    this.node.off(cc.Node.EventType.TOUCH_END, this._onTouchEnded, this);
+    this.node.off(cc.Node.EventType.TOUCH_CANCEL, this._onTouchCancel, this);
+// enabledInHierarchy  Boolean 表示该组件是否被启用并且所在的节点也处于激活状态。
+    _onTouchBegan (event) {
+        if (!this.interactable || !this.enabledInHierarchy) return;
+        this._pressed = true;
+        event.stopPropagation();
+    },
+
+    _onTouchMove (event) {
+        if (!this.interactable || !this.enabledInHierarchy || !this._pressed) return;
+        let touch = event.touch;
+        // 判断是否移动到节点外边
+        let hit = this.node._hitTest(touch.getLocation());
+        let target = this._getTarget();
+        let originalScale = this._originalScale;
+        event.stopPropagation();
+    },
+
+    _onTouchEnded (event) {
+        if (!this.interactable || !this.enabledInHierarchy) return;
+
+        if (this._pressed) {
+            cc.Component.EventHandler.emitEvents(this.clickEvents, event);
+            this.node.emit('click', this);
+        }
+        this._pressed = false;
+        event.stopPropagation();
+    },
+
+    _onTouchCancel () {
+        if (!this.interactable || !this.enabledInHierarchy) return;
+
+        this._pressed = false;
+    },

@@ -1,0 +1,1 @@
+com.android.ddmlib.AdbCommandRejectedException: device unauthorized.

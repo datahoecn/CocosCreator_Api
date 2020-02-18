@@ -1,8 +1,8 @@
-CocosCreator中可视区域外的节点依然会被渲染，所以屏幕外和mask外的节点需要自己手动active=false，对于TileMap，需要添加：
-cc.macro.ENABLE_TILEDMAP_CULLING = true;
+
+CocosCreator中可视区域外的节点依然会被渲染，所以屏幕外和mask外的节点需要自己手动active=false，
+对于TileMap，需要添加：cc.macro.ENABLE_TILEDMAP_CULLING = true;
 
 TileMap坐标转换
-
     TileMap坐标：以地图左上角为原点(0,0)，X轴向右增加，Y轴向下增加
     OpenGL坐标：以地图左下角为原点(0,0)，X轴向右增加，Y轴向上增加
     Creator坐标：以节点中心点为原点(0,0)，X轴向右增加，向左减少，Y轴向上增加，向下减少
@@ -114,14 +114,14 @@ TiledMap
 	propertie:
 		只有 Tmx Asset 编辑框，用来选择 Tiled Map 编辑器制作的地图文件，后缀名为 tmx
 
-    method
-    	getMapSize 获取地图大小。							Size 			let mapSize = tiledMap.getMapSize();
-    	getTileSize 获取地图背景中 tile 元素的大小。		Size 			let tileSize = tiledMap.getTileSize();
-    	getMapOrientation 获取地图方向。					Number			let mapOrientation = tiledMap.getMapOrientation();
-    	getObjectGroups 获取所有的对象层。					TiledObjectGroup[]		let objGroups = titledMap.getObjectGroups();
-    	getObjectGroup 获取指定的 TMXObjectGroup。		TiledObjectGroup	let group = titledMap.getObjectGroup("Players");
-    	getProperties 获取地图的属性。						Object[]		let properties = titledMap.getProperties();
-    	getLayers 返回包含所有 layer 的数组。				TiledLayer[]	let layers = titledMap.getLayers();
-    	getLayer 获取指定名称的 layer。					TiledLayer		let layer = titledMap.getLayer("Player");
-    	getProperty 通过属性名称，获取指定的属性。			String			let property = titledMap.getProperty("info");
-    	getPropertiesForGID 通过 GID ，获取指定的属性。	Object 			let properties = titledMap.getPropertiesForGID(GID);
+  method
+  	getMapSize 获取地图大小。							Size 			let mapSize = tiledMap.getMapSize();
+  	getTileSize 获取地图背景中 tile 元素的大小。		Size 			let tileSize = tiledMap.getTileSize();
+  	getMapOrientation 获取地图方向。					Number			let mapOrientation = tiledMap.getMapOrientation();
+  	getObjectGroups 获取所有的对象层。					TiledObjectGroup[]		let objGroups = titledMap.getObjectGroups();
+  	getObjectGroup 获取指定的 TMXObjectGroup。		TiledObjectGroup	let group = titledMap.getObjectGroup("Players");
+  	getProperties 获取地图的属性。						Object[]		let properties = titledMap.getProperties();
+  	getLayers 返回包含所有 layer 的数组。				TiledLayer[]	let layers = titledMap.getLayers();
+  	getLayer 获取指定名称的 layer。					TiledLayer		let layer = titledMap.getLayer("Player");
+  	getProperty 通过属性名称，获取指定的属性。			String			let property = titledMap.getProperty("info");
+  	getPropertiesForGID 通过 GID ，获取指定的属性。	Object 			let properties = titledMap.getPropertiesForGID(GID);

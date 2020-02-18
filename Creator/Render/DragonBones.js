@@ -1,14 +1,14 @@
-DragonBone
+DragonBones
+    当使用 DragonBones 组件时，属性检查器 中 Node 组件上的 Anchor 与 Size 属性是无效的
+
+    win_dra: dragonBones.ArmatureDisplay,
+
     var armatureDisplay = this.node.getComponent(dragonBones.ArmatureDisplay);
-    if(Config.language === "zh") {
+    if(Config.lang === "zh") {
         //animName 指定播放动画的名称, -1 为使用配置文件中的次数。 0 为无限循环播放。
-        armatureDisplay.playAnimation("animName", -1);
-    }
-    else if(Config.language === "en") {
-        armatureDisplay.playAnimation("Animation4", -1);
-    }
-    else {
-        armatureDisplay.playAnimation("Animation3", -1);
+        armatureDisplay.playAnimation("aniName_1", -1);
+    } else {
+        armatureDisplay.playAnimation("aniName_2", -1);
     }
     //component : DragonBones
     Dragon Asset：骨骼动画文件。
@@ -17,48 +17,10 @@ DragonBone
     Animation：动画名称。
 
 骨骼动画资源（DragonBones）
-        DragonBones 骨骼动画资源有：
-        .json 骨骼数据
-        .json 图集数据
-        .png 图集纹理
+    .json 骨骼数据
+    .json 图集数据
+    .png 图集纹理
 
-properties: {
-    zhuanchang_zb: dragonBones.ArmatureDisplay,
-    zhuanchang_db: dragonBones.ArmatureDisplay
-}
-playAni(name) {
-    switch (name) {
-        case "name_1":
-            this.zhuanchang_zb.node.active = true;
-            this.zhuanchang_zb.playAnimation("newAnimation", 1);
-            break;
-        case "name_2":
-            this.zhuanchang_db.node.active = true;
-            if(global.language === "zh"){
-                this.zhuanchang_db.playAnimation("gxjs-jianti", 1);
-            }else if(global.language === "en"){
-                this.zhuanchang_db.playAnimation("gxjs-yingwen", 1);      
-            }else{
-                this.zhuanchang_db.playAnimation("gxjs-fanti", 1);
-            }
-            break;
-        default:
-            break;
-    }
-},
-
-hideAni(name) {
-    switch (name) {
-        case "name_1":
-            this.zhuanchang_zb.node.active = false;
-            break;
-        case "name_2":
-            this.zhuanchang_db.node.active = false;
-            break;
-        default:
-            break;
-    }
-}
 
 // 手动创建
 var self = this;
@@ -88,11 +50,7 @@ cc.loader.loadResDir('pet/dragon', function(err, assets){
     // animName 指定播放动画的名称
     dragonDisplay.playAnimation('idle');  
 })
-
-当使用 DragonBones 组件时，属性检查器 中 Node 组件上的 Anchor 与 Size 属性是无效的
-
-
-        
+  
 Dragon Asset    骨骼信息数据，包含了骨骼信息（绑定骨骼动作，slots，渲染顺序，attachments，皮肤等等）和动画，但不持有任何状态。
                 多个 ArmatureDisplay 可以共用相同的骨骼数据。
                 可拖拽 DragonBones 导出的骨骼资源到这里
