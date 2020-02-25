@@ -155,6 +155,12 @@ cc.Event 类型的事件对象 event
     this.node.off(cc.Node.EventType.TOUCH_MOVE, this._onTouchMove, this);
     this.node.off(cc.Node.EventType.TOUCH_END, this._onTouchEnded, this);
     this.node.off(cc.Node.EventType.TOUCH_CANCEL, this._onTouchCancel, this);
+
+    clickEvents: {
+            default: [],
+            type: cc.Component.EventHandler,
+            tooltip: CC_DEV && 'i18n:COMPONENT.button.click_events',
+        }
 // enabledInHierarchy  Boolean 表示该组件是否被启用并且所在的节点也处于激活状态。
     _onTouchBegan (event) {
         if (!this.interactable || !this.enabledInHierarchy) return;

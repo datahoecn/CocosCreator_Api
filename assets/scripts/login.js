@@ -64,14 +64,14 @@ readData() {
     }
     cc.log("玩家名字：" + Global.playerName);
 
-    var isPlay = cc.sys.localStorage.getItem("isPlay");
-    if(isPlay === "true"){
-        Global.isPlay = true;
-    }else if(isPlay === "false"){
-        Global.isPlay = false;
+    var isVoice = cc.sys.localStorage.getItem("isVoice");
+    if(isVoice === "true"){
+        Global.isVoice = true;
+    }else if(isVoice === "false"){
+        Global.isVoice = false;
     }else{
-        Global.isPlay = true;
-        cc.sys.localStorage.setItem("isPlay", true);
+        Global.isVoice = true;
+        cc.sys.localStorage.setItem("isVoice", true);
     }
 
     Global.skinConfig = JSON.parse(cc.sys.localStorage.getItem("skinConfig"));
