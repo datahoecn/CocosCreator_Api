@@ -1,4 +1,14 @@
 Button
+    checkEvents: {
+        default: [],
+        type: cc.Component.EventHandler
+    },
+
+    if (this.checkEvents) {
+        cc.Component.EventHandler.emitEvents(this.checkEvents, toggle);
+    }
+
+    
 
     监听者通知分发者这里有代码对此事件感兴趣
     出事后由发射者通知分发者

@@ -32,3 +32,6 @@ Ctrl + Shift + \ 	Jump to matching braket
 
 
 Chinese (Simplified) Language Pack for Visual Studio Code
+
+过滤文件
+	文件 --> 首选项 --> 设置 --> 搜索 files.exclude
