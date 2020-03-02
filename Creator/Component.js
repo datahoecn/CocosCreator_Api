@@ -40,7 +40,7 @@ method
 
 const Player = require('Player');
 let Mask = cc.Class({
-    name: "sprite"//设置类名，类名用于序列化，一般可以省略。
+    name: "sprite",//设置类名，类名用于序列化，一般可以省略。
     extends: cc.Component, // 值类型：Function
     statics: {
         _count: 0,

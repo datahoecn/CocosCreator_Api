@@ -15,9 +15,7 @@
 
 		//当碰撞产生的时候调用
 		onCollisionEnter: function (other, self) {
-	        this.label.string = 'Collision on tag : ' + self.tag;
-	    }
-		onCollisionEnter: function (other, self) {
+			this.label.string = 'Collision on tag : ' + self.tag;
 		    console.log('on collision enter');
 		    // 碰撞系统会计算出碰撞组件在世界坐标系下的相关的值，并放到 world 这个属性里面
 		    var world = self.world;
@@ -47,6 +45,9 @@
 	tag	标签。当一个节点上有多个碰撞组件时，在发生碰撞后，可以使用此标签来判断是节点上的哪个碰撞组件被碰撞了
 
 点击测试
+	properties: {
+        collider: cc.BoxCollider
+    },
 	cc.PolygonCollider 组件(多边形对撞机)
 	this.node.on(cc.Node.EventType.TOUCH_START, function (touch, event) {
 	    var touchLoc = touch.getLocation();

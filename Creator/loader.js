@@ -46,16 +46,10 @@ if (CC_EDITOR) {
 
 如果这个预置需要反复执行 cc.instantiate，请选择“优化多次创建性能”，否则保持默认的“自动调整”即可。
 
-从当前场景切换到下一个场景时，如果当前场景不自动释放资源，
-则该场景中直接或间接引用到的所有资源（脚本动态加载的不算），
-默认都不主动释放。反之如果启用了自动释放，则这些引用到的资源默认都会自动释放。
 
 粒子系统的 plist 所引用的贴图不会被自动释放。如果要自动释放粒子贴图，
 请从 plist 中移除贴图信息，改用粒子组件的 Texture 属性来指定贴图
 
-如果项目中的场景很多，随着新场景的切换，内存占用就会不断上升
-除了使用 cc.loader.release 等 API 来精确释放不使用的资源
-我们还可以使用场景的自动释放功能
 
 启用了某个场景的资源自动释放后，如果在脚本中保存了对该场景的资源的“特殊引用”
 当场景切换后，由于资源已经被释放，这些引用可能会变成非法的，有可能引起渲染异常等问题
@@ -151,9 +145,6 @@ JSON 资源
     cc.loader.releaseAsset(spriteFrame);
 
 资源批量加载
-    // 加载 testassets 目录下所有资源
-    cc.loader.loadResDir("testassets", function (err, assets) {
-    });
     // 加载 test assets 目录下所有 SpriteFrame，并且获取它们的路径
     cc.loader.loadResDir("testassets", cc.SpriteFrame, function (err, assets, urls) {
         //利用多线程加载目录，时间可能比较长，加载完成后，利用 isValid 判断当前节点是否已被销毁，如果销毁直接返回
