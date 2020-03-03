@@ -1,7 +1,3 @@
-// 02-09 20-00
-// 02-11 15-50
-// 02-14 16-40
-
 
 svn checkout https://172.16.1.98/svn/math/design/Math/assets --username=lijie --password=123456 /Users/xhkj/Desktop/math/assets
 
@@ -118,7 +114,7 @@ console.time() 和 console.timeEnd()得到一段代码的执行时间
 console.group("====第" + (this.wave_index + 1) + "波小怪====");
 console.groupEnd();
 
-console.assert(isDebug,'为false时输出的信息');// isDebug为false，打印'为false时输出的信息'
+console.assert(isDebug,'为false时输出的信息');// isDebug为false时，打印'为false时输出的信息'
 console.count('myFunction被执行的次数'); // myFunction被执行的次数: 1
 console.dir(obj)// 输出obj详细
 https://developer.chrome.com/devtools/docs/console-api

@@ -1,10 +1,18 @@
 properties
+	node.isValid 			Boolean 表示该对象是否可用（被 destroy 后将不可用）。
+	node.activeInHierarchy 	Boolean 表示此节点是否在场景中激活。
+	node.cascadeOpacity 	Boolean 节点的不透明度值是否影响其子节点，默认值为 true。
+
 	node.eulerAngles 		cc.v3(0, Date.now() / 10, 0); 欧拉角度
 	node.is3DNode 			Boolean 开启 3 D 节点
-	node.z
-	node.zIndex				Number 控制节点排列顺序
-	node.groupIndex 		Integer 节点的分组索引。
+
+	node.z  				return this._position.z
+	node.x  				return this._position.x
+	node.zIndex				Number 是用来对节点进行排序的关键属性，它决定一个节点在兄弟节点之间的位置
+
+	node.groupIndex 		Integer 节点的分组索引。 节点的分组将关系到节点的碰撞组件可以与哪些碰撞组件相碰撞
 	node.group 				String 节点的分组。
+	
 	node.position 			cc.v2(300, 200)		Vec2 
 	node.rotation 			Number 该节点旋转角度。
 	node.rotationX 			Number 该节点 X 轴旋转角度。
@@ -17,14 +25,11 @@ properties
 	node.anchorX 			Number 节点 X 轴锚点位置。
 	node.width 				Number 节点宽度。
 	node.height 			Number 节点高度。
-	node.cascadeOpacity 	Boolean 节点的不透明度值是否影响其子节点，默认值为 true。
-	node.isValid 			Boolean 表示该对象是否可用（被 destroy 后将不可用）。
 	node.name 				String 该节点名称。
 	node.uuid 				String 主要用于编辑器的 uuid，在编辑器下可用于持久化存储，在项目构建之后将变成自增的 id。
 	node.children 			Node[] 节点的所有子节点。
 	node.childrenCount 		Number 节点的子节点数量。
 	node.active 			Boolean 当前节点的自身激活状态。
-	node.activeInHierarchy 	Boolean 表示此节点是否在场景中激活。
 	node.parent 			Node 该节点的父节点。
 
 	node._components 		Component[]
