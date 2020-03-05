@@ -1,4 +1,30 @@
-
+saveForBrowser() {
+    var content = JSON.stringify(this.layout);
+    if (cc.sys.isBrowser) {
+        console.log("浏览器");
+        let textFileAsBlob = new Blob([content], {type:'application/json'});
+        let downloadLink = document.createElement("a");
+        downloadLink.download = this._fileName;
+        downloadLink.innerHTML = "Download File";
+        if (window.webkitURL != null)
+        {
+            // Chrome allows the link to be clicked
+            // without actually adding it to the DOM.
+            downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
+        }
+        else
+        {
+            // Firefox requires the link to be added to the DOM
+            // before it can be clicked.
+            downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
+            downloadLink.onclick = destroyClickedElement;
+            downloadLink.style.display = "none";
+            document.body.appendChild(downloadLink);
+        }
+        downloadLink.click();
+    }
+},
+    
 svn checkout https://172.16.1.98/svn/math/design/Math/assets --username=lijie --password=123456 /Users/xhkj/Desktop/math/assets
 
 图片优化方法

@@ -1,3 +1,16 @@
+{
+    "server":"0.0.0.0",
+    "server_port":8989,
+    "local_address": "127.0.0.1",
+    "local_port":1080,
+    "password":"taihai2015",
+    "timeout":600,
+    "method":"aes-256-cfb",
+    "fast_open": false,
+    "workers": 1
+}
+
+1022 111
 http://172.16.1.29:7456/
 // PZE9653cPtkc
 // 好像是用在Facebook上
