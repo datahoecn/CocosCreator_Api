@@ -4,15 +4,6 @@
  @property(cc.Sprite)
  sp:cc.Sprite = null;
 
- @property(cc.Node)
- nodeParent:cc.Node = null;
-
- @property(cc.Label)
- txtPoint:cc.Label = null;
-
- @property(cc.Prefab)
- prefab:cc.Prefab = null;
-
  private index:number = 0;
  private addCallback:any = null;
  private isOver:boolean = false;
@@ -78,17 +69,6 @@ btn(event:cc.Event, data:string):void{
 	jQuery('#foo');
 
 运算符
-	==	比较两个运算元是否相等(10 == "10") true
-	===	比较两个运算云的值和类型是否相等(10 == "10") false
-	!=	比较两个运算元是否不等(10 ！= 20) true
-	!==	比较两个运算云的值和类型是否不等(10 ！== "10") true
-
-	&& 	且 
-	||	或
-	！	非
-
-	a += b	a = b + a
-
 	var a = b ? "b is true" : "b is false"
 
 	迭代对象的属性
@@ -110,9 +90,7 @@ btn(event:cc.Event, data:string):void{
 	function greet(name?: string): string{
 		if (name){
 			return "Hi! " + name;
-		}
-		else
-		{
+		} else {
 			return "Hi!";
 		}
 	}
@@ -121,9 +99,7 @@ btn(event:cc.Event, data:string):void{
 	var greet = function(name?: string): string{
 		if (name){
 			return "Hi! " + name;
-		}
-		else
-		{
+		} else {
 			return "Hi!";
 		}
 	}
@@ -132,9 +108,7 @@ btn(event:cc.Event, data:string):void{
 	var greet = (name?: string): string => {
 		if (name){
 			return "Hi! " + name;
-		}
-		else
-		{
+		} else {
 			return "Hi!";
 		}
 	}
@@ -211,8 +185,6 @@ btn(event:cc.Event, data:string):void{
 命名空间
 	使用 namespace 和 export 关键字
 
-声明了一个变量之后，不能改变它的类型的语言，是静态语言；能够随时改变它的类型的语言，是动态语言
-
 
 装饰器使用 @ 字符开头作为标记，装饰器主要用于编辑器对组件和属性的识别
 const {ccclass, property} = cc._decorator; // 从 cc._decorator 命名空间中引入 ccclass 和 property 两个装饰器
@@ -248,7 +220,8 @@ function func1( ...args ) {//...操作符的作用是用来声明任意数量的
 
 使用下划线(_)开始的变量名作为私有变量名
 
-闭包就是能够读取其他函数内部变量的函数。例如在javascript中，只有函数内部的子函数才能读取局部变量，所以闭包可以理解成“定义在一个函数内部的函数“。在本质上，闭包是将函数内部和函数外部连接起来的桥梁
+闭包就是能够读取其他函数内部变量的函数。例如在javascript中，只有函数内部的子函数才能读取局部变量，
+所以闭包可以理解成“定义在一个函数内部的函数“。在本质上，闭包是将函数内部和函数外部连接起来的桥梁
 
 
 
