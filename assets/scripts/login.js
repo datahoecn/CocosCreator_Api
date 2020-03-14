@@ -1,3 +1,20 @@
+const COLOR = [
+    new cc.Color(90, 100, 100), // 0
+    new cc.Color(255, 90, 90), // 1
+    new cc.Color(255, 150, 100), // 2
+    new cc.Color(255, 200, 0), // 4
+    new cc.Color(150, 150, 100), // 8
+    new cc.Color(150, 200, 100), // 16
+    new cc.Color(50, 200, 100),  // 32
+    new cc.Color(50, 200, 200),  // 64
+    new cc.Color(50, 150, 200),  // 128
+    new cc.Color(50, 100, 200), // 256
+    new cc.Color(100, 100, 200), // 512
+    new cc.Color(100, 50, 255), // 1024
+    new cc.Color(150, 50, 200), // 2048
+    new cc.Color(255, 50, 200), // 4096
+]
+
 var audioMgr = require("audioMgr");
 
 onLoad () {

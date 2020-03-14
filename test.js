@@ -1,1 +1,4 @@
-console.log(Math.random() > 0.5 ? 3 : 2)
+var a = 100;
+var b = 10;
+var c = 1;
+console.log(a += b - c);
