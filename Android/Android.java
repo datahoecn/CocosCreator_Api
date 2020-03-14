@@ -6,3 +6,7 @@ Log.e() error 	打印错误信息
 
 Table 自动补齐
 Alt + Enter 自动 import
+
+如果没有声明活动为主活动，程序依旧可以安装。一般作为第三方服务供其它应用调用，如支付宝快捷支付服务
+
+重写方法快捷键 Ctrl + O(Mac control + O)
