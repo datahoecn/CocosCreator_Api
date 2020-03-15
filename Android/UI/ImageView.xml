@@ -1,0 +1,11 @@
+<ImageView
+    android:id="@+id/imageView3"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:srcCompat="@drawable/add14" />
+
+代码更改图片
+private ImageView imageView;
+
+imageView = (ImageView) findViewById(R.id.imageView3);
+imageView.setImageResource(R.drawable.add14);

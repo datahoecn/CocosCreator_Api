@@ -1,0 +1,30 @@
+默认会对 Button 中的英文字母大写转换 textAllCaps = true
+
+<Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAllCaps="false"
+        android:text="Button" />
+
+
+	Button button = (Button) findViewById(R.id.button);
+	button.setOnClickListener(new View.OnClickListener() {
+	    @Override
+	    public void onClick(View view) {
+	    	witch (view.getId()) {
+                case R.id.button:
+                    Intent intent = new Intent(FirstActivity.this, SecondActivity.class);
+	        		startActivityForResult(intent, 111);
+                    break;
+                default:
+                    break;
+            }
+
+            or
+
+	        Intent intent = new Intent(FirstActivity.this, SecondActivity.class);
+	        startActivityForResult(intent, 111);
+	    }
+	});
+

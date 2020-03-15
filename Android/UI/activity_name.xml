@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Button" />
+</LinearLayout>
+
+
+layout_width
+layout_height
+	// 弃用 fill_parent
+	match_parent
+	wrap_content
+	 
+gravity
+    用于指定文字在控件中的对齐方式
+    // 可以用 "|" 同时指定多个值
+    top
+    bottom
+    left
+    right
+    center 等价 center_vertical|center_horizontal
+layout_gravity
+    用于指定控件在布局中的对齐方式
+    可选值和 gravity 差不多
+
+layout_weight
+    使用比例来指定控件大小
+    先把 weight 值相加，得到一个总值，求所占比例
+    如果由组件没使用 weight，总空间是先除掉该组件所使用的空间
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_weight="1"
+

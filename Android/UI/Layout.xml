@@ -1,0 +1,91 @@
+布局可以包含布局
+
+LinearLayout 线性布局 
+	horizontal 	水平排布（默认）
+	vertical 	垂直排布
+
+RelativeLayout 相对布局
+	相对父布局定位
+	<Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_centerInParent="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentLeft="true"
+
+        android:text="Button" />
+
+    相对控件定位
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="Button" />
+
+     <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_above="@+id/button2"
+        android:layout_toLeftOf="@+id/button2"
+        android:layout_below="@+id/button2"
+        android:layout_toRightOf="@+id/button2"
+
+        android:text="Button" />
+
+    or
+
+    对齐
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_alignRight="@+id/button2" 
+        android:layout_alignTop="@+id/button2"
+        android:layout_alignLeft="@+id/button2"
+        android:layout_alignBottom="@+id/button2"
+
+        android:text="Button" />
+
+
+FrameLayout 帧布局
+    没有方便的定位方式，所有控件都会默认摆放在布局的左上角
+
+
+
+百分比布局
+    打开 app/build.gradle 在 dependencies 闭包中添加
+    implementation 'com.android.support:appcompat-v7:29.0.0'
+    implementation 'com.android.support:percent:29.0.0'
+PercentFrameLayout
+    // xmlns:app 是自己添加的
+    // 不写下面两行，会报错，可以不用写
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    <?xml version="1.0" encoding="utf-8"?>
+    <androidx.percentlayout.widget.PercentFrameLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|top"
+            app:layout_widthPercent="50%"
+            app:layout_heightPercent="50%"
+            android:text="Button" />
+    </androidx.percentlayout.widget.PercentFrameLayout>
+
+percentRelativeLayout 用法和 PercentFrameLayout 类似
+
+    

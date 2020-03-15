@@ -1,0 +1,18 @@
+// 拖动 Plane Text 创建
+// hint 提示文字
+// maxLines 当输入超出两行，文本会向上滚动
+<EditText
+    android:id="@+id/editText"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hint="Type something here"
+    android:maxLines="2"
+    android:ems="10"
+    android:inputType="textPersonName"
+    android:text="Name" />
+
+// 获取输入内容
+	private EditText editText;
+
+    editText = (EditText) findViewById(R.id.editText);
+	String imputText = editText.getText().toString();

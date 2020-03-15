@@ -10,3 +10,19 @@ Alt + Enter 自动 import
 如果没有声明活动为主活动，程序依旧可以安装。一般作为第三方服务供其它应用调用，如支付宝快捷支付服务
 
 重写方法快捷键 Ctrl + O(Mac control + O)
+
+对话框
+	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	    android:orientation="vertical"
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent">
+
+	    <TextView
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:text="This is a dialog activity" />
+	</LinearLayout>
+
+	<activity android:name=".DialogActivity"
+				android:theme = "@style/Theme.AppCompat.Dialog">
+	</activity>

@@ -1,0 +1,30 @@
+    // visibility
+    	visible 	View.VISIBLE 	默认可见
+    	invisible 	View.INVISIBLE  不可见
+    	gone 		View.GONE      	不可见，而且不占用屏幕空间
+    // style 指定不同样式
+    // 圆形 "?android:attr/progressBarStyle"
+    // 水平 "?android:attr/progressBarStyleHorizontal"
+    // max 设置最大值
+    <ProgressBar
+		android:id="@+id/progressBar"
+		style="?android:attr/progressBarStyle"
+		android:max="100"
+		android:visibility="visible"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content" />
+
+
+
+
+	private ProgressBar progressBar;
+	progressBar = (ProgressBar) findViewById(R.id.progressBar);
+
+	if (progressBar.getVisibility() == View.GONE) {
+		progressBar.setVisibility(View.VISIBLE);
+	} else {
+	    progressBar.setVisibility(View.GONE);
+	}
+	int progress = progressBar.getProgress();
+	progress = progress + 10;
+	progressBar.setProgress(progress);
