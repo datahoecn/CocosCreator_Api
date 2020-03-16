@@ -1,8 +1,10 @@
+// 随机排序
 var randomNumber = function(){
     return 0.5 - Math.random()
 }
 skinIndexs.sort(randomNumber);
 
+// 角度计算
 var x1 = 1;
 var y1 = 0;
 var x2 = 1;
@@ -12,116 +14,91 @@ var anl = 180 / Math.PI * Math.acos((x1 * x2 + y1 * y2) / Math.sqrt(x1 * x1 + y1
 // 顺时针 还是 逆时针
 anl = 180 / Math.PI * Math.asin((x1 * y2 - y1 * x2) / Math.sqrt(x1 * x1 + y1 * y1) / Math.sqrt(x2 * x2 + y2 * y2));
 
-
-
 闭包是由函数以及创建该函数的词法环境组合而成。
 这个环境包含了这个闭包创建时所能访问的所有局部变量。
 
-Date.now() // 返回自1970年1月1日 00:00:00 UTC到当前时间的毫秒数，类型为Number。
-Date.UTC(year,month[,date[,hrs[,min[,sec[,ms]]]]]) // 返回1970-1-1 00:00:00 UTC到指定的日期之间的毫秒数
-var utcDate = Date.parse("Jul 8, 2005")
 
-Object.values()方法返回一个给定对象自身的所有可枚举属性值的数组，
-值的顺序与使用for...in循环的顺序相同 ( 区别在于 for-in 循环枚举原型链中的属性 )。
-var obj = { foo: 'bar', baz: 42 };
-console.log(Object.values(obj)); // ['bar', 42]
-console.log(Object.values('foo')); // ['f', 'o', 'o'].
+日期
+	Date.now() // 返回自1970年1月1日 00:00:00 UTC到当前时间的毫秒数，类型为Number。
+	Date.UTC(year,month,day,hours,minutes,seconds,ms) // 从 1970/01/01 到具体日期的毫秒数（根据世界时）
+	var utcDate = Date.parse("Jul 8, 2005")
 
-for (var prop in obj) {
-  if (obj.hasOwnProperty(prop)) {
-    console.log(`obj.${prop} = ${obj[prop]}`);
-  } 
-}
+	var date = new Date();
+	var a = date.getFullYear();
+	getDate()			// 从 Date 对象返回一个月中的某一天 (1 ~ 31)。
+	getDay()			// 从 Date 对象返回一周中的某一天 (0 ~ 6)。
+	getMonth()			// 从 Date 对象返回月份 (0 ~ 11)。
+	getFullYear()		// 从 Date 对象以四位数字返回年份。
+	getHours()			// 返回 Date 对象的小时 (0 ~ 23)。
+	getMinutes()		// 返回 Date 对象的分钟 (0 ~ 59)。
+	getSeconds()		// 返回 Date 对象的秒数 (0 ~ 59)。
+	getMilliseconds()	// 返回 Date 对象的毫秒(0 ~ 999)。
+	getTime()			// 返回 1970 年 1 月 1 日至今的毫秒数。
+	getTimezoneOffset()	// 返回本地时间与格林威治标准时间 (GMT) 的分钟差。
+	// UTC 协调世界时，又称世界统一时间、世界标准时间、国际协调时间
+	getUTCDate()			// 根据世界时从 Date 对象返回月中的一天 (1 ~ 31)。
+	getUTCDay()				// 根据世界时从 Date 对象返回周中的一天 (0 ~ 6)。
+	getUTCMonth()			// 根据世界时从 Date 对象返回月份 (0 ~ 11)。
+	getUTCFullYear()		// 根据世界时从 Date 对象返回四位数的年份。
+	getUTCHours()			// 根据世界时返回 Date 对象的小时 (0 ~ 23)。
+	getUTCMinutes()			// 根据世界时返回 Date 对象的分钟 (0 ~ 59)。
+	getUTCSeconds()			// 根据世界时返回 Date 对象的秒钟 (0 ~ 59)。
+	getUTCMilliseconds()	// 根据世界时返回 Date 对象的毫秒(0 ~ 999)。
 
+对象
+	Object.values()方法返回一个给定对象自身的所有可枚举属性值的数组，
+	for-in 会循环枚举原型链中的属性
+		
+	var obj = { foo: 'bar', baz: 42 };
+	console.log(Object.values(obj)); // ['bar', 42]
+	console.log(Object.values('foo')); // ['f', 'o', 'o'].
 
-function fn(want) {
-	setTimeout(want, 0);// 后执行
-	console.log("先执行")
-}
-
-实例方法
-	构造函数中的方法
-	function Foo() {
-		this.bar = function() {
-		}
-	}
-原型方法
-	通过 prototype 挂载到原型对象上的方法
-	Foo.prototype.bar = function() {
-
-	}
-静态方法
-	挂载在构造函数上的方法
-	静态方法不能通过实例访问，只能通过构造函数来访问
-	常用来实现一些常用的，与具体实例无关的功能
-	Foo.each = function() {
-	}
-
-继承
-	function Student(name, age, grade) {
-		Person.call(this, name, age);
-		this.grade = grade;
+	for (var prop in obj) {
+	  if (obj.hasOwnProperty(prop)) {
+	    console.log(`obj.${prop} = ${obj[prop]}`);
+	  } 
 	}
 
-	Student.prototype = Object.create(Person.prototype, {
-		constructor: {
-			value: Student
-		},
-		getGrade: {
-			value: function() {
-				return this.grade;
+
+	实例方法
+		构造函数中的方法
+		function Foo() {
+			this.bar = function() {
 			}
 		}
-	})
+	原型方法
+		通过 prototype 挂载到原型对象上的方法
+		Foo.prototype.bar = function() {
 
-
-所有函数与对象都有一个 toSring 和 valueOf 方法
-来自Object.prototype
-
-
-function add() {
-	var _args = [].slice.call(arguments);
-	var adder = function() {
-		var _adder = function() {
-			_args.push(...arguments);
-			return _adder;
 		}
-		_adder.toString = function() {
-			return _args.reduce(function(a,b) {
-				return a + b;
-			}) 
+	静态方法
+		挂载在构造函数上的方法
+		静态方法不能通过实例访问，只能通过构造函数来访问
+		常用来实现一些常用的，与具体实例无关的功能
+		Foo.each = function() {
 		}
-		return _adder;
-	}
-	return adder(..._args);
-}
-var a = add(1)(2)(3)(4);
-console.log(a + 10)
+
+	继承
+		function Student(name, age, grade) {
+			Person.call(this, name, age);
+			this.grade = grade;
+		}
+
+		Student.prototype = Object.create(Person.prototype, {
+			constructor: {
+				value: Student
+			},
+			getGrade: {
+				value: function() {
+					return this.grade;
+				}
+			}
+		})
 
 
-arguments是对象{"0": "参数1", "1": "参数2"}
-arguments对象不是一个 Array 。它类似于Array,但除了length属性和索引元素之外没有任何Array属性。
-第一个参数在索引0处
-arguments[0]
-arguments是所有（非箭头）函数中都可用的局部变量
+	所有函数与对象都有一个 toSring 和 valueOf 方法
+	来自Object.prototype
 
-// 收集参数
-var args = Array.prototype.slice.call(arguments);
-var args = [].slice.call(arguments);
-var args = (arguments.length === 1 ? [arguments[0]] : Array.apply(null, arguments));
-要确定函数签名中（输入）参数的数量，请使用Function.length 属性
-
-function myConcat(separator) {
-  var args = Array.prototype.slice.call(arguments, 1);
-  return args.join(separator);
-}
-// returns "red, orange, blue"
-myConcat(", ", "red", "orange", "blue");
-
-
-switch 用来判断的表达式可以是任意类型，而不仅限于整型（C++ 和 Java 要求该表达式必须为整型）
-
-object
 	var a = {"aaa": [], "bbb": null};
 	// 判断对象是否包含特定的自身(非继承)属性
 	// 继承属性
@@ -141,6 +118,49 @@ object
 	}
 	JavaScript 并没有保护 hasOwnProperty 这个属性名，千万别定义
 
+参数
+	function add() {
+		var _args = [].slice.call(arguments);
+		var adder = function() {
+			var _adder = function() {
+				_args.push(...arguments);
+				return _adder;
+			}
+			_adder.toString = function() {
+				return _args.reduce(function(a,b) {
+					return a + b;
+				}) 
+			}
+			return _adder;
+		}
+		return adder(..._args);
+	}
+	var a = add(1)(2)(3)(4);
+	console.log(a + 10)
+
+
+	arguments是对象{"0": "参数1", "1": "参数2"}
+	arguments对象不是一个 Array 。它类似于Array,但除了length属性和索引元素之外没有任何Array属性。
+	第一个参数在索引0处
+	arguments[0]
+	arguments是所有（非箭头）函数中都可用的局部变量
+
+	// 收集参数
+	var args = Array.prototype.slice.call(arguments);
+	var args = [].slice.call(arguments);
+	var args = (arguments.length === 1 ? [arguments[0]] : Array.apply(null, arguments));
+	要确定函数签名中（输入）参数的数量，请使用Function.length 属性
+
+	function myConcat(separator) {
+	  var args = Array.prototype.slice.call(arguments, 1);
+	  return args.join(separator);
+	}
+	// returns "red, orange, blue"
+	myConcat(", ", "red", "orange", "blue");
+
+
+switch 用来判断的表达式可以是任意类型，而不仅限于整型（C++ 和 Java 要求该表达式必须为整型）
+
 CommonJS模块规范
 	每个文件是一个模块, module 变量代表当前模块, 它的exports属性（即module.exports）是对外的接口
 	require方法用于加载模块
@@ -154,10 +174,11 @@ ES6模块规范
 	export function multiply(x, y) {
 	    return x*y;
 	}
+	import {ModuleA, ModuleB} from "modules"; 
+
 	export default function () {
 	    alert("default module called!");
 	};
-	import {ModuleA, ModuleB} from "modules"; 
 	import Default from 'modules2';
 
 
@@ -173,18 +194,17 @@ value < min_inclusive ? min_inclusive : value < max_inclusive ? value : max_incl
 	var c = (a, b) => {
 	    return a + b
 	}
-	箭头函数中的this,就是 声明函数时 所处上下文中的this,它不会被其他方式所改变
 	在箭头函数中，没有arguments对象
 
 
 一个函数调用时
 	创建阶段
 		创建变量对象，确认作用域链，确定this的指向
-		创建变量对象：
-			获得函数的参数变量及其值
-			使用 function 声明的函数，以函数名建立一个属性，其值为函数地址引用，如果已存在，会覆盖其值
-			使用 var 声明的变量，以变量名建立一个属性，其值为undefined, 如果已存在，会跳过
-		变量对象包含：函数参数，函数声明(function)和变量声明(var)
+			创建变量对象：
+				获得函数的参数变量及其值
+				使用 function 声明的函数，以函数名建立一个属性，其值为函数地址引用，如果已存在，会覆盖其值
+				使用 var 声明的变量，以变量名建立一个属性，其值为undefined, 如果已存在，会跳过
+			变量对象包含：函数参数，函数声明(function)和变量声明(var)
 	执行阶段
 		变量赋值，函数引用，执行其他可执行代码
 		
@@ -305,7 +325,7 @@ class Person {
 			var a = {
 				m: 20,
 				get: function() {
-					retrun this.m;
+					return this.m;
 				}
 			}
 	匿名函数//作为一个参数或返回值
