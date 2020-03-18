@@ -22,7 +22,7 @@ DragonBones
     .png 图集纹理
 
 
-// 手动创建
+手动创建
 var self = this;
 cc.loader.loadResDir('pet/dragon', function(err, assets){
     if(err){

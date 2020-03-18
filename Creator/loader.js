@@ -28,17 +28,6 @@ if (CC_EDITOR) {
     <key>blendFuncSource</key>
     <integer>770</integer>
 
-制作序列帧动画时，Trim mode 请选择 Trim，一定不要选择 Crop, flush position，否则透明像素剪裁信息会丢失，
-您在使用图集里的资源时也就无法获得原始图片未剪裁的尺寸和偏移信息了
-
-将 Sprite 组件 的 Trim 设为 false，将 Size Mode 设为 RAW。这样动画在播放每个序列帧时，
-都将使用原始图片的尺寸，并保留图像周围透明像素的信息，这样才能正确显示绘制在动画中的角色位移
-
-“特殊引用”指的是以全局变量、单例、闭包、“特殊组件”、“动态资源”等形式进行的引用。
-“特殊组件”是指通过 cc.game.addPersistRootNode 方法设置的常驻节点及其子节点上的组件，
-    并且这些组件中包含以字符串 URL 或 UUID，或者以除了数组和字典外的其它容器去保存的资源引用。
-“动态资源”指的是在脚本中动态创建或动态修改的资源。这些资源如果还引用到场景中的其它资源，
-    则就算动态资源本身不应该释放，其它资源默认还是会被场景自动释放。
 
 延迟加载资源
     这个场景直接或间接依赖的所有贴图、粒子和声音都将被延迟到场景切换后才加载，使场景切换速度极大提升
@@ -46,14 +35,6 @@ if (CC_EDITOR) {
 
 如果这个预置需要反复执行 cc.instantiate，请选择“优化多次创建性能”，否则保持默认的“自动调整”即可。
 
-
-粒子系统的 plist 所引用的贴图不会被自动释放。如果要自动释放粒子贴图，
-请从 plist 中移除贴图信息，改用粒子组件的 Texture 属性来指定贴图
-
-
-启用了某个场景的资源自动释放后，如果在脚本中保存了对该场景的资源的“特殊引用”
-当场景切换后，由于资源已经被释放，这些引用可能会变成非法的，有可能引起渲染异常等问题
-为了让这部分资源在场景切换时不被释放，我们可以使用 cc.loader.setAutoRelease 或者 cc.loader.setAutoReleaseRecursively 来保留这些资源。
 
 当加载新场景时，旧场景的资源根据旧场景是否勾选“Auto Release Assets”，将会被释放或者保留。 
 而使用 cc.loader.loadRes 或 cc.loader.loadResDir 动态加载的资源，则不受场景设置的影响，默认不自动释放。
@@ -89,11 +70,16 @@ loader
     cc.loader.release(prefab) // 只会release掉这个prefab所使用的json文件，而prefab所引用的spriteFrame以及其他的一些资源并不会释放掉
     var deps = cc.loader.getDependsRecursively(prefab);
     cc.loader.release(deps);
+
+    资源释放//releaseRes释放通过 loadRes 加载的资源
+    cc.loader.releaseRes("testassets/image", cc.SpriteFrame);
+    cc.loader.releaseRes("testassets/anim");
+    //释放特定的 Asset 实例,通过资源对象自身来释放资源
+    cc.loader.releaseAsset(spriteFrame);
     
 JSON 资源
          // 声明
         npcList: cc.JsonAsset,
-        
         // 读取
         var json = this.npcList.json;
 
@@ -138,11 +124,6 @@ JSON 资源
         sprite.spriteFrame = frame;
     });
 
-资源释放//releaseRes释放通过 loadRes 加载的资源
-    cc.loader.releaseRes("testassets/image", cc.SpriteFrame);
-    cc.loader.releaseRes("testassets/anim");
-    //释放特定的 Asset 实例,通过资源对象自身来释放资源
-    cc.loader.releaseAsset(spriteFrame);
 
 资源批量加载
     // 加载 test assets 目录下所有 SpriteFrame，并且获取它们的路径

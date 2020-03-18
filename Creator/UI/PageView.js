@@ -70,9 +70,6 @@ content 中的每个子节点为一个单独页面，该每个页面的大小为
      // 无法传递 customEventData
   }
 
-
-
-
 var pages = this.target.getPages();
 this.target.removePage(pages[pages.length - 1]);
 // 移除当前页面

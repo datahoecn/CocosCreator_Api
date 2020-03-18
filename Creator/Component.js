@@ -1,9 +1,4 @@
-cc.Class 是一个由 cc.Component 派生出来的组件类
-Class() 就是 cc 模块下的一个方法，这个方法用于声明 Cocos Creator 中的类
-调用 cc.Class，传入一个原型对象，在原型对象中以键值对的形式设定所需的类型参数，就能创建出所需要的类。
 
-const SEGEMENTS_MIN = 3;
-cc.Mask = module.exports = Mask;
 
 //cc.Vec2是类型，cc.v2只是一个创建二维向量简便写法,用cc.v2就不用在前面加new
 f v2(x, y){

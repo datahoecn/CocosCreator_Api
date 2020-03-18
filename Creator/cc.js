@@ -1,27 +1,16 @@
-//定义一个枚举类型。
-//用户可以把枚举值设为任意的整数，如果设为 -1，系统将会分配为上一个枚举值 + 1
-var LState = cc.Enum({
-    Init:0,
-    CheckVersion:1,
-})
-
-
-// this 是 object
-this[name + "_prefab"];
-
-//设计分辨率
-let designSize=cc.view.getDesignResolutionSize();
-//屏幕物理分辨率 也就是手机分辨率。
-let frameSize=cc.view.getFrameSize();
- //获取视图的大小，以点为单位。 
-let winSize=cc.director.getWinSize();
-//获取运行场景的可见大小。
-let visiSize=cc.director.getVisibleSize();
-let winSizePixels=cc.director.getWinSizeInPixels();
-
-winSize = visiSize = winSizePixels。一般使用 visiSize 即可
 
 cc.winSize  Size 为当前的游戏窗口的大小
+//设计分辨率
+let designSize = cc.view.getDesignResolutionSize();
+//屏幕物理分辨率 也就是手机分辨率。
+let frameSize = cc.view.getFrameSize();
+ //获取视图的大小，以点为单位。 
+let winSize = cc.director.getWinSize();
+//获取运行场景的可见大小。
+let visiSize = cc.director.getVisibleSize();
+let winSizePixels = cc.director.getWinSizeInPixels();
+
+winSize = visiSize = winSizePixels。一般使用 visiSize 即可
 cc.visibleRect.width, cc.visibleRect.height
 
 代码控制适配
@@ -94,14 +83,6 @@ cc.js.getClassName(obj); //param {Object|Function} return {String}
 cc.js.isNumber(obj);
 cc.js.isString(obj);
 
-
-术语
-    CCClass：使用 cc.Class 声明的类。
-    原型对象：调用 cc.Class 时传入的字面量参数。
-    实例成员：包含“成员变量”和“成员方法”。
-    静态成员：包含“静态变量”和“类方法”。
-    运行时：项目脱离编辑器独立运行时，或者在模拟器和浏览器里预览的时候。
-    序列化：解析内存中的对象，将它的信息编码为一个特殊的字符串，以便保存到硬盘上或传输到其它地方。
 
 存储数据
     cc.sys.localStorage.setItem('gold', 100);

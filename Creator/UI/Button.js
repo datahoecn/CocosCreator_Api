@@ -1,4 +1,18 @@
 Button
+    监听者通知分发者这里有代码对此事件感兴趣
+    出事后由发射者通知分发者
+    分发者根据当前的监听情况，把事件通知所有针对此事件的监听者
+    通知分发者这段代码对此事件不再感兴趣了
+
+    interactable 是否响应交互
+
+    this.node.on(type, callback, [target], [useCapture  = false]);
+    type        string    监听事件类型
+    callback    function  事件发生后的回调函数
+    target      object    调用回调的目标
+    useCapture  boolean   捕获模式开关
+    返回值是注册成功的回调函数，利用此返回值关闭事件监听
+
     位置变动监听事件, 通过 this.node.on(cc.Node.EventType.POSITION_CHANGED, callback, this); 进行监听
     尺寸变动监听事件，通过 this.node.on(cc.Node.EventType.SIZE_CHANGED, callback, this); 进行监听
     锚点变动监听事件，通过 this.node.on(cc.Node.EventType.ANCHOR_CHANGED, callback, this); 进行监听
@@ -6,25 +20,28 @@ Button
     删除子节点监听事件，通过 this.node.on(cc.Node.EventType.CHILD_REMOVED, callback, this); 进行监听
     子节点顺序变动监听事件，通过 this.node.on(cc.Node.EventType.CHILD_REORDER, callback, this); 进行监听
     节点分组变动监听事件，通过 this.node.on(cc.Node.EventType.GROUP_CHANGED, callback, this); 进行监听
-    
-    checkEvents: {
-        default: [],
-        type: cc.Component.EventHandler
-    },
+    cc.game.on(cc.game.EVENT_HIDE, (event)=>{
+        cc.log("game onPause - StorageUtil");
+    });
+    cc.game.on(cc.game.EVENT_SHOW, (event)=>{
+        cc.log("game onResume - StorageUtil");
+    });
 
-    if (this.checkEvents) {
-        cc.Component.EventHandler.emitEvents(this.checkEvents, toggle);
+
+    @property([cc.Component.EventHandler])
+    clickEvents: cc.Component.EventHandler[] = [];
+
+    _onTouchBegan (event: cc.Event) {
+        if (!this.enabledInHierarchy) return;
+        setTimeout(() => {
+            cc.Component.EventHandler.emitEvents(this.checkEvents, event);
+            or
+            this.clickEvents[0].emit([event]);
+        }, delayTime);
+        event.stopPropagation();
     }
 
-    
-
-    监听者通知分发者这里有代码对此事件感兴趣
-    出事后由发射者通知分发者
-    分发者根据当前的监听情况，把事件通知所有针对此事件的监听者
-    通知分发者这段代码对此事件不再感兴趣了
-
-    Interactable 是否响应交互，不勾选相当于禁用。
-
+    手动创建
     var event = new cc.Component.EventHandler();
     event.target = this.node;
     event.component = "MainMenu";
@@ -36,33 +53,10 @@ Button
       
     var button = node.getComponent(cc.Button);
     button.clickEvents[0] = event;//button.clickEvents.push(event);
-    
 
-    cc.game.on(cc.game.EVENT_HIDE, (event)=>{
-        cc.log("game onPause - StorageUtil");
-    });
-    cc.game.on(cc.game.EVENT_SHOW, (event)=>{
-        cc.log("game onResume - StorageUtil");
-    });
-
-
-    this.node.on(type, callback, [target], [useCapture  = false]);
-    type        string    监听事件类型
-    callback    function  事件发生后的回调函数
-    target      object    调用回调的目标
-    useCapture  boolean   捕获模式开关
-    返回值是注册成功的回调函数，利用此返回值关闭事件监听
-
-    this.node.on(cc.Node.EventType.TOUCH_START, this.start_click, this);
-    this.node.on(cc.Node.EventType.TOUCH_MOVE, this.move_click, this);
-    this.node.on(cc.Node.EventType.TOUCH_END, this.end_click, this);
-    this.node.on(cc.Node.EventType.TOUCH_CANCEL, this.cancel_click, this);
-
-    this.node.off(cc.Node.EventType.TOUCH_START, this.start_click, this);
-    this.node.off(cc.Node.EventType.TOUCH_MOVE, this.move_click, this);
-    this.node.off(cc.Node.EventType.TOUCH_END, this.end_click, this);
-    this.node.off(cc.Node.EventType.TOUCH_CANCEL, this.cancel_click, this);
-
+    const events = ['touchstart', 'touchmove', 'touchend',
+                     'mousedown', 'mousemove', 'mouseup',
+                     'mouseenter', 'mouseleave', 'mousewheel'];
 
     this.node.on('click', this.callback, this);
     this.node.off('click', this.callback, this);
@@ -71,15 +65,6 @@ Button
     cc.systemEvent.off(cc.SystemEvent.EventType.KEY_UP, this.keyBoard, this);
 
     
-
-
-    longTouchEvents: [cc.Component.EventHandler],
-    this.longTouchEvents.forEach((eventHandler) => {
-        eventHandler.emit("需要传递的值");
-    });
-
-   
-
     this.node.on(cc.Node.EventType.TOUCH_START, (event) => {
         // this._targetNode接受点击的节点
         //目标节点不存在，拦截
@@ -87,7 +72,6 @@ Button
             this.node._touchListener.setSwallowTouches(true);
             return;
         }
-
         //目标区域存在，击中放行
         let rect = this._targetNode.getBoundingBoxToWorld();
         if (rect.contains(event.getLocation())) {
@@ -99,6 +83,7 @@ Button
 
 
 cc.Event 类型的事件对象 event
+        touch 
         type                      String    事件的类型（事件名）
         bubbles                   boolean   表示该事件是否进行冒泡
         target                    cc.Node   接收到事件的原始对象
@@ -148,38 +133,21 @@ cc.Event 类型的事件对象 event
     node.on(type, callback, target)：持续监听 node 的 type 事件。
     node.once(type, callback, target)：监听一次 node 的 type 事件。
     node.off(type, callback, target)：取消监听所有 type 事件或取消 type 的某个监听器（用 callback 和 target 指定）。
-    cc.Node.EventType.TOUCH_START       'touchstart'
-    cc.Node.EventType.TOUCH_MOVE        'touchmove'
-    cc.Node.EventType.TOUCH_END         'touchend'
-    cc.Node.EventType.TOUCH_CANCEL      'touchcancel'
-
-    'mousedown', 'mousemove', 'mouseup', 'mouseenter', 'mouseleave', 'mousewheel'
-
-    cc.Node.EventType.SIZE_CHANGED      size-changed  当宽高属性修改时
-    cc.Node.EventType.ANCHOR_CHANGED    anchor-changed  当锚点属性修改时
-    position-changed  当位置属性修改时
-    rotation-changed  当旋转属性修改时
-    scale-changed 当缩放属性修改时
 
 
-
-// Button 源码
-    this.node.on(cc.Node.EventType.TOUCH_START, this._onTouchBegan, this);
-    this.node.on(cc.Node.EventType.TOUCH_MOVE, this._onTouchMove, this);
-    this.node.on(cc.Node.EventType.TOUCH_END, this._onTouchEnded, this);
-    this.node.on(cc.Node.EventType.TOUCH_CANCEL, this._onTouchCancel, this);
-
-    this.node.off(cc.Node.EventType.TOUCH_START, this._onTouchBegan, this);
-    this.node.off(cc.Node.EventType.TOUCH_MOVE, this._onTouchMove, this);
-    this.node.off(cc.Node.EventType.TOUCH_END, this._onTouchEnded, this);
-    this.node.off(cc.Node.EventType.TOUCH_CANCEL, this._onTouchCancel, this);
-
-    clickEvents: {
-            default: [],
-            type: cc.Component.EventHandler,
-            tooltip: CC_DEV && 'i18n:COMPONENT.button.click_events',
-        }
 // enabledInHierarchy  Boolean 表示该组件是否被启用并且所在的节点也处于激活状态。
+    onEnable() {
+        this.node.on(cc.Node.EventType.TOUCH_START, this._onTouchBegan, this);
+        this.node.on(cc.Node.EventType.TOUCH_MOVE, this._onTouchMove, this);
+        this.node.on(cc.Node.EventType.TOUCH_END, this._onTouchEnded, this);
+        this.node.on(cc.Node.EventType.TOUCH_CANCEL, this._onTouchCancel, this);
+    }
+    onDisable () {
+        this.node.off(cc.Node.EventType.TOUCH_START, this._onTouchBegan, this);
+        this.node.off(cc.Node.EventType.TOUCH_MOVE, this._onTouchMove, this);
+        this.node.off(cc.Node.EventType.TOUCH_END, this._onTouchEnded, this);
+        this.node.off(cc.Node.EventType.TOUCH_CANCEL, this._onTouchCancel, this);
+    }
     _onTouchBegan (event) {
         if (!this.interactable || !this.enabledInHierarchy) return;
         this._pressed = true;

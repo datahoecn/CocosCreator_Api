@@ -108,8 +108,6 @@ information		info	信息
 getInstance    //获得实例
 upData        //数据更新
 onRender    //渲染    
-init...        //初始化...
-set...        //设置/更改 
 loadFile    //装载文件
 add..by..    //添加...
 moveDown    //移动
@@ -117,18 +115,12 @@ backup        //备份
 revert        //恢复
 londFile    //读取文件
 Birth        //初始
-Vaule        //值
-index        //索引
 create...    //创建        
 Entity      //（父类用）
-Monster        //怪物
-Scene        //场景
-Node        //节点
 director    //主管
 stance        //立场
 select        //挑选
 refresh        //更新、使.....恢复
-Global         //全局、全球
 Register    //注册
 Controller     //控制器
 
