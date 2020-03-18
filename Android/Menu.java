@@ -7,9 +7,9 @@
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		// getMenuInflater 获得 MenuInflater 对象
-		// 调用 inflate 给当前活动创建菜单，第一个参数是指定资源文件，第二个指定菜单项添加到哪个 Menu 这里使用的是参数 menu
-		// 返回 true 显示创建的菜单，否则反之
+		getMenuInflater 获得 MenuInflater 对象
+		调用 inflate 给当前活动创建菜单，第一个参数是指定资源文件，第二个指定菜单项添加到哪个 Menu 这里使用的是参数 menu
+		返回 true 显示创建的菜单，否则反之
 	    getMenuInflater().inflate(R.menu.main, menu);
 	    return true;
 	}

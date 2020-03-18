@@ -1,4 +1,4 @@
-// 销毁活动，finish()
+销毁活动，finish()
 
 	import android.os.Bundle;
 	
@@ -47,7 +47,7 @@
             String tempData = savedInstanceState.getString("data_key");
         }
     }
-    // putInt
+
 	@Override
     protected void onSaveInstanceState(Bundle outSate) {
         super.onSaveInstanceState(outSate);
@@ -62,7 +62,7 @@
 	singleTask 		// 如果栈中存在该活动，会把这个活动之上的所有活动踢出栈
 	singleInstance  // 会启用新的栈来管理这个活动(singleTask模式指定不同的taskAffinity, 也会启动一个栈)
 					// 可以和其他程序共享这个实例
-	// 打印当前返回的栈id
+	// 打印当前返回栈的 id
 	Log.d("SecondActivity", "Task id is " + getTaskId());
 
 	<activity android:name=".FirstActivity"

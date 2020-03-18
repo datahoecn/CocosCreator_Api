@@ -1,16 +1,8 @@
  @property([cc.SpriteFrame])
  spf:cc.SpriteFrame[] = [];
 
- @property(cc.Sprite)
- sp:cc.Sprite = null;
+ private index:any = 0;
 
- private index:number = 0;
- private addCallback:any = null;
- private isOver:boolean = false;
-
-setAddCallback(callback:any):void{
-    this.addCallback = callback;
-}
 
 btn(event:cc.Event, data:string):void{
 }
@@ -36,11 +28,6 @@ btn(event:cc.Event, data:string):void{
 
 	var TestVar;			//变量声名但未初始化,undefined
 	var TestVar = null;		//变量被赋值null
-	不能把 null 或 undefined 当作类型使用
-	var TestVar : null;		//错误，类型错误
-	var TestVar : undefined //错误，找不到undefined
-
-	const:会创建一个保存在创建位置作用域中的常量
 
 联合类型
 	var path : string[] | string;
@@ -168,7 +155,7 @@ btn(event:cc.Event, data:string):void{
 	//可选属性age?，可以不定义age
 	interface Person {
 	    name: string;
-	    age?，: number;
+	    age?: number;
 	}
 
 	类与接口

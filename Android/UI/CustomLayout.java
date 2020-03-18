@@ -31,6 +31,7 @@ public class TitleLayout extends LinearLayout {
 }
 
 MainActivity
+隐藏自己的标题栏
 @Override
 protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);

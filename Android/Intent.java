@@ -27,7 +27,7 @@ Intent 可以指明当前组件想要执行的动作，还可以在不同组件�
     // 每个 Intent 只能指定一个 action 但却能指定多个 category
 
     <category android:name="MY_CATEGORY"/>
-    intent.addCategory(("MY_CATEGORY"));
+    intent.addCategory("MY_CATEGORY");
 
 
 
@@ -35,8 +35,6 @@ Intent 可以指明当前组件想要执行的动作，还可以在不同组件�
 http // 网页
 geo // 地理位置
 tel // 拨打电话
-
-
 展示一个网页
 	// Intent.ACTION_VIEW 是内置的动作
 	// 通过 Uri.parse 将网址字符串解析成一个 Uri 对象
@@ -51,6 +49,7 @@ tel // 拨打电话
 	android:port 	// 指定端口部分，一般紧随主机名后
 	android:path  	// 指定主机名和端口之后的部分，如一段网址中跟在域名之后的内容
 	android:mimeType// 指定可以处理的数据类型，允许使用通配符的方式进行指定
+
 <activity android:name=".SecondActivity">
     <intent-filter>
         <action android:name="com.example.firstproject.ACTION_START" />
@@ -82,7 +81,7 @@ tel // 拨打电话
 
 
 返回数据给上一个活动
-    // startActivityForResult 在活动销毁时返回一个结果给上个活动
+    startActivityForResult 在活动销毁时返回一个结果给上个活动
     Intent intent = new Intent(FirstActivity.this, SecondActivity.class);
     startActivityForResult(intent, 111);
 
@@ -100,10 +99,10 @@ tel // 拨打电话
         }
     }
 
-    // SecondActivity
-    // setResult
-    // 第一个参数时处理结果，RESULT_OK 和 RESULT_CANCELED
-    // 第二个参数时带有数据的 Intent
+    SecondActivity
+    setResult
+    第一个参数时处理结果，RESULT_OK 和 RESULT_CANCELED
+    第二个参数时带有数据的 Intent
     Intent intent = new Intent();
     intent.putExtra("data_return", "Hellow FirstActivity");
     setResult(RESULT_OK, intent);
