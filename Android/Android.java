@@ -1,3 +1,27 @@
+限定符
+	大小
+		small 	提供给小屏幕设备的资源
+		normal 	提供给中等屏幕设备的资源
+		large 	提供给大屏幕设备的资源
+		xlarge 	提供给超大屏幕设备的资源
+
+	分辨率
+		ldpi 	提供给低分辨率设备的资源（120dpi以下）
+		mdpi 	提供给中等分辨率设备的资源（120dpi~160dpi）
+		hdpi 	提供给高分辨率设备的资源（160dpi~240dpi）
+		xhdpi 	提供给超高分辨率设备的资源（240dpi~320dpi）
+		xxhdpi 	提供给超超高分辨率设备的资源（320dpi~480dpi）
+
+	方向
+		land  提供给横屏设备的资源
+		port  提供给竖屏设备的资源
+
+	如 layout-large
+
+最小宽度限定符
+	屏幕宽度大于 600 就加载这个文件下的布局
+	layout-sw600dp
+
 Log.v() verbose 打印那些最为琐碎的、意义最小的日志
 Log.d() debug	打印一些调试信息
 Log.i() info    打印一些比较重要的数据
