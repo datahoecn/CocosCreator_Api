@@ -10,11 +10,18 @@
     "workers": 1
 }
 
+
+svn checkout https://172.16.1.98/svn/math/design/Math/assets --username=lijie --password=123456 /Users/xhkj/Desktop/math/assets
+
 1022 111
+// cocos creator 浏览器地址
 http://172.16.1.29:7456/
+
 // PZE9653cPtkc
+
 // 好像是用在Facebook上
 // lsSlctVDVMRFk4M0hONjRaZXBvZnN1ZGdwR0FkeElYTi16WUN3bWgzamVzRUplRVFBQUFBJCQAAAAAAAAAAAEAAACYjamlzPjQrM7aueoAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAN4jG17eIxteU3
+
 // 速盘极速版激活码 17C15C4C-7843-FD55-68B5-2EE4FD9A3305
 
 停止动作

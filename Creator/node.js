@@ -13,7 +13,7 @@ properties
 	node.groupIndex 		Integer 节点的分组索引。 节点的分组将关系到节点的碰撞组件可以与哪些碰撞组件相碰撞
 	node.group 				String 节点的分组。
 	
-	node.position 			cc.v2(300, 200)		Vec2 
+	node.position 			cc.v2(300, 200)		cc.Vec2 
 	node.rotation 			Number 该节点旋转角度。
 	node.rotationX 			Number 该节点 X 轴旋转角度。
 	node.scale 				Number 节点相对父节点的缩放。
@@ -100,16 +100,7 @@ cc.log(cc.isValid(node));    // true, still valid in this frame
 // after a frame...
 cc.log(cc.isValid(node));    // false, destroyed in the end of last frame
 
-
-this.node.rotation = -Math.atan2(sub_y, sub_x) * 180 / Math.PI;
-
 this.node.setPosition(cc.visibleRect.bottomLeft);
-
-let rot_1 = Math.atan2(y_1,x_1);
-let rot_2 = Math.atan2(y_2,x_2);
-let sub_1 = Math.abs(rot_1 - rot_2);
-let sub_2 = Math.abs(2 * Math.PI - Math.abs(rot_1) - Math.abs(rot_2));
-let sub_3 = sub_1 > sub_2 ? sub_2 : sub_1; // 夹角
 
 destroy	与 removeFromParent 区别		
 destroy 后，节点不可用。
@@ -123,6 +114,7 @@ removeFromParent 后，节点可重新 add 回场景中。
 	cc.game.addPersistRootNode(myNode);
 	//将节点还原为可在场景切换时销毁的节点
 	cc.game.removePersistRootNode(myNode);
+	
 创建新节点
 	var node = new cc.Node('Sprite');
 	var role = new cc.Sprite('role.png');

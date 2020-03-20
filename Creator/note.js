@@ -1,40 +1,12 @@
-saveForBrowser() {
-    var content = JSON.stringify(this.layout);
-    if (cc.sys.isBrowser) {
-        console.log("浏览器");
-        let textFileAsBlob = new Blob([content], {type:'application/json'});
-        let downloadLink = document.createElement("a");
-        downloadLink.download = this._fileName;
-        downloadLink.innerHTML = "Download File";
-        if (window.webkitURL != null)
-        {
-            // Chrome allows the link to be clicked
-            // without actually adding it to the DOM.
-            downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
-        }
-        else
-        {
-            // Firefox requires the link to be added to the DOM
-            // before it can be clicked.
-            downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
-            downloadLink.onclick = destroyClickedElement;
-            downloadLink.style.display = "none";
-            document.body.appendChild(downloadLink);
-        }
-        downloadLink.click();
-    }
-},
-    
-svn checkout https://172.16.1.98/svn/math/design/Math/assets --username=lijie --password=123456 /Users/xhkj/Desktop/math/assets
 
-图片优化方法
-避免大尺寸的图片
 cocos creator所支持的最大图片尺寸为2048*2048
 
-勾选 prefab 延迟加载资源 可以减少加载耗时，但所引用的资源，像图片、音效会在prefab第一次显示的时候再进行资源的加载
+勾选 prefab 延迟加载资源 可以减少加载耗时，
+但所引用的资源，像图片、音效会在prefab第一次显示的时候再进行资源的加载
+
 优化多次创建性能：Prefab加载后会进行一个预处理的操作，预处理就是动态生成一些prefab的实例化代码，并把这些代码交给jit去进行优化。
               这样在实例化时的耗时将会大大减少，相应的，在load时的耗时会有所增加。
-优化单词创建性能：加载后会跳过预处理的步骤，这样在加载时的耗时会减少很多
+优化单次创建性能：加载后会跳过预处理的步骤，这样在加载时的耗时会减少很多
 
 由于微信小游戏平台禁用了动态加载代码，类似eval这些不能使用，因此优化策略这个选项在微信小游戏平台是无效的。
 
@@ -44,8 +16,6 @@ cocos creator所支持的最大图片尺寸为2048*2048
 3.填信息
 4.npm install async --save
 5.var async = require("async");
-
-
 
 
 
@@ -79,9 +49,6 @@ cocos creator所支持的最大图片尺寸为2048*2048
     预览项目或者在 Cocos Creator 中使用碎图的时候都是直接使用的碎图资源
     在 构建项目 这一步才会真正生成图集到项目中。
     
-渲染帧调试
-https://spector.babylonjs.com/
-
 由于 Creator 的 自动图集 功能是在项目导出的时候进行的，所以应该在发布后的项目中进行合批测试。
 在导入 BMFont 的资源的时候，需要把 .fnt 和相应的 png 图片放在同一个目录下面。
 LabelAtlas 底层渲染采用的跟 BMFont 一样的机制，所以也可以和 BMFont 及其它 UI 元素一起合图来实现批次渲染。
@@ -109,40 +76,6 @@ meta
 资源导入导出(.fire 场景文件和 .prefab 预制文件)
 在主菜单选择 文件 -> 资源导出
 
-var xmlhttp = cc.loader.getXMLHttpRequest();
-xmlhttp.onreadystatechange=()=>{
-    if (xmlhttp.readyState==4 && xmlhttp.status==200){
-        var dateStr = xmlhttp.getResponseHeader("Date");
-        var date = new Date(dateStr);
-        var year = date.getFullYear();
-        var month = date.getMonth() + 1;
-        var date1 = date.getDate();
-        var hour = date.getHours();
-        var minutes = date.getMinutes();
-        var second = date.getSeconds();
-        cc.log(year + "年" + month + "月" + date1 + "日" + hour + "时" + minutes + "分" + second + "秒");
-    }
-}
-xmlhttp.open("GET", "https://www.baidu.com", true);
-xmlhttp.setRequestHeader("If-Modified-Since", "baidu");
-xmlhttp.send();
-
-// 权重递增
-this.counter +=  this.counter * 1.003;
-
-
 图像资源（Texture）又经常被称作贴图、图片
-
-console.trace() 会输出函数调用堆栈
-console.table() 会把一个对象按表格形式输出
-console.time() 和 console.timeEnd()得到一段代码的执行时间
-// 一组信息
-console.group("====第" + (this.wave_index + 1) + "波小怪====");
-console.groupEnd();
-
-console.assert(isDebug,'为false时输出的信息');// isDebug为false时，打印'为false时输出的信息'
-console.count('myFunction被执行的次数'); // myFunction被执行的次数: 1
-console.dir(obj)// 输出obj详细
-https://developer.chrome.com/devtools/docs/console-api
 
 Draw Call//表示引擎对当前画面的绘制次数

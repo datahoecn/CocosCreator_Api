@@ -1,5 +1,3 @@
-var a = {n: 1}
-var b = a;
-a.x = a = {n: 2};
+var a = [1,2,3]
+a.splice(0, 0, 5);
 console.log(a);
-console.log(b)

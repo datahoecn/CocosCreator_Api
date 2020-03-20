@@ -1,4 +1,53 @@
 
+// 权重递增
+this.counter +=  this.counter * 1.003;
+
+var xmlhttp = cc.loader.getXMLHttpRequest();
+xmlhttp.onreadystatechange=()=>{
+    if (xmlhttp.readyState==4 && xmlhttp.status==200){
+        var dateStr = xmlhttp.getResponseHeader("Date");
+        var date = new Date(dateStr);
+        var year = date.getFullYear();
+        var month = date.getMonth() + 1;
+        var date1 = date.getDate();
+        var hour = date.getHours();
+        var minutes = date.getMinutes();
+        var second = date.getSeconds();
+        cc.log(year + "年" + month + "月" + date1 + "日" + hour + "时" + minutes + "分" + second + "秒");
+    }
+}
+xmlhttp.open("GET", "https://www.baidu.com", true);
+xmlhttp.setRequestHeader("If-Modified-Since", "baidu");
+xmlhttp.send();
+
+浏览器保存文件
+saveForBrowser() {
+    var content = JSON.stringify(this.layout);
+    if (cc.sys.isBrowser) {
+        console.log("浏览器");
+        let textFileAsBlob = new Blob([content], {type:'application/json'});
+        let downloadLink = document.createElement("a");
+        downloadLink.download = this._fileName;
+        downloadLink.innerHTML = "Download File";
+        if (window.webkitURL != null)
+        {
+            // Chrome allows the link to be clicked
+            // without actually adding it to the DOM.
+            downloadLink.href = window.webkitURL.createObjectURL(textFileAsBlob);
+        }
+        else
+        {
+            // Firefox requires the link to be added to the DOM
+            // before it can be clicked.
+            downloadLink.href = window.URL.createObjectURL(textFileAsBlob);
+            downloadLink.onclick = destroyClickedElement;
+            downloadLink.style.display = "none";
+            document.body.appendChild(downloadLink);
+        }
+        downloadLink.click();
+    }
+},
+
 // 访问属性、调用方法运算符"."的优先级高于赋值运算符。
 var a = {n: 1}
 var b = a;

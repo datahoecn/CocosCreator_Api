@@ -11,3 +11,6 @@ https://docs.cocos.com/creator/2.0/manual/zh/getting-started/support.html?h=drag
 图片压缩工具
   https://pngquant.org/
   https://tinypng.com/
+
+渲染帧调试
+https://spector.babylonjs.com/

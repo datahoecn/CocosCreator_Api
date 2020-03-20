@@ -1,25 +1,36 @@
 
-AB+BC=AC
-AB-AC=CB. 即“共同起点，指向被减”
+自己写的求夹角
+    let rot_1 = Math.atan2(y_1,x_1);
+    let rot_2 = Math.atan2(y_2,x_2);
+    let sub_1 = Math.abs(rot_1 - rot_2);
+    let sub_2 = Math.abs(2 * Math.PI - Math.abs(rot_1) - Math.abs(rot_2));
+    let sub_3 = sub_1 > sub_2 ? sub_2 : sub_1; // 夹角
 
-a⊥b的充要条件是 a•b=0，即 xx'+yy'=0
+根据坐标差，设置节点朝向
+    this.node.rotation = -Math.atan2(sub_y, sub_x) * 180 / Math.PI;
 
-已知两个非零向量a、b，那么a·b=|a||b|cosθ（θ是a与b的夹角
-数量积a·b的几何意义是：a的长度|a|与b在a的方向上的投影|b|cos θ的乘积。
+向量定理
+    AB+BC=AC
+    AB-AC=CB. 即“共同起点，指向被减”
 
-var angle = Math.random() * Math.PI * 2;
-var dx = 500 * Math.cos(angle);
-var dy = 500 * Math.sin(angle);
+    a⊥b的充要条件是 a • b = 0，即 x * x'+ y * y'= 0;
 
-// 旋转指定角度
-var pos_x = 3;
-var pos_y = 1;
-var angle = 90 / 180 * Math.PI;
-var cosVal = Math.cos(angle);
-var sinVal = Math.sin(angle);
-var new_x = pos_x * cosVal - pos_y * sinVal;
-var new_y = pos_x * sinVal + pos_y * cosVal;
-console.log(new_x,new_y);
+    已知两个非零向量a、b，那么a·b=|a||b|cosθ（θ是a与b的夹角
+    数量积a·b的几何意义是：a的长度|a|与b在a的方向上的投影|b|cos θ的乘积。
+
+随机角度，速度为500，设置 x, y 轴的速度
+    var angle = Math.random() * Math.PI * 2;
+    var dx = 500 * Math.cos(angle);
+    var dy = 500 * Math.sin(angle);
+
+已知坐标，得出旋转指定角度的新坐标
+    var pos_x = 3;
+    var pos_y = 1;
+    var angle = 90 / 180 * Math.PI;
+    var cosVal = Math.cos(angle);
+    var sinVal = Math.sin(angle);
+    var new_x = pos_x * cosVal - pos_y * sinVal;
+    var new_y = pos_x * sinVal + pos_y * cosVal;
 
 Vec2
     cc.v2(0, 0);
