@@ -1,6 +1,6 @@
-// 动态规划实列
-// 动态规划从底部开始解决问题
-var arr = [0, 1, 1, 2, 3, 5, 8, 13]; // 前两项相加得第三项
+
+前两项相加得第三项
+var arr = [0, 1, 1, 2, 3, 5, 8, 13];
 function recurFib(n) {
 	if (n < 2) {
 		return n;
@@ -8,7 +8,6 @@ function recurFib(n) {
 		return recurFib(n - 1) + recurFib(n - 2);
 	}
 }
-
 console.log(recurFib(10));
 
 function dynFib(n) {
@@ -27,7 +26,6 @@ function dynFib(n) {
 		return val[n-1];
 	}
 }
-
 console.log(dynFib(10));
 
 function iterFib(n) {
@@ -44,6 +42,7 @@ function iterFib(n) {
 
 console.log(iterFib(10));
 
+
 // 寻找最长公共子串
 function lcs(word1, word2) {
 	var max = 0;
@@ -53,6 +52,7 @@ function lcs(word1, word2) {
 		lcsarr[i] = new Array(word2.length);
 		for (var j = 0; j < word2.length; j++) {
 			if(word1[i] == word2[j]) {
+				i j 不是 0
 				if(i > 0 && j > 0) {
 					lcsarr[i][j] = lcsarr[i-1][j-1] + 1;
 				} else {

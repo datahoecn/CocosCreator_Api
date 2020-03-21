@@ -75,8 +75,7 @@ Vec2
         project 返回当前向量在指定 vector 向量上的投影向量。
         transformMat4 Transforms the vec2 with a mat4. 3rd vector component is implicitly '0', 4th vector component is implicitly '1'
 
-Role.ts
-// 挂在目标节点上
+
 const {ccclass, property} = cc._decorator;
 
 @ccclass
