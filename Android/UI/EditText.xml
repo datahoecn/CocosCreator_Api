@@ -16,3 +16,6 @@
 
     editText = (EditText) findViewById(R.id.editText);
 	String imputText = editText.getText().toString();
+    editText.setText(imputText);
+    光标移动
+    editText.setSelection(imputText.length());
