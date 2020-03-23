@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<litepal>
+    <dbname value="demo" />
+    <version value="2" />
+    <list>
+        <mapping class="com.example.litepal.Book" />
+        <mapping class="com.example.litepal.Category" />
+    </list>
+</litepal>

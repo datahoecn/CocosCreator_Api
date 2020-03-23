@@ -12,6 +12,7 @@
     . 输入 .exit 或 .quit 退出数据库编辑
     .输入 exit  退出设备控制台
     adb devices 显示设置
+    如果 sqlite 出现 ...> 输入 ; 回车
 
 SQLiteOpenHelper是一个抽象类，需要创建一个自己的帮助类去继承它。
 SQLiteOpenHelper中有两个抽象方法，分别是onCreate() 和onUpgrade() ，
