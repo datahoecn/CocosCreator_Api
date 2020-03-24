@@ -1,6 +1,9 @@
+
 1.直接拖动组件，会自动添加依赖库
 2.GridLayoutManager 网格布局
 3.StaggeredGridLayoutManager 瀑布流布局
+
+
 package com.example.recyclerview;
 
 import androidx.appcompat.app.AppCompatActivity;

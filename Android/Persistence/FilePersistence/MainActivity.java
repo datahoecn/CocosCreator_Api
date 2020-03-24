@@ -3,7 +3,7 @@
 
 openFileOutput 用于将数据储存到指定文件中
     参数1 文件名，默认存储到 /data/data/<package name>/files/ 目录下
-    参数2 文件的操作模式, MODE_PRIVATE 和 MODE_APPEND，
+    参数2 文件的操作模式
         MODE_PRIVATE 默认模式，写入的内容会覆盖原有内容
         MODE_APPEND 后面追加内容
 

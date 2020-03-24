@@ -2,19 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingLeft="100dp" 周围加上补白
-        android:maxLines="1" TextView 只能单行显示
-        android:ellipsize="end" 文本内容超出控件宽度时，文本缩略方式，这里指定 end 表示在尾部进行缩略
-        android:gravity="center"
-        android:background="@drawable/ic_launcher_background"
-        android:text="Button" />
-        
+    android:layout_height="match_parent"> 
     一条细线
     <view
         android:layout_width="match_parent"
@@ -34,7 +22,6 @@ View --> ImageView
 
 layout_width
 layout_height
-	// 弃用 fill_parent
 	match_parent
 	wrap_content
 	 
@@ -46,6 +33,7 @@ gravity
     left
     right
     center 等价 center_vertical|center_horizontal
+    
 layout_gravity
     用于指定控件在布局中的对齐方式
     可选值和 gravity 差不多

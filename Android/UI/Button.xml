@@ -1,11 +1,16 @@
 
 默认会对 Button 中的英文字母大写转换 textAllCaps = true
 <Button
-        android:id="@+id/button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAllCaps="false"
-        android:text="Button" />
+    android:id="@+id/button3"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="100dp" 周围加上补白
+    android:maxLines="1" TextView 只能单行显示
+    android:ellipsize="end" 文本内容超出控件宽度时，文本缩略方式，这里指定 end 表示在尾部进行缩略
+    android:gravity="center"
+    android:background="@drawable/ic_launcher_background"
+    android:textAllCaps="false"
+    android:text="Button" />
 
 
 	Button button = (Button) findViewById(R.id.button);

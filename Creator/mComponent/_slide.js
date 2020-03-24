@@ -155,10 +155,6 @@ cc.Class({
         cc.Component.EventHandler.emitEvents(this.slideEvents, this);
         // this.node.emit('slide', this);
     },
-
-    event() {
-    },
-
 });
 
 var clamp01 = function (value) {

@@ -1,12 +1,29 @@
+
+.MainActivity.this：表示MainActivity对象，一般用在内部类中指示外面的this，如果在内部类直接用this
+.getContext()：这个是View类中提供的方法，在继承了View的类中才可以调用，返回的是当前View运行在哪个Activity Context中
+.getActivity():获得Fragment依附的Activity对象。Fragment里边的getActivity()
+	不推荐使用原因如下：
+	这个方法会返回当前Fragment所附加的Activity，当Fragment生命周期结束并销毁时，
+	getActivity()返回的是null，所以在使用时要注意判断null或者捕获空指针异常。
+	MainActivity activity = (MainActivity) getActivity();
+
 销毁活动，finish()
 
-	import android.os.Bundle;
-	
-	@Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.first_layout);
+import android.os.Bundle;
+
+@Override
+protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+    隐藏自己的标题栏
+    ActionBar actionBar = getSupportActionBar();
+    if (actionBar != null) {
+        actionBar.hide();
     }
+}
+
+
+
 
 
 活动状态

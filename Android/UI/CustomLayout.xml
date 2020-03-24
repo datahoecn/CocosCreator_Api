@@ -1,7 +1,8 @@
 自定义标题
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
+    android:orientation="horizontal" 
+    android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <Button
@@ -37,20 +38,11 @@
 
 // 引进 include 使用
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="horizontal" android:layout_width="match_parent"
+    android:orientation="horizontal" 
+    android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
      <include layout="@layout/title"/>
 
 </LinearLayout>
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        // 隐藏自己的标题栏
-        ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.hide();
-        }
-    }

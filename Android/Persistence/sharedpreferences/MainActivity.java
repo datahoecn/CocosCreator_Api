@@ -1,3 +1,4 @@
+
 获取 SharedPreferences
     getSharedPreferences("data", MODE_PRIVATE) 参数1 指定文件名称，如果不存在会创建，位置 /data/data/<package name>/shared_prefs/
                                                 参数2 指定操作模式，目前只有 MODE_PRIVATE 表示只有当前程序才可读写
@@ -5,10 +6,6 @@
 
 调用 edit() 方法，获取 SharedPreferences.Editor
 editor.clear();// 清除数据
-
-
-
-
 
 
 package com.example.sharedpreferences;

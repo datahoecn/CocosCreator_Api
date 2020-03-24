@@ -1,11 +1,13 @@
 
 碎片是一种可以嵌入获得当中的 UI 片段
+    .通过继承 Fragment 类来创建碎片
+    .使用元素,在活动的布局文件中声明碎片
 动态添加碎片步骤
-    1.创建待添加碎片的实例；
-    2.获取 FragmentManager
-    3.开启一个事务，调用 beginTransaction 开启；
-    4.向容器添加或替换碎片 replace
-    5.提交事务
+    .创建待添加碎片的实例 AnotherRightFragment；
+    .获取 FragmentManager
+    .开启一个事务，调用 beginTransaction 开启；
+    .向容器添加或替换碎片 replace
+    .提交事务
 package com.example.fragment;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -44,11 +46,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         参数1 id 参数2 碎片实例
         transaction.replace(R.id.right_layout, fragment);
-        将事务添加的返回栈，
-        如果添加，点击 Back 键会返回上一个碎片
-        如果不添加，直接退出程序
-        参数 一般传入 null 
-        transaction.addToBackStack(null);
+            将事务添加的返回栈，
+            如果添加，点击 Back 键会返回上一个碎片
+            如果不添加，直接退出程序
+            参数 一般传入 null 
+            transaction.addToBackStack(null);
         transaction.commit();
     }
 }
@@ -59,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     RightFragment.java
     MainActivity activity = (MainActivity) getActivity();
-    如果需要 Context，也可以使用 getActivity
+    如果需要 Context ，也可以使用 getActivity
 
 碎片生命周期
     运行状态：碎片可见，所关联的活动处于运行状态
