@@ -2,23 +2,22 @@
 	一种是使用现有的内容提供器来读取和操作相应程序中的数据
 	另一种是创建自己的内容提供器给我们程序的数据提供外部访问接口
 
-可以通过Context中的getContentResolver() 方法获取到该类的实例。
+	可以通过Context中的 getContentResolver() 方法获取到该类的实例。
 
-内容URI,由两部分组成：authority path
-	authority是用于对不同的应用程序做区分的，一般为了避免冲突，都会采用程序包名的方式来进行命名。
-	比如某个程序的包名是com.example.app，那么该程序对应的authority就可以命名为com.example.app.provider。
-	path则是用于对同一应用程序中不同的表做区分的，通常都会添加到authority的后面。
-	比如某个程序的数据库里存在两张表：table1和table2，这时就可以将path分别命名为/table1和/table2，
-	然后把authority和path进行组合，内容URI就变成了com.example.app.provider/table1和com.example.app.provider/table2。
-	不过，目前还很难辨认出这两个字符串就是两个内容URI，我们还需要在字符串的头部加上协议声明。
-	因此，内容URI最标准的格式写法如下：
+内容URI,由两部分组成： authority path
+	authority 是用于对不同的应用程序做区分的，一般为了避免冲突，都会采用程序包名的方式来进行命名。
+	比如某个程序的包名是com.example.app，那么该程序对应的authority就可以命名为com.example.app.provider
+	path则是用于对同一应用程序中不同的表做区分的，通常都会添加到 authority 的后面。
+	比如某个程序的数据库里存在两张表：table1和table2，这时就可以将path分别命名为 /table1和 /table2，
+	然后把authority和path进行组合，内容URI就变成了 com.example.app.provider/table1 和 com.example.app.provider/table2
+	还需要在字符串的头部加上协议声明, 内容URI最标准的格式写法如下：
 		content://com.example.app.provider/table1
 		content://com.example.app.provider/table2
 
-解析成Uri 对象
+解析成 Uri 对象
 	Uri uri = Uri.parse("content://com.example.app.provider/table1")
 
-查询table1表中的数据,返回的是一个Cursor 对象
+查询 table1 表中的数据,返回的是一个Cursor 对象
 	Cursor cursor = getContentResolver().query(
 	    uri,			// 指定查询某个应用程序下的某一张表
 	    projection,		// 指定查询的列名
@@ -26,8 +25,7 @@
 	    selectionArgs,  // 为where 中的占位符提供具体的值
 	    sortOrder       // 指定查询结果的排序方式
     );
-
-读取数据
+	读取数据查询到的数据
 	if (cursor != null) {
 	 while (cursor.moveToNext()) {
 	        String column1 = cursor.getString(cursor.getColumnIndex("column1"));
@@ -36,13 +34,13 @@
 	    cursor.close();
 	}
 
-向 table1 表中添加一条数据
+添加数据
 	ContentValues values = new ContentValues();
 	values.put("column1", "text");
 	values.put("column2", 1);
 	getContentResolver().insert(uri, values);
 
-更新这条新添加的数据
+更新数据
 	ContentValues values = new ContentValues();
 	values.put("column1", "");
 	getContentResolver().update(uri, values, "column1 = ? and column2 = ?", new String[] {"text", "1"});
@@ -50,9 +48,9 @@
 删除数据
 	getContentResolver().delete(uri, "column2 = ?", new String[] { "1" });
 
-
-访问其他应用程序的数据
-	ContactsContract.CommonDataKinds.Phone 类提供了一个 CONTENT_URI 常量，而这个常量就是使用Uri.parse() 方法解析出来的结果。
+读取手机联系人
+	ContactsContract.CommonDataKinds.Phone 类
+	提供了一个 CONTENT_URI 常量，而这个常量就是使用Uri.parse() 方法解析出来的结果。
 	联系人姓名这一列对应的常量是 ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME ，
 	联系人手机号这一列对应的常量是 ContactsContract.CommonDataKinds.Phone.NUMBER 
 
@@ -174,7 +172,3 @@
 			一个能够匹配table1表中任意一行数据的内容URI格式
 				content://com.example.app.provider/table1/#
 
-UriMatcher中提供了一个 addURI() 方法，
-	这个方法接收3个参数，可以分别把authority 、path 和一个自定义代码传进去。
-	当调用UriMatcher的match() 方法时，就可以将一个Uri 对象传入，返回值是某个能够匹配这个Uri 对象所对应的自定义代码，
-	利用这个代码，我们就可以判断出调用方期望访问的是哪张表中的数据了。修改MyProvider中的代码

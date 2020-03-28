@@ -1,7 +1,7 @@
 
 碎片是一种可以嵌入获得当中的 UI 片段
     .通过继承 Fragment 类来创建碎片
-    .使用元素,在活动的布局文件中声明碎片
+    .在活动的布局文件中声明碎片
 动态添加碎片步骤
     .创建待添加碎片的实例 AnotherRightFragment；
     .获取 FragmentManager

@@ -212,7 +212,15 @@ ActionManager
 
 
 
+AnimationState
+    如果说 AnimationClip 作为动画数据的承载，那么 AnimationState 则是 AnimationClip 在运行时的实例，
+    它将动画数据解析为方便程序中做计算的数值。 Animation 在播放一个 AnimationClip 的时候，
+    会将 AnimationClip 解析成 AnimationState。 Animation 的播放状态实际都是由 AnimationState 来计算的，
+    包括动画是否循环，怎么循环，播放速度 等
 Animation组件
+    停止 状态，则 Animation 会直接重新播放这个动画
+    暂停 状态，则 Animation 会恢复动画的播放，并从当前时间继续播放下去
+    播放 状态，则 Animation 会先停止这个动画，再重新播放动画
 当在 cc.Animation 注册了一个回调函数后，它会在播放一个动画时，对相应的 cc.AnimationState 注册这个回调，
 在 cc.AnimationState 停止播放时，对 cc.AnimationState 取消注册这个回调。
 
@@ -323,6 +331,9 @@ this.playAni("heroRun" + this.heroType + "_", 5, 0.06, true);
         //动画系统会搜索动画根节点中的所有组件，
         //如果组件中有实现动画事件中指定的函数的话，就会对它进行调用，并传入事件中填的参数
     注册动画回调
+        当在 cc.Animation 注册了一个回调函数后，它会在播放一个动画时，
+        对相应的 cc.AnimationState 注册这个回调，在 cc.AnimationState 停止播放时，
+        对 cc.AnimationState 取消注册这个回调。
         var animation = this.node.getComponent(cc.Animation);
         // 注册
         animation.on('play',      this.onPlay,        this);
